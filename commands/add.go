@@ -1,12 +1,15 @@
 package commands
 
 import (
+	"crypto/md5"
+	"crypto/sha1"
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"io"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"rctf/config"
 	"rctf/data"
@@ -75,14 +78,35 @@ func addFile(srcPath string) error {
 
 	//
 
+	fileOutput := exec.Command("file", dstPath)
+	fileOutputResult, err := fileOutput.Output()
+	if err != nil {
+		fmt.Printf("warning: unable to get output from file on %s\n", dstPath)
+	}
+
+	fileOutputResultString := string(fileOutputResult[:len(fileOutputResult)-1])
+
+	//
+
 	content, err := os.ReadFile(dstPath)
 	if err != nil {
 		fmt.Println("error reading file:", dstPath)
 		return nil
 	}
 
-	hash := sha256.New()
-	hash.Write(content)
+	//
+
+	md5Hash := md5.New()
+	md5Hash.Write(content)
+	md5HashString := hex.EncodeToString(md5Hash.Sum(nil))
+
+	sha1Hash := sha1.New()
+	sha1Hash.Write(content)
+	sha1HashString := hex.EncodeToString(sha1Hash.Sum(nil))
+
+	sha256Hash := sha256.New()
+	sha256Hash.Write(content)
+	sha256HashString := hex.EncodeToString(sha256Hash.Sum(nil))
 
 	//
 
@@ -90,10 +114,10 @@ func addFile(srcPath string) error {
 		Filename:  fileName,
 		Filepath:  dstPath,
 		Size:      len(content),
-		Type:      "todo",
-		MD5:       hex.EncodeToString(hash.Sum(nil)),
-		SHA1:      hex.EncodeToString(hash.Sum(nil)),
-		SHA256:    hex.EncodeToString(hash.Sum(nil)),
+		Type:      fileOutputResultString,
+		MD5:       md5HashString,
+		SHA1:      sha1HashString,
+		SHA256:    sha256HashString,
 		Timestamp: time.Now().UTC(),
 	}
 
@@ -103,9 +127,15 @@ func addFile(srcPath string) error {
 		os.Exit(1)
 	}
 
-	fmt.Printf("%s\n", jsonData)
-
 	//
+
+	for _, f := range files.Files {
+		if sha256HashString == f.SHA256 {
+			fmt.Printf("error: file \"%s\" with sha256 \"%s\" already added...\n",
+				f.Filename, f.SHA256)
+			os.Exit(1)
+		}
+	}
 
 	files.Files = append(files.Files, file)
 
