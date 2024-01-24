@@ -13,7 +13,7 @@ func help() {
 	fmt.Println("Usage: rctf [init/add/status]...")
 }
 
-func makeDirectory() {
+func ensureSkeleton() {
 	if _, err := os.Stat(config.FolderName); os.IsNotExist(err) {
 		fmt.Println("mkdir", config.FolderName)
 		err := os.MkdirAll(config.FolderName, 0755)
@@ -22,10 +22,19 @@ func makeDirectory() {
 			os.Exit(1)
 		}
 	}
+
+	if _, err := os.Stat(config.FilesFolderName); os.IsNotExist(err) {
+		fmt.Println("mkdir", config.FilesFolderName)
+		err := os.MkdirAll(config.FilesFolderName, 0755)
+		if err != nil {
+			fmt.Println("error creating directory:", err)
+			os.Exit(1)
+		}
+	}
 }
 
 func main() {
-	makeDirectory()
+	ensureSkeleton()
 
 	var verbose bool
 	flag.BoolVar(&verbose, "v", false, "enable verbose mode")
