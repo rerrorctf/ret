@@ -84,7 +84,8 @@ func addFile(srcPath string) error {
 		fmt.Printf("warning: unable to get output from file on %s\n", dstPath)
 	}
 
-	fileOutputResultString := string(fileOutputResult[:len(fileOutputResult)-1])
+	// TODO bit hacky to get a nice a format..
+	fileOutputResultString := string(fileOutputResult[len(dstPath)+2 : len(fileOutputResult)-1])
 
 	//
 
