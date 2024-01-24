@@ -31,6 +31,15 @@ func ensureSkeleton() {
 			os.Exit(1)
 		}
 	}
+
+	if _, err := os.Stat(config.FolderName + "/ghidra"); os.IsNotExist(err) {
+		fmt.Println("mkdir", config.FolderName+"/ghidra")
+		err := os.MkdirAll(config.FolderName+"/ghidra", 0755)
+		if err != nil {
+			fmt.Println("error creating directory:", err)
+			os.Exit(1)
+		}
+	}
 }
 
 func main() {

@@ -152,6 +152,19 @@ func addFile(srcPath string) error {
 		os.Exit(1)
 	}
 
+	analyzeFile := exec.Command(
+		config.GhidraInstallPath+"/support/analyzeHeadless",
+		config.FolderName+"/ghidra",
+		"project",
+		"-import", dstPath)
+
+	analyzeFileOutput, err := analyzeFile.CombinedOutput()
+	if err != nil {
+		fmt.Println("warning:\n", err)
+	}
+
+	fmt.Printf("%s\n", analyzeFileOutput)
+
 	return nil
 }
 
