@@ -134,13 +134,3 @@ func Init(args []string) {
 
 	createTask()
 }
-
-// should setup .rctf structure
-// 	- task.json
-// 		- all details
-//		- timestamp,
-// 	- should setup git repo
-//  - for pwn it should setup go.py
-//  - for rev it should setup ghidra project perhaps?
-//	- it should create notes.txt file
-// could potentially ping a discord bot via a webhook
