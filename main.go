@@ -1,16 +1,88 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
 	"os"
+	"os/user"
+	"path/filepath"
 
 	"rctf/commands"
 	"rctf/config"
+	"rctf/data"
 )
 
 func help() {
 	fmt.Println("Usage: rctf [init/add/status]...")
+}
+
+func createDefaultConfig(configPath string) {
+	var userConfig data.Config
+
+	userConfig.GhidraInstallPath = config.GhidraInstallPath
+	userConfig.GhidraProjectPath = config.GhidraProjectPath
+	userConfig.PwnScriptName = config.PwnScriptName
+
+	jsonData, err := json.MarshalIndent(userConfig, "", "  ")
+	if err != nil {
+		fmt.Println("error marshalling json:", err)
+		os.Exit(1)
+	}
+
+	err = os.WriteFile(configPath, jsonData, 0644)
+	if err != nil {
+		fmt.Println("error opening file:", err)
+		os.Exit(1)
+	}
+}
+
+func parseUserConfig() {
+	currentUser, err := user.Current()
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+
+	configPath := filepath.Join(currentUser.HomeDir, config.UserConfig)
+
+	jsonData, err := os.ReadFile(configPath)
+	if err != nil {
+		createDefaultConfig(configPath)
+		return
+	}
+
+	var userConfig data.Config
+
+	err = json.Unmarshal(jsonData, &userConfig)
+	if err != nil {
+		fmt.Println("error unmarshalling json:", err)
+		os.Exit(1)
+	}
+
+	if len(userConfig.GhidraInstallPath) > 0 {
+		config.GhidraInstallPath = userConfig.GhidraInstallPath
+
+		if config.Verbose {
+			fmt.Printf("config: %v\n", userConfig.GhidraInstallPath)
+		}
+	}
+
+	if len(userConfig.GhidraProjectPath) > 0 {
+		config.GhidraProjectPath = userConfig.GhidraProjectPath
+
+		if config.Verbose {
+			fmt.Printf("config: %v\n", userConfig.GhidraProjectPath)
+		}
+	}
+
+	if len(userConfig.PwnScriptName) > 0 {
+		config.PwnScriptName = userConfig.PwnScriptName
+
+		if config.Verbose {
+			fmt.Printf("config: %v\n", userConfig.PwnScriptName)
+		}
+	}
 }
 
 func ensureDirectory(dirPath string) {
@@ -40,6 +112,8 @@ func main() {
 		help()
 		os.Exit(1)
 	}
+
+	parseUserConfig()
 
 	ensureSkeleton()
 
