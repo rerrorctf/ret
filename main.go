@@ -55,6 +55,8 @@ func main() {
 		commands.Status(flag.Args()[1:])
 	case "pwn":
 		commands.Pwn(flag.Args()[1:])
+	case "ghidra":
+		commands.Ghidra(flag.Args()[1:])
 	default:
 		fmt.Println("Unknown command:", flag.Arg(0))
 		os.Exit(1)
