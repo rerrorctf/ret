@@ -9,10 +9,6 @@ import (
 )
 
 func Ghidra(args []string) {
-	if config.Verbose {
-		fmt.Println("Ghidra:", args)
-	}
-
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
