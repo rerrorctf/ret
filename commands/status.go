@@ -9,10 +9,6 @@ import (
 	"time"
 )
 
-func StatusHelp() {
-	fmt.Println("rctf status help would go here...")
-}
-
 func Status(args []string) {
 	if config.Verbose {
 		fmt.Println("Status:", args)
@@ -21,7 +17,17 @@ func Status(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			StatusHelp()
+			fmt.Fprintf(os.Stderr, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+			fmt.Fprintf(os.Stderr, "usage: rctf status\n")
+
+			fmt.Fprintf(os.Stderr, "  displays the status for the current task with rctf\n")
+
+			fmt.Fprintf(os.Stderr, "\nsubcommands:\n")
+			fmt.Fprintf(os.Stderr, "  ❓ help ~ print this message\n")
+
+			fmt.Fprintf(os.Stderr, "\n~ 🚩 @rerrorctf 🚩 ~\n")
+			fmt.Fprintf(os.Stderr, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+
 			os.Exit(0)
 		}
 	}
@@ -40,20 +46,22 @@ func Status(args []string) {
 		os.Exit(1)
 	}
 
-	fmt.Printf("%s (%s) ~ %v(%v)\n", task.Name, task.Category,
+	fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+
+	fmt.Printf("\"%s\" (%s) ~ %v(%v)\n", task.Name, task.Category,
 		task.Timestamp, time.Now().UTC().Sub(task.Timestamp))
 
 	if len(task.Description) > 0 {
-		fmt.Printf("desc: %s\n", task.Description)
+		fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+		fmt.Printf("\"%s\"\n", task.Description)
 	}
+
+	fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
 	jsonData, err = os.ReadFile(config.RctfFilesName)
 	if err != nil {
 		os.Exit(1)
 	}
-
-	fmt.Println("\nfiles:")
-	fmt.Println("########################################################")
 
 	var files data.Files
 
@@ -64,22 +72,26 @@ func Status(args []string) {
 	}
 
 	for idx, file := range files.Files {
-		fmt.Printf("[%v] %s (%v bytes)\n", idx, file.Filename, file.Size)
+		fmt.Printf("[%v] %s (%v bytes) 👀\n", idx, file.Filename, file.Size)
 
 		if len(file.Type) < 60 {
-			fmt.Printf("     type:   %s\n", file.Type)
+			fmt.Printf("  type:   %s\n", file.Type)
 		} else {
-			fmt.Printf("     type:   %s...\n", file.Type[:60])
+			fmt.Printf("  type:   %s...\n", file.Type[:60])
 		}
 
-		fmt.Printf("     md5:    %s\n", file.MD5)
-		fmt.Printf("     sha1:   %s\n", file.SHA1)
-		fmt.Printf("     sha256: %s\n", file.SHA256)
+		if config.Verbose {
+			fmt.Printf("  md5:    %s\n", file.MD5)
+			fmt.Printf("  sha1:   %s\n", file.SHA1)
+			fmt.Printf("  sha256: %s\n", file.SHA256)
+		} else {
+			fmt.Printf("  %s\n", file.SHA256)
+		}
 
 		if len(file.Comment) > 0 {
-			fmt.Printf("     comment: %s\n", file.Comment)
+			fmt.Printf("  comment: %s\n", file.Comment)
 		}
-		fmt.Printf("%v(%v)\n", file.Timestamp, time.Now().UTC().Sub(file.Timestamp))
-		fmt.Println("########################################################")
+		fmt.Printf("  %v(%v)\n", file.Timestamp, time.Now().UTC().Sub(file.Timestamp))
+		fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 	}
 }
