@@ -6,6 +6,7 @@ const (
 	FilesFolderName   = FolderName + "/files"
 	RctfFilesName     = FilesFolderName + "/rctf-files.json"
 	GhidraInstallPath = "/opt/ghidra_11.0_PUBLIC/"
+	GhidraProjectPath = FolderName + "/ghidra"
 )
 
 var (
