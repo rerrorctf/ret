@@ -36,7 +36,13 @@ $ rctf pwn help
 
 ## ~/.config/rctf
 
-todo
+```
+{
+  "ghidrainstallpath": "/path/to/ghidra/install",
+  "ghidraprojectpath": "ghidra_project_folder_name_default_is_ghidra",
+  "pwnscriptname": "custom-pwn-script-name.py"
+}
+```
 
 ## workflows
 
