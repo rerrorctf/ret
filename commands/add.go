@@ -46,10 +46,7 @@ func copyFile(srcPath string, dstPath string) error {
 	return nil
 }
 
-func addFile(srcPath string) error {
-	fmt.Printf("adding \"%s\"...\n", srcPath)
-
-	files := data.Files{}
+func parseFiles(files *data.Files) {
 	if filesAlreadyExists() {
 		jsonData, err := os.ReadFile(config.RctfFilesName)
 		if err != nil {
@@ -63,6 +60,49 @@ func addFile(srcPath string) error {
 			os.Exit(1)
 		}
 	}
+}
+
+func runFileCommandOnFile(path string) string {
+	fileOutput := exec.Command("file", path)
+	fileOutputResult, err := fileOutput.Output()
+	if err != nil {
+		fmt.Printf("warning: unable to get output from file on %s\n", path)
+	}
+
+	// TODO bit hacky to get a nice a format..
+	fileOutputResultString := string(fileOutputResult[len(path)+2 : len(fileOutputResult)-1])
+	return fileOutputResultString
+}
+
+func writeFiles(files *data.Files) {
+	jsonData, err := json.MarshalIndent(files, "", "  ")
+	if err != nil {
+		fmt.Println("error marshalling json:", err)
+		os.Exit(1)
+	}
+
+	err = os.WriteFile(config.RctfFilesName, jsonData, 0644)
+	if err != nil {
+		fmt.Println("error writing to file:", err)
+		os.Exit(1)
+	}
+}
+
+func ensureFileNotAdded(file *data.File, files *data.Files) {
+	for _, f := range files.Files {
+		if file.SHA256 == f.SHA256 {
+			fmt.Printf("error: file \"%s\" with sha256 \"%s\" already added...\n",
+				f.Filename, f.SHA256)
+			os.Exit(1)
+		}
+	}
+}
+
+func addFile(srcPath string) error {
+	fmt.Printf("adding \"%s\"...\n", srcPath)
+
+	files := data.Files{}
+	parseFiles(&files)
 
 	//
 
@@ -78,14 +118,7 @@ func addFile(srcPath string) error {
 
 	//
 
-	fileOutput := exec.Command("file", dstPath)
-	fileOutputResult, err := fileOutput.Output()
-	if err != nil {
-		fmt.Printf("warning: unable to get output from file on %s\n", dstPath)
-	}
-
-	// TODO bit hacky to get a nice a format..
-	fileOutputResultString := string(fileOutputResult[len(dstPath)+2 : len(fileOutputResult)-1])
+	fileOutput := runFileCommandOnFile(dstPath)
 
 	//
 
@@ -115,42 +148,20 @@ func addFile(srcPath string) error {
 		Filename:  fileName,
 		Filepath:  dstPath,
 		Size:      len(content),
-		Type:      fileOutputResultString,
+		Type:      fileOutput,
 		MD5:       md5HashString,
 		SHA1:      sha1HashString,
 		SHA256:    sha256HashString,
 		Timestamp: time.Now().UTC(),
 	}
 
-	jsonData, err := json.MarshalIndent(file, "", "  ")
-	if err != nil {
-		fmt.Println("error marshalling json:", err)
-		os.Exit(1)
-	}
-
 	//
 
-	for _, f := range files.Files {
-		if sha256HashString == f.SHA256 {
-			fmt.Printf("error: file \"%s\" with sha256 \"%s\" already added...\n",
-				f.Filename, f.SHA256)
-			os.Exit(1)
-		}
-	}
+	ensureFileNotAdded(&file, &files)
 
 	files.Files = append(files.Files, file)
 
-	jsonData, err = json.MarshalIndent(files, "", "  ")
-	if err != nil {
-		fmt.Println("error marshalling json:", err)
-		os.Exit(1)
-	}
-
-	err = os.WriteFile(config.RctfFilesName, jsonData, 0644)
-	if err != nil {
-		fmt.Println("error writing to file:", err)
-		os.Exit(1)
-	}
+	writeFiles(&files)
 
 	analyzeFile := exec.Command(
 		config.GhidraInstallPath+"/support/analyzeHeadless",
