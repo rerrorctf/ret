@@ -47,14 +47,6 @@ func Status(args []string) {
 		fmt.Printf("desc: %s\n", task.Description)
 	}
 
-	if len(task.Ip) > 0 {
-		fmt.Printf("    remote: %s:%v\n", task.Ip, task.Port)
-	}
-
-	if len(task.Url) > 0 {
-		fmt.Printf("    url: %s\n", task.Url)
-	}
-
 	jsonData, err = os.ReadFile(config.RctfFilesName)
 	if err != nil {
 		os.Exit(1)

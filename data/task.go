@@ -7,7 +7,4 @@ type Task struct {
 	Category    string    `json:"category"`
 	Description string    `json:"description"`
 	Timestamp   time.Time `json:"timestamp"`
-	Ip          string    `json:"ip"`
-	Port        int       `json:"port"`
-	Url         string    `json:"url"`
 }

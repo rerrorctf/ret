@@ -7,7 +7,6 @@ import (
 	"os"
 	"rctf/config"
 	"rctf/data"
-	"strconv"
 	"time"
 )
 
@@ -36,50 +35,6 @@ func writeTask(task data.Task) {
 	fmt.Println("data written to task.json")
 }
 
-func createRevTask(task *data.Task, scanner *bufio.Scanner) {
-	fmt.Print("enter the remote ip (if this rev task has one ~ blank otherwise): ")
-	scanner.Scan()
-	task.Ip = scanner.Text()
-	// TODO validate ip address is valid / reachable
-
-	fmt.Print("enter the remote port (if this rev task has one ~ blank otherwise): ")
-	scanner.Scan()
-	port, err := strconv.Atoi(scanner.Text())
-	if err != nil {
-		fmt.Println("error reading port:", err)
-		os.Exit(1)
-	}
-
-	// TODO validate if port is a valid port number
-	task.Port = port
-}
-
-func createWebTask(task *data.Task, scanner *bufio.Scanner) {
-	fmt.Print("enter the website url (can be left blank for none): ")
-	scanner.Scan()
-	task.Url = scanner.Text()
-	// TODO validate if this is a valid url / reachable / has http/https prefix
-}
-
-func createPwnTask(task *data.Task, scanner *bufio.Scanner) {
-	fmt.Print("enter the remote ip (can be left blank for no remote): ")
-	scanner.Scan()
-	task.Ip = scanner.Text()
-
-	// TODO validate ip address is valid / reachable
-
-	fmt.Print("enter the remote port (can be left blank for no remote): ")
-	scanner.Scan()
-	port, err := strconv.Atoi(scanner.Text())
-	if err != nil {
-		fmt.Println("error reading port:", err)
-		os.Exit(1)
-	}
-
-	// TODO validate if port is a valid port number
-	task.Port = port
-}
-
 func createTask() {
 	task := data.Task{
 		Timestamp: time.Now().UTC(),
@@ -100,18 +55,6 @@ func createTask() {
 	fmt.Print("enter the category (cry/rev/pwn/web/misc): ")
 	scanner.Scan()
 	task.Category = scanner.Text()
-
-	switch task.Category {
-	case "cry":
-	case "rev":
-		createRevTask(&task, scanner)
-	case "web":
-		createWebTask(&task, scanner)
-	case "pwn":
-		createPwnTask(&task, scanner)
-	default:
-		fmt.Printf("category \"%s\" invokes no special treatment\n", task.Category)
-	}
 
 	writeTask(task)
 }
