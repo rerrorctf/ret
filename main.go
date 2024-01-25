@@ -14,7 +14,7 @@ import (
 )
 
 func help() {
-	fmt.Println("Usage: rctf [init/add/status]...")
+	fmt.Println("Usage: rctf [init/add/status/pwn/ghidra]...")
 }
 
 func createDefaultConfig(configPath string) {
