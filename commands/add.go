@@ -156,9 +156,9 @@ func addFile(srcPath string) error {
 
 func AddHelp() {
 	fmt.Fprintf(os.Stderr, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
-	fmt.Fprintf(os.Stderr, "usage: rctf add file\n")
+	fmt.Fprintf(os.Stderr, "usage: rctf add file1 [file2 file3...]\n")
 
-	fmt.Fprintf(os.Stderr, "  adds a file to the current task with rctf\n")
+	fmt.Fprintf(os.Stderr, "  add one or more files to the current task with rctf\n")
 
 	fmt.Fprintf(os.Stderr, "\nsubcommands:\n")
 	fmt.Fprintf(os.Stderr, "  ❓ help ~ print this message\n")
