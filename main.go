@@ -105,7 +105,7 @@ func main() {
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 
-		fmt.Fprintf(os.Stderr, "usage: %s [command] [arg1 arg2...]\n", os.Args[0])
+		fmt.Fprintf(os.Stderr, "usage: %s command [arg1 arg2...]\n", os.Args[0])
 
 		flag.PrintDefaults()
 
@@ -116,7 +116,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "  🐚 pwn\n")
 		fmt.Fprintf(os.Stderr, "  🦖 ghidra\n")
 
-		fmt.Fprintf(os.Stderr, "\n~ try `command help` for more info ~\n")
+		fmt.Fprintf(os.Stderr, "\n~ try `%%command%% help` for more info ~\n")
 		fmt.Fprintf(os.Stderr, "~ 🚩 @rerrorctf 🚩 ~\n")
 		fmt.Fprintf(os.Stderr, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 	}
