@@ -41,8 +41,13 @@ func makeScript(ip string, port int) {
 	script := fmt.Sprintf(
 		"#!/usr/bin/env python3\n\n"+
 			"from pwn import *\n\n"+
-			"#p = process(\"./task\")\n"+
-			"p = remote(\"%s\", %d)\n\n"+
+			"LOCAL_BINARY = \"./task\"\n"+
+			"REMOTE_IP = \"%s\"\n"+
+			"REMOTE_PORT = \"%d\"\n\n"+
+			"#elf = ELF(LOCAL_BINARY)\n\n"+
+			"#p = process(LOCAL_BINARY)\n"+
+			"p = remote(REMOTE_IP, REMOTE_PORT)\n"+
+			"#gdb.attach(p, gdbscript=\"\")\n\n"+
 			"# pwn it here\n\n"+
 			"p.interactive()\n",
 		ip, port)
