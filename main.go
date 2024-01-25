@@ -29,7 +29,6 @@ func ensureDirectory(dirPath string) {
 func ensureSkeleton() {
 	ensureDirectory(config.FolderName)
 	ensureDirectory(config.FilesFolderName)
-	ensureDirectory(config.GhidraProjectPath)
 }
 
 func main() {
