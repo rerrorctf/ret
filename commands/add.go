@@ -16,10 +16,6 @@ import (
 	"time"
 )
 
-func AddHelp() {
-	fmt.Println("rctf add help would go here...")
-}
-
 func filesAlreadyExists() bool {
 	_, err := os.Stat(config.RctfFilesName)
 	return !os.IsNotExist(err)
@@ -91,7 +87,7 @@ func writeFiles(files *data.Files) {
 func ensureFileNotAdded(file *data.File, files *data.Files) {
 	for _, f := range files.Files {
 		if file.SHA256 == f.SHA256 {
-			fmt.Printf("error: file \"%s\" with sha256 \"%s\" already added...\n",
+			fmt.Printf("💥 error: file \"%s\" with sha256 \"%s\" already added...\n",
 				f.Filename, f.SHA256)
 			os.Exit(1)
 		}
@@ -99,7 +95,7 @@ func ensureFileNotAdded(file *data.File, files *data.Files) {
 }
 
 func addFile(srcPath string) error {
-	fmt.Printf("adding \"%s\"...\n", srcPath)
+	fmt.Printf("📥 adding \"%s\"...\n", srcPath)
 
 	files := data.Files{}
 	parseFiles(&files)
@@ -154,11 +150,22 @@ func addFile(srcPath string) error {
 	return nil
 }
 
-func Add(args []string) {
-	if config.Verbose {
-		fmt.Println("Add:", args)
-	}
+func AddHelp() {
+	fmt.Fprintf(os.Stderr, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+	fmt.Fprintf(os.Stderr, "usage: rctf add file\n")
 
+	fmt.Fprintf(os.Stderr, "  adds a file to the current task with rctf\n")
+
+	fmt.Fprintf(os.Stderr, "\nsubcommands:\n")
+	fmt.Fprintf(os.Stderr, "  ❓ help ~ print this message\n")
+
+	fmt.Fprintf(os.Stderr, "\n~ 🚩 @rerrorctf 🚩 ~\n")
+	fmt.Fprintf(os.Stderr, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+
+	os.Exit(0)
+}
+
+func Add(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
