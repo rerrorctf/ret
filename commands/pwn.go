@@ -43,7 +43,7 @@ func makeScript(ip string, port int) {
 			"from pwn import *\n\n"+
 			"LOCAL_BINARY = \"./task\"\n"+
 			"REMOTE_IP = \"%s\"\n"+
-			"REMOTE_PORT = \"%d\"\n\n"+
+			"REMOTE_PORT = %d\n\n"+
 			"#elf = ELF(LOCAL_BINARY)\n\n"+
 			"#p = process(LOCAL_BINARY)\n"+
 			"p = remote(REMOTE_IP, REMOTE_PORT)\n"+
