@@ -25,6 +25,17 @@ func Ghidra(args []string) {
 		}
 	}
 
+	if _, err := os.Stat(config.GhidraProjectPath); os.IsNotExist(err) {
+		if config.Verbose {
+			fmt.Println("mkdir", config.GhidraProjectPath)
+		}
+		err := os.MkdirAll(config.GhidraProjectPath, 0755)
+		if err != nil {
+			fmt.Println("error creating directory:", err)
+			os.Exit(1)
+		}
+	}
+
 	absoluteProjectPath, err := filepath.Abs(config.GhidraProjectPath + "/project.gpr")
 	if err != nil {
 		fmt.Println("error abs:", err)
