@@ -104,7 +104,6 @@ func main() {
 
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
-
 		fmt.Fprintf(os.Stderr, "usage: %s command [arg1 arg2...]\n", os.Args[0])
 
 		flag.PrintDefaults()
