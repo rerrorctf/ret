@@ -6,7 +6,24 @@ import (
 	"os/exec"
 	"path/filepath"
 	"rctf/config"
+	"time"
 )
+
+func ghidraSpinner() {
+	emojis := []string{
+		"🍎", "🥑", "🥓", "🥖", "🍌", "🥯", "🫐", "🍔", "🥦", "🥩",
+		"🥕", "🥂", "🍫", "🍪", "🥒", "🧀", "🥚", "🍳", "🍟", "🍇",
+		"🍏", "🍔", "🍯", "🥝", "🍋", "🥬", "🍞", "🥗", "🍣", "🍜",
+		"🥟", "🍲", "🌭", "🍕", "🍝", "🌮", "🍉", "🍊", "🍓", "🚩",
+	}
+
+	for {
+		for _, e := range emojis {
+			fmt.Printf("\r%s -> 🦖", e)
+			time.Sleep(200 * time.Millisecond)
+		}
+	}
+}
 
 func Ghidra(args []string) {
 	if len(args) > 0 {
@@ -44,7 +61,7 @@ func Ghidra(args []string) {
 		os.Exit(1)
 	}
 
-	fmt.Println("🦖 this might take a while...")
+	go ghidraSpinner()
 
 	analyzeFile := exec.Command(
 		config.GhidraInstallPath+"/support/analyzeHeadless",
@@ -66,4 +83,6 @@ func Ghidra(args []string) {
 		fmt.Printf("%s\n", openGhidraOutput)
 		fmt.Println("warning:\n", err)
 	}
+
+	fmt.Printf("\n")
 }
