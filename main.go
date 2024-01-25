@@ -15,7 +15,9 @@ func help() {
 
 func ensureSkeleton() {
 	if _, err := os.Stat(config.FolderName); os.IsNotExist(err) {
-		fmt.Println("mkdir", config.FolderName)
+		if config.Verbose {
+			fmt.Println("mkdir", config.FolderName)
+		}
 		err := os.MkdirAll(config.FolderName, 0755)
 		if err != nil {
 			fmt.Println("error creating directory:", err)
@@ -24,7 +26,9 @@ func ensureSkeleton() {
 	}
 
 	if _, err := os.Stat(config.FilesFolderName); os.IsNotExist(err) {
-		fmt.Println("mkdir", config.FilesFolderName)
+		if config.Verbose {
+			fmt.Println("mkdir", config.FilesFolderName)
+		}
 		err := os.MkdirAll(config.FilesFolderName, 0755)
 		if err != nil {
 			fmt.Println("error creating directory:", err)
@@ -33,7 +37,9 @@ func ensureSkeleton() {
 	}
 
 	if _, err := os.Stat(config.FolderName + "/ghidra"); os.IsNotExist(err) {
-		fmt.Println("mkdir", config.FolderName+"/ghidra")
+		if config.Verbose {
+			fmt.Println("mkdir", config.FolderName+"/ghidra")
+		}
 		err := os.MkdirAll(config.FolderName+"/ghidra", 0755)
 		if err != nil {
 			fmt.Println("error creating directory:", err)
@@ -43,8 +49,6 @@ func ensureSkeleton() {
 }
 
 func main() {
-	ensureSkeleton()
-
 	flag.BoolVar(&config.Verbose, "v", false, "enable verbose mode")
 
 	flag.Parse()
@@ -53,6 +57,8 @@ func main() {
 		help()
 		os.Exit(1)
 	}
+
+	ensureSkeleton()
 
 	// TODO add sub commands to output of -h/--help
 
