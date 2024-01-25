@@ -45,8 +45,7 @@ func ensureSkeleton() {
 func main() {
 	ensureSkeleton()
 
-	var verbose bool
-	flag.BoolVar(&verbose, "v", false, "enable verbose mode")
+	flag.BoolVar(&config.Verbose, "v", false, "enable verbose mode")
 
 	flag.Parse()
 
@@ -55,15 +54,17 @@ func main() {
 		os.Exit(1)
 	}
 
-	switch os.Args[1] {
+	// TODO add sub commands to output of -h/--help
+
+	switch flag.Arg(0) {
 	case "init":
-		commands.Init(os.Args[2:])
+		commands.Init(flag.Args()[1:])
 	case "add":
-		commands.Add(os.Args[2:])
+		commands.Add(flag.Args()[1:])
 	case "status":
-		commands.Status(os.Args[2:])
+		commands.Status(flag.Args()[1:])
 	default:
-		fmt.Println("Unknown command:", os.Args[1])
+		fmt.Println("Unknown command:", flag.Arg(0))
 		os.Exit(1)
 	}
 }

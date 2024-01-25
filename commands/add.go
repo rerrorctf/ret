@@ -169,7 +169,9 @@ func addFile(srcPath string) error {
 }
 
 func Add(args []string) {
-	fmt.Println("Add:", args)
+	if config.Verbose {
+		fmt.Println("Add:", args)
+	}
 
 	if len(args) > 0 {
 		switch args[0] {

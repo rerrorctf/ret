@@ -7,3 +7,7 @@ const (
 	RctfFilesName     = FilesFolderName + "/rctf-files.json"
 	GhidraInstallPath = "/opt/ghidra_11.0_PUBLIC/"
 )
+
+var (
+	Verbose = false
+)

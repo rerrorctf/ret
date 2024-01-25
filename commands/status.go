@@ -14,7 +14,9 @@ func StatusHelp() {
 }
 
 func Status(args []string) {
-	fmt.Println("Status:", args)
+	if config.Verbose {
+		fmt.Println("Status:", args)
+	}
 
 	if len(args) > 0 {
 		switch args[0] {
