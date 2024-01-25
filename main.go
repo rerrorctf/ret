@@ -11,6 +11,7 @@ import (
 	"rctf/commands"
 	"rctf/config"
 	"rctf/data"
+	"rctf/theme"
 )
 
 func createDefaultConfig(configPath string) {
@@ -103,23 +104,19 @@ func main() {
 	flag.BoolVar(&config.Verbose, "v", false, "enable verbose mode")
 
 	flag.Usage = func() {
-		fmt.Fprintf(os.Stderr, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
-		fmt.Fprintf(os.Stderr, "usage: %s command [arg1 arg2...]\n", os.Args[0])
+		fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"command"+theme.ColorGray+" [arg1 arg2...]\n"+theme.ColorReset)
 
 		flag.PrintDefaults()
 
-		fmt.Fprintf(os.Stderr, "\ncommands:\n")
-		fmt.Fprintf(os.Stderr, "  🚀 init\n")
-		fmt.Fprintf(os.Stderr, "  👀 status\n")
-		fmt.Fprintf(os.Stderr, "  📥 add\n")
-		fmt.Fprintf(os.Stderr, "  🐚 pwn\n")
-		fmt.Fprintf(os.Stderr, "  🦖 ghidra\n")
-		fmt.Fprintf(os.Stderr, "  💃 ida\n")
-		fmt.Fprintf(os.Stderr, "  📡 monitor\n")
-
-		fmt.Fprintf(os.Stderr, "\n~ try `%%command%% help` for more info ~\n")
-		fmt.Fprintf(os.Stderr, "~ 🚩 @rerrorctf 🚩 ~\n")
-		fmt.Fprintf(os.Stderr, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+		fmt.Fprintf(os.Stderr, "\n"+theme.ColorGreen+"commands"+theme.ColorReset+":\n")
+		fmt.Fprintf(os.Stderr, "  🚀 "+theme.ColorBlue+"init"+theme.ColorReset+"\n")
+		fmt.Fprintf(os.Stderr, "  👀 "+theme.ColorBlue+"status"+theme.ColorReset+"\n")
+		fmt.Fprintf(os.Stderr, "  📥 "+theme.ColorBlue+"add"+theme.ColorReset+"\n")
+		fmt.Fprintf(os.Stderr, "  🐚 "+theme.ColorBlue+"pwn"+theme.ColorReset+"\n")
+		fmt.Fprintf(os.Stderr, "  🦖 "+theme.ColorBlue+"ghidra"+theme.ColorReset+"\n")
+		fmt.Fprintf(os.Stderr, "  💃 "+theme.ColorBlue+"ida"+theme.ColorReset+"\n")
+		fmt.Fprintf(os.Stderr, "  📡 "+theme.ColorBlue+"monitor"+theme.ColorReset+"\n")
+		fmt.Fprintf(os.Stderr, "\n🚩 https://github.com/rerrorctf/rctf 🚩\n")
 	}
 
 	flag.Parse()
