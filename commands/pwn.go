@@ -59,6 +59,7 @@ func makeScript(ip string, port int) {
 	script := fmt.Sprintf(
 		"#!/usr/bin/env python3\n\n"+
 			"from pwn import *\n\n"+
+			"#context.log_level = \"debug\"\n\n"+
 			"LOCAL_BINARY = \"./task\"\n"+
 			"REMOTE_IP = \"%s\"\n"+
 			"REMOTE_PORT = %d\n\n"+
