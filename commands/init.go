@@ -117,7 +117,9 @@ func createTask() {
 }
 
 func Init(args []string) {
-	fmt.Println("Init:", args)
+	if config.Verbose {
+		fmt.Println("Init:", args)
+	}
 
 	if len(args) > 0 {
 		switch args[0] {
