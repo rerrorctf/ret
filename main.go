@@ -115,6 +115,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "  🐚 pwn\n")
 		fmt.Fprintf(os.Stderr, "  🦖 ghidra\n")
 		fmt.Fprintf(os.Stderr, "  💃 ida\n")
+		fmt.Fprintf(os.Stderr, "  📡 monitor\n")
 
 		fmt.Fprintf(os.Stderr, "\n~ try `%%command%% help` for more info ~\n")
 		fmt.Fprintf(os.Stderr, "~ 🚩 @rerrorctf 🚩 ~\n")
@@ -145,6 +146,8 @@ func main() {
 		commands.Ghidra(flag.Args()[1:])
 	case "ida":
 		commands.Ida(flag.Args()[1:])
+	case "monitor":
+		commands.Monitor(flag.Args()[1:])
 	default:
 		flag.Usage()
 		os.Exit(1)
