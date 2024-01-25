@@ -8,33 +8,51 @@ import (
 	"strconv"
 )
 
-func PwnHelp() {
-	fmt.Println("rctf pwn help would go here...")
-}
-
-func getRemoteParams(ip *string, port *int) {
+func getRemoteParams(args []string, ip *string, port *int) {
 	scanner := bufio.NewScanner(os.Stdin)
 
-	fmt.Print("enter the remote ip address (no port): ")
-
-	scanner.Scan()
-	*ip = scanner.Text()
-
-	fmt.Print("enter the remote port: ")
-
-	scanner.Scan()
-	p, err := strconv.Atoi(scanner.Text())
-	if err != nil {
-		fmt.Println("error reading port:", err)
-		os.Exit(1)
+	if len(args) > 0 {
+		fmt.Printf("ip: %s\n", args[0])
+		*ip = args[0]
+	} else {
+		fmt.Print("enter the remote ip address (no port): ")
+		scanner.Scan()
+		*ip = scanner.Text()
 	}
 
-	if p < 1 || p > 65535 {
-		fmt.Printf("error: invalid port %v\n", port)
-		os.Exit(1)
-	}
+	if len(args) > 1 {
+		p, err := strconv.Atoi(args[1])
 
-	*port = p
+		if err != nil {
+			fmt.Println("error reading port:", err)
+			os.Exit(1)
+		}
+
+		if p < 1 || p > 65535 {
+			fmt.Printf("error: invalid port %v\n", port)
+			os.Exit(1)
+		}
+
+		fmt.Printf("port: %v\n", p)
+
+		*port = p
+	} else {
+		fmt.Print("enter the remote port: ")
+		scanner.Scan()
+		p, err := strconv.Atoi(scanner.Text())
+
+		if err != nil {
+			fmt.Println("error reading port:", err)
+			os.Exit(1)
+		}
+
+		if p < 1 || p > 65535 {
+			fmt.Printf("error: invalid port %v\n", port)
+			os.Exit(1)
+		}
+
+		*port = p
+	}
 }
 
 func makeScript(ip string, port int) {
@@ -64,31 +82,37 @@ func makeScript(ip string, port int) {
 		os.Exit(1)
 	}
 
-	fmt.Printf("ready to pwn: $ ./%s\n", config.PwnScriptName)
+	fmt.Printf("🐚 ready to pwn: $ ./%s\n", config.PwnScriptName)
 }
 
 func Pwn(args []string) {
-	if config.Verbose {
-		fmt.Println("Pwn:", args)
-	}
-
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			PwnHelp()
+			fmt.Fprintf(os.Stderr, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+			fmt.Fprintf(os.Stderr, "usage: rctf pwn [ip] [port]\n")
+
+			fmt.Fprintf(os.Stderr, "  create a pwntools script with rctf\n")
+
+			fmt.Fprintf(os.Stderr, "\nsubcommands:\n")
+			fmt.Fprintf(os.Stderr, "  ❓ help ~ print this message\n")
+
+			fmt.Fprintf(os.Stderr, "\n~ 🚩 @rerrorctf 🚩 ~\n")
+			fmt.Fprintf(os.Stderr, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+
 			os.Exit(0)
 		}
 	}
 
 	_, err := os.Stat(config.PwnScriptName)
 	if !os.IsNotExist(err) {
-		fmt.Printf("error: \"%s\" already exists!\n", config.PwnScriptName)
+		fmt.Printf("💥 error: \"%s\" already exists!\n", config.PwnScriptName)
 		os.Exit(1)
 	}
 
 	var ip string
 	var port int
-	getRemoteParams(&ip, &port)
+	getRemoteParams(args, &ip, &port)
 
 	makeScript(ip, port)
 }
