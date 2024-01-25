@@ -84,14 +84,16 @@ func writeFiles(files *data.Files) {
 	}
 }
 
-func ensureFileNotAdded(file *data.File, files *data.Files) {
+func ensureFileNotAdded(file *data.File, files *data.Files) bool {
 	for _, f := range files.Files {
 		if file.SHA256 == f.SHA256 {
 			fmt.Printf("💥 error: file \"%s\" with sha256 \"%s\" already added...\n",
 				f.Filename, f.SHA256)
-			os.Exit(1)
+			return false
 		}
 	}
+
+	return true
 }
 
 func addFile(srcPath string) error {
@@ -135,7 +137,9 @@ func addFile(srcPath string) error {
 		Timestamp: time.Now().UTC(),
 	}
 
-	ensureFileNotAdded(&file, &files)
+	if !ensureFileNotAdded(&file, &files) {
+		return nil
+	}
 
 	err = copyFile(srcPath, dstPath)
 	if err != nil {
@@ -178,7 +182,10 @@ func Add(args []string) {
 				os.Exit(1)
 			}
 
-			err = addFile(args[0])
+			for _, file := range args {
+				err = addFile(file)
+			}
+
 			if err != nil {
 				os.Exit(1)
 			}
