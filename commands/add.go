@@ -64,14 +64,14 @@ func parseFiles(files *data.Files) {
 
 func runFileCommandOnFile(path string) string {
 	fileOutput := exec.Command("file", path)
+
 	fileOutputResult, err := fileOutput.Output()
 	if err != nil {
 		fmt.Printf("warning: unable to get output from file on %s\n", path)
+		return ""
 	}
 
-	// TODO bit hacky to get a nice a format..
-	fileOutputResultString := string(fileOutputResult[len(path)+2 : len(fileOutputResult)-1])
-	return fileOutputResultString
+	return string(fileOutputResult[len(path)+2 : len(fileOutputResult)-1])
 }
 
 func writeFiles(files *data.Files) {
@@ -104,31 +104,17 @@ func addFile(srcPath string) error {
 	files := data.Files{}
 	parseFiles(&files)
 
-	//
-
 	_, fileName := filepath.Split(srcPath)
 
 	dstPath := config.FilesFolderName + "/" + fileName
 
-	err := copyFile(srcPath, dstPath)
+	fileOutput := runFileCommandOnFile(srcPath)
+
+	content, err := os.ReadFile(srcPath)
 	if err != nil {
-		fmt.Println("error copying file:", dstPath)
+		fmt.Println("error reading file:", srcPath)
 		return nil
 	}
-
-	//
-
-	fileOutput := runFileCommandOnFile(dstPath)
-
-	//
-
-	content, err := os.ReadFile(dstPath)
-	if err != nil {
-		fmt.Println("error reading file:", dstPath)
-		return nil
-	}
-
-	//
 
 	md5Hash := md5.New()
 	md5Hash.Write(content)
@@ -142,8 +128,6 @@ func addFile(srcPath string) error {
 	sha256Hash.Write(content)
 	sha256HashString := hex.EncodeToString(sha256Hash.Sum(nil))
 
-	//
-
 	file := data.File{
 		Filename:  fileName,
 		Filepath:  dstPath,
@@ -155,26 +139,17 @@ func addFile(srcPath string) error {
 		Timestamp: time.Now().UTC(),
 	}
 
-	//
-
 	ensureFileNotAdded(&file, &files)
+
+	err = copyFile(srcPath, dstPath)
+	if err != nil {
+		fmt.Println("error copying file:", dstPath)
+		return nil
+	}
 
 	files.Files = append(files.Files, file)
 
 	writeFiles(&files)
-
-	analyzeFile := exec.Command(
-		config.GhidraInstallPath+"/support/analyzeHeadless",
-		config.FolderName+"/ghidra",
-		"project",
-		"-import", dstPath)
-
-	analyzeFileOutput, err := analyzeFile.CombinedOutput()
-	if err != nil {
-		fmt.Println("warning:\n", err)
-	}
-
-	fmt.Printf("%s\n", analyzeFileOutput)
 
 	return nil
 }
