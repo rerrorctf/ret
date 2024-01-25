@@ -84,5 +84,5 @@ func Ghidra(args []string) {
 		fmt.Println("warning:\n", err)
 	}
 
-	fmt.Printf("\n")
+	fmt.Printf("\r")
 }
