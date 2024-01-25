@@ -28,7 +28,7 @@ func Status(args []string) {
 
 	jsonData, err := os.ReadFile(config.TaskName)
 	if err != nil {
-		fmt.Printf("error reading %s %v\n", config.TaskName, err)
+		fmt.Println("error reading:", err)
 		os.Exit(1)
 	}
 
