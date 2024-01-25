@@ -77,7 +77,6 @@ func Init(args []string) {
 		switch args[0] {
 		case "help":
 			fmt.Fprintf(os.Stderr, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
-
 			fmt.Fprintf(os.Stderr, "usage: %s init [name] [description] [category]\n", os.Args[0])
 
 			fmt.Fprintf(os.Stderr, "  initializes the cwd for a task with rctf\n")
