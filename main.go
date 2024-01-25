@@ -53,6 +53,8 @@ func main() {
 		commands.Add(flag.Args()[1:])
 	case "status":
 		commands.Status(flag.Args()[1:])
+	case "pwn":
+		commands.Pwn(flag.Args()[1:])
 	default:
 		fmt.Println("Unknown command:", flag.Arg(0))
 		os.Exit(1)
