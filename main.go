@@ -13,39 +13,23 @@ func help() {
 	fmt.Println("Usage: rctf [init/add/status]...")
 }
 
+func ensureDirectory(dirPath string) {
+	if _, err := os.Stat(dirPath); os.IsNotExist(err) {
+		if config.Verbose {
+			fmt.Println("mkdir", dirPath)
+		}
+		err := os.MkdirAll(dirPath, 0755)
+		if err != nil {
+			fmt.Println("error creating directory:", err)
+			os.Exit(1)
+		}
+	}
+}
+
 func ensureSkeleton() {
-	if _, err := os.Stat(config.FolderName); os.IsNotExist(err) {
-		if config.Verbose {
-			fmt.Println("mkdir", config.FolderName)
-		}
-		err := os.MkdirAll(config.FolderName, 0755)
-		if err != nil {
-			fmt.Println("error creating directory:", err)
-			os.Exit(1)
-		}
-	}
-
-	if _, err := os.Stat(config.FilesFolderName); os.IsNotExist(err) {
-		if config.Verbose {
-			fmt.Println("mkdir", config.FilesFolderName)
-		}
-		err := os.MkdirAll(config.FilesFolderName, 0755)
-		if err != nil {
-			fmt.Println("error creating directory:", err)
-			os.Exit(1)
-		}
-	}
-
-	if _, err := os.Stat(config.GhidraProjectPath); os.IsNotExist(err) {
-		if config.Verbose {
-			fmt.Println("mkdir", config.GhidraProjectPath)
-		}
-		err := os.MkdirAll(config.GhidraProjectPath, 0755)
-		if err != nil {
-			fmt.Println("error creating directory:", err)
-			os.Exit(1)
-		}
-	}
+	ensureDirectory(config.FolderName)
+	ensureDirectory(config.FilesFolderName)
+	ensureDirectory(config.GhidraProjectPath)
 }
 
 func main() {
