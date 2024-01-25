@@ -13,10 +13,6 @@ import (
 	"rctf/data"
 )
 
-func help() {
-	fmt.Println("Usage: rctf [init/add/status/pwn/ghidra]...")
-}
-
 func createDefaultConfig(configPath string) {
 	var userConfig data.Config
 
@@ -106,18 +102,35 @@ func ensureSkeleton() {
 func main() {
 	flag.BoolVar(&config.Verbose, "v", false, "enable verbose mode")
 
+	flag.Usage = func() {
+		fmt.Fprintf(os.Stderr, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+
+		fmt.Fprintf(os.Stderr, "usage: %s [command] [arg1 arg2...]\n", os.Args[0])
+
+		flag.PrintDefaults()
+
+		fmt.Fprintf(os.Stderr, "\ncommands:\n")
+		fmt.Fprintf(os.Stderr, "  🚀 init\n")
+		fmt.Fprintf(os.Stderr, "  👀 status\n")
+		fmt.Fprintf(os.Stderr, "  📥 add\n")
+		fmt.Fprintf(os.Stderr, "  🐚 pwn\n")
+		fmt.Fprintf(os.Stderr, "  🦖 ghidra\n")
+
+		fmt.Fprintf(os.Stderr, "\n~ try `command help` for more info ~\n")
+		fmt.Fprintf(os.Stderr, "~ 🚩 @rerrorctf 🚩 ~\n")
+		fmt.Fprintf(os.Stderr, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+	}
+
 	flag.Parse()
 
 	if flag.NArg() < 1 {
-		help()
+		flag.Usage()
 		os.Exit(1)
 	}
 
 	parseUserConfig()
 
 	ensureSkeleton()
-
-	// TODO add sub commands to output of -h/--help
 
 	switch flag.Arg(0) {
 	case "init":
@@ -131,9 +144,7 @@ func main() {
 	case "ghidra":
 		commands.Ghidra(flag.Args()[1:])
 	default:
-		fmt.Println("Unknown command:", flag.Arg(0))
+		flag.Usage()
 		os.Exit(1)
 	}
 }
-
-// should have a .rctf lock file held while this tool runs
