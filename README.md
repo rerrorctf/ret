@@ -6,11 +6,17 @@
 
 ## building from source
 
-todo
+```
+$ go build
+```
 
 ## installation
 
-todo
+```
+$ sudo cp ./rctf /usr/local/bin
+```
+
+Other options are available.
 
 ## commands
 
