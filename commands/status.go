@@ -60,7 +60,8 @@ func Status(args []string) {
 		os.Exit(1)
 	}
 
-	fmt.Println("files:")
+	fmt.Println("\nfiles:")
+	fmt.Println("########################################################")
 
 	var files data.Files
 
@@ -72,13 +73,21 @@ func Status(args []string) {
 
 	for idx, file := range files.Files {
 		fmt.Printf("[%v] %s (%v bytes)\n", idx, file.Filename, file.Size)
-		fmt.Printf("     type:   %s...\n", file.Type[:25])
+
+		if len(file.Type) < 60 {
+			fmt.Printf("     type:   %s\n", file.Type)
+		} else {
+			fmt.Printf("     type:   %s...\n", file.Type[:60])
+		}
+
 		fmt.Printf("     md5:    %s\n", file.MD5)
 		fmt.Printf("     sha1:   %s\n", file.SHA1)
 		fmt.Printf("     sha256: %s\n", file.SHA256)
+
 		if len(file.Comment) > 0 {
 			fmt.Printf("     comment: %s\n", file.Comment)
 		}
 		fmt.Printf("%v(%v)\n", file.Timestamp, time.Now().UTC().Sub(file.Timestamp))
+		fmt.Println("########################################################")
 	}
 }
