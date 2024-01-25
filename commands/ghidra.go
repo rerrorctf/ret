@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"rctf/config"
 )
 
@@ -24,6 +25,12 @@ func Ghidra(args []string) {
 		}
 	}
 
+	absoluteProjectPath, err := filepath.Abs(config.GhidraProjectPath + "/project.gpr")
+	if err != nil {
+		fmt.Println("error abs:", err)
+		os.Exit(1)
+	}
+
 	analyzeFile := exec.Command(
 		config.GhidraInstallPath+"/support/analyzeHeadless",
 		config.GhidraProjectPath,
@@ -37,8 +44,7 @@ func Ghidra(args []string) {
 	}
 
 	openGhidra := exec.Command(
-		config.GhidraInstallPath+"/ghidraRun",
-		"/home/user/rctf/ghidra/project.gpr")
+		config.GhidraInstallPath+"/ghidraRun", absoluteProjectPath)
 
 	openGhidraOutput, err := openGhidra.CombinedOutput()
 	if err != nil {
