@@ -96,6 +96,29 @@ func main() {
 
 		flag.PrintDefaults()
 
+		fmt.Fprintf(os.Stderr, "\n")
+
+		fmt.Fprintln(os.Stderr, theme.ColorRed+`                FFFF                                                 
+            FFFFFFFFFFFFF            FFF                                
+      F  FFFFFFFFF   FFFFF      FFFFFFFFF                               
+     FFFFFFFF         FFFFFFFFFFFFFFFF                                  
+      FF       FFFFFFFFFFFF FFFFF                                       
+       FF   FFFFFFFFFFF    F FFFFFFFFF                                  
+        FF FFFFFFFFFFF          FFFFFFFFFFFF                            
+        FFF   FFFFFFFFFFFF         FFFFFFFFF                            
+         FFF         FFFFFF FFFFFFFFFFFFFF                              
+          FF       FFFFFFFFF FFFFFFF        FFF                         
+           FF  FFFFFFFFFFFFF FFFFF      FFFFFFF                         
+            FF FFFFF          FFFFFFFFFFFFFFF                           
+            FFF F              FFFFFFFFF                                
+             FFF                                                        
+              FF                                                        
+               FF                                                       
+                FF                                                      
+                FFF                                                     
+                 FFF                                                    
+                  FF`+theme.ColorReset)
+
 		fmt.Fprintf(os.Stderr, "\n"+theme.ColorGreen+"commands"+theme.ColorReset+":\n")
 		fmt.Fprintf(os.Stderr, "  🚀 "+theme.ColorBlue+"init"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  👀 "+theme.ColorBlue+"status"+theme.ColorReset+"\n")

@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -123,7 +124,7 @@ func processFile(file *data.File, path string) {
 	grep2Win(file, path)
 }
 
-func addFile(srcPath string) error {
+func addFile(srcPath string) {
 	fmt.Printf("📥 adding \"%s\"...\n", srcPath)
 
 	files := data.Files{}
@@ -138,7 +139,7 @@ func addFile(srcPath string) error {
 	content, err := os.ReadFile(srcPath)
 	if err != nil {
 		fmt.Println("error reading file:", srcPath)
-		return nil
+		return
 	}
 
 	md5Hash := md5.New()
@@ -165,13 +166,13 @@ func addFile(srcPath string) error {
 	}
 
 	if !ensureFileNotAdded(&file, &files) {
-		return nil
+		return
 	}
 
 	err = copyFile(srcPath, dstPath)
 	if err != nil {
 		fmt.Println("error copying file:", dstPath)
-		return nil
+		return
 	}
 
 	processFile(&file, dstPath)
@@ -180,7 +181,7 @@ func addFile(srcPath string) error {
 
 	writeFiles(&files)
 
-	return nil
+	return
 }
 
 func AddHelp() {
@@ -198,16 +199,11 @@ func Add(args []string) {
 		default:
 			_, err := os.Stat(config.TaskName)
 			if os.IsNotExist(err) {
-				fmt.Printf("error: no %s found\nrun "+theme.ColorBlue+"init"+theme.ColorReset+" first\n", config.TaskName)
-				os.Exit(1)
+				log.Fatalf("error: no %s found\nrun "+theme.ColorBlue+"init"+theme.ColorReset+" first\n", config.TaskName)
 			}
 
 			for _, file := range args {
-				err = addFile(file)
-			}
-
-			if err != nil {
-				os.Exit(1)
+				addFile(file)
 			}
 		}
 	} else {
