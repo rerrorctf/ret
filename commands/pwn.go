@@ -14,12 +14,13 @@ func getRemoteParams(args []string, ip *string, port *int) {
 	scanner := bufio.NewScanner(os.Stdin)
 
 	if len(args) > 0 {
-		fmt.Printf("ip: %s\n", args[0])
+		fmt.Printf(theme.ColorGray+"ip: "+theme.ColorYellow+"%s"+theme.ColorReset+"\n", args[0])
 		*ip = args[0]
 	} else {
-		fmt.Print("enter the remote ip address (no port): ")
+		fmt.Print(theme.ColorGray + "enter remote ip (no port): " + theme.ColorYellow)
 		scanner.Scan()
 		*ip = scanner.Text()
+		fmt.Printf(theme.ColorReset)
 	}
 
 	if len(args) > 1 {
@@ -33,12 +34,14 @@ func getRemoteParams(args []string, ip *string, port *int) {
 			log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": invalid port %v\n", port)
 		}
 
-		fmt.Printf("port: %v\n", p)
+		fmt.Printf(theme.ColorGray+"port: "+theme.ColorYellow+"%v"+theme.ColorReset+"\n", p)
 
 		*port = p
 	} else {
-		fmt.Print("enter the remote port: ")
+		fmt.Print(theme.ColorGray + "enter remote port: " + theme.ColorYellow)
 		scanner.Scan()
+		fmt.Printf(theme.ColorReset)
+
 		p, err := strconv.Atoi(scanner.Text())
 
 		if err != nil {
@@ -56,6 +59,7 @@ func getRemoteParams(args []string, ip *string, port *int) {
 func makeScript(ip string, port int) {
 	script := fmt.Sprintf(
 		"#!/usr/bin/env python3\n\n"+
+			"#pwn template made with 🚩 https://github.com/rerrorctf/rctf 🚩\n\n"+
 			"from pwn import *\n\n"+
 			"#context.log_level = \"debug\"\n\n"+
 			"LOCAL_BINARY = \"./task\"\n"+
