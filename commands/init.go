@@ -7,6 +7,7 @@ import (
 	"os"
 	"rctf/config"
 	"rctf/data"
+	"rctf/theme"
 	"time"
 )
 
@@ -85,23 +86,14 @@ func Init(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Fprintf(os.Stderr, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
-			fmt.Fprintf(os.Stderr, "usage: %s init [name] [description] [category] [flag-format]\n", os.Args[0])
-
-			fmt.Fprintf(os.Stderr, "  initializes the cwd for a task with rctf\n")
-
-			fmt.Fprintf(os.Stderr, "\nsubcommands:\n")
-			fmt.Fprintf(os.Stderr, "  ❓ help ~ print this message\n")
-
-			fmt.Fprintf(os.Stderr, "\n~ 🚩 @rerrorctf 🚩 ~\n")
-			fmt.Fprintf(os.Stderr, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
-
+			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"init"+theme.ColorGray+" [name] [description] [category] [flag-format]"+theme.ColorReset+"\n")
+			fmt.Fprintf(os.Stderr, "  🚀 initializes the cwd for a task with rctf\n")
 			os.Exit(0)
 		}
 	}
 
 	if taskAlreadyExists() {
-		fmt.Printf("%s already exists\n", config.TaskName)
+		fmt.Printf("💥 error: %s already exists\n", config.TaskName)
 		os.Exit(1)
 	}
 

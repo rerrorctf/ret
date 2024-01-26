@@ -115,7 +115,7 @@ func grep2Win(file *data.File, path string) {
 	grep2win := exec.Command("grep", "-aEoi", task.FlagFormat, path)
 	grep2winOutput, err := grep2win.Output()
 	if err == nil {
-		fmt.Printf("[grep2win]: %s", grep2winOutput)
+		fmt.Printf(theme.ColorPurple+"[grep2win]"+theme.ColorReset+": %s", grep2winOutput)
 	}
 }
 
@@ -185,13 +185,15 @@ func addFile(srcPath string) error {
 
 func AddHelp() {
 	fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"add"+theme.ColorReset+" file "+theme.ColorGray+"[file file...]"+theme.ColorReset+"\n")
-
 	fmt.Fprintf(os.Stderr, "  add one or more files to the current task with rctf\n")
-
 	os.Exit(0)
 }
 
 func Add(args []string) {
+	if config.Verbose {
+		fmt.Println("Add:", args)
+	}
+
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
@@ -200,7 +202,7 @@ func Add(args []string) {
 		default:
 			_, err := os.Stat(config.TaskName)
 			if os.IsNotExist(err) {
-				fmt.Printf("error: no %s found\nrun ~ $ rctf init ~ first\n", config.TaskName)
+				fmt.Printf("error: no %s found\nrun "+theme.ColorBlue+"init"+theme.ColorReset+" first\n", config.TaskName)
 				os.Exit(1)
 			}
 

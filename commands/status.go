@@ -6,6 +6,7 @@ import (
 	"os"
 	"rctf/config"
 	"rctf/data"
+	"rctf/theme"
 	"time"
 )
 
@@ -17,17 +18,8 @@ func Status(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Fprintf(os.Stderr, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
-			fmt.Fprintf(os.Stderr, "usage: rctf status\n")
-
+			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"status"+theme.ColorReset+"\n")
 			fmt.Fprintf(os.Stderr, "  displays the status for the current task with rctf\n")
-
-			fmt.Fprintf(os.Stderr, "\nsubcommands:\n")
-			fmt.Fprintf(os.Stderr, "  ❓ help ~ print this message\n")
-
-			fmt.Fprintf(os.Stderr, "\n~ 🚩 @rerrorctf 🚩 ~\n")
-			fmt.Fprintf(os.Stderr, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
-
 			os.Exit(0)
 		}
 	}

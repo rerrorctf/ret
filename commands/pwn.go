@@ -87,20 +87,15 @@ func makeScript(ip string, port int) {
 }
 
 func Pwn(args []string) {
+	if config.Verbose {
+		fmt.Println("Pwn:", args)
+	}
+
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Fprintf(os.Stderr, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 			fmt.Fprintf(os.Stderr, "usage: rctf pwn [ip] [port]\n")
-
-			fmt.Fprintf(os.Stderr, "  create a pwntools script with rctf\n")
-
-			fmt.Fprintf(os.Stderr, "\nsubcommands:\n")
-			fmt.Fprintf(os.Stderr, "  ❓ help ~ print this message\n")
-
-			fmt.Fprintf(os.Stderr, "\n~ 🚩 @rerrorctf 🚩 ~\n")
-			fmt.Fprintf(os.Stderr, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
-
+			fmt.Fprintf(os.Stderr, "  🐚 create a pwntools script with rctf\n")
 			os.Exit(0)
 		}
 	}
