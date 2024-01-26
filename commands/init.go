@@ -65,6 +65,15 @@ func createTask(args []string) {
 		task.Category = scanner.Text()
 	}
 
+	if len(args) > 3 {
+		fmt.Printf("flag format: %s\n", args[3])
+		task.FlagFormat = args[3]
+	} else {
+		fmt.Print("enter the flag format (as a regular expression): ")
+		scanner.Scan()
+		task.FlagFormat = scanner.Text()
+	}
+
 	writeTask(task)
 }
 
@@ -77,7 +86,7 @@ func Init(args []string) {
 		switch args[0] {
 		case "help":
 			fmt.Fprintf(os.Stderr, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
-			fmt.Fprintf(os.Stderr, "usage: %s init [name] [description] [category]\n", os.Args[0])
+			fmt.Fprintf(os.Stderr, "usage: %s init [name] [description] [category] [flag-format]\n", os.Args[0])
 
 			fmt.Fprintf(os.Stderr, "  initializes the cwd for a task with rctf\n")
 
