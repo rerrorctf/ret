@@ -96,6 +96,32 @@ func ensureFileNotAdded(file *data.File, files *data.Files) bool {
 	return true
 }
 
+func grep2Win(file *data.File, path string) {
+	jsonData, err := os.ReadFile(config.TaskName)
+	if err != nil {
+		fmt.Println("error reading:", err)
+		os.Exit(1)
+	}
+
+	var task data.Task
+
+	err = json.Unmarshal(jsonData, &task)
+	if err != nil {
+		fmt.Println("error unmarshalling json:", err)
+		os.Exit(1)
+	}
+
+	grep2win := exec.Command("grep", "-aEo", task.FlagFormat, path)
+	grep2winOutput, err := grep2win.Output()
+	if err == nil {
+		fmt.Printf("[grep2win]: %s", grep2winOutput)
+	}
+}
+
+func processFile(file *data.File, path string) {
+	grep2Win(file, path)
+}
+
 func addFile(srcPath string) error {
 	fmt.Printf("📥 adding \"%s\"...\n", srcPath)
 
@@ -146,6 +172,8 @@ func addFile(srcPath string) error {
 		fmt.Println("error copying file:", dstPath)
 		return nil
 	}
+
+	processFile(&file, dstPath)
 
 	files.Files = append(files.Files, file)
 
