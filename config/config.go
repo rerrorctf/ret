@@ -10,7 +10,7 @@ const (
 
 var (
 	GhidraInstallPath = "/opt/ghidra_11.0_PUBLIC/"
-	GhidraProjectPath = "ghidra"
+	GhidraProjectPath = FolderName + "/ghidra"
 	PwnScriptName     = "go.py"
 	Verbose           = false
 )
