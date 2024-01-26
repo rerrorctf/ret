@@ -41,6 +41,10 @@ func parseUserConfig() {
 		return
 	}
 
+	if config.Verbose {
+		fmt.Printf("config: parsing user config for \"%s\"...\n", currentUser)
+	}
+
 	configPath := filepath.Join(currentUser.HomeDir, config.UserConfig)
 
 	jsonData, err := os.ReadFile(configPath)

@@ -26,20 +26,15 @@ func ghidraSpinner() {
 }
 
 func Ghidra(args []string) {
+	if config.Verbose {
+		fmt.Println("Ghidra:", args)
+	}
+
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Fprintf(os.Stderr, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 			fmt.Fprintf(os.Stderr, "usage: rctf ghidra\n")
-
 			fmt.Fprintf(os.Stderr, "  🦖 ingests all added files then opens ghidra with rctf\n")
-
-			fmt.Fprintf(os.Stderr, "\nsubcommands:\n")
-			fmt.Fprintf(os.Stderr, "  ❓ help ~ print this message\n")
-
-			fmt.Fprintf(os.Stderr, "\n~ 🚩 @rerrorctf 🚩 ~\n")
-			fmt.Fprintf(os.Stderr, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
-
 			os.Exit(0)
 		}
 	}
