@@ -3,8 +3,10 @@ package commands
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"os"
 	"rctf/config"
+	"rctf/theme"
 	"strconv"
 )
 
@@ -24,13 +26,11 @@ func getRemoteParams(args []string, ip *string, port *int) {
 		p, err := strconv.Atoi(args[1])
 
 		if err != nil {
-			fmt.Println("error reading port:", err)
-			os.Exit(1)
+			log.Fatalln("💥 "+theme.ColorRed+"error"+theme.ColorReset+": reading port:", err)
 		}
 
 		if p < 1 || p > 65535 {
-			fmt.Printf("error: invalid port %v\n", port)
-			os.Exit(1)
+			log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": invalid port %v\n", port)
 		}
 
 		fmt.Printf("port: %v\n", p)
@@ -42,13 +42,11 @@ func getRemoteParams(args []string, ip *string, port *int) {
 		p, err := strconv.Atoi(scanner.Text())
 
 		if err != nil {
-			fmt.Println("error reading port:", err)
-			os.Exit(1)
+			log.Fatalln("💥 "+theme.ColorRed+"error"+theme.ColorReset+": reading port", err)
 		}
 
 		if p < 1 || p > 65535 {
-			fmt.Printf("error: invalid port %v\n", port)
-			os.Exit(1)
+			log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": invalid port %v\n", port)
 		}
 
 		*port = p
@@ -73,17 +71,15 @@ func makeScript(ip string, port int) {
 
 	err := os.WriteFile(config.PwnScriptName, []byte(script), 0644)
 	if err != nil {
-		fmt.Println("error writing to file:", err)
-		os.Exit(1)
+		log.Fatalln("error writing to file:", err)
 	}
 
 	err = os.Chmod(config.PwnScriptName, 0744)
 	if err != nil {
-		fmt.Println("error chmoding file:", err)
-		os.Exit(1)
+		log.Fatalln("error chmoding file:", err)
 	}
 
-	fmt.Printf("🐚 ready to pwn: $ ./%s\n", config.PwnScriptName)
+	fmt.Printf("🐚 "+theme.ColorGray+"ready to pwn:"+theme.ColorReset+" $ ./%s\n", config.PwnScriptName)
 }
 
 func Pwn(args []string) {
@@ -102,8 +98,7 @@ func Pwn(args []string) {
 
 	_, err := os.Stat(config.PwnScriptName)
 	if !os.IsNotExist(err) {
-		fmt.Printf("💥 error: \"%s\" already exists!\n", config.PwnScriptName)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": \"%s\" already exists!\n", config.PwnScriptName)
 	}
 
 	var ip string

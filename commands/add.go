@@ -88,7 +88,7 @@ func writeFiles(files *data.Files) {
 func ensureFileNotAdded(file *data.File, files *data.Files) bool {
 	for _, f := range files.Files {
 		if file.SHA256 == f.SHA256 {
-			fmt.Printf("💥 error: file \"%s\" with sha256 \"%s\" already added...\n",
+			fmt.Printf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": file \"%s\" with sha256 \"%s\" already added...\n",
 				f.Filename, f.SHA256)
 			return false
 		}
