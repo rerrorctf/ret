@@ -3,7 +3,6 @@ package commands
 import (
 	"fmt"
 	"os"
-	"rctf/config"
 	"rctf/theme"
 	"time"
 )
@@ -25,10 +24,6 @@ func idaSpinner() {
 }
 
 func Ida(args []string) {
-	if config.Verbose {
-		fmt.Println("Ida:", args)
-	}
-
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":

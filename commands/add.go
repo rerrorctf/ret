@@ -190,10 +190,6 @@ func AddHelp() {
 }
 
 func Add(args []string) {
-	if config.Verbose {
-		fmt.Println("Add:", args)
-	}
-
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
