@@ -111,7 +111,7 @@ func grep2Win(file *data.File, path string) {
 		os.Exit(1)
 	}
 
-	grep2win := exec.Command("grep", "-aEo", task.FlagFormat, path)
+	grep2win := exec.Command("grep", "-aEoi", task.FlagFormat, path)
 	grep2winOutput, err := grep2win.Output()
 	if err == nil {
 		fmt.Printf("[grep2win]: %s", grep2winOutput)
