@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"rctf/config"
+	"rctf/theme"
 	"time"
 )
 
@@ -31,7 +32,7 @@ func Ida(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Fprintf(os.Stderr, "usage: rctf ida\n")
+			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"ida"+theme.ColorReset+"\n")
 			fmt.Fprintf(os.Stderr, "  💃 ingests all added files then opens ida with rctf\n")
 			os.Exit(0)
 		}

@@ -19,7 +19,7 @@ func Status(args []string) {
 		switch args[0] {
 		case "help":
 			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"status"+theme.ColorReset+"\n")
-			fmt.Fprintf(os.Stderr, "  displays the status for the current task with rctf\n")
+			fmt.Fprintf(os.Stderr, "  👀 displays the status for the current task with rctf\n")
 			os.Exit(0)
 		}
 	}

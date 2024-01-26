@@ -6,6 +6,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"rctf/config"
+	"rctf/theme"
 	"time"
 )
 
@@ -33,7 +34,7 @@ func Ghidra(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Fprintf(os.Stderr, "usage: rctf ghidra\n")
+			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"ghidra"+theme.ColorReset+"\n")
 			fmt.Fprintf(os.Stderr, "  🦖 ingests all added files then opens ghidra with rctf\n")
 			os.Exit(0)
 		}

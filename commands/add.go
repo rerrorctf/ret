@@ -185,7 +185,7 @@ func addFile(srcPath string) error {
 
 func AddHelp() {
 	fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"add"+theme.ColorReset+" file "+theme.ColorGray+"[file file...]"+theme.ColorReset+"\n")
-	fmt.Fprintf(os.Stderr, "  add one or more files to the current task with rctf\n")
+	fmt.Fprintf(os.Stderr, "  📥 add one or more files to the current task with rctf\n")
 	os.Exit(0)
 }
 
