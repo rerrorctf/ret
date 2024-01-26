@@ -180,8 +180,6 @@ func addFile(srcPath string) {
 	files.Files = append(files.Files, file)
 
 	writeFiles(&files)
-
-	return
 }
 
 func AddHelp() {
