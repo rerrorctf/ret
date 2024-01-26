@@ -59,7 +59,7 @@ func getRemoteParams(args []string, ip *string, port *int) {
 func makeScript(ip string, port int) {
 	script := fmt.Sprintf(
 		"#!/usr/bin/env python3\n\n"+
-			"#pwn template made with 🚩 https://github.com/rerrorctf/rctf 🚩\n\n"+
+			"#\n# pwn template made with 🚩 https://github.com/rerrorctf/rctf 🚩\n#\n\n"+
 			"from pwn import *\n\n"+
 			"#context.log_level = \"debug\"\n\n"+
 			"LOCAL_BINARY = \"./task\"\n"+
@@ -90,7 +90,7 @@ func Pwn(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Fprintf(os.Stderr, "usage: rctf pwn [ip] [port]\n")
+			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"pwn"+theme.ColorGray+" [ip] [port]"+theme.ColorReset+"\n")
 			fmt.Fprintf(os.Stderr, "  🐚 create a pwntools script with rctf\n")
 			os.Exit(0)
 		}

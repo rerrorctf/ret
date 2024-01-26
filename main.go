@@ -98,7 +98,8 @@ func main() {
 
 		fmt.Fprintf(os.Stderr, "\n")
 
-		fmt.Fprintln(os.Stderr, theme.ColorRed+`                FFFF                                                 
+		fmt.Fprintln(os.Stderr, theme.ColorRed+
+			`                FFFF                                                 
             FFFFFFFFFFFFF            FFF                                
       F  FFFFFFFFF   FFFFF      FFFFFFFFF                               
      FFFFFFFF         FFFFFFFFFFFFFFFF                                  
