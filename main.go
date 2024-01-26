@@ -41,10 +41,6 @@ func parseUserConfig() {
 		return
 	}
 
-	if config.Verbose {
-		fmt.Printf("config: parsing user config for \"%s\"...\n", currentUser)
-	}
-
 	configPath := filepath.Join(currentUser.HomeDir, config.UserConfig)
 
 	jsonData, err := os.ReadFile(configPath)
@@ -63,26 +59,14 @@ func parseUserConfig() {
 
 	if len(userConfig.GhidraInstallPath) > 0 {
 		config.GhidraInstallPath = userConfig.GhidraInstallPath
-
-		if config.Verbose {
-			fmt.Printf("config: %v\n", userConfig.GhidraInstallPath)
-		}
 	}
 
 	if len(userConfig.GhidraProjectPath) > 0 {
 		config.GhidraProjectPath = userConfig.GhidraProjectPath
-
-		if config.Verbose {
-			fmt.Printf("config: %v\n", userConfig.GhidraProjectPath)
-		}
 	}
 
 	if len(userConfig.PwnScriptName) > 0 {
 		config.PwnScriptName = userConfig.PwnScriptName
-
-		if config.Verbose {
-			fmt.Printf("config: %v\n", userConfig.PwnScriptName)
-		}
 	}
 }
 

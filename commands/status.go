@@ -3,6 +3,7 @@ package commands
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"os"
 	"rctf/config"
 	"rctf/data"
@@ -11,10 +12,6 @@ import (
 )
 
 func Status(args []string) {
-	if config.Verbose {
-		fmt.Println("Status:", args)
-	}
-
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
@@ -26,32 +23,35 @@ func Status(args []string) {
 
 	jsonData, err := os.ReadFile(config.TaskName)
 	if err != nil {
-		fmt.Println("error reading:", err)
-		os.Exit(1)
+		log.Fatalln("💥 "+theme.ColorRed+"error"+theme.ColorReset+": reading", err)
 	}
 
 	var task data.Task
 
 	err = json.Unmarshal(jsonData, &task)
 	if err != nil {
-		fmt.Println("error unmarshalling json:", err)
-		os.Exit(1)
+		log.Fatalln("💥 "+theme.ColorRed+"error"+theme.ColorReset+" unmarshalling json:", err)
 	}
 
-	fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+	fmt.Printf(theme.ColorPurple+"%s "+theme.ColorGray, task.Name)
 
-	fmt.Printf("\"%s\" (%s) ~ %v(%v)\n", task.Name, task.Category,
-		task.Timestamp, time.Now().UTC().Sub(task.Timestamp))
+	fmt.Printf("("+theme.ColorPurple+"%s"+theme.ColorGray+") "+theme.ColorReset, task.Category)
+
+	if config.Verbose {
+		fmt.Printf(theme.ColorPurple+"%v(%v)"+theme.ColorReset+"\n", task.Timestamp, time.Now().UTC().Sub(task.Timestamp))
+	} else {
+		fmt.Printf("\n")
+	}
 
 	if len(task.Description) > 0 {
-		fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 		fmt.Printf("\"%s\"\n", task.Description)
 	}
 
-	fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-
 	jsonData, err = os.ReadFile(config.RctfFilesName)
 	if err != nil {
+		if config.Verbose {
+			fmt.Println("no files added yet... exiting")
+		}
 		os.Exit(1)
 	}
 
@@ -59,31 +59,36 @@ func Status(args []string) {
 
 	err = json.Unmarshal(jsonData, &files)
 	if err != nil {
-		fmt.Println("error unmarshalling json:", err)
-		os.Exit(1)
+		log.Fatalln("💥 "+theme.ColorRed+"error"+theme.ColorReset+": unmarshalling json", err)
 	}
 
 	for idx, file := range files.Files {
-		fmt.Printf("[%v] %s (%v bytes) 👀\n", idx, file.Filename, file.Size)
+		fmt.Printf(theme.ColorGray+"["+theme.ColorBlue+"%v"+theme.ColorGray+"]"+theme.ColorReset, idx)
+
+		fmt.Printf(theme.ColorGreen+" %s ", file.Filename)
+
+		fmt.Printf(theme.ColorGray+"("+theme.ColorCyan+"%v "+theme.ColorGray+"bytes)"+theme.ColorReset+" 👀\n", file.Size)
 
 		if len(file.Type) < 60 {
-			fmt.Printf("  type:   %s\n", file.Type)
+			fmt.Printf(theme.ColorGray+"  type:   "+theme.ColorReset+"%s\n", file.Type)
 		} else {
-			fmt.Printf("  type:   %s...\n", file.Type[:60])
+			fmt.Printf(theme.ColorGray+"  type:   "+theme.ColorReset+"%s...\n", file.Type[:60])
 		}
 
 		if config.Verbose {
-			fmt.Printf("  md5:    %s\n", file.MD5)
-			fmt.Printf("  sha1:   %s\n", file.SHA1)
-			fmt.Printf("  sha256: %s\n", file.SHA256)
+			fmt.Printf(theme.ColorGray+"  md5:    "+theme.ColorReset+"%s\n", file.MD5)
+			fmt.Printf(theme.ColorGray+"  sha1:   "+theme.ColorReset+"%s\n", file.SHA1)
+			fmt.Printf(theme.ColorGray+"  sha256: "+theme.ColorReset+"%s\n", file.SHA256)
 		} else {
-			fmt.Printf("  %s\n", file.SHA256)
+			fmt.Printf(theme.ColorGray+"  sha256: "+theme.ColorReset+"%s\n", file.SHA256)
 		}
 
 		if len(file.Comment) > 0 {
 			fmt.Printf("  comment: %s\n", file.Comment)
 		}
-		fmt.Printf("  %v(%v)\n", file.Timestamp, time.Now().UTC().Sub(file.Timestamp))
-		fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+
+		if config.Verbose {
+			fmt.Printf("  %v(%v)\n", file.Timestamp, time.Now().UTC().Sub(file.Timestamp))
+		}
 	}
 }

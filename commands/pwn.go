@@ -87,10 +87,6 @@ func makeScript(ip string, port int) {
 }
 
 func Pwn(args []string) {
-	if config.Verbose {
-		fmt.Println("Pwn:", args)
-	}
-
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
