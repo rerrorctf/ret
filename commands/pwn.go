@@ -91,7 +91,7 @@ func Pwn(args []string) {
 		switch args[0] {
 		case "help":
 			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"pwn"+theme.ColorGray+" [ip] [port]"+theme.ColorReset+"\n")
-			fmt.Fprintf(os.Stderr, "  🐚 create a pwntools script with rctf\n")
+			fmt.Fprintf(os.Stderr, "  🐚 create a pwntools script template with rctf\n")
 			os.Exit(0)
 		}
 	}
