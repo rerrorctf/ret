@@ -15,6 +15,7 @@ import (
 	"rctf/config"
 	"rctf/data"
 	"rctf/theme"
+	"rctf/util"
 	"time"
 )
 
@@ -86,32 +87,6 @@ func writeFiles(files *data.Files) {
 	}
 }
 
-func grep2Win(file *data.File, path string) {
-	jsonData, err := os.ReadFile(config.TaskName)
-	if err != nil {
-		fmt.Println("error reading:", err)
-		os.Exit(1)
-	}
-
-	var task data.Task
-
-	err = json.Unmarshal(jsonData, &task)
-	if err != nil {
-		fmt.Println("error unmarshalling json:", err)
-		os.Exit(1)
-	}
-
-	grep2win := exec.Command("grep", "-aEoi", task.FlagFormat, path)
-	grep2winOutput, err := grep2win.Output()
-	if err == nil {
-		fmt.Printf(theme.ColorPurple+"[grep2win]"+theme.ColorReset+": %s", grep2winOutput)
-	}
-}
-
-func processFile(file *data.File, path string) {
-	grep2Win(file, path)
-}
-
 func addFile(srcPath string) {
 	fmt.Printf("📥 adding \"%s\"...\n", srcPath)
 
@@ -172,7 +147,7 @@ func addFile(srcPath string) {
 		return
 	}
 
-	processFile(&file, dstPath)
+	util.ProcessFile(&file, dstPath)
 
 	files.Files = append(files.Files, file)
 
