@@ -47,11 +47,13 @@ func Check(args []string) {
 	testCommand("ltrace", "--version")
 	testCommand("nasm", "--version")
 	testCommand("gdb", "--version")
+	testCommand("vim", "--version")
 	testCommand("code", "--version")
 	testCommand("subl", "--version")
 	testCommand("nmap", "--version")
 	testCommand("jq", "--version")
 	testCommand("exiftool", "--version")
+	testCommand("which", "discord")
 
 	// python setup
 	testCommand("python3", "--version")
