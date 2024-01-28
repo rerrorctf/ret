@@ -141,20 +141,22 @@ func main() {
 
 	parseUserConfig()
 
-	ensureSkeleton()
-
 	switch flag.Arg(0) {
 	case "init":
+		ensureSkeleton()
 		commands.Init(flag.Args()[1:])
 	case "add":
+		ensureSkeleton()
 		commands.Add(flag.Args()[1:])
 	case "status":
 		commands.Status(flag.Args()[1:])
 	case "pwn":
 		commands.Pwn(flag.Args()[1:])
 	case "ghidra":
+		ensureSkeleton()
 		commands.Ghidra(flag.Args()[1:])
 	case "ida":
+		ensureSkeleton()
 		commands.Ida(flag.Args()[1:])
 	case "monitor":
 		commands.Monitor(flag.Args()[1:])
