@@ -49,6 +49,9 @@ func Check(args []string) {
 	testCommand("gdb", "--version")
 	testCommand("code", "--version")
 	testCommand("subl", "--version")
+	testCommand("nmap", "--version")
+	testCommand("jq", "--version")
+	testCommand("exiftool", "--version")
 
 	// python setup
 	testCommand("python3", "--version")
@@ -65,4 +68,9 @@ func Check(args []string) {
 	// web related stuff
 	testCommand("stat", currentUser.HomeDir+"/BurpSuiteCommunity/BurpSuiteCommunity")
 	testCommand("stat", "/opt/SecLists")
+	testCommand("gobuster", "-h")
+	testCommand("ffuf", "-h")
+	testCommand("sqlmap", "-h")
+	testCommand("wireshark", "-h")
+	testCommand("curl", "--version")
 }
