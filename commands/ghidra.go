@@ -58,7 +58,7 @@ func Ghidra(args []string) {
 	analyzeFile := exec.Command(
 		config.GhidraInstallPath+"/support/analyzeHeadless",
 		config.GhidraProjectPath,
-		"project",
+		"project", "-recursive",
 		"-import", config.FilesFolderName)
 
 	analyzeFileOutput, err := analyzeFile.CombinedOutput()
