@@ -33,7 +33,7 @@ func Status(args []string) {
 		log.Fatalln("💥 "+theme.ColorRed+"error"+theme.ColorReset+" unmarshalling json:", err)
 	}
 
-	fmt.Printf(theme.ColorPurple+"%s "+theme.ColorGray, task.Name)
+	fmt.Printf(theme.ColorGray+"task: "+theme.ColorReset+"%s "+theme.ColorGray, task.Name)
 
 	fmt.Printf("("+theme.ColorPurple+"%s"+theme.ColorGray+") "+theme.ColorReset, task.Category)
 
@@ -67,7 +67,8 @@ func Status(args []string) {
 
 		fmt.Printf(theme.ColorGreen+" %s ", file.Filename)
 
-		fmt.Printf(theme.ColorGray+"("+theme.ColorCyan+"%v "+theme.ColorGray+"bytes)"+theme.ColorReset+" 👀\n", file.Size)
+		fmt.Printf(theme.ColorGray+"("+theme.ColorCyan+"%vB"+theme.ColorGray+"/"+theme.ColorRed+"%vK"+theme.ColorGray+"/"+theme.ColorYellow+"%vM"+theme.ColorGray+"/"+theme.ColorBlue+"%vG"+theme.ColorGray+")"+theme.ColorReset+" 👀\n",
+			file.Size, file.Size/1024, file.Size/1024/1024, file.Size/1024/1024/1024)
 
 		if len(file.Type) < 60 {
 			fmt.Printf(theme.ColorGray+"  type:   "+theme.ColorReset+"%s\n", file.Type)
