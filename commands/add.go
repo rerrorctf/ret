@@ -86,18 +86,6 @@ func writeFiles(files *data.Files) {
 	}
 }
 
-func ensureFileNotAdded(file *data.File, files *data.Files) bool {
-	for _, f := range files.Files {
-		if file.SHA256 == f.SHA256 {
-			fmt.Printf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": file \"%s\" with sha256 \"%s\" already added...\n",
-				f.Filename, f.SHA256)
-			return false
-		}
-	}
-
-	return true
-}
-
 func grep2Win(file *data.File, path string) {
 	jsonData, err := os.ReadFile(config.TaskName)
 	if err != nil {
@@ -132,8 +120,6 @@ func addFile(srcPath string) {
 
 	_, fileName := filepath.Split(srcPath)
 
-	dstPath := config.FilesFolderName + "/" + fileName
-
 	fileOutput := runFileCommandOnFile(srcPath)
 
 	content, err := os.ReadFile(srcPath)
@@ -154,6 +140,9 @@ func addFile(srcPath string) {
 	sha256Hash.Write(content)
 	sha256HashString := hex.EncodeToString(sha256Hash.Sum(nil))
 
+	dirPath := config.FilesFolderName + "/" + sha256HashString
+	dstPath := dirPath + "/" + fileName
+
 	file := data.File{
 		Filename:  fileName,
 		Filepath:  dstPath,
@@ -165,7 +154,15 @@ func addFile(srcPath string) {
 		Timestamp: time.Now().UTC(),
 	}
 
-	if !ensureFileNotAdded(&file, &files) {
+	if _, err := os.Stat(dirPath); !os.IsNotExist(err) {
+		fmt.Printf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": file \"%s\" with sha256 \"%s\" already added...\n",
+			srcPath, sha256HashString)
+		return
+	}
+
+	err = os.MkdirAll(dirPath, 0755)
+	if err != nil {
+		fmt.Println("error making directory:", dirPath)
 		return
 	}
 
