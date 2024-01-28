@@ -40,8 +40,12 @@ func Check(args []string) {
 
 	// system utils
 	testCommand("gcc", "--version")
+	testCommand("g++", "--version")
 	testCommand("clang", "--version")
+	testCommand("clang++", "--version")
 	testCommand("strace", "--version")
+	testCommand("ltrace", "--version")
+	testCommand("nasm", "--version")
 	testCommand("gdb", "--version")
 	testCommand("code", "--version")
 	testCommand("subl", "--version")
