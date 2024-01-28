@@ -14,26 +14,6 @@ import (
 	"rctf/theme"
 )
 
-func createDefaultConfig(configPath string) {
-	var userConfig data.Config
-
-	userConfig.GhidraInstallPath = config.GhidraInstallPath
-	userConfig.GhidraProjectPath = config.GhidraProjectPath
-	userConfig.PwnScriptName = config.PwnScriptName
-
-	jsonData, err := json.MarshalIndent(userConfig, "", "  ")
-	if err != nil {
-		fmt.Println("error marshalling json:", err)
-		os.Exit(1)
-	}
-
-	err = os.WriteFile(configPath, jsonData, 0644)
-	if err != nil {
-		fmt.Println("error opening file:", err)
-		os.Exit(1)
-	}
-}
-
 func parseUserConfig() {
 	currentUser, err := user.Current()
 	if err != nil {
@@ -45,7 +25,6 @@ func parseUserConfig() {
 
 	jsonData, err := os.ReadFile(configPath)
 	if err != nil {
-		createDefaultConfig(configPath)
 		return
 	}
 
