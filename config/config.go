@@ -3,7 +3,7 @@ package config
 const (
 	UserConfig      = ".config/rctf"
 	FolderName      = ".rctf"
-	TaskName        = FolderName + "/task.json"
+	TaskName        = FolderName + "/rctf-task.json"
 	FilesFolderName = FolderName + "/files"
 	RctfFilesName   = FilesFolderName + "/rctf-files.json"
 )
