@@ -108,6 +108,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "  💃 "+theme.ColorBlue+"ida"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  📡 "+theme.ColorBlue+"monitor"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  ✅ "+theme.ColorBlue+"check"+theme.ColorReset+"\n")
+		fmt.Fprintf(os.Stderr, "  📞 "+theme.ColorBlue+"syscall"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "\n🚩 https://github.com/rerrorctf/rctf 🚩\n")
 	}
 
@@ -141,6 +142,8 @@ func main() {
 		commands.Monitor(flag.Args()[1:])
 	case "check":
 		commands.Check(flag.Args()[1:])
+	case "syscall":
+		commands.Syscall(flag.Args()[1:])
 	default:
 		flag.Usage()
 		os.Exit(1)
