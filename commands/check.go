@@ -66,6 +66,8 @@ func Check(args []string) {
 	// pwn related stuff
 	testCommand("stat", currentUser.HomeDir+"/pwndbg/setup.sh")
 	testCommand("one_gadget", "-h")
+	testCommand("pwn")
+	testCommand("pwn", "checksec")
 
 	// web related stuff
 	testCommand("stat", currentUser.HomeDir+"/BurpSuiteCommunity/BurpSuiteCommunity")
