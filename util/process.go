@@ -32,6 +32,15 @@ func grep2Win(file *data.File, path string) {
 	}
 }
 
+func checksec(file *data.File, path string) {
+	checksec := exec.Command("pwn", "checksec", path)
+	checksecOutput, err := checksec.CombinedOutput()
+	if err == nil {
+		fmt.Printf(theme.ColorPurple+"[checksec]"+theme.ColorReset+": %s", checksecOutput)
+	}
+}
+
 func ProcessFile(file *data.File, path string) {
 	grep2Win(file, path)
+	checksec(file, path)
 }
