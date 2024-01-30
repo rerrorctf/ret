@@ -91,5 +91,13 @@ func Status(args []string) {
 		if config.Verbose {
 			fmt.Printf("  %v(%v)\n", file.Timestamp, time.Now().UTC().Sub(file.Timestamp))
 		}
+
+		logFilePath := config.FilesFolderName + "/" + file.SHA256 + "/rctflog.txt"
+		logFile, err := os.ReadFile(logFilePath)
+		if err != nil {
+			log.Fatalln("💥 "+theme.ColorRed+"error"+theme.ColorReset+": reading log file", err)
+		}
+
+		fmt.Printf(theme.ColorGray+" => %s"+theme.ColorReset+"\n%s\n", logFilePath, logFile)
 	}
 }
