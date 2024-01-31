@@ -9,14 +9,15 @@ import (
 	"rctf/theme"
 )
 
-func testCommand(command string, args ...string) {
+func testCommand(command string, args ...string) bool {
 	c := exec.Command(command, args...)
 	err := c.Run()
 	if err != nil {
 		fmt.Printf("  😔 "+theme.ColorRed+"%v %v\n     -> %v"+theme.ColorReset+"\n", command, args, err)
-	} else {
-		fmt.Printf("  ✅ "+theme.ColorBlue+"%v "+theme.ColorGray+"%v"+theme.ColorReset+"\n", command, args)
+		return false
 	}
+	fmt.Printf("  ✅ "+theme.ColorBlue+"%v "+theme.ColorGray+"%v"+theme.ColorReset+"\n", command, args)
+	return true
 }
 
 func Check(args []string) {
@@ -29,8 +30,6 @@ func Check(args []string) {
 			os.Exit(0)
 		}
 	}
-
-	// TODO
 
 	currentUser, err := user.Current()
 	if err != nil {
@@ -48,30 +47,55 @@ func Check(args []string) {
 	testCommand("nasm", "--version")
 	testCommand("gdb", "--version")
 	testCommand("vim", "--version")
-	testCommand("code", "--version")
-	testCommand("subl", "--version")
+
+	if !testCommand("code", "--version") {
+		fmt.Println(theme.ColorGray + "       -> 🔗 " + theme.ColorCyan + "https://code.visualstudio.com/" + theme.ColorReset)
+	}
+
+	if !testCommand("subl", "--version") {
+		fmt.Println(theme.ColorGray + "       -> 🔗 " + theme.ColorCyan + "https://www.sublimetext.com/" + theme.ColorReset)
+	}
+
 	testCommand("nmap", "--version")
 	testCommand("jq", "--version")
 	testCommand("exiftool", "--version")
-	testCommand("which", "discord")
+	testCommand("xxd", "-v")
+
+	if !testCommand("which", "discord") {
+		fmt.Println(theme.ColorGray + "       -> 🔗 " + theme.ColorCyan + "https://discord.com/" + theme.ColorReset)
+	}
 
 	// python setup
 	testCommand("python3", "--version")
 	testCommand("pip", "show", "pwntools")
 
 	// re related stuff
-	testCommand("stat", config.GhidraInstallPath+"/ghidraRun")
-	testCommand("stat", config.IdaInstallPath+"/idaRun")
+	if !testCommand("stat", config.GhidraInstallPath+"/ghidraRun") {
+		fmt.Println(theme.ColorGray + "       -> 🔗 " + theme.ColorCyan + "https://github.com/NationalSecurityAgency/ghidra/releases" + theme.ColorReset)
+	}
+
+	if !testCommand("stat", config.IdaInstallPath+"/idaRun") {
+		fmt.Println(theme.ColorGray + "       -> 🔗 " + theme.ColorCyan + "https://hex-rays.com/ida-free/" + theme.ColorReset)
+	}
 
 	// pwn related stuff
-	testCommand("stat", currentUser.HomeDir+"/pwndbg/setup.sh")
+	if !testCommand("stat", currentUser.HomeDir+"/pwndbg/setup.sh") {
+		fmt.Println(theme.ColorGray + "       -> 🔗 " + theme.ColorCyan + "https://github.com/pwndbg/pwndbg" + theme.ColorReset)
+	}
+
 	testCommand("one_gadget", "-h")
 	testCommand("pwn")
 	testCommand("pwn", "checksec")
 
 	// web related stuff
-	testCommand("stat", currentUser.HomeDir+"/BurpSuiteCommunity/BurpSuiteCommunity")
-	testCommand("stat", "/opt/SecLists")
+	if !testCommand("stat", currentUser.HomeDir+"/BurpSuiteCommunity/BurpSuiteCommunity") {
+		fmt.Println(theme.ColorGray + "       -> 🔗 " + theme.ColorCyan + "https://portswigger.net/burp/releases/community/latest" + theme.ColorReset)
+	}
+
+	if !testCommand("stat", "/opt/SecLists") {
+		fmt.Println(theme.ColorGray + "       -> 🔗 " + theme.ColorCyan + "https://github.com/danielmiessler/SecLists/releases" + theme.ColorReset)
+	}
+
 	testCommand("gobuster", "-h")
 	testCommand("ffuf", "-h")
 	testCommand("sqlmap", "-h")
