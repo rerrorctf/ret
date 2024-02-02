@@ -1,60 +1,13 @@
 package commands
 
 import (
-	"bufio"
 	"fmt"
 	"log"
 	"os"
 	"rctf/config"
 	"rctf/theme"
-	"strconv"
+	"rctf/util"
 )
-
-func getRemoteParams(args []string, ip *string, port *int) {
-	scanner := bufio.NewScanner(os.Stdin)
-
-	if len(args) > 0 {
-		fmt.Printf(theme.ColorGray+"ip: "+theme.ColorYellow+"%s"+theme.ColorReset+"\n", args[0])
-		*ip = args[0]
-	} else {
-		fmt.Print(theme.ColorGray + "enter remote ip (no port): " + theme.ColorYellow)
-		scanner.Scan()
-		*ip = scanner.Text()
-		fmt.Printf(theme.ColorReset)
-	}
-
-	if len(args) > 1 {
-		p, err := strconv.Atoi(args[1])
-
-		if err != nil {
-			log.Fatalln("💥 "+theme.ColorRed+"error"+theme.ColorReset+": reading port:", err)
-		}
-
-		if p < 1 || p > 65535 {
-			log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": invalid port %v\n", port)
-		}
-
-		fmt.Printf(theme.ColorGray+"port: "+theme.ColorYellow+"%v"+theme.ColorReset+"\n", p)
-
-		*port = p
-	} else {
-		fmt.Print(theme.ColorGray + "enter remote port: " + theme.ColorYellow)
-		scanner.Scan()
-		fmt.Printf(theme.ColorReset)
-
-		p, err := strconv.Atoi(scanner.Text())
-
-		if err != nil {
-			log.Fatalln("💥 "+theme.ColorRed+"error"+theme.ColorReset+": reading port", err)
-		}
-
-		if p < 1 || p > 65535 {
-			log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": invalid port %v\n", port)
-		}
-
-		*port = p
-	}
-}
 
 func makeScript(ip string, port int) {
 	script := fmt.Sprintf(
@@ -103,7 +56,7 @@ func Pwn(args []string) {
 
 	var ip string
 	var port int
-	getRemoteParams(args, &ip, &port)
+	util.GetRemoteParams(args, &ip, &port)
 
 	makeScript(ip, port)
 }
