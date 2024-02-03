@@ -2,21 +2,50 @@ package commands
 
 import (
 	"fmt"
+	"log"
 	"net"
 	"os"
 	"os/signal"
 	"rctf/theme"
 	"rctf/util"
+	"strconv"
 	"syscall"
 	"time"
 )
 
-const (
-	montitorScanInterval = 30
+var (
+	montitorScanInterval = 60 * time.Second
 )
 
+func waitForTerm(sigChan <-chan os.Signal) {
+	<-sigChan
+	fmt.Println("\r\n👋")
+	os.Exit(0)
+}
+
+func monitorServer(serverAddress string) {
+	connected := false
+	for {
+		_, err := net.Dial("tcp", serverAddress)
+		if err != nil {
+			if connected {
+				fromUpToDown()
+				connected = false
+			}
+
+		} else {
+			if !connected {
+				fromDownToUp()
+				connected = true
+			}
+		}
+
+		time.Sleep(montitorScanInterval)
+	}
+}
+
 func monitorSpinner() {
-	interval := 500 * time.Millisecond
+	interval := 750 * time.Millisecond
 
 	for {
 		fmt.Printf("\r" + theme.ColorGray + "[" + theme.ColorPurple + "⠋" + theme.ColorGray + "]" + theme.ColorReset + " 📡 📧        🌐")
@@ -47,11 +76,21 @@ func monitorSpinner() {
 	}
 }
 
+func fromDownToUp() {
+	fmt.Printf(theme.ColorGreen+"\r[conn]"+theme.ColorReset+" ⤴️: %v\n", time.Now().UTC())
+
+}
+
+func fromUpToDown() {
+	fmt.Printf(theme.ColorRed+"\r[down]"+theme.ColorReset+" ⤵️: %v\n", time.Now().UTC())
+
+}
+
 func Monitor(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"monitor"+theme.ColorGray+" [ip] [port]"+theme.ColorReset+"\n")
+			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"monitor"+theme.ColorGray+" [ip] [port] [interval-seconds]"+theme.ColorReset+"\n")
 			fmt.Fprintf(os.Stderr, "  📡 watch infra for up/down state changes with rctf\n")
 
 			os.Exit(0)
@@ -64,41 +103,32 @@ func Monitor(args []string) {
 
 	serverAddress := fmt.Sprintf("%s:%v", ip, port)
 
-	sigChan := make(chan os.Signal, 1)
+	if len(args) > 2 {
+		intervalArg, err := strconv.Atoi(args[2])
+		if err != nil {
+			log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": \"%s\"!\n", err)
+		}
 
+		if intervalArg < 10 {
+			log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": interval of \"%v\" seconds too smol!\n", intervalArg)
+		}
+
+		montitorScanInterval = time.Duration(intervalArg) * time.Second
+	}
+
+	fmt.Printf(theme.ColorGray+"interval: "+theme.ColorYellow+"%v seconds"+theme.ColorReset+"\n", montitorScanInterval)
+
+	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, os.Interrupt, syscall.SIGTERM)
 
-	go func() {
-		<-sigChan
-		fmt.Println("\r\n👋")
-		os.Exit(0)
-	}()
+	go waitForTerm(sigChan)
 
-	go func(serverAddress string) {
-		connected := false
-		for {
-			_, err := net.DialTimeout("tcp", serverAddress, montitorScanInterval*time.Second)
-			if err != nil {
-				if connected {
-					// no longer connected...
-					fmt.Printf(theme.ColorRed+"\r[down]"+theme.ColorReset+" ⤵️: %v\n", time.Now().UTC())
-					connected = false
-				}
+	go monitorServer(serverAddress)
 
-			} else {
-				if !connected {
-					// now connected!
-					fmt.Printf(theme.ColorGreen+"\r[conn]"+theme.ColorReset+" ⤴️: %v\n", time.Now().UTC())
-					connected = true
-				}
-			}
-
-			time.Sleep(montitorScanInterval * time.Second)
-		}
-	}(serverAddress)
-
-	fmt.Printf("starting scan: %v\n", time.Now().UTC())
+	fmt.Printf(theme.ColorGray+"starting scan: "+theme.ColorReset+"%v\n", time.Now().UTC())
 	fmt.Println(theme.ColorPurple + "press " + theme.ColorCyan + "ctrl+c " + theme.ColorPurple + "to exit..." + theme.ColorReset)
+
 	go monitorSpinner()
+
 	select {}
 }
