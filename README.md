@@ -51,5 +51,6 @@ Other options are available.
   "ghidrainstallpath": "/path/to/ghidra/install",
   "ghidraprojectpath": "ghidra_project_folder_name_default_is_ghidra",
   "pwnscriptname": "custom-pwn-script-name.py"
+  "monitorwebhook": "https://discord.com/api/webhooks/your-webhook-token-goes-here"
 }
 ```
