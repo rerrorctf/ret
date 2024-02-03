@@ -47,6 +47,10 @@ func parseUserConfig() {
 	if len(userConfig.PwnScriptName) > 0 {
 		config.PwnScriptName = userConfig.PwnScriptName
 	}
+
+	if len(userConfig.MonitorWebhook) > 0 {
+		config.MonitorWebhook = userConfig.MonitorWebhook
+	}
 }
 
 func ensureDirectory(dirPath string) {

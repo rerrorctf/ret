@@ -5,7 +5,9 @@ import (
 	"log"
 	"net"
 	"os"
+	"os/exec"
 	"os/signal"
+	"rctf/config"
 	"rctf/theme"
 	"rctf/util"
 	"strconv"
@@ -20,6 +22,13 @@ var (
 func waitForTerm(sigChan <-chan os.Signal) {
 	<-sigChan
 	fmt.Println("\r\n👋")
+
+	if config.MonitorWebhook != "" {
+		hook := exec.Command("curl", "-H", "Content-type: application/json", "-d", `{"content": "stopped monitoring"}`,
+			config.MonitorWebhook)
+		hook.Run()
+	}
+
 	os.Exit(0)
 }
 
@@ -29,13 +38,13 @@ func monitorServer(serverAddress string) {
 		_, err := net.Dial("tcp", serverAddress)
 		if err != nil {
 			if connected {
-				fromUpToDown()
+				fromUpToDown(serverAddress)
 				connected = false
 			}
 
 		} else {
 			if !connected {
-				fromDownToUp()
+				fromDownToUp(serverAddress)
 				connected = true
 			}
 		}
@@ -76,14 +85,26 @@ func monitorSpinner() {
 	}
 }
 
-func fromDownToUp() {
+func fromDownToUp(serverAddress string) {
 	fmt.Printf(theme.ColorGreen+"\r[conn]"+theme.ColorReset+" ⤴️: %v\n", time.Now().UTC())
 
+	if config.MonitorWebhook != "" {
+		msg := fmt.Sprintf(`{"content": "[conn] ⤴️: %s"}`, serverAddress)
+		hook := exec.Command("curl", "-H", "Content-type: application/json", "-d", msg,
+			config.MonitorWebhook)
+		hook.Run()
+	}
 }
 
-func fromUpToDown() {
+func fromUpToDown(serverAddress string) {
 	fmt.Printf(theme.ColorRed+"\r[down]"+theme.ColorReset+" ⤵️: %v\n", time.Now().UTC())
 
+	if config.MonitorWebhook != "" {
+		msg := fmt.Sprintf(`{"content": "[down] ⤵️: %s"}`, serverAddress)
+		hook := exec.Command("curl", "-H", "Content-type: application/json", "-d", msg,
+			config.MonitorWebhook)
+		hook.Run()
+	}
 }
 
 func Monitor(args []string) {
@@ -127,6 +148,13 @@ func Monitor(args []string) {
 
 	fmt.Printf(theme.ColorGray+"starting scan: "+theme.ColorReset+"%v\n", time.Now().UTC())
 	fmt.Println(theme.ColorPurple + "press " + theme.ColorCyan + "ctrl+c " + theme.ColorPurple + "to exit..." + theme.ColorReset)
+
+	if config.MonitorWebhook != "" {
+		msg := fmt.Sprintf(`{"content": "starting monitoring: %s"}`, serverAddress)
+		hook := exec.Command("curl", "-H", "Content-type: application/json", "-d", msg,
+			config.MonitorWebhook)
+		hook.Run()
+	}
 
 	go monitorSpinner()
 
