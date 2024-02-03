@@ -61,11 +61,9 @@ func monitorSpinner() {
 		time.Sleep(interval)
 
 		fmt.Printf("\r" + theme.ColorGray + "[" + theme.ColorPurple + "⠙" + theme.ColorGray + "]" + theme.ColorReset + " 📡  📧       🌐")
-
 		time.Sleep(interval)
 
 		fmt.Printf("\r" + theme.ColorGray + "[" + theme.ColorPurple + "⠹" + theme.ColorGray + "]" + theme.ColorReset + " 📡   📧      🌐")
-
 		time.Sleep(interval)
 
 		fmt.Printf("\r" + theme.ColorGray + "[" + theme.ColorPurple + "⠸" + theme.ColorGray + "]" + theme.ColorReset + " 📡    📧     🌐")
