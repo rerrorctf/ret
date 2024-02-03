@@ -111,6 +111,7 @@ func Monitor(args []string) {
 		case "help":
 			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"monitor"+theme.ColorGray+" [ip] [port] [interval-seconds]"+theme.ColorReset+"\n")
 			fmt.Fprintf(os.Stderr, "  📡 watch infra for up/down state changes with rctf\n")
+			fmt.Fprintf(os.Stderr, "  🪝 can report to discord via ~/.config/rctf \"monitorwebhook\"\n")
 
 			os.Exit(0)
 		}
