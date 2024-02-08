@@ -1,8 +1,8 @@
 # rctf
 
-## ctf task automation tool
+## CTF Task Automation Tool
 
-## building from source
+## Compiling (Optional)
 
 First install `go` https://go.dev/dl/ by following the install instructions.
 
@@ -14,9 +14,15 @@ Now, the project root directory, you can simply do:
 $ go build
 ```
 
-This will produce the `rctf` binary. This static binary / single file is all you need to use `rctf`. 
+This will produce the `rctf` binary. This static binary / single file is all you need to use `rctf`.
 
-## installation
+## Pre-built Binary
+
+You can simply get the latest pre-built binary from https://github.com/rerrorctf/rctf/releases.
+
+Please note that, while `rctf` is a single static file built for x64 linux, you can use go to build this for a range of platforms (although this hasn't been tested yet).
+
+## Installation
 
 Here installation just means putting `rctf` somewhere on your path. I like to copy it to `/usr/local/bin`.
 
@@ -69,3 +75,52 @@ Here is an example config:
   "monitorwebhook": "https://discord.com/api/webhooks/your-webhook-token-goes-here"
 }
 ```
+
+## Commands
+
+### init
+
+### add
+
+### status
+
+### pwn
+
+### ghidra
+
+### ida
+
+### syscall
+
+### writeup
+
+### check
+
+## The .rctf Directory Structure
+
+Certain commands, such as `init`, `add` and `status` will use a hidden directory structure.
+
+This is technically configurable via https://github.com/rerrorctf/rctf/blob/main/config/config.go#L5 but this is not exposed to the user config. In other words you can change this be changing the source code and building your own version if you wish. If there is a strong desire to change this I would consider adding it to the user config.
+
+You can delete this directory if you like or make changes as you see fit but just be aware that the tool makes certain assumptions about the contents.
+
+This directory is structured as follows:
+
+- `.rctf/rctf-task.json`
+ - This file contains information about the task being worked on in this directory
+
+- `.rctf/files`
+  - This directory contains files and metadata about files added to the task by the `add` command
+  - For each file added a subdirectory of files is created that is named using the SHA2-256 hex digest of the file content
+    - e.g. `.rctf/files/7ebfc53f17925af4340d4218aafd16ba39b5afa8b6ac1f7adc3dd92952a2a237`
+    - Inside of the folder created for each file
+      - There is a copy of the file that was added
+      - There is the `rctflog.txt` log file for the processes that were run when added that file
+
+- `.rctf/ghidra`
+  - This directory is created to store the ghidra project created if you use the `ghidra` command
+  - Note that you can change this with `~/.config/rctf` as above
+
+- `.rctf/ida`
+  - This directory is created to store the ida project created if you use the `ida` command
+  - Note that you can change this with `~/.config/rctf` as above
