@@ -78,23 +78,162 @@ Here is an example config:
 
 ## Commands
 
+You can list all the commands by using `-h`, `--help`, `help` or simply providing no arguments:
+
+```
+$ rctf help
+```
+
+You can get help for a command by giving `help` as an argument to the command:
+
+```
+$ rctf command help
+```
+
 ### init
+
+```
+usage: rctf init [name] [description] [category] [flag-format]
+```
+
+Initializes the current working directory for a task.
+
+This information is stored in the `rctf-tasks.json` file in the hidden `.rctf` directory.
+
+Note that the flag format is treated as a regular expression. For example `flag{.+}` would be suitable for a ctf with flags like `flag{example}`.
+
+https://github.com/rerrorctf/rctf/blob/main/commands/init.go
 
 ### add
 
+```
+usage: rctf add file [file file...]
+```
+
+This command adds one or more files to the task.
+
+This involves taking a copy of the file and performing some basic analysis on the file.
+
+Added files can be viewed with the `status` command.
+
+This command deduplicates files by comparing a file content's SHA2-256 hash with the hash of files previously added.
+
+Added files are stored in in the hidden directory `.rctf/files` inside a subfolder that is named using the SHA2-256 hex digest of the file content.
+
+Added files are subject to being automatically ingested by the commands `ghidra` and `ida`.
+
+https://github.com/rerrorctf/rctf/blob/main/commands/add.go
+
 ### status
+
+```
+usage: rctf status
+```
+
+Prints information about the task including any added files.
+
+Print more detailed information with the `-v` flag.
+
+https://github.com/rerrorctf/rctf/blob/main/commands/status.go
 
 ### pwn
 
+```
+usage: rctf pwn [ip] [port]
+```
+
+Creates a pwntools script from a template.
+
+https://github.com/rerrorctf/rctf/blob/main/commands/pwn.go
+
 ### ghidra
+
+```
+usage: rctf ghidra
+```
+
+Creates a ghidra project in the hidden directory `.rctf/ghidra`.
+
+Imports and analyzes all added files.
+
+Opens ghidra.
+
+Make sure ghidra is installed (or symlinked) at `/opt/ghidra` or use the config file to adjust the default ghidra installation.
+
+https://github.com/rerrorctf/rctf/blob/main/commands/ghidra.go
 
 ### ida
 
+```
+usage: rctf ghidra
+```
+
+TODO
+
+https://github.com/rerrorctf/rctf/blob/main/commands/ida.go
+
 ### syscall
+
+```
+usage: rctf syscall [(x86/32)/(x64/64)] [regex-pattern]
+```
+
+Greps syscall headers for x86 and x64 linux.
+
+For x86 linux we use `/usr/include/x86_64-linux-gnu/asm/unistd_32.h`.
+
+For x64 linux we use `/usr/include/x86_64-linux-gnu/asm/unistd_64.h`.
+
+For example:
+
+`syscall x64 " 0"`
+`syscall x64 write`
+`syscall 32 read`
+`syscall x86 10[0-9]`
+
+https://github.com/rerrorctf/rctf/blob/main/commands/syscall.go
 
 ### writeup
 
+```
+usage: rctf writeup
+```
+
+Create a writeup template for a task in a file called `writeup.md`.
+
+https://github.com/rerrorctf/rctf/blob/main/commands/writeup.go
+
 ### check
+
+```
+usage: rctf check
+```
+
+Check your environment for ctf readiness by checking if various pieces of commonly used software are installed.
+
+If something is not installed `rctf` tries to give you a link to help you install it quickly.
+
+https://github.com/rerrorctf/rctf/blob/main/commands/check.go
+
+### monitor
+
+```
+usage: rctf monitor [ip] [port] [interval-seconds]
+```
+
+Monitor for changes in the up/down status of a server address.
+
+*Please* only point this at infrastructure associated with a ctf or that you own or have permission to interact with.
+
+*Please* use this with caution as there is a fine line between monitoring and spamming the server to the detriment of all involved.
+
+The default interval between tcp opens is 60 seconds.
+
+As such whilst you can change the interval there is a minimum of 10 seconds hardcoded.
+
+This command optionally makes use of a discord webhook which you can specify in `~/.config/rctf` with the key `"monitorwebhook"`. See the config section of this readme for more details.
+
+https://github.com/rerrorctf/rctf/blob/main/commands/monitor.go
 
 ## The .rctf Directory Structure
 
