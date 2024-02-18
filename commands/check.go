@@ -105,4 +105,8 @@ func Check(args []string) {
 	if !testCommand("docker", "-v") {
 		fmt.Println(theme.ColorGray + "       -> 🔗 " + theme.ColorCyan + "https://docs.docker.com/desktop/install/ubuntu/" + theme.ColorReset)
 	}
+
+	if !testCommand("go", "version") {
+		fmt.Println(theme.ColorGray + "       -> 🔗 " + theme.ColorCyan + "https://go.dev/doc/install" + theme.ColorReset)
+	}
 }
