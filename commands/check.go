@@ -101,4 +101,8 @@ func Check(args []string) {
 	testCommand("sqlmap", "-h")
 	testCommand("wireshark", "-h")
 	testCommand("curl", "--version")
+
+	if !testCommand("docker", "-v") {
+		fmt.Println(theme.ColorGray + "       -> 🔗 " + theme.ColorCyan + "https://docs.docker.com/desktop/install/ubuntu/" + theme.ColorReset)
+	}
 }
