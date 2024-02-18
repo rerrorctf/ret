@@ -165,7 +165,7 @@ https://github.com/rerrorctf/rctf/blob/main/commands/ghidra.go
 ### ida
 
 ```
-usage: rctf ghidra
+usage: rctf ida
 ```
 
 TODO
