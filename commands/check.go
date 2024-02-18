@@ -20,6 +20,10 @@ func testCommand(command string, args ...string) bool {
 	return true
 }
 
+func suggestLink(link string) {
+	fmt.Println(theme.ColorGray + "       -> 🔗 " + theme.ColorCyan + link + theme.ColorReset)
+}
+
 func Check(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
@@ -49,11 +53,11 @@ func Check(args []string) {
 	testCommand("vim", "--version")
 
 	if !testCommand("code", "--version") {
-		fmt.Println(theme.ColorGray + "       -> 🔗 " + theme.ColorCyan + "https://code.visualstudio.com/" + theme.ColorReset)
+		suggestLink("https://code.visualstudio.com/")
 	}
 
 	if !testCommand("subl", "--version") {
-		fmt.Println(theme.ColorGray + "       -> 🔗 " + theme.ColorCyan + "https://www.sublimetext.com/" + theme.ColorReset)
+		suggestLink("https://www.sublimetext.com/")
 	}
 
 	testCommand("nmap", "--version")
@@ -62,7 +66,7 @@ func Check(args []string) {
 	testCommand("xxd", "-v")
 
 	if !testCommand("which", "discord") {
-		fmt.Println(theme.ColorGray + "       -> 🔗 " + theme.ColorCyan + "https://discord.com/" + theme.ColorReset)
+		suggestLink("https://discord.com/")
 	}
 
 	// python setup
@@ -71,16 +75,16 @@ func Check(args []string) {
 
 	// re related stuff
 	if !testCommand("stat", config.GhidraInstallPath+"/ghidraRun") {
-		fmt.Println(theme.ColorGray + "       -> 🔗 " + theme.ColorCyan + "https://github.com/NationalSecurityAgency/ghidra/releases" + theme.ColorReset)
+		suggestLink("https://github.com/NationalSecurityAgency/ghidra/releases")
 	}
 
 	if !testCommand("stat", config.IdaInstallPath+"/idaRun") {
-		fmt.Println(theme.ColorGray + "       -> 🔗 " + theme.ColorCyan + "https://hex-rays.com/ida-free/" + theme.ColorReset)
+		suggestLink("https://hex-rays.com/ida-free/")
 	}
 
 	// pwn related stuff
 	if !testCommand("stat", currentUser.HomeDir+"/pwndbg/setup.sh") {
-		fmt.Println(theme.ColorGray + "       -> 🔗 " + theme.ColorCyan + "https://github.com/pwndbg/pwndbg" + theme.ColorReset)
+		suggestLink("https://github.com/pwndbg/pwndbg")
 	}
 
 	testCommand("one_gadget", "-h")
@@ -89,11 +93,11 @@ func Check(args []string) {
 
 	// web related stuff
 	if !testCommand("stat", currentUser.HomeDir+"/BurpSuiteCommunity/BurpSuiteCommunity") {
-		fmt.Println(theme.ColorGray + "       -> 🔗 " + theme.ColorCyan + "https://portswigger.net/burp/releases/community/latest" + theme.ColorReset)
+		suggestLink("https://portswigger.net/burp/releases/community/latest")
 	}
 
 	if !testCommand("stat", "/opt/SecLists") {
-		fmt.Println(theme.ColorGray + "       -> 🔗 " + theme.ColorCyan + "https://github.com/danielmiessler/SecLists/releases" + theme.ColorReset)
+		suggestLink("https://github.com/danielmiessler/SecLists/releases")
 	}
 
 	testCommand("gobuster", "-h")
@@ -103,10 +107,10 @@ func Check(args []string) {
 	testCommand("curl", "--version")
 
 	if !testCommand("docker", "-v") {
-		fmt.Println(theme.ColorGray + "       -> 🔗 " + theme.ColorCyan + "https://docs.docker.com/desktop/install/ubuntu/" + theme.ColorReset)
+		suggestLink("https://docs.docker.com/desktop/install/ubuntu/")
 	}
 
 	if !testCommand("go", "version") {
-		fmt.Println(theme.ColorGray + "       -> 🔗 " + theme.ColorCyan + "https://go.dev/doc/install" + theme.ColorReset)
+		suggestLink("https://go.dev/doc/install")
 	}
 }
