@@ -44,6 +44,14 @@ func parseUserConfig() {
 		config.GhidraProjectPath = userConfig.GhidraProjectPath
 	}
 
+	if len(userConfig.IdaInstallPath) > 0 {
+		config.IdaInstallPath = userConfig.IdaInstallPath
+	}
+
+	if len(userConfig.IdaProjectPath) > 0 {
+		config.IdaProjectPath = userConfig.IdaProjectPath
+	}
+
 	if len(userConfig.PwnScriptName) > 0 {
 		config.PwnScriptName = userConfig.PwnScriptName
 	}
