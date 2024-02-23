@@ -54,10 +54,11 @@ func makeScript(ip string, port int) {
 		"#!/usr/bin/env python3\n\n"+
 			"#\n# pwn template made with 🚩 https://github.com/rerrorctf/rctf 🚩\n#\n\n"+
 			"from pwn import *\n\n"+
-			"#context.log_level = \"debug\"\n\n"+
 			"LOCAL_BINARY = \"./%s\"\n"+
 			"REMOTE_IP = \"%s\"\n"+
 			"REMOTE_PORT = %d\n\n"+
+			"#context.log_level = \"debug\"\n"+
+			"context.binary = LOCAL_BINARY\n\n"+
 			"#elf = ELF(LOCAL_BINARY)\n\n"+
 			"#p = process(LOCAL_BINARY)\n"+
 			"p = remote(REMOTE_IP, REMOTE_PORT)\n"+
