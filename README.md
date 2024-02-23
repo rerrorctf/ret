@@ -235,6 +235,16 @@ This command optionally makes use of a discord webhook which you can specify in 
 
 https://github.com/rerrorctf/rctf/blob/main/commands/monitor.go
 
+### cheatsheet
+
+```
+usage: rctf cheatsheet
+```
+
+Prints a list of cheatsheets for quick reference.
+
+https://github.com/rerrorctf/rctf/blob/main/commands/monitor.go
+
 ## The .rctf Directory Structure
 
 Certain commands, such as `init`, `add` and `status` will use a hidden directory structure.
