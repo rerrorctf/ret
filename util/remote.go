@@ -16,7 +16,7 @@ func GetRemoteParams(args []string, ip *string, port *int) {
 		fmt.Printf(theme.ColorGray+"ip: "+theme.ColorYellow+"%s"+theme.ColorReset+"\n", args[0])
 		*ip = args[0]
 	} else {
-		fmt.Print(theme.ColorGray + "enter remote ip (no port): " + theme.ColorYellow)
+		fmt.Print(theme.ColorGray + "enter remote ip (no port): " + theme.ColorReset)
 		scanner.Scan()
 		*ip = scanner.Text()
 		fmt.Printf(theme.ColorReset)
@@ -37,7 +37,7 @@ func GetRemoteParams(args []string, ip *string, port *int) {
 
 		*port = p
 	} else {
-		fmt.Print(theme.ColorGray + "enter remote port: " + theme.ColorYellow)
+		fmt.Print(theme.ColorGray + "enter remote port: " + theme.ColorReset)
 		scanner.Scan()
 		fmt.Printf(theme.ColorReset)
 
