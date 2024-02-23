@@ -1,13 +1,53 @@
 package commands
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
 	"rctf/config"
+	"rctf/data"
 	"rctf/theme"
 	"rctf/util"
+	"strings"
 )
+
+func guessBinary() string {
+	defaultBinaryName := "task"
+
+	jsonData, err := os.ReadFile(config.TaskName)
+	if err != nil {
+		return defaultBinaryName
+	}
+
+	var task data.Task
+
+	err = json.Unmarshal(jsonData, &task)
+	if err != nil {
+		return defaultBinaryName
+	}
+
+	jsonData, err = os.ReadFile(config.RctfFilesName)
+	if err != nil {
+		return defaultBinaryName
+	}
+
+	var files data.Files
+
+	err = json.Unmarshal(jsonData, &files)
+	if err != nil {
+		return defaultBinaryName
+	}
+
+	for _, file := range files.Files {
+		if strings.Contains(file.Filename, "libc.so") {
+			continue
+		}
+		return file.Filename
+	}
+
+	return defaultBinaryName
+}
 
 func makeScript(ip string, port int) {
 	script := fmt.Sprintf(
@@ -15,7 +55,7 @@ func makeScript(ip string, port int) {
 			"#\n# pwn template made with 🚩 https://github.com/rerrorctf/rctf 🚩\n#\n\n"+
 			"from pwn import *\n\n"+
 			"#context.log_level = \"debug\"\n\n"+
-			"LOCAL_BINARY = \"./task\"\n"+
+			"LOCAL_BINARY = \"./%s\"\n"+
 			"REMOTE_IP = \"%s\"\n"+
 			"REMOTE_PORT = %d\n\n"+
 			"#elf = ELF(LOCAL_BINARY)\n\n"+
@@ -24,7 +64,7 @@ func makeScript(ip string, port int) {
 			"#gdb.attach(p, gdbscript=\"\")\n\n"+
 			"# pwn it here\n\n"+
 			"p.interactive()\n",
-		ip, port)
+		guessBinary(), ip, port)
 
 	err := os.WriteFile(config.PwnScriptName, []byte(script), 0644)
 	if err != nil {
