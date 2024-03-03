@@ -27,7 +27,7 @@ func grep2Win(file *data.File, path string) {
 
 	grep2win := exec.Command("grep", "-aEoi", task.FlagFormat, path)
 	grep2winOutput, err := grep2win.Output()
-	if err == nil {
+	if err == nil && len(grep2winOutput) > 0 {
 		fmt.Printf(theme.ColorPurple+"[grep2win]"+theme.ColorReset+": %s", grep2winOutput)
 	}
 }
