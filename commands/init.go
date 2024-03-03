@@ -1,7 +1,6 @@
 package commands
 
 import (
-	"bufio"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -34,48 +33,11 @@ func createTask(args []string) {
 		Timestamp: time.Now().UTC(),
 	}
 
-	scanner := bufio.NewScanner(os.Stdin)
-
 	fmt.Printf("🚀 starting new task @ %v\n", task.Timestamp)
 
 	if len(args) > 0 {
-		fmt.Printf(theme.ColorGray+"task name: "+theme.ColorYellow+"%s"+theme.ColorReset+"\n", args[0])
-		task.Name = args[0]
-	} else {
-		fmt.Print(theme.ColorGray + "enter the task name: " + theme.ColorYellow)
-		scanner.Scan()
-		task.Name = scanner.Text()
-		fmt.Printf(theme.ColorReset)
-	}
-
-	if len(args) > 1 {
-		fmt.Printf(theme.ColorGray+"task description: "+theme.ColorYellow+"%s"+theme.ColorReset+"\n", args[1])
-		task.Description = args[1]
-	} else {
-		fmt.Print(theme.ColorGray + "enter the task description: " + theme.ColorYellow)
-		scanner.Scan()
-		task.Description = scanner.Text()
-		fmt.Printf(theme.ColorReset)
-	}
-
-	if len(args) > 2 {
-		fmt.Printf(theme.ColorGray+"task category: "+theme.ColorYellow+"%s"+theme.ColorReset+"\n", args[2])
-		task.Category = args[2]
-	} else {
-		fmt.Print(theme.ColorGray + "enter the category: " + theme.ColorYellow)
-		scanner.Scan()
-		task.Category = scanner.Text()
-		fmt.Printf(theme.ColorReset)
-	}
-
-	if len(args) > 3 {
-		fmt.Printf(theme.ColorGray+"task flag format: "+theme.ColorYellow+"%s"+theme.ColorReset+"\n", args[3])
-		task.FlagFormat = args[3]
-	} else {
-		fmt.Print(theme.ColorGray + "enter the flag format (as a regular expression): " + theme.ColorYellow)
-		scanner.Scan()
-		task.FlagFormat = scanner.Text()
-		fmt.Printf(theme.ColorReset)
+		fmt.Printf(theme.ColorGray+"task flag format: "+theme.ColorYellow+"%s"+theme.ColorReset+"\n", args[0])
+		task.FlagFormat = args[0]
 	}
 
 	writeTask(task)
@@ -89,7 +51,7 @@ func Init(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"init"+theme.ColorGray+" [name] [description] [category] [flag-format]"+theme.ColorReset+"\n")
+			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"init"+theme.ColorGray+" [flag-format]"+theme.ColorReset+"\n")
 			fmt.Fprintf(os.Stderr, "  🚀 initializes the cwd for a task with rctf\n")
 			os.Exit(0)
 		}

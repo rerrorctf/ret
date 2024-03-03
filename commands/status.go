@@ -33,25 +33,13 @@ func Status(args []string) {
 		log.Fatalln("💥 "+theme.ColorRed+"error"+theme.ColorReset+" unmarshalling json:", err)
 	}
 
-	fmt.Printf(theme.ColorGray+"task: "+theme.ColorReset+"%s "+theme.ColorGray, task.Name)
-
-	fmt.Printf("("+theme.ColorPurple+"%s"+theme.ColorGray+") "+theme.ColorReset, task.Category)
-
 	if config.Verbose {
 		fmt.Printf(theme.ColorPurple+"%v(%v)"+theme.ColorReset+"\n", task.Timestamp, time.Now().UTC().Sub(task.Timestamp))
-	} else {
-		fmt.Printf("\n")
-	}
-
-	if len(task.Description) > 0 {
-		fmt.Printf("\"%s\"\n", task.Description)
 	}
 
 	jsonData, err = os.ReadFile(config.RctfFilesName)
 	if err != nil {
-		if config.Verbose {
-			fmt.Println("no files added yet... exiting")
-		}
+		fmt.Println("no files added yet... exiting")
 		os.Exit(1)
 	}
 
