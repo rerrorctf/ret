@@ -50,6 +50,8 @@ func guessBinary() string {
 }
 
 func makeScript(ip string, port int) {
+	binary := guessBinary()
+
 	script := fmt.Sprintf(
 		"#!/usr/bin/env python3\n\n"+
 			"#\n# pwn template made with 🚩 https://github.com/rerrorctf/rctf 🚩\n#\n\n"+
@@ -65,7 +67,7 @@ func makeScript(ip string, port int) {
 			"#gdb.attach(p, gdbscript=\"\")\n\n"+
 			"# pwn it here\n\n"+
 			"p.interactive()\n",
-		guessBinary(), ip, port)
+		binary, ip, port)
 
 	err := os.WriteFile(config.PwnScriptName, []byte(script), 0644)
 	if err != nil {
@@ -77,7 +79,41 @@ func makeScript(ip string, port int) {
 		log.Fatalln("error chmoding file:", err)
 	}
 
-	fmt.Printf("🐚 "+theme.ColorGray+"ready to pwn:"+theme.ColorReset+" $ ./%s\n", config.PwnScriptName)
+	dockerfile := fmt.Sprintf(
+		"#\n# Dockerfile template made with 🚩 https://github.com/rerrorctf/rctf 🚩\n#\n\n"+
+			"FROM ubuntu:24.04\n\n"+
+			"RUN apt update && apt install -y socat\n\n"+
+			"RUN groupadd --gid 1001 pwn\n\n"+
+			"RUN useradd --uid 1001 --gid 1001 --home-dir /home/pwn --create-home --shell /sbin/nologin pwn\n\n"+
+			"WORKDIR /home/pwn\n\n"+
+			"COPY %s .\n\n"+
+			"COPY flag.txt .\n\n"+
+			"RUN chmod +x ./%s\n\n"+
+			"EXPOSE %d\n\n"+
+			"USER pwn\n\n"+
+			"CMD [\"socat\", \"tcp-listen:%d,fork,reuseaddr\", \"exec:./%s\"]\n",
+		binary, binary, port, port, binary)
+
+	err = os.WriteFile("Dockerfile", []byte(dockerfile), 0644)
+	if err != nil {
+		log.Fatalln("error writing to file:", err)
+	}
+
+	compose := fmt.Sprintf(
+		"#\n# compose.yml template made with 🚩 https://github.com/rerrorctf/rctf 🚩\n#\n\n"+
+			"services:\n"+
+			"    task:\n"+
+			"        build: .\n"+
+			"        ports:\n"+
+			"            - %d:%d\n",
+		port, port)
+
+	err = os.WriteFile("compose.yml", []byte(compose), 0644)
+	if err != nil {
+		log.Fatalln("error writing to file:", err)
+	}
+
+	fmt.Printf("🐚 "+theme.ColorGray+"ready to pwn:"+theme.ColorReset+" $ sudo docker compose up --build -d && ./%s\n", config.PwnScriptName)
 }
 
 func Pwn(args []string) {
@@ -93,6 +129,16 @@ func Pwn(args []string) {
 	_, err := os.Stat(config.PwnScriptName)
 	if !os.IsNotExist(err) {
 		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": \"%s\" already exists!\n", config.PwnScriptName)
+	}
+
+	_, err = os.Stat("./Dockerfile")
+	if !os.IsNotExist(err) {
+		log.Fatalf("💥 " + theme.ColorRed + "error" + theme.ColorReset + ": \"Dockerfile\" already exists!\n")
+	}
+
+	_, err = os.Stat("./compose.yml")
+	if !os.IsNotExist(err) {
+		log.Fatalf("💥 " + theme.ColorRed + "error" + theme.ColorReset + ": \"Dockerfile\" already exists!\n")
 	}
 
 	var ip string
