@@ -1,25 +1,18 @@
 package util
 
 import (
-	"bufio"
 	"fmt"
 	"log"
-	"os"
 	"rctf/theme"
 	"strconv"
 )
 
 func GetRemoteParams(args []string, ip *string, port *int) {
-	scanner := bufio.NewScanner(os.Stdin)
-
 	if len(args) > 0 {
 		fmt.Printf(theme.ColorGray+"ip: "+theme.ColorYellow+"%s"+theme.ColorReset+"\n", args[0])
 		*ip = args[0]
 	} else {
-		fmt.Print(theme.ColorGray + "enter remote ip (no port): " + theme.ColorReset)
-		scanner.Scan()
-		*ip = scanner.Text()
-		fmt.Printf(theme.ColorReset)
+		*ip = "127.0.0.1"
 	}
 
 	if len(args) > 1 {
@@ -37,20 +30,6 @@ func GetRemoteParams(args []string, ip *string, port *int) {
 
 		*port = p
 	} else {
-		fmt.Print(theme.ColorGray + "enter remote port: " + theme.ColorReset)
-		scanner.Scan()
-		fmt.Printf(theme.ColorReset)
-
-		p, err := strconv.Atoi(scanner.Text())
-
-		if err != nil {
-			log.Fatalln("💥 "+theme.ColorRed+"error"+theme.ColorReset+": reading port", err)
-		}
-
-		if p < 1 || p > 65535 {
-			log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": invalid port %v\n", port)
-		}
-
-		*port = p
+		*port = 9001
 	}
 }
