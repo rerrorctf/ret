@@ -63,8 +63,8 @@ func makeScript(ip string, port int) {
 			"context.binary = LOCAL_BINARY\n\n"+
 			"#elf = ELF(LOCAL_BINARY)\n"+
 			"#libc = elf.libc\n\n"+
-			"#p = process(LOCAL_BINARY)\n"+
-			"p = remote(REMOTE_IP, REMOTE_PORT)\n"+
+			"p = process(LOCAL_BINARY)\n"+
+			"#p = remote(REMOTE_IP, REMOTE_PORT)\n"+
 			"#gdb.attach(p, gdbscript=\"\")\n\n"+
 			"# pwn it here\n\n"+
 			"p.interactive()\n",
@@ -114,7 +114,7 @@ func makeScript(ip string, port int) {
 		log.Fatalln("error writing to file:", err)
 	}
 
-	fmt.Printf("🐚 "+theme.ColorGray+"ready to pwn:"+theme.ColorReset+" $ sudo docker compose up --build -d && ./%s\n", config.PwnScriptName)
+	fmt.Printf("🐚 "+theme.ColorGray+"ready to pwn:"+theme.ColorReset+" $ ./%s\n", config.PwnScriptName)
 }
 
 func Pwn(args []string) {
