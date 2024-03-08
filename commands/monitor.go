@@ -21,13 +21,14 @@ var (
 
 func waitForTerm(sigChan <-chan os.Signal) {
 	<-sigChan
-	fmt.Println("\r\n👋")
 
 	if config.MonitorWebhook != "" {
 		hook := exec.Command("curl", "-H", "Content-type: application/json", "-d", `{"content": "stopped monitoring"}`,
 			config.MonitorWebhook)
 		hook.Run()
 	}
+
+	fmt.Println("\r\n👋")
 
 	os.Exit(0)
 }
@@ -138,6 +139,15 @@ func Monitor(args []string) {
 
 	fmt.Printf(theme.ColorGray+"interval: "+theme.ColorYellow+"%v seconds"+theme.ColorReset+"\n", montitorScanInterval)
 
+	if config.MonitorWebhook != "" {
+		msg := fmt.Sprintf(`{"content": "starting monitoring: %s"}`, serverAddress)
+		hook := exec.Command("curl", "-H", "Content-type: application/json", "-d", msg,
+			config.MonitorWebhook)
+		hook.Run()
+	}
+
+	time.Sleep(time.Second * 5)
+
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, os.Interrupt, syscall.SIGTERM)
 
@@ -147,13 +157,6 @@ func Monitor(args []string) {
 
 	fmt.Printf(theme.ColorGray+"starting scan: "+theme.ColorReset+"%v\n", time.Now().UTC())
 	fmt.Println(theme.ColorPurple + "press " + theme.ColorCyan + "ctrl+c " + theme.ColorPurple + "to exit..." + theme.ColorReset)
-
-	if config.MonitorWebhook != "" {
-		msg := fmt.Sprintf(`{"content": "starting monitoring: %s"}`, serverAddress)
-		hook := exec.Command("curl", "-H", "Content-type: application/json", "-d", msg,
-			config.MonitorWebhook)
-		hook.Run()
-	}
 
 	go monitorSpinner()
 
