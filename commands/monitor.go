@@ -23,7 +23,7 @@ func waitForTerm(sigChan <-chan os.Signal) {
 	<-sigChan
 
 	if config.MonitorWebhook != "" {
-		hook := exec.Command("curl", "-H", "Content-type: application/json", "-d", `{"content": "stopped monitoring"}`,
+		hook := exec.Command("curl", "-H", "Content-type: application/json", "-d", `{"content": "👋"}`,
 			config.MonitorWebhook)
 		hook.Run()
 	}
@@ -88,7 +88,7 @@ func fromDownToUp(serverAddress string) {
 	fmt.Printf(theme.ColorGreen+"\r[conn]"+theme.ColorReset+" ⤴️: %v\n", time.Now().UTC())
 
 	if config.MonitorWebhook != "" {
-		msg := fmt.Sprintf(`{"content": "[conn] ⤴️: %s"}`, serverAddress)
+		msg := fmt.Sprintf(`{"content": "⤴️ %s"}`, serverAddress)
 		hook := exec.Command("curl", "-H", "Content-type: application/json", "-d", msg,
 			config.MonitorWebhook)
 		hook.Run()
@@ -99,7 +99,7 @@ func fromUpToDown(serverAddress string) {
 	fmt.Printf(theme.ColorRed+"\r[down]"+theme.ColorReset+" ⤵️: %v\n", time.Now().UTC())
 
 	if config.MonitorWebhook != "" {
-		msg := fmt.Sprintf(`{"content": "[down] ⤵️: %s"}`, serverAddress)
+		msg := fmt.Sprintf(`{"content": "⤵️ %s"}`, serverAddress)
 		hook := exec.Command("curl", "-H", "Content-type: application/json", "-d", msg,
 			config.MonitorWebhook)
 		hook.Run()
@@ -140,7 +140,7 @@ func Monitor(args []string) {
 	fmt.Printf(theme.ColorGray+"interval: "+theme.ColorYellow+"%v seconds"+theme.ColorReset+"\n", montitorScanInterval)
 
 	if config.MonitorWebhook != "" {
-		msg := fmt.Sprintf(`{"content": "starting monitoring: %s"}`, serverAddress)
+		msg := fmt.Sprintf(`{"content": "📡 %s"}`, serverAddress)
 		hook := exec.Command("curl", "-H", "Content-type: application/json", "-d", msg,
 			config.MonitorWebhook)
 		hook.Run()
