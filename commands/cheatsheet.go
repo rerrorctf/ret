@@ -33,4 +33,14 @@ func Cheatsheet(args []string) {
 
 	fmt.Println(theme.ColorCyan + "reverse shells" + theme.ColorReset)
 	fmt.Println(theme.ColorGray + "🔗 https://swisskyrepo.github.io/InternalAllTheThings/cheatsheets/shell-reverse-cheatsheet/" + theme.ColorReset)
+
+	fmt.Println(theme.ColorCyan + "gpg" + theme.ColorReset)
+	fmt.Println(theme.ColorGray + "🔗 https://irtfweb.ifa.hawaii.edu/~lockhart/gpg/" + theme.ColorReset)
+	fmt.Println(theme.ColorGray + "🔗 https://devhints.io/gnupg" + theme.ColorReset)
+
+	fmt.Println(theme.ColorCyan + "ssh" + theme.ColorReset)
+	fmt.Println(theme.ColorGray + "🔗 https://iximiuz.com/ssh-tunnels/ssh-tunnels.png" + theme.ColorReset)
+
+	fmt.Println(theme.ColorCyan + "pwn" + theme.ColorReset)
+	fmt.Println(theme.ColorGray + "🔗 https://ir0nstone.gitbook.io/notes/" + theme.ColorReset)
 }
