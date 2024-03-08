@@ -166,13 +166,13 @@ https://github.com/rerrorctf/rctf/blob/main/commands/ghidra.go
 
 ```
 usage: rctf ida
+```
 
 Imports all added files.
 
 Opens ida.
 
 Make sure ida is installed (or symlinked) at `/opt/ida` or use the config file to adjust the default ida installation location.
-```
 
 https://github.com/rerrorctf/rctf/blob/main/commands/ida.go
 
