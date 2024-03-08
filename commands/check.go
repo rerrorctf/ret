@@ -78,7 +78,7 @@ func Check(args []string) {
 		suggestLink("https://github.com/NationalSecurityAgency/ghidra/releases")
 	}
 
-	if !testCommand("stat", config.IdaInstallPath+"/idaRun") {
+	if !testCommand("stat", config.IdaInstallPath+"/ida64") {
 		suggestLink("https://hex-rays.com/ida-free/")
 	}
 
