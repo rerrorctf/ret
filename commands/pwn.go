@@ -88,7 +88,7 @@ func makeScript(ip string, port int) {
 			"RUN useradd --uid 1001 --gid 1001 --home-dir /home/pwn --create-home --shell /sbin/nologin pwn\n\n"+
 			"WORKDIR /home/pwn\n\n"+
 			"COPY %s .\n\n"+
-			"COPY flag.txt .\n\n"+
+			"RUN echo \"flag{example}\" > flag.txt\n\n"+
 			"RUN chmod +x ./%s\n\n"+
 			"EXPOSE %d\n\n"+
 			"USER pwn\n\n"+
