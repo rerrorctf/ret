@@ -247,7 +247,7 @@ usage: rctf cheatsheet
 
 Prints a list of cheatsheets for quick reference.
 
-https://github.com/rerrorctf/rctf/blob/main/commands/monitor.go
+https://github.com/rerrorctf/rctf/blob/main/commands/cheatsheet.go
 
 ## The .rctf Directory Structure
 
