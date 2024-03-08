@@ -93,7 +93,7 @@ $ rctf command help
 ### init
 
 ```
-usage: rctf init [name] [description] [category] [flag-format]
+usage: rctf init [flag-format]
 ```
 
 Initializes the current working directory for a task.
@@ -107,7 +107,7 @@ https://github.com/rerrorctf/rctf/blob/main/commands/init.go
 ### add
 
 ```
-usage: rctf add file [file file...]
+usage: rctf add file1 [file2 file3...]
 ```
 
 This command adds one or more files to the task.
@@ -142,7 +142,7 @@ https://github.com/rerrorctf/rctf/blob/main/commands/status.go
 usage: rctf pwn [ip] [port]
 ```
 
-Creates a pwntools script from a template.
+Creates a pwntools script and Dockerfile from a template.
 
 https://github.com/rerrorctf/rctf/blob/main/commands/pwn.go
 
