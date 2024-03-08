@@ -61,7 +61,8 @@ func makeScript(ip string, port int) {
 			"REMOTE_PORT = %d\n\n"+
 			"#context.log_level = \"debug\"\n"+
 			"context.binary = LOCAL_BINARY\n\n"+
-			"#elf = ELF(LOCAL_BINARY)\n\n"+
+			"#elf = ELF(LOCAL_BINARY)\n"+
+			"#libc = elf.libc\n\n"+
 			"#p = process(LOCAL_BINARY)\n"+
 			"p = remote(REMOTE_IP, REMOTE_PORT)\n"+
 			"#gdb.attach(p, gdbscript=\"\")\n\n"+
