@@ -268,7 +268,6 @@ This directory is structured as follows:
     - e.g. `.rctf/files/7ebfc53f17925af4340d4218aafd16ba39b5afa8b6ac1f7adc3dd92952a2a237`
     - Inside of the folder created for each file
       - There is a copy of the file that was added
-      - There is the `rctflog.txt` log file for the processes that were run when added that file
 
 - `.rctf/ghidra`
   - This directory is created to store the ghidra project created if you use the `ghidra` command
