@@ -38,7 +38,7 @@ Other options are available and you may do whatever works best for you.
 
 While I aim to keep this readme in sync; for the current structure of the config file please consult https://github.com/rerrorctf/rctf/blob/main/data/config.go#L3.
 
-The data in the config must be in the json format. You can may include zero or more of the following in your config:
+The data in the config must be in the json format. You can include zero or more of the following in your config:
 
 - `ghidrainstallpath`
   - This is the location where you have installed ghidra, e.g. `/opt/ghidra` is what I use, so that `rctf ghidra` knows where to find `ghidraRun`.
