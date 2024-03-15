@@ -27,7 +27,8 @@ func Writeup(args []string) {
 
 	template := fmt.Sprintf(
 		"https://chal.link.goes.here\n\n" +
-			"# NAME (CATEGORY)\n\n" +
+			"# TASK-NAME (CATEGORY)\n\n" +
+			"AUTHOR DATE\n\n" +
 			"DESCRIPTION\n\n" +
 			"## Solution\n\n" +
 			"## Flag\n`flag{example}`\n")
