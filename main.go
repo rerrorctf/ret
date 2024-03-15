@@ -92,6 +92,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "  👀 "+theme.ColorBlue+"status"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  📥 "+theme.ColorBlue+"add"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  🐚 "+theme.ColorBlue+"pwn"+theme.ColorReset+"\n")
+		fmt.Fprintf(os.Stderr, "  🐋 "+theme.ColorBlue+"docker"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  🦖 "+theme.ColorBlue+"ghidra"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  💃 "+theme.ColorBlue+"ida"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  📡 "+theme.ColorBlue+"monitor"+theme.ColorReset+"\n")
@@ -122,6 +123,8 @@ func main() {
 		commands.Status(flag.Args()[1:])
 	case "pwn":
 		commands.Pwn(flag.Args()[1:])
+	case "docker":
+		commands.Docker(flag.Args()[1:])
 	case "ghidra":
 		ensureSkeleton()
 		commands.Ghidra(flag.Args()[1:])

@@ -1,56 +1,16 @@
 package commands
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"os"
 	"rctf/config"
-	"rctf/data"
 	"rctf/theme"
 	"rctf/util"
-	"strings"
 )
 
-func guessBinary() string {
-	defaultBinaryName := "task"
-
-	jsonData, err := os.ReadFile(config.TaskName)
-	if err != nil {
-		return defaultBinaryName
-	}
-
-	var task data.Task
-
-	err = json.Unmarshal(jsonData, &task)
-	if err != nil {
-		return defaultBinaryName
-	}
-
-	jsonData, err = os.ReadFile(config.RctfFilesName)
-	if err != nil {
-		return defaultBinaryName
-	}
-
-	var files data.Files
-
-	err = json.Unmarshal(jsonData, &files)
-	if err != nil {
-		return defaultBinaryName
-	}
-
-	for _, file := range files.Files {
-		if strings.Contains(file.Filename, "libc.so") {
-			continue
-		}
-		return file.Filename
-	}
-
-	return defaultBinaryName
-}
-
 func makeScript(ip string, port int) {
-	binary := guessBinary()
+	binary := util.GuessBinary()
 
 	script := fmt.Sprintf(
 		"#!/usr/bin/env python3\n\n"+

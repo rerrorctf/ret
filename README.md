@@ -146,6 +146,16 @@ Creates a pwntools script and Dockerfile from a template.
 
 https://github.com/rerrorctf/rctf/blob/main/commands/pwn.go
 
+### docker
+
+```
+usage: rctf docker [ip] [port]
+```
+
+Creates a Dockerfile and compose.yml from a template.
+
+https://github.com/rerrorctf/rctf/blob/main/commands/docker.go
+
 ### ghidra
 
 ```
