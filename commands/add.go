@@ -147,11 +147,11 @@ func addFile(srcPath string) {
 		return
 	}
 
-	util.ProcessFile(&file, dstPath)
-
 	files.Files = append(files.Files, file)
 
 	writeFiles(&files)
+
+	util.ProcessFile(dstPath)
 }
 
 func AddHelp() {

@@ -10,7 +10,7 @@ import (
 	"rctf/theme"
 )
 
-func grep2Win(file *data.File, path string) {
+func grep2Win(path string) {
 	jsonData, err := os.ReadFile(config.TaskName)
 	if err != nil {
 		fmt.Println("error reading:", err)
@@ -32,6 +32,6 @@ func grep2Win(file *data.File, path string) {
 	}
 }
 
-func ProcessFile(file *data.File, path string) {
-	grep2Win(file, path)
+func ProcessFile(path string) {
+	grep2Win(path)
 }
