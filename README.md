@@ -259,6 +259,14 @@ Prints a list of cheatsheets for quick reference.
 
 https://github.com/rerrorctf/rctf/blob/main/commands/cheatsheet.go
 
+### wizard
+
+```
+usage: rctf wizard
+```
+
+https://github.com/rerrorctf/rctf/blob/main/commands/wizard.go
+
 ## The .rctf Directory Structure
 
 Certain commands, such as `init`, `add` and `status` will use a hidden directory structure.

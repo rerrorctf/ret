@@ -10,7 +10,6 @@ import (
 	"io"
 	"log"
 	"os"
-	"os/exec"
 	"path/filepath"
 	"rctf/config"
 	"rctf/data"
@@ -61,18 +60,6 @@ func parseFiles(files *data.Files) {
 	}
 }
 
-func runFileCommandOnFile(path string) string {
-	fileOutput := exec.Command("file", path)
-
-	fileOutputResult, err := fileOutput.Output()
-	if err != nil {
-		fmt.Printf("warning: unable to get output from file on %s\n", path)
-		return ""
-	}
-
-	return string(fileOutputResult[len(path)+2 : len(fileOutputResult)-1])
-}
-
 func writeFiles(files *data.Files) {
 	jsonData, err := json.MarshalIndent(files, "", "  ")
 	if err != nil {
@@ -95,7 +82,7 @@ func addFile(srcPath string) {
 
 	_, fileName := filepath.Split(srcPath)
 
-	fileOutput := runFileCommandOnFile(srcPath)
+	fileOutput := util.RunFileCommandOnFile(srcPath)
 
 	content, err := os.ReadFile(srcPath)
 	if err != nil {

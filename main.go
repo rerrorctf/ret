@@ -12,6 +12,7 @@ import (
 	"rctf/config"
 	"rctf/data"
 	"rctf/theme"
+	"rctf/util"
 )
 
 func parseUserConfig() {
@@ -61,24 +62,6 @@ func parseUserConfig() {
 	}
 }
 
-func ensureDirectory(dirPath string) {
-	if _, err := os.Stat(dirPath); os.IsNotExist(err) {
-		if config.Verbose {
-			fmt.Println("mkdir", dirPath)
-		}
-		err := os.MkdirAll(dirPath, 0755)
-		if err != nil {
-			fmt.Println("error creating directory:", err)
-			os.Exit(1)
-		}
-	}
-}
-
-func ensureSkeleton() {
-	ensureDirectory(config.FolderName)
-	ensureDirectory(config.FilesFolderName)
-}
-
 func main() {
 	flag.BoolVar(&config.Verbose, "v", false, "enable verbose mode")
 
@@ -100,6 +83,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "  📞 "+theme.ColorBlue+"syscall"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  📝 "+theme.ColorBlue+"writeup"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  📚 "+theme.ColorBlue+"cheatsheet"+theme.ColorReset+"\n")
+		fmt.Fprintf(os.Stderr, "  🧙 "+theme.ColorBlue+"wizard"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "\n🚩 https://github.com/rerrorctf/rctf 🚩\n")
 	}
 
@@ -114,10 +98,10 @@ func main() {
 
 	switch flag.Arg(0) {
 	case "init":
-		ensureSkeleton()
+		util.EnsureSkeleton()
 		commands.Init(flag.Args()[1:])
 	case "add":
-		ensureSkeleton()
+		util.EnsureSkeleton()
 		commands.Add(flag.Args()[1:])
 	case "status":
 		commands.Status(flag.Args()[1:])
@@ -126,10 +110,10 @@ func main() {
 	case "docker":
 		commands.Docker(flag.Args()[1:])
 	case "ghidra":
-		ensureSkeleton()
+		util.EnsureSkeleton()
 		commands.Ghidra(flag.Args()[1:])
 	case "ida":
-		ensureSkeleton()
+		util.EnsureSkeleton()
 		commands.Ida(flag.Args()[1:])
 	case "monitor":
 		commands.Monitor(flag.Args()[1:])
@@ -141,6 +125,8 @@ func main() {
 		commands.Writeup(flag.Args()[1:])
 	case "cheatsheet":
 		commands.Cheatsheet(flag.Args()[1:])
+	case "wizard":
+		commands.Wizard(flag.Args()[1:])
 	default:
 		flag.Usage()
 		os.Exit(1)
