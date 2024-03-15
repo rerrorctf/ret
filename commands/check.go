@@ -113,4 +113,8 @@ func Check(args []string) {
 	if !testCommand("go", "version") {
 		suggestLink("https://go.dev/doc/install")
 	}
+
+	// steg related stuff
+	testCommand("which", "stegseek")
+	testCommand("steghide", "--help")
 }
