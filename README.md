@@ -2,7 +2,23 @@
 
 ## CTF Task Automation Tool
 
-## Compiling (Optional)
+## Get The Latest Build
+
+You can simply get the latest pre-built binary from https://github.com/rerrorctf/rctf/releases.
+
+Please note that, while `rctf` is a single static file built for x64 linux, you can use go to build this for a range of platforms (although this hasn't been tested yet).
+
+### Installation
+
+Here installation just means putting `rctf` somewhere on your path. I like to copy it to `/usr/local/bin`.
+
+```
+$ sudo cp ./rctf /usr/local/bin
+```
+
+Other options are available and you may do whatever works best for you.
+
+### Compiling (Optional)
 
 First install `go` https://go.dev/dl/ by following the install instructions.
 
@@ -15,22 +31,6 @@ $ go build
 ```
 
 This will produce the `rctf` binary. This static binary / single file is all you need to use `rctf`.
-
-## Pre-built Binary
-
-You can simply get the latest pre-built binary from https://github.com/rerrorctf/rctf/releases.
-
-Please note that, while `rctf` is a single static file built for x64 linux, you can use go to build this for a range of platforms (although this hasn't been tested yet).
-
-## Installation
-
-Here installation just means putting `rctf` somewhere on your path. I like to copy it to `/usr/local/bin`.
-
-```
-$ sudo cp ./rctf /usr/local/bin
-```
-
-Other options are available and you may do whatever works best for you.
 
 ## ~/.config/rctf
 
