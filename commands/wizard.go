@@ -121,7 +121,9 @@ func Wizard(args []string) {
 		filesToAdd = append(filesToAdd, file)
 	}
 
-	Add(filesToAdd)
+	if len(filesToAdd) > 0 {
+		Add(filesToAdd)
+	}
 
 	// show status
 	fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me show the status!" + theme.ColorReset + "\n")
