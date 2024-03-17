@@ -159,10 +159,12 @@ https://github.com/rerrorctf/rctf/blob/main/commands/docker.go
 ### ghidra
 
 ```
-usage: rctf ghidra
+usage: rctf ghidra [file file]
 ```
 
 Creates a ghidra project in the hidden directory `.rctf/ghidra`.
+
+Optionally adds one or more new files.
 
 Imports and analyzes all added files.
 
@@ -175,8 +177,10 @@ https://github.com/rerrorctf/rctf/blob/main/commands/ghidra.go
 ### ida
 
 ```
-usage: rctf ida
+usage: rctf ida [file file]
 ```
+
+Optionally adds one or more new files.
 
 Imports all added files.
 

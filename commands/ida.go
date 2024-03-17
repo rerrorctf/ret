@@ -31,10 +31,14 @@ func Ida(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"ida"+theme.ColorReset+"\n")
+			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"ida"+theme.ColorGray+" [file file...]"+theme.ColorReset+"\n")
 			fmt.Fprintf(os.Stderr, "  💃 opens all added files then opens ida with rctf\n")
 			os.Exit(0)
 		}
+	}
+
+	if len(args) > 0 {
+		Add(args)
 	}
 
 	go idaSpinner()

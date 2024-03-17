@@ -30,7 +30,7 @@ func Ghidra(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"ghidra"+theme.ColorReset+"\n")
+			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"ghidra"+theme.ColorGray+" [file file...]"+theme.ColorReset+"\n")
 			fmt.Fprintf(os.Stderr, "  🦖 ingests all added files then opens ghidra with rctf\n")
 			os.Exit(0)
 		}
@@ -51,6 +51,10 @@ func Ghidra(args []string) {
 	if err != nil {
 		fmt.Println("error abs:", err)
 		os.Exit(1)
+	}
+
+	if len(args) > 0 {
+		Add(args)
 	}
 
 	go ghidraSpinner()
