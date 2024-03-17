@@ -103,13 +103,25 @@ func Wizard(args []string) {
 		fmt.Printf("🧙💬 " + theme.ColorGreen + "Let me add that interesting file for you!" + theme.ColorReset + " 🪄\n")
 	}
 
-	Add(interestingFiles)
+	filesToAdd := []string{}
+
+	for _, file := range interestingFiles {
+		result := util.RunFileCommandOnFile(file)
+
+		if strings.Contains(result, "Zip archive data") {
+			continue
+		}
+
+		filesToAdd = append(filesToAdd, file)
+	}
+
+	Add(filesToAdd)
 
 	// show status
 	Status([]string{})
 
 	// if binary then pwn
-	for _, file := range interestingFiles {
+	for _, file := range filesToAdd {
 		result := util.RunFileCommandOnFile(file)
 
 		if strings.Contains(result, "ELF") {
