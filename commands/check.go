@@ -51,6 +51,7 @@ func Check(args []string) {
 	testCommand("nasm", "--version")
 	testCommand("gdb", "--version")
 	testCommand("vim", "--version")
+	testCommand("unzip")
 
 	if !testCommand("code", "--version") {
 		suggestLink("https://code.visualstudio.com/")
