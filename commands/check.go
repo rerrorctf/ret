@@ -91,6 +91,10 @@ func Check(args []string) {
 	testCommand("pwn")
 	testCommand("pwn", "checksec")
 
+	if !testCommand("seccomp-tools", "--version") {
+		suggestLink("https://github.com/david942j/seccomp-tools")
+	}
+
 	// web related stuff
 	if !testCommand("stat", currentUser.HomeDir+"/BurpSuiteCommunity/BurpSuiteCommunity") {
 		suggestLink("https://portswigger.net/burp/releases/community/latest")
