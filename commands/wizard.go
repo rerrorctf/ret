@@ -38,9 +38,9 @@ func findInterestingFiles() []string {
 	}
 
 	if len(interestingFiles) > 1 {
-		fmt.Printf("🧙💬 "+theme.ColorGreen+"I see %d interesting files here..."+theme.ColorReset+"\n", len(interestingFiles))
+		fmt.Printf("🧙💬 "+theme.ColorGreen+"I see "+theme.ColorPurple+"%d"+theme.ColorGreen+" interesting files here!"+theme.ColorReset+"\n", len(interestingFiles))
 	} else {
-		fmt.Printf("🧙💬 " + theme.ColorGreen + "I see an interesting file here..." + theme.ColorReset + "\n")
+		fmt.Printf("🧙💬 " + theme.ColorGreen + "I see an interesting file here!" + theme.ColorReset + "\n")
 	}
 
 	for _, file := range interestingFiles {
@@ -55,7 +55,7 @@ func Wizard(args []string) {
 		switch args[0] {
 		case "help":
 			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"wizard"+theme.ColorReset+"\n")
-			fmt.Fprintf(os.Stderr, "  🧙 do "+theme.ColorPurple+"magic"+theme.ColorReset+" with rctf\n")
+			fmt.Fprintf(os.Stderr, "  🧙 do "+theme.ColorPurple+"m"+theme.ColorBlue+"a"+theme.ColorGreen+"g"+theme.ColorYellow+"i"+theme.ColorRed+"c"+theme.ColorReset+" with rctf\n")
 			os.Exit(0)
 		}
 	}
@@ -66,14 +66,16 @@ func Wizard(args []string) {
 	// ensure skeleton
 	_, err := os.Stat(config.FolderName)
 	if os.IsNotExist(err) {
-		fmt.Printf("🧙💬 "+theme.ColorGreen+"I see that you don't have a %s.. let me create that for you!"+theme.ColorReset+" 🪄\n", config.FolderName)
+		fmt.Printf("🧙💬 "+theme.ColorGreen+"I see that you don't have a "+theme.ColorCyan+"\"%s\""+theme.ColorGreen+" directory."+theme.ColorReset+"\n", config.FolderName)
+		fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me create that for you!" + theme.ColorReset + "\n")
 		util.EnsureSkeleton()
 	}
 
 	// init task
 	_, err = os.Stat(config.TaskName)
 	if os.IsNotExist(err) {
-		fmt.Printf("🧙💬 "+theme.ColorGreen+"I see that you don't have a %s.. let me create that for you!"+theme.ColorReset+" 🪄\n", config.TaskName)
+		fmt.Printf("🧙💬 "+theme.ColorGreen+"I see that you don't have a "+theme.ColorCyan+"\"%s\""+theme.ColorGreen+" file."+theme.ColorReset+"\n", config.TaskName)
+		fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me create that for you!" + theme.ColorReset + "\n")
 		Init([]string{"flag{.+}"})
 	}
 
@@ -84,7 +86,8 @@ func Wizard(args []string) {
 		result := util.RunFileCommandOnFile(file)
 
 		if strings.Contains(result, "Zip archive data") {
-			fmt.Printf("🧙💬 "+theme.ColorGreen+"I see that %s is a zip file.. let me unzip that for you!"+theme.ColorReset+" 🪄\n", file)
+			fmt.Printf("🧙💬 "+theme.ColorGreen+"I see that "+theme.ColorCyan+"\"%s\""+theme.ColorGreen+" is a zip file."+theme.ColorReset+"\n", file)
+			fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me unzip that for you!" + theme.ColorReset + "\n")
 
 			util.UnzipFile(file)
 
@@ -98,9 +101,9 @@ func Wizard(args []string) {
 
 	// add files
 	if len(interestingFiles) > 1 {
-		fmt.Printf("🧙💬 " + theme.ColorGreen + "Let me add those interesting files for you!" + theme.ColorReset + " 🪄\n")
+		fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me add those interesting files for you!" + theme.ColorReset + "\n")
 	} else {
-		fmt.Printf("🧙💬 " + theme.ColorGreen + "Let me add that interesting file for you!" + theme.ColorReset + " 🪄\n")
+		fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me add that interesting file for you!" + theme.ColorReset + "\n")
 	}
 
 	filesToAdd := []string{}
@@ -109,6 +112,7 @@ func Wizard(args []string) {
 		result := util.RunFileCommandOnFile(file)
 
 		if strings.Contains(result, "Zip archive data") {
+			fmt.Printf("🧙💬 "+theme.ColorGreen+"Skipping "+theme.ColorCyan+"\"%s\""+theme.ColorGreen+" as it is a zip file."+theme.ColorReset+"\n", file)
 			continue
 		}
 
@@ -118,6 +122,7 @@ func Wizard(args []string) {
 	Add(filesToAdd)
 
 	// show status
+	fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me show the status!" + theme.ColorReset + "\n")
 	Status([]string{})
 
 	// if there is a single elf binary then pwn
@@ -139,7 +144,8 @@ func Wizard(args []string) {
 
 	if numElfFiles == 1 {
 		solitaryElfName := filesToAdd[elfFileIndex]
-		fmt.Printf("🧙💬 "+theme.ColorGreen+"I see that %s is an ELF.. let me pwn that for you!"+theme.ColorReset+" 🪄\n", solitaryElfName)
+		fmt.Printf("🧙💬 "+theme.ColorGreen+"I see that "+theme.ColorCyan+"\"%s\""+theme.ColorGreen+" is an ELF."+theme.ColorReset+"\n", solitaryElfName)
+		fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me pwn that for you!" + theme.ColorReset + "\n")
 		Pwn([]string{})
 	}
 }
