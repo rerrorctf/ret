@@ -14,7 +14,6 @@ func makeScript(ip string, port int) {
 
 	script := fmt.Sprintf(
 		"#!/usr/bin/env python3\n\n"+
-			"#\n# pwn template made with 🚩 https://github.com/rerrorctf/rctf 🚩\n#\n\n"+
 			"from pwn import *\n\n"+
 			"LOCAL_BINARY = \"./%s\"\n"+
 			"REMOTE_IP = \"%s\"\n"+

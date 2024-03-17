@@ -12,8 +12,7 @@ func makeDockerFile(port int) {
 	binary := util.GuessBinary()
 
 	dockerfile := fmt.Sprintf(
-		"#\n# Dockerfile template made with 🚩 https://github.com/rerrorctf/rctf 🚩\n#\n\n"+
-			"FROM ubuntu:24.04\n\n"+
+		"FROM ubuntu:24.04\n\n"+
 			"RUN apt update && apt install -y socat\n\n"+
 			"RUN groupadd --gid 1001 pwn\n\n"+
 			"RUN useradd --uid 1001 --gid 1001 --home-dir /home/pwn --create-home --shell /sbin/nologin pwn\n\n"+
@@ -32,8 +31,7 @@ func makeDockerFile(port int) {
 	}
 
 	compose := fmt.Sprintf(
-		"#\n# compose.yml template made with 🚩 https://github.com/rerrorctf/rctf 🚩\n#\n\n"+
-			"services:\n"+
+		"services:\n"+
 			"    task:\n"+
 			"        build: .\n"+
 			"        ports:\n"+
