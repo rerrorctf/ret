@@ -198,15 +198,20 @@ usage: rctf syscall [(x86/32)/(x64/64)] [regex-pattern]
 
 Greps syscall headers for x86 and x64 linux.
 
-For x86 linux we use `/usr/include/x86_64-linux-gnu/asm/unistd_32.h`.
+For x86 linux we use:
+`/usr/include/x86_64-linux-gnu/asm/unistd_32.h`
 
-For x64 linux we use `/usr/include/x86_64-linux-gnu/asm/unistd_64.h`.
+For x64 linux we use:
+`/usr/include/x86_64-linux-gnu/asm/unistd_64.h`
 
 For example:
 
 `syscall x64 " 0"`
+
 `syscall x64 write`
+
 `syscall 32 read`
+
 `syscall x86 10[0-9]`
 
 https://github.com/rerrorctf/rctf/blob/main/commands/syscall.go
