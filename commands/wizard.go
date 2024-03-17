@@ -120,15 +120,26 @@ func Wizard(args []string) {
 	// show status
 	Status([]string{})
 
-	// if binary then pwn
-	for _, file := range filesToAdd {
+	// if there is a single elf binary then pwn
+	numElfFiles := 0
+	elfFileIndex := -1
+
+	for i, file := range filesToAdd {
+		if strings.Contains(file, ".so") {
+			continue
+		}
+
 		result := util.RunFileCommandOnFile(file)
 
 		if strings.Contains(result, "ELF") {
-			fmt.Printf("🧙💬 "+theme.ColorGreen+"I see that %s is an ELF.. let me pwn that for you!"+theme.ColorReset+" 🪄\n", file)
-
-			Pwn([]string{})
-			break
+			numElfFiles += 1
+			elfFileIndex = i
 		}
+	}
+
+	if numElfFiles == 1 {
+		solitaryElfName := filesToAdd[elfFileIndex]
+		fmt.Printf("🧙💬 "+theme.ColorGreen+"I see that %s is an ELF.. let me pwn that for you!"+theme.ColorReset+" 🪄\n", solitaryElfName)
+		Pwn([]string{})
 	}
 }
