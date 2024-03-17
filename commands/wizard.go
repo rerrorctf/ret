@@ -100,10 +100,12 @@ func Wizard(args []string) {
 	}
 
 	// add files
-	if len(interestingFiles) > 1 {
-		fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me add those interesting files for you!" + theme.ColorReset + "\n")
-	} else {
-		fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me add that interesting file for you!" + theme.ColorReset + "\n")
+	if len(interestingFiles) > 0 {
+		if len(interestingFiles) > 1 {
+			fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me add those interesting files for you!" + theme.ColorReset + "\n")
+		} else {
+			fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me add that interesting file for you!" + theme.ColorReset + "\n")
+		}
 	}
 
 	filesToAdd := []string{}
