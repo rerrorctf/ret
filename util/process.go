@@ -13,8 +13,8 @@ import (
 func grep2Win(path string) {
 	jsonData, err := os.ReadFile(config.TaskName)
 	if err != nil {
-		fmt.Println("error reading:", err)
-		os.Exit(1)
+		// this is ok we just don't have a tasks file for this directory
+		return
 	}
 
 	var task data.Task

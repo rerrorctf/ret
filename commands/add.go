@@ -8,7 +8,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"os"
 	"path/filepath"
 	"rctf/config"
@@ -154,11 +153,6 @@ func Add(args []string) {
 			AddHelp()
 			os.Exit(0)
 		default:
-			_, err := os.Stat(config.TaskName)
-			if os.IsNotExist(err) {
-				log.Fatalf("error: no %s found\nrun "+theme.ColorBlue+"init"+theme.ColorReset+" first\n", config.TaskName)
-			}
-
 			for _, file := range args {
 				addFile(file)
 			}
