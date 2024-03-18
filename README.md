@@ -271,8 +271,10 @@ https://github.com/rerrorctf/rctf/blob/main/commands/cheatsheet.go
 ### wizard
 
 ```
-usage: rctf wizard
+usage: rctf wizard [flag-format]
 ```
+
+Optionally takes a flag format which is passed to init. If none is supplied `flag{.+}` is supplied by default.
 
 https://github.com/rerrorctf/rctf/blob/main/commands/wizard.go
 
