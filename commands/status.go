@@ -45,25 +45,18 @@ func Status(args []string) {
 	err = json.Unmarshal(jsonData, &files)
 	if err == nil {
 		for idx, file := range files.Files {
-			fmt.Printf(theme.ColorGray+"["+theme.ColorBlue+"%v"+theme.ColorGray+"]"+theme.ColorReset, idx)
-
-			fmt.Printf(theme.ColorGreen+" %s ", file.Filename)
-
-			fmt.Printf(theme.ColorGray+"("+theme.ColorCyan+"%vB"+theme.ColorGray+"/"+theme.ColorRed+"%vK"+theme.ColorGray+"/"+theme.ColorYellow+"%vM"+theme.ColorGray+"/"+theme.ColorBlue+"%vG"+theme.ColorGray+")"+theme.ColorReset+" 👀\n",
-				file.Size, file.Size/1024, file.Size/1024/1024, file.Size/1024/1024/1024)
-
-			if len(file.Type) < 60 {
-				fmt.Printf(theme.ColorGray+"  type:   "+theme.ColorReset+"%s\n", file.Type)
-			} else {
-				fmt.Printf(theme.ColorGray+"  type:   "+theme.ColorReset+"%s...\n", file.Type[:60])
-			}
 
 			if config.Verbose {
+				fmt.Printf(theme.ColorGray+"["+theme.ColorBlue+"%v"+theme.ColorGray+"]"+theme.ColorReset, idx)
+				fmt.Printf(theme.ColorGreen+" %s\n", file.Filename)
+
 				fmt.Printf(theme.ColorGray+"  md5:    "+theme.ColorReset+"%s\n", file.MD5)
 				fmt.Printf(theme.ColorGray+"  sha1:   "+theme.ColorReset+"%s\n", file.SHA1)
 				fmt.Printf(theme.ColorGray+"  sha256: "+theme.ColorReset+"%s\n", file.SHA256)
 			} else {
-				fmt.Printf(theme.ColorGray+"  sha256: "+theme.ColorReset+"%s\n", file.SHA256)
+				fmt.Printf(theme.ColorGray+"["+theme.ColorBlue+"%v"+theme.ColorGray+"]"+theme.ColorReset, idx)
+				fmt.Printf(theme.ColorGreen+" %s ", file.Filename)
+				fmt.Printf(theme.ColorReset+"%s\n", file.SHA256)
 			}
 
 			if len(file.Comment) > 0 {
@@ -71,8 +64,10 @@ func Status(args []string) {
 			}
 
 			if config.Verbose {
-				fmt.Printf("  %v(%v)\n", file.Timestamp, time.Now().UTC().Sub(file.Timestamp))
+				fmt.Printf(theme.ColorPurple+"  %v"+theme.ColorReset+"\n", file.Timestamp)
 			}
+
+			fmt.Printf(theme.ColorGray+"  type:   "+theme.ColorReset+"%s\n", file.Type)
 		}
 	}
 }
