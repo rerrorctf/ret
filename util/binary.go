@@ -36,10 +36,13 @@ func GuessBinary() string {
 	}
 
 	for _, file := range files.Files {
-		if strings.Contains(file.Filename, "libc.so") {
+		if strings.Contains(file.Filename, ".so") {
 			continue
 		}
-		return file.Filename
+
+		if strings.Contains(file.Type, "ELF") {
+			return file.Filename
+		}
 	}
 
 	return defaultBinaryName
