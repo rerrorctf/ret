@@ -60,11 +60,6 @@ The data in the config must be in the json format. You can include zero or more 
   - This is what you would like the script created by `rctf pwn` to be called.
   - The default is `go.py` and is chosen to be short and not clash with any common imports as per https://github.com/rerrorctf/rctf/blob/main/config/config.go#L16
 
-- `monitorwebhook`
-  - This is the discord webhook url you would like to use to post `rctf monitor` events.
-  - _This is most likely a private server you have setup for the purpose of recieiving these notifications to avoid spamming others_
-  - The default is `""` because by default this is not enabled as per https://github.com/rerrorctf/rctf/blob/main/config/config.go#L17 
-
 Here is an example config:
 
 ```
@@ -72,7 +67,6 @@ Here is an example config:
   "ghidrainstallpath": "/opt/software/ghidra",
   "ghidraprojectpath": "ghidra-project",
   "pwnscriptname": "exploit.py"
-  "monitorwebhook": "https://discord.com/api/webhooks/your-webhook-token-goes-here"
 }
 ```
 
@@ -237,26 +231,6 @@ Check your environment for ctf readiness by checking if various pieces of common
 If something is not installed `rctf` tries to give you a link to help you install it quickly.
 
 https://github.com/rerrorctf/rctf/blob/main/commands/check.go
-
-### monitor
-
-```
-usage: rctf monitor [ip] [port] [interval-seconds]
-```
-
-Monitor for changes in the up/down status of a server address.
-
-*Please* only point this at infrastructure associated with a ctf or that you own or have permission to interact with.
-
-*Please* use this with caution as there is a fine line between monitoring and spamming the server to the detriment of all involved.
-
-The default interval between tcp opens is 60 seconds.
-
-As such whilst you can change the interval there is a minimum of 10 seconds hardcoded.
-
-This command optionally makes use of a discord webhook which you can specify in `~/.config/rctf` with the key `"monitorwebhook"`. See the config section of this readme for more details.
-
-https://github.com/rerrorctf/rctf/blob/main/commands/monitor.go
 
 ### cheatsheet
 

@@ -14,6 +14,5 @@ var (
 	IdaInstallPath    = "/opt/ida"
 	IdaProjectPath    = FolderName + "/ida"
 	PwnScriptName     = "go.py"
-	MonitorWebhook    = ""
 	Verbose           = false
 )

@@ -56,10 +56,6 @@ func parseUserConfig() {
 	if len(userConfig.PwnScriptName) > 0 {
 		config.PwnScriptName = userConfig.PwnScriptName
 	}
-
-	if len(userConfig.MonitorWebhook) > 0 {
-		config.MonitorWebhook = userConfig.MonitorWebhook
-	}
 }
 
 func main() {
@@ -78,7 +74,6 @@ func main() {
 		fmt.Fprintf(os.Stderr, "  🐋 "+theme.ColorBlue+"docker"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  🦖 "+theme.ColorBlue+"ghidra"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  💃 "+theme.ColorBlue+"ida"+theme.ColorReset+"\n")
-		fmt.Fprintf(os.Stderr, "  📡 "+theme.ColorBlue+"monitor"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  ✅ "+theme.ColorBlue+"check"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  📞 "+theme.ColorBlue+"syscall"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  📝 "+theme.ColorBlue+"writeup"+theme.ColorReset+"\n")
@@ -115,8 +110,6 @@ func main() {
 	case "ida":
 		util.EnsureSkeleton()
 		commands.Ida(flag.Args()[1:])
-	case "monitor":
-		commands.Monitor(flag.Args()[1:])
 	case "check":
 		commands.Check(flag.Args()[1:])
 	case "syscall":
