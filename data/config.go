@@ -6,5 +6,4 @@ type Config struct {
 	IdaInstallPath    string `json:"idainstallpath"`
 	IdaProjectPath    string `json:"idaprojectpath"`
 	PwnScriptName     string `json:"pwnscriptname"`
-	MonitorWebhook    string `json:"monitorwebhook"`
 }
