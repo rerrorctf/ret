@@ -56,6 +56,10 @@ func parseUserConfig() {
 	if len(userConfig.PwnScriptName) > 0 {
 		config.PwnScriptName = userConfig.PwnScriptName
 	}
+
+	if len(userConfig.FlagFormat) > 0 {
+		config.FlagFormat = userConfig.FlagFormat
+	}
 }
 
 func main() {

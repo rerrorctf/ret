@@ -54,7 +54,7 @@ func Wizard(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"wizard"+theme.ColorGray+" [flag-format]"+theme.ColorReset+"\n")
+			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"wizard"+theme.ColorReset+"\n")
 			fmt.Fprintf(os.Stderr, "  🧙 do "+theme.ColorPurple+"m"+theme.ColorBlue+"a"+theme.ColorGreen+"g"+theme.ColorYellow+"i"+theme.ColorRed+"c"+theme.ColorReset+" with rctf\n")
 			os.Exit(0)
 		}
@@ -77,11 +77,7 @@ func Wizard(args []string) {
 		fmt.Printf("🧙💬 "+theme.ColorGreen+"I see that you don't have a "+theme.ColorCyan+"\"%s\""+theme.ColorGreen+" file."+theme.ColorReset+"\n", config.TaskName)
 		fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me create that for you!" + theme.ColorReset + "\n")
 
-		if len(args) > 0 {
-			Init(args)
-		} else {
-			Init([]string{"flag{.+}"})
-		}
+		Init([]string{})
 	}
 
 	unzippedAny := false

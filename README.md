@@ -60,6 +60,10 @@ The data in the config must be in the json format. You can include zero or more 
   - This is what you would like the script created by `rctf pwn` to be called.
   - The default is `go.py` and is chosen to be short and not clash with any common imports as per https://github.com/rerrorctf/rctf/blob/main/config/config.go#L16
 
+- `flagformat`
+  - This is the regular expression that matches the flag format for the ctf you are currently playing.
+  - The default is `flag{.+}`.
+
 Here is an example config:
 
 ```
@@ -87,14 +91,12 @@ $ rctf command help
 ### init
 
 ```
-usage: rctf init [flag-format]
+usage: rctf init
 ```
 
 Initializes the current working directory for a task.
 
-This information is stored in the `rctf-tasks.json` file in the hidden `.rctf` directory.
-
-Note that the flag format is treated as a regular expression. For example `flag{.+}` would be suitable for a ctf with flags like `flag{example}`.
+This creates the `rctf-tasks.json` file in the hidden `.rctf` directory.
 
 https://github.com/rerrorctf/rctf/blob/main/commands/init.go
 
@@ -245,10 +247,8 @@ https://github.com/rerrorctf/rctf/blob/main/commands/cheatsheet.go
 ### wizard
 
 ```
-usage: rctf wizard [flag-format]
+usage: rctf wizard
 ```
-
-Optionally takes a flag format which is passed to init. If none is supplied `flag{.+}` is supplied by default.
 
 https://github.com/rerrorctf/rctf/blob/main/commands/wizard.go
 

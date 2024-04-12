@@ -6,4 +6,5 @@ type Config struct {
 	IdaInstallPath    string `json:"idainstallpath"`
 	IdaProjectPath    string `json:"idaprojectpath"`
 	PwnScriptName     string `json:"pwnscriptname"`
+	FlagFormat        string `json:"flagformat"`
 }

@@ -35,11 +35,6 @@ func createTask(args []string) {
 
 	fmt.Printf("🚀 starting new task @ %v\n", task.Timestamp)
 
-	if len(args) > 0 {
-		fmt.Printf(theme.ColorGray+"task flag format: "+theme.ColorYellow+"%s"+theme.ColorReset+"\n", args[0])
-		task.FlagFormat = args[0]
-	}
-
 	writeTask(task)
 }
 
@@ -51,7 +46,7 @@ func Init(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"init"+theme.ColorGray+" [flag-format]"+theme.ColorReset+"\n")
+			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"init"+theme.ColorReset+"\n")
 			fmt.Fprintf(os.Stderr, "  🚀 initializes the cwd for a task with rctf\n")
 			os.Exit(0)
 		}
