@@ -28,7 +28,7 @@ func writeTask(task data.Task) {
 	}
 }
 
-func createTask(args []string) {
+func createTask() {
 	task := data.Task{
 		Timestamp: time.Now().UTC(),
 	}
@@ -52,5 +52,5 @@ func Init(args []string) {
 		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %s already exists\n", config.TaskName)
 	}
 
-	createTask(args)
+	createTask()
 }
