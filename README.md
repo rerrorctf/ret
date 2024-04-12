@@ -100,6 +100,18 @@ This creates the `rctf-tasks.json` file in the hidden `.rctf` directory.
 
 https://github.com/rerrorctf/rctf/blob/main/commands/init.go
 
+### flag
+
+```
+usage: rctf flag [format]
+```
+
+Prints the current flag format regex or updates it if an argument is supplied.
+
+This creates or rewrites the contents `~/.config/rctf`.
+
+https://github.com/rerrorctf/rctf/blob/main/commands/flag.go
+
 ### add
 
 ```

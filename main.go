@@ -72,6 +72,7 @@ func main() {
 
 		fmt.Fprintf(os.Stderr, theme.ColorGreen+"commands"+theme.ColorReset+":\n")
 		fmt.Fprintf(os.Stderr, "  🚀 "+theme.ColorBlue+"init"+theme.ColorReset+"\n")
+		fmt.Fprintf(os.Stderr, "  ⛳ "+theme.ColorBlue+"flag"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  👀 "+theme.ColorBlue+"status"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  📥 "+theme.ColorBlue+"add"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  🐚 "+theme.ColorBlue+"pwn"+theme.ColorReset+"\n")
@@ -99,6 +100,8 @@ func main() {
 	case "init":
 		util.EnsureSkeleton()
 		commands.Init(flag.Args()[1:])
+	case "flag":
+		commands.Flag(flag.Args()[1:])
 	case "add":
 		util.EnsureSkeleton()
 		commands.Add(flag.Args()[1:])
