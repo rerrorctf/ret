@@ -45,33 +45,22 @@ func Ida(args []string) {
 
 	idaArgs := make([]string, 0)
 
-	jsonData, err := os.ReadFile(config.TaskName)
+	jsonData, err := os.ReadFile(config.RctfFilesName)
 	if err == nil {
-		var task data.Task
+		fmt.Println(err)
+		os.Exit(1)
+	}
 
-		err = json.Unmarshal(jsonData, &task)
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
-		}
+	var files data.Files
 
-		jsonData, err = os.ReadFile(config.RctfFilesName)
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
-		}
+	err = json.Unmarshal(jsonData, &files)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 
-		var files data.Files
-
-		err = json.Unmarshal(jsonData, &files)
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
-		}
-
-		for _, file := range files.Files {
-			idaArgs = append(idaArgs, file.Filepath)
-		}
+	for _, file := range files.Files {
+		idaArgs = append(idaArgs, file.Filepath)
 	}
 
 	launchIda := exec.Command(config.IdaInstallPath+"/ida64", idaArgs...)

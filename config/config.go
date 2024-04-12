@@ -12,7 +12,6 @@ import (
 const (
 	UserConfig      = ".config/rctf"
 	FolderName      = ".rctf"
-	TaskName        = FolderName + "/rctf-task.json"
 	FilesFolderName = FolderName + "/files"
 	RctfFilesName   = FilesFolderName + "/rctf-files.json"
 )

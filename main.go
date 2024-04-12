@@ -20,7 +20,6 @@ func main() {
 		flag.PrintDefaults()
 
 		fmt.Fprintf(os.Stderr, theme.ColorGreen+"commands"+theme.ColorReset+":\n")
-		fmt.Fprintf(os.Stderr, "  🚀 "+theme.ColorBlue+"init"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  ⛳ "+theme.ColorBlue+"flag"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  👀 "+theme.ColorBlue+"status"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  📥 "+theme.ColorBlue+"add"+theme.ColorReset+"\n")
@@ -46,9 +45,6 @@ func main() {
 	config.ParseUserConfig()
 
 	switch flag.Arg(0) {
-	case "init":
-		util.EnsureSkeleton()
-		commands.Init(flag.Args()[1:])
 	case "flag":
 		commands.Flag(flag.Args()[1:])
 	case "add":

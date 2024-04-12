@@ -11,19 +11,7 @@ import (
 func GuessBinary() string {
 	defaultBinaryName := "task"
 
-	jsonData, err := os.ReadFile(config.TaskName)
-	if err != nil {
-		return defaultBinaryName
-	}
-
-	var task data.Task
-
-	err = json.Unmarshal(jsonData, &task)
-	if err != nil {
-		return defaultBinaryName
-	}
-
-	jsonData, err = os.ReadFile(config.RctfFilesName)
+	jsonData, err := os.ReadFile(config.RctfFilesName)
 	if err != nil {
 		return defaultBinaryName
 	}

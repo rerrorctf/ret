@@ -3,12 +3,10 @@ package commands
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"os"
 	"rctf/config"
 	"rctf/data"
 	"rctf/theme"
-	"time"
 )
 
 func Status(args []string) {
@@ -21,21 +19,7 @@ func Status(args []string) {
 		}
 	}
 
-	jsonData, err := os.ReadFile(config.TaskName)
-	if err == nil {
-		var task data.Task
-
-		err = json.Unmarshal(jsonData, &task)
-		if err != nil {
-			log.Fatalln("💥 "+theme.ColorRed+"error"+theme.ColorReset+" unmarshalling json:", err)
-		}
-
-		if config.Verbose {
-			fmt.Printf(theme.ColorPurple+"%v(%v)"+theme.ColorReset+"\n", task.Timestamp, time.Now().UTC().Sub(task.Timestamp))
-		}
-	}
-
-	jsonData, err = os.ReadFile(config.RctfFilesName)
+	jsonData, err := os.ReadFile(config.RctfFilesName)
 	if err != nil {
 		os.Exit(1)
 	}

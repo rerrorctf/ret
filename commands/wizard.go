@@ -71,15 +71,6 @@ func Wizard(args []string) {
 		util.EnsureSkeleton()
 	}
 
-	// init task
-	_, err = os.Stat(config.TaskName)
-	if os.IsNotExist(err) {
-		fmt.Printf("🧙💬 "+theme.ColorGreen+"I see that you don't have a "+theme.ColorCyan+"\"%s\""+theme.ColorGreen+" file."+theme.ColorReset+"\n", config.TaskName)
-		fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me create that for you!" + theme.ColorReset + "\n")
-
-		Init([]string{})
-	}
-
 	unzippedAny := false
 
 	// unzip

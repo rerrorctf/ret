@@ -88,18 +88,6 @@ You can get help for a command by giving `help` as an argument to the command:
 $ rctf command help
 ```
 
-### init
-
-```
-usage: rctf init
-```
-
-Initializes the current working directory for a task.
-
-This creates the `rctf-tasks.json` file in the hidden `.rctf` directory.
-
-https://github.com/rerrorctf/rctf/blob/main/commands/init.go
-
 ### flag
 
 ```
@@ -266,7 +254,7 @@ https://github.com/rerrorctf/rctf/blob/main/commands/wizard.go
 
 ## The .rctf Directory Structure
 
-Certain commands, such as `init`, `add` and `status` will use a hidden directory structure.
+Certain commands, such as `add` and `status` will use a hidden directory structure.
 
 This is technically configurable via https://github.com/rerrorctf/rctf/blob/main/config/config.go#L5 but this is not exposed to the user config. In other words you can change this be changing the source code and building your own version if you wish. If there is a strong desire to change this I would consider adding it to the user config.
 
