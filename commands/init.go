@@ -39,10 +39,6 @@ func createTask(args []string) {
 }
 
 func Init(args []string) {
-	if config.Verbose {
-		fmt.Println("Init:", args)
-	}
-
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
