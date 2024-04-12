@@ -100,6 +100,14 @@ This creates or rewrites the contents `~/.config/rctf`.
 
 https://github.com/rerrorctf/rctf/blob/main/commands/flag.go
 
+### wizard
+
+```
+usage: rctf wizard
+```
+
+https://github.com/rerrorctf/rctf/blob/main/commands/wizard.go
+
 ### add
 
 ```
@@ -142,16 +150,6 @@ Creates a pwntools script and Dockerfile from a template.
 
 https://github.com/rerrorctf/rctf/blob/main/commands/pwn.go
 
-### docker
-
-```
-usage: rctf docker [ip] [port]
-```
-
-Creates a Dockerfile and compose.yml from a template.
-
-https://github.com/rerrorctf/rctf/blob/main/commands/docker.go
-
 ### ghidra
 
 ```
@@ -185,6 +183,16 @@ Opens ida.
 Make sure ida is installed (or symlinked) at `/opt/ida` or use the config file to adjust the default ida installation location.
 
 https://github.com/rerrorctf/rctf/blob/main/commands/ida.go
+
+### docker
+
+```
+usage: rctf docker [ip] [port]
+```
+
+Creates a Dockerfile and compose.yml from a template.
+
+https://github.com/rerrorctf/rctf/blob/main/commands/docker.go
 
 ### syscall
 
@@ -243,14 +251,6 @@ usage: rctf cheatsheet
 Prints a list of cheatsheets for quick reference.
 
 https://github.com/rerrorctf/rctf/blob/main/commands/cheatsheet.go
-
-### wizard
-
-```
-usage: rctf wizard
-```
-
-https://github.com/rerrorctf/rctf/blob/main/commands/wizard.go
 
 ## The .rctf Directory Structure
 
