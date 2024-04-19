@@ -91,6 +91,9 @@ func Wizard(args []string) {
 		interestingFiles = findInterestingFiles()
 	}
 
+	// current flag format reminder
+	fmt.Printf("🧙💬 "+theme.ColorGreen+"The current flag format is "+theme.ColorPurple+"%s\n"+theme.ColorReset, config.FlagFormat)
+
 	// add files
 	if len(interestingFiles) > 0 {
 		if len(interestingFiles) > 1 {
