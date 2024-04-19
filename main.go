@@ -30,6 +30,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "  🐋 "+theme.ColorBlue+"docker"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  ✅ "+theme.ColorBlue+"check"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  📞 "+theme.ColorBlue+"syscall"+theme.ColorReset+"\n")
+		fmt.Fprintf(os.Stderr, "  🤝 "+theme.ColorBlue+"abi"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  📝 "+theme.ColorBlue+"writeup"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  📚 "+theme.ColorBlue+"cheatsheet"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "\n🚩 https://github.com/rerrorctf/rctf 🚩\n")
@@ -66,6 +67,8 @@ func main() {
 		commands.Check(flag.Args()[1:])
 	case "syscall":
 		commands.Syscall(flag.Args()[1:])
+	case "abi":
+		commands.Abi(flag.Args()[1:])
 	case "writeup":
 		commands.Writeup(flag.Args()[1:])
 	case "cheatsheet":
