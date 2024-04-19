@@ -2,6 +2,7 @@ package commands
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"rctf/theme"
 )
@@ -27,7 +28,7 @@ func showLinuxAbix86() {
 }
 
 func showLinuxAbix64() {
-	fmt.Println(theme.ColorPurple + "\nlinux 🐧 " + theme.ColorPurple + "x64" + theme.ColorReset)
+	fmt.Println(theme.ColorPurple + "linux 🐧 " + theme.ColorPurple + "x64" + theme.ColorReset)
 
 	fmt.Println(theme.ColorYellow + "\nscratch" + theme.ColorReset + "/" + theme.ColorYellow + "caller-save" + theme.ColorReset + "/" + theme.ColorYellow + "volatile" + theme.ColorReset + ":")
 
@@ -49,7 +50,7 @@ func showLinuxAbix64() {
 }
 
 func showWindowsAbix86() {
-	fmt.Println(theme.ColorBlue + "\nwindows 🪟 " + theme.ColorBlue + "x86" + theme.ColorReset)
+	fmt.Println(theme.ColorBlue + "windows 🪟 " + theme.ColorBlue + "x86" + theme.ColorReset)
 
 	fmt.Println(theme.ColorYellow + "\nscratch" + theme.ColorReset + "/" + theme.ColorYellow + "caller-save" + theme.ColorReset + "/" + theme.ColorYellow + "volatile" + theme.ColorReset + ":")
 
@@ -67,7 +68,7 @@ func showWindowsAbix86() {
 }
 
 func showWindowsAbix64() {
-	fmt.Println(theme.ColorBlue + "\nwindows 🪟 " + theme.ColorBlue + "x64" + theme.ColorReset)
+	fmt.Println(theme.ColorBlue + "windows 🪟 " + theme.ColorBlue + "x64" + theme.ColorReset)
 
 	fmt.Println(theme.ColorYellow + "\nscratch" + theme.ColorReset + "/" + theme.ColorYellow + "caller-save" + theme.ColorReset + "/" + theme.ColorYellow + "volatile" + theme.ColorReset + ":")
 
@@ -82,23 +83,60 @@ func showWindowsAbix64() {
 	fmt.Println(theme.ColorCyan + "  RCX/ZMM0 RDX/ZMM1 R8/ZMM2 R9/ZMM3 STACK => RAX XMM0 YMM0 ZMM0" + theme.ColorReset)
 }
 
+func abiHelp() {
+	fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"abi"+theme.ColorReset+" [(x86/32)/(x64/64)]"+theme.ColorReset+" [linux/windows]\n")
+	fmt.Fprintf(os.Stderr, "  🤝 view abi details with rctf\n")
+}
+
 func Abi(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"abi"+theme.ColorReset+"\n")
-			fmt.Fprintf(os.Stderr, "  🤝 view abi details with rctf\n")
-			os.Exit(0)
+			abiHelp()
+			os.Exit(1)
 		}
 	}
 
-	showLinuxAbix86()
+	if len(args) < 2 {
+		abiHelp()
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v missing args\n", 2-len(args))
+		os.Exit(1)
+	}
 
-	showLinuxAbix64()
-
-	showWindowsAbix86()
-
-	showWindowsAbix64()
+	switch args[0] {
+	case "x86":
+		{
+			if args[1] == "linux" {
+				showLinuxAbix86()
+			} else {
+				showWindowsAbix86()
+			}
+		}
+	case "32":
+		{
+			if args[1] == "linux" {
+				showLinuxAbix86()
+			} else {
+				showWindowsAbix86()
+			}
+		}
+	case "x64":
+		{
+			if args[1] == "linux" {
+				showLinuxAbix64()
+			} else {
+				showWindowsAbix64()
+			}
+		}
+	case "64":
+		{
+			if args[1] == "linux" {
+				showLinuxAbix64()
+			} else {
+				showWindowsAbix64()
+			}
+		}
+	}
 
 	fmt.Println("\n🔗 " + theme.ColorCyan + "https://www.agner.org/optimize/calling_conventions.pdf" + theme.ColorReset)
 }
