@@ -1,8 +1,6 @@
 package commands
 
 import (
-	"crypto/md5"
-	"crypto/sha1"
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
@@ -14,7 +12,6 @@ import (
 	"rctf/data"
 	"rctf/theme"
 	"rctf/util"
-	"time"
 )
 
 func filesAlreadyExists() bool {
@@ -87,14 +84,6 @@ func addFile(srcPath string) {
 		return
 	}
 
-	md5Hash := md5.New()
-	md5Hash.Write(content)
-	md5HashString := hex.EncodeToString(md5Hash.Sum(nil))
-
-	sha1Hash := sha1.New()
-	sha1Hash.Write(content)
-	sha1HashString := hex.EncodeToString(sha1Hash.Sum(nil))
-
 	sha256Hash := sha256.New()
 	sha256Hash.Write(content)
 	sha256HashString := hex.EncodeToString(sha256Hash.Sum(nil))
@@ -103,14 +92,11 @@ func addFile(srcPath string) {
 	dstPath := dirPath + "/" + fileName
 
 	file := data.File{
-		Filename:  fileName,
-		Filepath:  dstPath,
-		Size:      len(content),
-		Type:      fileOutput,
-		MD5:       md5HashString,
-		SHA1:      sha1HashString,
-		SHA256:    sha256HashString,
-		Timestamp: time.Now().UTC(),
+		Filename: fileName,
+		Filepath: dstPath,
+		Size:     len(content),
+		Type:     fileOutput,
+		SHA256:   sha256HashString,
 	}
 
 	if _, err := os.Stat(dirPath); !os.IsNotExist(err) {
@@ -131,7 +117,7 @@ func addFile(srcPath string) {
 		return
 	}
 
-	fmt.Printf("📥 adding \"%s\" with sha256 \"%s\"\n", srcPath, sha256HashString)
+	fmt.Printf("📥 adding \"%s\" %s\n", srcPath, sha256HashString)
 
 	files.Files = append(files.Files, file)
 

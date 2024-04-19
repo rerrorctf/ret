@@ -34,10 +34,6 @@ func Status(args []string) {
 			fmt.Printf(theme.ColorGreen+" %s ", file.Filename)
 			fmt.Printf(theme.ColorReset+"%s\n", file.SHA256)
 
-			if len(file.Comment) > 0 {
-				fmt.Printf("  comment: %s\n", file.Comment)
-			}
-
 			fmt.Printf(theme.ColorGray+"  type:   "+theme.ColorReset+"%s\n", file.Type)
 		}
 	}
