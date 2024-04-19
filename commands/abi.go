@@ -48,10 +48,38 @@ func showLinuxAbix64() {
 	fmt.Println(theme.ColorRed + "  RAX RDI RSI RDX R10 R8 R9 => RAX" + theme.ColorReset)
 }
 
-func showWindowsAbi() {
+func showWindowsAbix86() {
 	fmt.Println(theme.ColorBlue + "\nwindows 🪟 " + theme.ColorBlue + "x86" + theme.ColorReset)
 
+	fmt.Println(theme.ColorYellow + "\nscratch" + theme.ColorReset + "/" + theme.ColorYellow + "caller-save" + theme.ColorReset + "/" + theme.ColorYellow + "volatile" + theme.ColorReset + ":")
+
+	fmt.Println(theme.ColorYellow + "  EAX ECX EDX XMM0-XMM7 YMM0-YMM7 ZMM0-ZMM7" + theme.ColorReset)
+
+	fmt.Println(theme.ColorGreen + "\ncallee-save" + theme.ColorReset + "/" + theme.ColorGreen + "non-volatile" + theme.ColorReset + ":")
+
+	fmt.Println(theme.ColorGreen + "  EBX ESI EDI EBP" + theme.ColorReset)
+
+	fmt.Println(theme.ColorCyan + "\ncall" + theme.ColorReset + ":")
+
+	fmt.Println(theme.ColorCyan + "  STACK => EAX EDX XMM0 YMM0 ZMM0" + theme.ColorReset)
+
+	fmt.Println(theme.ColorGray + "  for fastcall the first two parameters use ECX EDX" + theme.ColorReset)
+}
+
+func showWindowsAbix64() {
 	fmt.Println(theme.ColorBlue + "\nwindows 🪟 " + theme.ColorBlue + "x64" + theme.ColorReset)
+
+	fmt.Println(theme.ColorYellow + "\nscratch" + theme.ColorReset + "/" + theme.ColorYellow + "caller-save" + theme.ColorReset + "/" + theme.ColorYellow + "volatile" + theme.ColorReset + ":")
+
+	fmt.Println(theme.ColorYellow + "  RAX RCX RDX R8-R11 XMM0-XMM5 YMM0-YMM15 ZMM0-ZMM31" + theme.ColorReset)
+
+	fmt.Println(theme.ColorGreen + "\ncallee-save" + theme.ColorReset + "/" + theme.ColorGreen + "non-volatile" + theme.ColorReset + ":")
+
+	fmt.Println(theme.ColorGreen + "  RBX RSI RDI RBP R12-R15 XMM6-XMM15" + theme.ColorReset)
+
+	fmt.Println(theme.ColorCyan + "\ncall" + theme.ColorReset + ":")
+
+	fmt.Println(theme.ColorCyan + "  RCX/ZMM0 RDX/ZMM1 R8/ZMM2 R9/ZMM3 STACK => RAX XMM0 YMM0 ZMM0" + theme.ColorReset)
 }
 
 func Abi(args []string) {
@@ -68,7 +96,9 @@ func Abi(args []string) {
 
 	showLinuxAbix64()
 
-	showWindowsAbi()
+	showWindowsAbix86()
+
+	showWindowsAbix64()
 
 	fmt.Println("\n🔗 " + theme.ColorCyan + "https://www.agner.org/optimize/calling_conventions.pdf" + theme.ColorReset)
 }
