@@ -22,7 +22,6 @@ var (
 	IdaInstallPath    = "/opt/ida"
 	IdaProjectPath    = FolderName + "/ida"
 	PwnScriptName     = "go.py"
-	Verbose           = false
 	FlagFormat        = "flag{.+}"
 )
 

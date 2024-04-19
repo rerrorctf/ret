@@ -30,25 +30,12 @@ func Status(args []string) {
 	if err == nil {
 		for idx, file := range files.Files {
 
-			if config.Verbose {
-				fmt.Printf(theme.ColorGray+"["+theme.ColorBlue+"%v"+theme.ColorGray+"]"+theme.ColorReset, idx)
-				fmt.Printf(theme.ColorGreen+" %s\n", file.Filename)
-
-				fmt.Printf(theme.ColorGray+"  md5:    "+theme.ColorReset+"%s\n", file.MD5)
-				fmt.Printf(theme.ColorGray+"  sha1:   "+theme.ColorReset+"%s\n", file.SHA1)
-				fmt.Printf(theme.ColorGray+"  sha256: "+theme.ColorReset+"%s\n", file.SHA256)
-			} else {
-				fmt.Printf(theme.ColorGray+"["+theme.ColorBlue+"%v"+theme.ColorGray+"]"+theme.ColorReset, idx)
-				fmt.Printf(theme.ColorGreen+" %s ", file.Filename)
-				fmt.Printf(theme.ColorReset+"%s\n", file.SHA256)
-			}
+			fmt.Printf(theme.ColorGray+"["+theme.ColorBlue+"%v"+theme.ColorGray+"]"+theme.ColorReset, idx)
+			fmt.Printf(theme.ColorGreen+" %s ", file.Filename)
+			fmt.Printf(theme.ColorReset+"%s\n", file.SHA256)
 
 			if len(file.Comment) > 0 {
 				fmt.Printf("  comment: %s\n", file.Comment)
-			}
-
-			if config.Verbose {
-				fmt.Printf(theme.ColorPurple+"  %v"+theme.ColorReset+"\n", file.Timestamp)
 			}
 
 			fmt.Printf(theme.ColorGray+"  type:   "+theme.ColorReset+"%s\n", file.Type)

@@ -8,9 +8,6 @@ import (
 
 func EnsureDirectory(dirPath string) {
 	if _, err := os.Stat(dirPath); os.IsNotExist(err) {
-		if config.Verbose {
-			fmt.Println("mkdir", dirPath)
-		}
 		err := os.MkdirAll(dirPath, 0755)
 		if err != nil {
 			fmt.Println("error creating directory:", err)

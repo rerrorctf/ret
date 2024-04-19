@@ -12,12 +12,8 @@ import (
 )
 
 func main() {
-	flag.BoolVar(&config.Verbose, "v", false, "enable verbose mode")
-
 	flag.Usage = func() {
-		fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"command"+theme.ColorGray+" [arg1 arg2...]\n"+theme.ColorReset)
-
-		flag.PrintDefaults()
+		fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"command"+theme.ColorGray+" [arg1 arg2...]\n\n"+theme.ColorReset)
 
 		fmt.Fprintf(os.Stderr, theme.ColorGreen+"commands"+theme.ColorReset+":\n")
 		fmt.Fprintf(os.Stderr, "  ⛳ "+theme.ColorBlue+"flag"+theme.ColorReset+"\n")
