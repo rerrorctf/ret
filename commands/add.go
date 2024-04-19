@@ -74,8 +74,6 @@ func writeFiles(files *data.Files) {
 }
 
 func addFile(srcPath string) {
-	fmt.Printf("📥 adding \"%s\"...\n", srcPath)
-
 	files := data.Files{}
 	parseFiles(&files)
 
@@ -132,6 +130,8 @@ func addFile(srcPath string) {
 		fmt.Println("error copying file:", dstPath)
 		return
 	}
+
+	fmt.Printf("📥 adding \"%s\" with sha256 \"%s\"\n", srcPath, sha256HashString)
 
 	files.Files = append(files.Files, file)
 
