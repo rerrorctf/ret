@@ -7,10 +7,17 @@ import (
 	"rctf/config"
 	"rctf/theme"
 	"rctf/util"
+	"strings"
 )
 
 func makeScript(ip string, port int) {
 	binary := util.GuessBinary()
+
+	if strings.Compare(binary, util.DefaultBinaryName) != 0 {
+		if !util.BinaryIsExecutable(binary) {
+			fmt.Printf("⚠️ "+theme.ColorGray+" \""+theme.ColorReset+"%v"+theme.ColorGray+"\""+theme.ColorRed+" is not executable"+theme.ColorReset+"\n", binary)
+		}
+	}
 
 	script := fmt.Sprintf(
 		"#!/usr/bin/env python3\n\n"+
