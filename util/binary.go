@@ -8,19 +8,22 @@ import (
 	"strings"
 )
 
+const (
+	DefaultBinaryName = "task"
+)
+
 func GuessBinary() string {
-	defaultBinaryName := "task"
 
 	jsonData, err := os.ReadFile(config.RctfFilesName)
 	if err != nil {
-		return defaultBinaryName
+		return DefaultBinaryName
 	}
 
 	var files data.Files
 
 	err = json.Unmarshal(jsonData, &files)
 	if err != nil {
-		return defaultBinaryName
+		return DefaultBinaryName
 	}
 
 	for _, file := range files.Files {
@@ -33,7 +36,8 @@ func GuessBinary() string {
 		}
 	}
 
-	return defaultBinaryName
+	return DefaultBinaryName
+}
 
 func BinaryIsExecutable(file string) bool {
 	stat, err := os.Stat(file)
