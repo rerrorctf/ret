@@ -2,7 +2,6 @@ package commands
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"ret/theme"
 )
@@ -97,16 +96,20 @@ func Abi(args []string) {
 		}
 	}
 
-	if len(args) < 2 {
-		abiHelp()
-		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v missing args\n", 2-len(args))
-		os.Exit(1)
+	arch := "x64"
+	os := "linux"
+
+	if len(args) > 1 {
+		arch = args[0]
+		os = args[1]
+	} else if len(args) > 0 {
+		arch = args[0]
 	}
 
-	switch args[0] {
+	switch arch {
 	case "x86":
 		{
-			if args[1] == "linux" {
+			if os == "linux" {
 				showLinuxAbix86()
 			} else {
 				showWindowsAbix86()
@@ -114,7 +117,7 @@ func Abi(args []string) {
 		}
 	case "32":
 		{
-			if args[1] == "linux" {
+			if os == "linux" {
 				showLinuxAbix86()
 			} else {
 				showWindowsAbix86()
@@ -122,7 +125,7 @@ func Abi(args []string) {
 		}
 	case "x64":
 		{
-			if args[1] == "linux" {
+			if os == "linux" {
 				showLinuxAbix64()
 			} else {
 				showWindowsAbix64()
@@ -130,7 +133,7 @@ func Abi(args []string) {
 		}
 	case "64":
 		{
-			if args[1] == "linux" {
+			if os == "linux" {
 				showLinuxAbix64()
 			} else {
 				showWindowsAbix64()
