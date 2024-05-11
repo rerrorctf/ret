@@ -2,6 +2,16 @@
 
 ## CTF Task Automation Tool
 
+## Example Workflow for Typical pwn/rev Tasks
+
+```
+$ mkdir task
+$ cd task
+$ cp ~/Downloads/task.zip .
+$ rctf wizard
+$ rctf ghidra
+```
+
 ## Get The Latest Build
 
 You can simply get the latest pre-built binary from https://github.com/rerrorctf/rctf/releases.
@@ -34,7 +44,7 @@ This will produce the `rctf` binary. This static binary / single file is all you
 
 ## ~/.config/rctf
 
-`rctf` will parse `~/.config.rctf` *if* it exists. It will not make this file for you.
+`rctf` will parse `~/.config.rctf`.
 
 While I aim to keep this readme in sync; for the current structure of the config file please consult https://github.com/rerrorctf/rctf/blob/main/data/config.go#L3.
 
@@ -64,6 +74,14 @@ The data in the config must be in the json format. You can include zero or more 
   - This is the regular expression that matches the flag format for the ctf you are currently playing.
   - The default is `flag{.+}`.
 
+- `wizardprecommand`
+  - This will be executed by the `wizard` before they do any of their own magic.
+  - It is passed to `bash -c`
+
+- `wizardpostcommand`
+  - This will be executed by the `wizard` after they have worked their own magic.
+  - It is passed to `bash -c`
+
 Here is an example config:
 
 ```
@@ -71,6 +89,7 @@ Here is an example config:
   "ghidrainstallpath": "/opt/software/ghidra",
   "ghidraprojectpath": "ghidra-project",
   "pwnscriptname": "exploit.py"
+  "wizardpostcommand": "code ."
 }
 ```
 
@@ -105,6 +124,17 @@ https://github.com/rerrorctf/rctf/blob/main/commands/flag.go
 ```
 usage: rctf wizard
 ```
+
+Wizard is here to help! They simply run a few common commands for a typical workflow. The workflow is quite well suited for typical rev and pwn tasks. Sometimes the wizard makes mistakes!
+
+1) Executes the `wizardprecommand` from ~/.config/rctf.
+2) Searches for interesting files within the current directory.
+3) Ensures that the hidden .rctf directory skeleton exists.
+4) Unzips any .zip files that it can.
+5) Adds any interesting files this includes those found by unzipping and ignores .zip files.
+6) Shows `status`.
+7) If the wizard thinks there is an elf file it will invoke `pwn` for you.
+8) Executes the `wizardpostcommand` from ~/.config/rctf.
 
 https://github.com/rerrorctf/rctf/blob/main/commands/wizard.go
 
@@ -146,25 +176,27 @@ https://github.com/rerrorctf/rctf/blob/main/commands/status.go
 usage: rctf pwn [ip] [port]
 ```
 
-Creates a pwntools script and Dockerfile from a template.
+Creates a pwntools script from a template.
 
 https://github.com/rerrorctf/rctf/blob/main/commands/pwn.go
 
 ### ghidra
 
 ```
-usage: rctf ghidra [file file]
+usage: rctf ghidra [file1 file2...]
 ```
 
 Creates a ghidra project in the hidden directory `.rctf/ghidra`.
 
 Optionally adds one or more new files.
 
-Imports and analyzes all added files.
+Imports and analyzes all added files using headless mode.
 
-Opens ghidra.
+Opens the ghidra project after the analysis has completed.
 
 Make sure ghidra is installed (or symlinked) at `/opt/ghidra` or use the config file to adjust the default ghidra installation location.
+
+From a workflow point of view I tend to run this after running the wizard in the background. This means that when i'm ready to use ghidra everything is already fully analyzed.
 
 https://github.com/rerrorctf/rctf/blob/main/commands/ghidra.go
 
@@ -182,17 +214,9 @@ Opens ida.
 
 Make sure ida is installed (or symlinked) at `/opt/ida` or use the config file to adjust the default ida installation location.
 
+Note: this command doesn't work well and needs an ida user's love and care.
+
 https://github.com/rerrorctf/rctf/blob/main/commands/ida.go
-
-### docker
-
-```
-usage: rctf docker [ip] [port]
-```
-
-Creates a Dockerfile and compose.yml from a template.
-
-https://github.com/rerrorctf/rctf/blob/main/commands/docker.go
 
 ### syscall
 
@@ -261,9 +285,6 @@ This is technically configurable via https://github.com/rerrorctf/rctf/blob/main
 You can delete this directory if you like or make changes as you see fit but just be aware that the tool makes certain assumptions about the contents.
 
 This directory is structured as follows:
-
-- `.rctf/rctf-task.json`
- - This file contains information about the task being worked on in this directory
 
 - `.rctf/files`
   - This directory contains files and metadata about files added to the task by the `add` command
