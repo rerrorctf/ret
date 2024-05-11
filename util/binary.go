@@ -34,4 +34,12 @@ func GuessBinary() string {
 	}
 
 	return defaultBinaryName
+
+func BinaryIsExecutable(file string) bool {
+	stat, err := os.Stat(file)
+	if err != nil {
+		return false
+	}
+
+	return stat.Mode().Perm()&0100 != 0
 }
