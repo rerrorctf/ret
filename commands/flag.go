@@ -20,15 +20,15 @@ func Flag(args []string) {
 			FlagHelp()
 		}
 	} else {
-		fmt.Printf("current flag format: %v\n", config.FlagFormat)
+		fmt.Printf(theme.ColorGray+"current flag format: "+theme.ColorReset+"%v"+theme.ColorReset+"\n", config.FlagFormat)
 		os.Exit(1)
 	}
 
-	fmt.Printf("old flag format: %v\n", config.FlagFormat)
+	fmt.Printf(theme.ColorGray+"old flag format: "+theme.ColorRed+"%v"+theme.ColorReset+"\n", config.FlagFormat)
 
 	config.FlagFormat = args[0]
 
 	config.WriteUserConfig()
 
-	fmt.Printf("new flag format: %v\n", config.FlagFormat)
+	fmt.Printf(theme.ColorGray+"new flag format: "+theme.ColorGreen+"%v"+theme.ColorReset+"\n", config.FlagFormat)
 }
