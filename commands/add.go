@@ -8,14 +8,14 @@ import (
 	"io"
 	"os"
 	"path/filepath"
-	"rctf/config"
-	"rctf/data"
-	"rctf/theme"
-	"rctf/util"
+	"ret/config"
+	"ret/data"
+	"ret/theme"
+	"ret/util"
 )
 
 func filesAlreadyExists() bool {
-	_, err := os.Stat(config.RctfFilesName)
+	_, err := os.Stat(config.RetFilesNames)
 	return !os.IsNotExist(err)
 }
 
@@ -42,9 +42,9 @@ func copyFile(srcPath string, dstPath string) error {
 
 func parseFiles(files *data.Files) {
 	if filesAlreadyExists() {
-		jsonData, err := os.ReadFile(config.RctfFilesName)
+		jsonData, err := os.ReadFile(config.RetFilesNames)
 		if err != nil {
-			fmt.Println("error reading:", config.RctfFilesName)
+			fmt.Println("error reading:", config.RetFilesNames)
 			os.Exit(1)
 		}
 
@@ -63,7 +63,7 @@ func writeFiles(files *data.Files) {
 		os.Exit(1)
 	}
 
-	err = os.WriteFile(config.RctfFilesName, jsonData, 0644)
+	err = os.WriteFile(config.RetFilesNames, jsonData, 0644)
 	if err != nil {
 		fmt.Println("error writing to file:", err)
 		os.Exit(1)
@@ -127,8 +127,8 @@ func addFile(srcPath string) {
 }
 
 func AddHelp() {
-	fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"add"+theme.ColorReset+" file "+theme.ColorGray+"[file file...]"+theme.ColorReset+"\n")
-	fmt.Fprintf(os.Stderr, "  📥 add one or more files to the current task with rctf\n")
+	fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"add"+theme.ColorReset+" file "+theme.ColorGray+"[file file...]"+theme.ColorReset+"\n")
+	fmt.Fprintf(os.Stderr, "  📥 add one or more files to the current task with ret\n")
 	os.Exit(0)
 }
 

@@ -3,13 +3,13 @@ package commands
 import (
 	"fmt"
 	"os"
-	"rctf/config"
-	"rctf/theme"
+	"ret/config"
+	"ret/theme"
 )
 
 func FlagHelp() {
-	fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"flag"+theme.ColorGray+" format"+theme.ColorReset+"\n")
-	fmt.Fprintf(os.Stderr, "  ⛳ set the current flag format regex with rctf\n")
+	fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"flag"+theme.ColorGray+" format"+theme.ColorReset+"\n")
+	fmt.Fprintf(os.Stderr, "  ⛳ set the current flag format regex with ret\n")
 	os.Exit(0)
 }
 

@@ -5,9 +5,9 @@ import (
 	"log"
 	"os"
 	"os/exec"
-	"rctf/config"
-	"rctf/theme"
-	"rctf/util"
+	"ret/config"
+	"ret/theme"
+	"ret/util"
 	"strings"
 )
 
@@ -74,8 +74,8 @@ func Wizard(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"wizard"+theme.ColorReset+"\n")
-			fmt.Fprintf(os.Stderr, "  🧙 do "+theme.ColorPurple+"m"+theme.ColorBlue+"a"+theme.ColorGreen+"g"+theme.ColorYellow+"i"+theme.ColorRed+"c"+theme.ColorReset+" with rctf\n")
+			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"wizard"+theme.ColorReset+"\n")
+			fmt.Fprintf(os.Stderr, "  🧙 do "+theme.ColorPurple+"m"+theme.ColorBlue+"a"+theme.ColorGreen+"g"+theme.ColorYellow+"i"+theme.ColorRed+"c"+theme.ColorReset+" with ret\n")
 			os.Exit(0)
 		}
 	}

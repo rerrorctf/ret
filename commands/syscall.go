@@ -5,13 +5,13 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"rctf/theme"
 	"regexp"
+	"ret/theme"
 )
 
 func syscallHelp() {
-	fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"syscall"+theme.ColorReset+" [(x86/32)/(x64/64)]"+theme.ColorReset+" [regex-pattern]\n")
-	fmt.Fprintf(os.Stderr, "  📞 check syscalls by regex with rctf\n")
+	fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"syscall"+theme.ColorReset+" [(x86/32)/(x64/64)]"+theme.ColorReset+" [regex-pattern]\n")
+	fmt.Fprintf(os.Stderr, "  📞 check syscalls by regex with ret\n")
 
 	fmt.Fprintf(os.Stderr, theme.ColorBlue+"\n  uses"+theme.ColorGray+": \n")
 	fmt.Fprintf(os.Stderr, theme.ColorGreen+"    x86"+theme.ColorGray+": /usr/include/x86_64-linux-gnu/asm/unistd_32.h"+theme.ColorReset+"\n")

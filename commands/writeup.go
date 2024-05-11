@@ -4,15 +4,15 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"rctf/theme"
+	"ret/theme"
 )
 
 func Writeup(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"writeup"+theme.ColorReset+"\n")
-			fmt.Fprintf(os.Stderr, "  📝 create a template for a task in a file called writeup.md with rctf\n")
+			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"writeup"+theme.ColorReset+"\n")
+			fmt.Fprintf(os.Stderr, "  📝 create a template for a task in a file called writeup.md with ret\n")
 			os.Exit(0)
 		}
 	}

@@ -5,8 +5,8 @@ import (
 	"os"
 	"os/exec"
 	"os/user"
-	"rctf/config"
-	"rctf/theme"
+	"ret/config"
+	"ret/theme"
 )
 
 func testCommand(command string, args ...string) bool {
@@ -28,8 +28,8 @@ func Check(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"check"+theme.ColorReset+"\n")
-			fmt.Fprintf(os.Stderr, "  ✅ check your env/setup readiness before a ctf with rctf\n")
+			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"check"+theme.ColorReset+"\n")
+			fmt.Fprintf(os.Stderr, "  ✅ check your env/setup readiness before a ctf with ret\n")
 
 			os.Exit(0)
 		}

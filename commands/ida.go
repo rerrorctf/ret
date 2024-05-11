@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
-	"rctf/config"
-	"rctf/data"
-	"rctf/theme"
+	"ret/config"
+	"ret/data"
+	"ret/theme"
 	"time"
 )
 
@@ -31,8 +31,8 @@ func Ida(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"ida"+theme.ColorGray+" [file file...]"+theme.ColorReset+"\n")
-			fmt.Fprintf(os.Stderr, "  💃 opens all added files then opens ida with rctf\n")
+			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"ida"+theme.ColorGray+" [file file...]"+theme.ColorReset+"\n")
+			fmt.Fprintf(os.Stderr, "  💃 opens all added files then opens ida with ret\n")
 			os.Exit(0)
 		}
 	}
@@ -45,7 +45,7 @@ func Ida(args []string) {
 
 	idaArgs := make([]string, 0)
 
-	jsonData, err := os.ReadFile(config.RctfFilesName)
+	jsonData, err := os.ReadFile(config.RetFilesNames)
 	if err == nil {
 		fmt.Println(err)
 		os.Exit(1)

@@ -3,8 +3,8 @@ package util
 import (
 	"encoding/json"
 	"os"
-	"rctf/config"
-	"rctf/data"
+	"ret/config"
+	"ret/data"
 	"strings"
 )
 
@@ -14,7 +14,7 @@ const (
 
 func GuessBinary() string {
 
-	jsonData, err := os.ReadFile(config.RctfFilesName)
+	jsonData, err := os.ReadFile(config.RetFilesNames)
 	if err != nil {
 		return DefaultBinaryName
 	}

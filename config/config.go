@@ -6,14 +6,14 @@ import (
 	"os"
 	"os/user"
 	"path/filepath"
-	"rctf/data"
+	"ret/data"
 )
 
 const (
-	UserConfig      = ".config/rctf"
-	FolderName      = ".rctf"
+	UserConfig      = ".config/ret"
+	FolderName      = ".ret"
 	FilesFolderName = FolderName + "/files"
-	RctfFilesName   = FilesFolderName + "/rctf-files.json"
+	RetFilesNames   = FilesFolderName + "/ret-files.json"
 )
 
 var (

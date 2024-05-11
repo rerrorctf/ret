@@ -3,7 +3,7 @@ package util
 import (
 	"fmt"
 	"os"
-	"rctf/config"
+	"ret/config"
 )
 
 func EnsureDirectory(dirPath string) {

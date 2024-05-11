@@ -3,8 +3,8 @@ package util
 import (
 	"fmt"
 	"os/exec"
-	"rctf/config"
-	"rctf/theme"
+	"ret/config"
+	"ret/theme"
 )
 
 func grep2Win(path string) {

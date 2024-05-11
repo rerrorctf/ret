@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"rctf/config"
-	"rctf/theme"
-	"rctf/util"
+	"ret/config"
+	"ret/theme"
+	"ret/util"
 	"strings"
 )
 
@@ -53,8 +53,8 @@ func Pwn(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"pwn"+theme.ColorGray+" [ip] [port]"+theme.ColorReset+"\n")
-			fmt.Fprintf(os.Stderr, "  🐚 create a pwntools script template with rctf\n")
+			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"pwn"+theme.ColorGray+" [ip] [port]"+theme.ColorReset+"\n")
+			fmt.Fprintf(os.Stderr, "  🐚 create a pwntools script template with ret\n")
 			os.Exit(0)
 		}
 	}

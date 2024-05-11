@@ -5,8 +5,8 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
-	"rctf/config"
-	"rctf/theme"
+	"ret/config"
+	"ret/theme"
 	"time"
 )
 
@@ -30,8 +30,8 @@ func Ghidra(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"ghidra"+theme.ColorGray+" [file file...]"+theme.ColorReset+"\n")
-			fmt.Fprintf(os.Stderr, "  🦖 ingests all added files then opens ghidra with rctf\n")
+			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"ghidra"+theme.ColorGray+" [file file...]"+theme.ColorReset+"\n")
+			fmt.Fprintf(os.Stderr, "  🦖 ingests all added files then opens ghidra with ret\n")
 			os.Exit(0)
 		}
 	}

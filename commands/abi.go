@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"rctf/theme"
+	"ret/theme"
 )
 
 func showLinuxAbix86() {
@@ -84,8 +84,8 @@ func showWindowsAbix64() {
 }
 
 func abiHelp() {
-	fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"abi"+theme.ColorReset+" [(x86/32)/(x64/64)]"+theme.ColorReset+" [linux/windows]\n")
-	fmt.Fprintf(os.Stderr, "  🤝 view abi details with rctf\n")
+	fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"abi"+theme.ColorReset+" [(x86/32)/(x64/64)]"+theme.ColorReset+" [linux/windows]\n")
+	fmt.Fprintf(os.Stderr, "  🤝 view abi details with ret\n")
 }
 
 func Abi(args []string) {

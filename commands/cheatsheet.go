@@ -3,15 +3,15 @@ package commands
 import (
 	"fmt"
 	"os"
-	"rctf/theme"
+	"ret/theme"
 )
 
 func Cheatsheet(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"cheatsheet"+theme.ColorReset+"\n")
-			fmt.Fprintf(os.Stderr, "  📚 prints a list of cheatsheet links with rctf\n")
+			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"cheatsheet"+theme.ColorReset+"\n")
+			fmt.Fprintf(os.Stderr, "  📚 prints a list of cheatsheet links with ret\n")
 			os.Exit(0)
 		}
 	}

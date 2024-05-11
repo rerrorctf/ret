@@ -4,22 +4,22 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"rctf/config"
-	"rctf/data"
-	"rctf/theme"
+	"ret/config"
+	"ret/data"
+	"ret/theme"
 )
 
 func Status(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": rctf "+theme.ColorBlue+"status"+theme.ColorReset+"\n")
-			fmt.Fprintf(os.Stderr, "  👀 displays the status for the current task with rctf\n")
+			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"status"+theme.ColorReset+"\n")
+			fmt.Fprintf(os.Stderr, "  👀 displays the status for the current task with ret\n")
 			os.Exit(0)
 		}
 	}
 
-	jsonData, err := os.ReadFile(config.RctfFilesName)
+	jsonData, err := os.ReadFile(config.RetFilesNames)
 	if err != nil {
 		os.Exit(1)
 	}
