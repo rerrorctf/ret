@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strings"
 
 	"ret/commands"
 	"ret/config"
@@ -41,38 +42,95 @@ func main() {
 
 	config.ParseUserConfig()
 
-	switch flag.Arg(0) {
-	case "flag":
+	command := flag.Arg(0)
+
+	// flag
+	if command[0] == 'f' {
 		commands.Flag(flag.Args()[1:])
-	case "add":
-		util.EnsureSkeleton()
-		commands.Add(flag.Args()[1:])
-	case "status":
-		commands.Status(flag.Args()[1:])
-	case "pwn":
+		return
+	}
+
+	// pwn
+	if command[0] == 'p' {
 		commands.Pwn(flag.Args()[1:])
-	case "docker":
+		return
+	}
+
+	// docker
+	if command[0] == 'd' {
 		commands.Docker(flag.Args()[1:])
-	case "ghidra":
+		return
+	}
+
+	// ghidra
+	if command[0] == 'g' {
 		util.EnsureSkeleton()
 		commands.Ghidra(flag.Args()[1:])
-	case "ida":
+		return
+	}
+
+	// ida
+	if command[0] == 'i' {
 		util.EnsureSkeleton()
 		commands.Ida(flag.Args()[1:])
-	case "check":
-		commands.Check(flag.Args()[1:])
-	case "syscall":
-		commands.Syscall(flag.Args()[1:])
-	case "abi":
-		commands.Abi(flag.Args()[1:])
-	case "writeup":
-		commands.Writeup(flag.Args()[1:])
-	case "cheatsheet":
-		commands.Cheatsheet(flag.Args()[1:])
-	case "wizard":
-		commands.Wizard(flag.Args()[1:])
-	default:
-		flag.Usage()
-		os.Exit(1)
+		return
 	}
+
+	// add, abi
+	if command[0] == 'a' && len(command) > 1 {
+		if command[1] == 'd' {
+			util.EnsureSkeleton()
+			commands.Add(flag.Args()[1:])
+			return
+		}
+
+		if command[1] == 'b' {
+			commands.Abi(flag.Args()[1:])
+			return
+		}
+	}
+
+	// status, syscall
+	if command[0] == 's' && len(command) > 1 {
+		if command[1] == 't' {
+			commands.Status(flag.Args()[1:])
+			return
+		}
+
+		if command[1] == 'y' {
+			commands.Syscall(flag.Args()[1:])
+			return
+		}
+	}
+
+	// check, cheatsheet
+	if command[0] == 'c' && len(command) > 3 {
+		if strings.Compare("chec", command[:4]) == 0 {
+			commands.Check(flag.Args()[1:])
+			return
+		}
+
+		if strings.Compare("chea", command[:4]) == 0 {
+			commands.Cheatsheet(flag.Args()[1:])
+			return
+		}
+	}
+
+	// writeup, wizard
+	if command[0] == 'w' && len(command) > 1 {
+		fmt.Println(command)
+		if command[1] == 'r' {
+			commands.Writeup(flag.Args()[1:])
+			return
+		}
+
+		if command[1] == 'i' {
+			commands.Wizard(flag.Args()[1:])
+			return
+		}
+	}
+
+	// help
+	flag.Usage()
+	os.Exit(1)
 }
