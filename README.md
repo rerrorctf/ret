@@ -14,7 +14,7 @@ $ ret ghidra
 
 ## Get The Latest Build
 
-You can simply get the latest pre-built binary from https://github.com/rerroret/ret/releases.
+You can simply get the latest pre-built binary from https://github.com/rerrorctf/ret/releases.
 
 Please note that, while `ret` is a single static file built for x64 linux, you can use go to build this for a range of platforms (although this hasn't been tested yet).
 
@@ -66,7 +66,7 @@ Prints the current flag format regex or updates it if an argument is supplied.
 
 This creates or rewrites the contents `~/.config/ret`.
 
-https://github.com/rerroret/ret/blob/main/commands/flag.go
+https://github.com/rerrorctf/ret/blob/main/commands/flag.go
 
 ### wizard
 
@@ -85,7 +85,7 @@ Wizard is here to help! They simply run a few common commands for a typical work
 7) If the wizard thinks there is an elf file it will invoke `pwn` for you.
 8) Executes the `wizardpostcommand` from ~/.config/ret.
 
-https://github.com/rerroret/ret/blob/main/commands/wizard.go
+https://github.com/rerrorctf/ret/blob/main/commands/wizard.go
 
 ### add
 
@@ -105,7 +105,7 @@ Added files are stored in in the hidden directory `.ret/files` inside a subfolde
 
 Added files are subject to being automatically ingested by the commands `ghidra` and `ida`.
 
-https://github.com/rerroret/ret/blob/main/commands/add.go
+https://github.com/rerrorctf/ret/blob/main/commands/add.go
 
 ### status
 
@@ -117,7 +117,7 @@ Prints information about the task including any added files.
 
 Print more detailed information with the `-v` flag.
 
-https://github.com/rerroret/ret/blob/main/commands/status.go
+https://github.com/rerrorctf/ret/blob/main/commands/status.go
 
 ### pwn
 
@@ -127,7 +127,7 @@ usage: ret pwn [ip] [port]
 
 Creates a pwntools script from a template.
 
-https://github.com/rerroret/ret/blob/main/commands/pwn.go
+https://github.com/rerrorctf/ret/blob/main/commands/pwn.go
 
 ### ghidra
 
@@ -147,7 +147,7 @@ Make sure ghidra is installed (or symlinked) at `/opt/ghidra` or use the config 
 
 From a workflow point of view I tend to run this after running the wizard in the background. This means that when i'm ready to use ghidra everything is already fully analyzed.
 
-https://github.com/rerroret/ret/blob/main/commands/ghidra.go
+https://github.com/rerrorctf/ret/blob/main/commands/ghidra.go
 
 ### ida
 
@@ -165,7 +165,7 @@ Make sure ida is installed (or symlinked) at `/opt/ida` or use the config file t
 
 Note: this command doesn't work well and needs an ida user's love and care.
 
-https://github.com/rerroret/ret/blob/main/commands/ida.go
+https://github.com/rerrorctf/ret/blob/main/commands/ida.go
 
 ### docker
 
@@ -175,7 +175,7 @@ usage: ret docker [ip] [port]
 
 Creates a Dockerfile from a template.
 
-https://github.com/rerroret/ret/blob/main/commands/docker.go
+https://github.com/rerrorctf/ret/blob/main/commands/docker.go
 
 ### check
 
@@ -187,7 +187,7 @@ Check your environment for ctf readiness by checking if various pieces of common
 
 If something is not installed `ret` tries to give you a link to help you install it quickly.
 
-https://github.com/rerroret/ret/blob/main/commands/check.go
+https://github.com/rerrorctf/ret/blob/main/commands/check.go
 
 ### syscall
 
@@ -213,7 +213,7 @@ For example:
 
 `syscall x86 10[0-9]`
 
-https://github.com/rerroret/ret/blob/main/commands/syscall.go
+https://github.com/rerrorctf/ret/blob/main/commands/syscall.go
 
 ### abi
 
@@ -223,7 +223,7 @@ usage: ret abi [(x86/32)/(x64/64)] [linux/windows]
 
 Prints reference details about the abi for the given platform.
 
-https://github.com/rerroret/ret/blob/main/commands/abi.go
+https://github.com/rerrorctf/ret/blob/main/commands/abi.go
 
 ### writeup
 
@@ -233,7 +233,7 @@ usage: ret writeup
 
 Create a writeup template for a task in a file called `writeup.md`.
 
-https://github.com/rerroret/ret/blob/main/commands/writeup.go
+https://github.com/rerrorctf/ret/blob/main/commands/writeup.go
 
 ### cheatsheet
 
@@ -243,35 +243,35 @@ usage: ret cheatsheet
 
 Prints a list of cheatsheets for quick reference.
 
-https://github.com/rerroret/ret/blob/main/commands/cheatsheet.go
+https://github.com/rerrorctf/ret/blob/main/commands/cheatsheet.go
 
 ## ~/.config/ret
 
 `ret` will parse `~/.config/ret`.
 
-While I aim to keep this readme in sync; for the current structure of the config file please consult https://github.com/rerroret/ret/blob/main/data/config.go#L3.
+While I aim to keep this readme in sync; for the current structure of the config file please consult https://github.com/rerrorctf/ret/blob/main/data/config.go#L3.
 
 The data in the config must be in the json format. You can include zero or more of the following in your config:
 
 - `ghidrainstallpath`
   - This is the location where you have installed ghidra, e.g. `/opt/ghidra` is what I use, so that `ret ghidra` knows where to find `ghidraRun`.
-  - The current default value is `/opt/ghidra` as per https://github.com/rerroret/ret/blob/main/config/config.go#L12
+  - The current default value is `/opt/ghidra` as per https://github.com/rerrorctf/ret/blob/main/config/config.go#L12
 
 - `ghidraprojectpath`
   - This is what you would like the ghidra folder, created by `ret`, to be called within the `.ret` folder to be called e.g. `./.ret/ghidra`.
-  - The current default value is `./.ret/ghidra` as per https://github.com/rerroret/ret/blob/main/config/config.go#L13
+  - The current default value is `./.ret/ghidra` as per https://github.com/rerrorctf/ret/blob/main/config/config.go#L13
 
 - `idainstallpath`
   - This is the location where you have installed ghidra, e.g. `/opt/ida`, so that `ret ida` knows where to find ida.
-  - The current default value is `/opt/ida` as per https://github.com/rerroret/ret/blob/main/config/config.go#L14
+  - The current default value is `/opt/ida` as per https://github.com/rerrorctf/ret/blob/main/config/config.go#L14
 
 - `idaprojectpath`
   - This is what you would like the ida folder, created by `ret`, to be called within the `.ret` folder to be called e.g. `./.ret/ida`.
-  - The current default value is `./.ret/ida` as per https://github.com/rerroret/ret/blob/main/config/config.go#L15
+  - The current default value is `./.ret/ida` as per https://github.com/rerrorctf/ret/blob/main/config/config.go#L15
 
 - `pwnscriptname`
   - This is what you would like the script created by `ret pwn` to be called.
-  - The default is `go.py` and is chosen to be short and not clash with any common imports as per https://github.com/rerroret/ret/blob/main/config/config.go#L16
+  - The default is `go.py` and is chosen to be short and not clash with any common imports as per https://github.com/rerrorctf/ret/blob/main/config/config.go#L16
 
 - `flagformat`
   - This is the regular expression that matches the flag format for the ctf you are currently playing.
@@ -300,7 +300,7 @@ Here is an example config:
 
 Certain commands, such as `add` and `status` will use a hidden directory structure.
 
-This is technically configurable via https://github.com/rerroret/ret/blob/main/config/config.go#L5 but this is not exposed to the user config. In other words you can change this be changing the source code and building your own version if you wish. If there is a strong desire to change this I would consider adding it to the user config.
+This is technically configurable via https://github.com/rerrorctf/ret/blob/main/config/config.go#L5 but this is not exposed to the user config. In other words you can change this be changing the source code and building your own version if you wish. If there is a strong desire to change this I would consider adding it to the user config.
 
 You can delete this directory if you like or make changes as you see fit but just be aware that the tool makes certain assumptions about the contents.
 
