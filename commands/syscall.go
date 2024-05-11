@@ -55,28 +55,32 @@ func Syscall(args []string) {
 		}
 	}
 
-	if len(args) < 2 {
-		syscallHelp()
-		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v missing args\n", 2-len(args))
-		os.Exit(1)
+	arch := "x64"
+	pattern := "."
+
+	if len(args) > 1 {
+		arch = args[0]
+		pattern = args[1]
+	} else if len(args) > 0 {
+		arch = args[0]
 	}
 
-	switch args[0] {
+	switch arch {
 	case "x86":
 		{
-			grep("/usr/include/x86_64-linux-gnu/asm/unistd_32.h", args[1])
+			grep("/usr/include/x86_64-linux-gnu/asm/unistd_32.h", pattern)
 		}
 	case "32":
 		{
-			grep("/usr/include/x86_64-linux-gnu/asm/unistd_32.h", args[1])
+			grep("/usr/include/x86_64-linux-gnu/asm/unistd_32.h", pattern)
 		}
 	case "x64":
 		{
-			grep("/usr/include/x86_64-linux-gnu/asm/unistd_64.h", args[1])
+			grep("/usr/include/x86_64-linux-gnu/asm/unistd_64.h", pattern)
 		}
 	case "64":
 		{
-			grep("/usr/include/x86_64-linux-gnu/asm/unistd_64.h", args[1])
+			grep("/usr/include/x86_64-linux-gnu/asm/unistd_64.h", pattern)
 		}
 	default:
 		{
