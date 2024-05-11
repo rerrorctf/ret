@@ -14,18 +14,18 @@ func makeScript(ip string, port int) {
 
 	script := fmt.Sprintf(
 		"#!/usr/bin/env python3\n\n"+
-			"from pwn import *\n\n"+
+			"from pwn import *\n"+
+			"#from z3 import *\n\n"+
 			"LOCAL_BINARY = \"./%s\"\n"+
 			"REMOTE_IP = \"%s\"\n"+
 			"REMOTE_PORT = %d\n\n"+
 			"#context.log_level = \"debug\"\n"+
-			"context.binary = LOCAL_BINARY\n\n"+
-			"#elf = ELF(LOCAL_BINARY)\n"+
-			"#libc = elf.libc\n\n"+
-			"p = process(LOCAL_BINARY)\n"+
+			"elf = ELF(LOCAL_BINARY, checksec=False)\n"+
+			"#libc = elf.libc\n"+
+			"context.binary = elf\n\n"+
+			"p = elf.process()\n"+
 			"#p = remote(REMOTE_IP, REMOTE_PORT)\n"+
 			"#gdb.attach(p, gdbscript=\"\")\n\n"+
-			"# pwn it here\n\n"+
 			"p.interactive()\n",
 		binary, ip, port)
 
