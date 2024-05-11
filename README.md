@@ -42,57 +42,6 @@ $ go build
 
 This will produce the `ret` binary. This static binary / single file is all you need to use `ret`.
 
-## ~/.config/ret
-
-`ret` will parse `~/.config/ret`.
-
-While I aim to keep this readme in sync; for the current structure of the config file please consult https://github.com/rerroret/ret/blob/main/data/config.go#L3.
-
-The data in the config must be in the json format. You can include zero or more of the following in your config:
-
-- `ghidrainstallpath`
-  - This is the location where you have installed ghidra, e.g. `/opt/ghidra` is what I use, so that `ret ghidra` knows where to find `ghidraRun`.
-  - The current default value is `/opt/ghidra` as per https://github.com/rerroret/ret/blob/main/config/config.go#L12
-
-- `ghidraprojectpath`
-  - This is what you would like the ghidra folder, created by `ret`, to be called within the `.ret` folder to be called e.g. `./.ret/ghidra`.
-  - The current default value is `./.ret/ghidra` as per https://github.com/rerroret/ret/blob/main/config/config.go#L13
-
-- `idainstallpath`
-  - This is the location where you have installed ghidra, e.g. `/opt/ida`, so that `ret ida` knows where to find ida.
-  - The current default value is `/opt/ida` as per https://github.com/rerroret/ret/blob/main/config/config.go#L14
-
-- `idaprojectpath`
-  - This is what you would like the ida folder, created by `ret`, to be called within the `.ret` folder to be called e.g. `./.ret/ida`.
-  - The current default value is `./.ret/ida` as per https://github.com/rerroret/ret/blob/main/config/config.go#L15
-
-- `pwnscriptname`
-  - This is what you would like the script created by `ret pwn` to be called.
-  - The default is `go.py` and is chosen to be short and not clash with any common imports as per https://github.com/rerroret/ret/blob/main/config/config.go#L16
-
-- `flagformat`
-  - This is the regular expression that matches the flag format for the ctf you are currently playing.
-  - The default is `flag{.+}`.
-
-- `wizardprecommand`
-  - This will be executed by the `wizard` before they do any of their own magic.
-  - It is passed to `bash -c`
-
-- `wizardpostcommand`
-  - This will be executed by the `wizard` after they have worked their own magic.
-  - It is passed to `bash -c`
-
-Here is an example config:
-
-```
-{
-  "ghidrainstallpath": "/opt/software/ghidra",
-  "ghidraprojectpath": "ghidra-project",
-  "pwnscriptname": "exploit.py"
-  "wizardpostcommand": "code ."
-}
-```
-
 ## Commands
 
 You can list all the commands by using `-h`, `--help`, `help` or simply providing no arguments:
@@ -275,6 +224,57 @@ usage: ret cheatsheet
 Prints a list of cheatsheets for quick reference.
 
 https://github.com/rerroret/ret/blob/main/commands/cheatsheet.go
+
+## ~/.config/ret
+
+`ret` will parse `~/.config/ret`.
+
+While I aim to keep this readme in sync; for the current structure of the config file please consult https://github.com/rerroret/ret/blob/main/data/config.go#L3.
+
+The data in the config must be in the json format. You can include zero or more of the following in your config:
+
+- `ghidrainstallpath`
+  - This is the location where you have installed ghidra, e.g. `/opt/ghidra` is what I use, so that `ret ghidra` knows where to find `ghidraRun`.
+  - The current default value is `/opt/ghidra` as per https://github.com/rerroret/ret/blob/main/config/config.go#L12
+
+- `ghidraprojectpath`
+  - This is what you would like the ghidra folder, created by `ret`, to be called within the `.ret` folder to be called e.g. `./.ret/ghidra`.
+  - The current default value is `./.ret/ghidra` as per https://github.com/rerroret/ret/blob/main/config/config.go#L13
+
+- `idainstallpath`
+  - This is the location where you have installed ghidra, e.g. `/opt/ida`, so that `ret ida` knows where to find ida.
+  - The current default value is `/opt/ida` as per https://github.com/rerroret/ret/blob/main/config/config.go#L14
+
+- `idaprojectpath`
+  - This is what you would like the ida folder, created by `ret`, to be called within the `.ret` folder to be called e.g. `./.ret/ida`.
+  - The current default value is `./.ret/ida` as per https://github.com/rerroret/ret/blob/main/config/config.go#L15
+
+- `pwnscriptname`
+  - This is what you would like the script created by `ret pwn` to be called.
+  - The default is `go.py` and is chosen to be short and not clash with any common imports as per https://github.com/rerroret/ret/blob/main/config/config.go#L16
+
+- `flagformat`
+  - This is the regular expression that matches the flag format for the ctf you are currently playing.
+  - The default is `flag{.+}`.
+
+- `wizardprecommand`
+  - This will be executed by the `wizard` before they do any of their own magic.
+  - It is passed to `bash -c`
+
+- `wizardpostcommand`
+  - This will be executed by the `wizard` after they have worked their own magic.
+  - It is passed to `bash -c`
+
+Here is an example config:
+
+```
+{
+  "ghidrainstallpath": "/opt/software/ghidra",
+  "ghidraprojectpath": "ghidra-project",
+  "pwnscriptname": "exploit.py"
+  "wizardpostcommand": "code ."
+}
+```
 
 ## The .ret Directory Structure
 
