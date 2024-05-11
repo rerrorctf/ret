@@ -4,11 +4,31 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/exec"
 	"rctf/config"
 	"rctf/theme"
 	"rctf/util"
 	"strings"
 )
+
+func runWizardCommand(command string) {
+	if len(command) == 0 {
+		return
+	}
+
+	fmt.Printf("🧙💬 " + theme.ColorGreen + "I see a custom incantation..." + theme.ColorReset + "\n")
+	fmt.Printf("🧙📖 "+theme.ColorPurple+"%v"+theme.ColorReset+"\n", command)
+	fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me run that for you!" + theme.ColorReset + "\n")
+
+	magic := exec.Command("bash", "-c", command)
+
+	out, err := magic.CombinedOutput()
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	fmt.Print(string(out))
+}
 
 func findInterestingFiles() []string {
 	files, err := os.ReadDir(".")
@@ -59,6 +79,8 @@ func Wizard(args []string) {
 			os.Exit(0)
 		}
 	}
+
+	runWizardCommand(config.WizardPreCommand)
 
 	// create interesting files list
 	interestingFiles := findInterestingFiles()
@@ -147,4 +169,6 @@ func Wizard(args []string) {
 		fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me pwn that for you!" + theme.ColorReset + "\n")
 		Pwn([]string{})
 	}
+
+	runWizardCommand(config.WizardPostCommand)
 }
