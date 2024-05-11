@@ -167,6 +167,28 @@ Note: this command doesn't work well and needs an ida user's love and care.
 
 https://github.com/rerroret/ret/blob/main/commands/ida.go
 
+### docker
+
+```
+usage: ret docker [ip] [port]
+```
+
+Creates a Dockerfile from a template.
+
+https://github.com/rerroret/ret/blob/main/commands/docker.go
+
+### check
+
+```
+usage: ret check
+```
+
+Check your environment for ctf readiness by checking if various pieces of commonly used software are installed.
+
+If something is not installed `ret` tries to give you a link to help you install it quickly.
+
+https://github.com/rerroret/ret/blob/main/commands/check.go
+
 ### syscall
 
 ```
@@ -193,6 +215,16 @@ For example:
 
 https://github.com/rerroret/ret/blob/main/commands/syscall.go
 
+### abi
+
+```
+usage: ret abi [(x86/32)/(x64/64)] [linux/windows]
+```
+
+Prints reference details about the abi for the given platform.
+
+https://github.com/rerroret/ret/blob/main/commands/abi.go
+
 ### writeup
 
 ```
@@ -202,18 +234,6 @@ usage: ret writeup
 Create a writeup template for a task in a file called `writeup.md`.
 
 https://github.com/rerroret/ret/blob/main/commands/writeup.go
-
-### check
-
-```
-usage: ret check
-```
-
-Check your environment for ctf readiness by checking if various pieces of commonly used software are installed.
-
-If something is not installed `ret` tries to give you a link to help you install it quickly.
-
-https://github.com/rerroret/ret/blob/main/commands/check.go
 
 ### cheatsheet
 
