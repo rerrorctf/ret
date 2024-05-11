@@ -2,6 +2,8 @@
 
 ## CTF Task Automation Tool
 
+This tool helps you solve CTF tasks by automating workflow and basic analysis.
+
 ## Example Workflow for Typical pwn/rev Tasks
 
 ```
