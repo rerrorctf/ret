@@ -56,7 +56,7 @@ You can get help for a command by giving `help` as an argument to the command:
 $ ret command help
 ```
 
-### flag
+### flag ⛳
 
 ```
 usage: ret flag [format]
@@ -68,7 +68,7 @@ This creates or rewrites the contents `~/.config/ret`.
 
 https://github.com/rerrorctf/ret/blob/main/commands/flag.go
 
-### wizard
+### wizard 🧙
 
 ```
 usage: ret wizard
@@ -87,7 +87,7 @@ Wizard is here to help! They simply run a few common commands for a typical work
 
 https://github.com/rerrorctf/ret/blob/main/commands/wizard.go
 
-### add
+### add 📥
 
 ```
 usage: ret add file1 [file2 file3...]
@@ -107,7 +107,7 @@ Added files are subject to being automatically ingested by the commands `ghidra`
 
 https://github.com/rerrorctf/ret/blob/main/commands/add.go
 
-### status
+### status 👀
 
 ```
 usage: ret status
@@ -119,7 +119,7 @@ Print more detailed information with the `-v` flag.
 
 https://github.com/rerrorctf/ret/blob/main/commands/status.go
 
-### pwn
+### pwn 🐚
 
 ```
 usage: ret pwn [ip] [port]
@@ -129,7 +129,7 @@ Creates a pwntools script from a template.
 
 https://github.com/rerrorctf/ret/blob/main/commands/pwn.go
 
-### ghidra
+### ghidra 🦖
 
 ```
 usage: ret ghidra [file1 file2...]
@@ -149,7 +149,7 @@ From a workflow point of view I tend to run this after running the wizard in the
 
 https://github.com/rerrorctf/ret/blob/main/commands/ghidra.go
 
-### ida
+### ida 💃
 
 ```
 usage: ret ida [file file]
@@ -167,7 +167,7 @@ Note: this command doesn't work well and needs an ida user's love and care.
 
 https://github.com/rerrorctf/ret/blob/main/commands/ida.go
 
-### docker
+### docker 🐋
 
 ```
 usage: ret docker [ip] [port]
@@ -177,7 +177,7 @@ Creates a Dockerfile from a template.
 
 https://github.com/rerrorctf/ret/blob/main/commands/docker.go
 
-### check
+### check ✅
 
 ```
 usage: ret check
@@ -189,7 +189,7 @@ If something is not installed `ret` tries to give you a link to help you install
 
 https://github.com/rerrorctf/ret/blob/main/commands/check.go
 
-### syscall
+### syscall 📞
 
 ```
 usage: ret syscall [(x86/32)/(x64/64)] [regex-pattern]
@@ -215,7 +215,7 @@ For example:
 
 https://github.com/rerrorctf/ret/blob/main/commands/syscall.go
 
-### abi
+### abi 🤝
 
 ```
 usage: ret abi [(x86/32)/(x64/64)] [linux/windows]
@@ -225,7 +225,7 @@ Prints reference details about the abi for the given platform.
 
 https://github.com/rerrorctf/ret/blob/main/commands/abi.go
 
-### writeup
+### writeup 📝
 
 ```
 usage: ret writeup
@@ -235,7 +235,7 @@ Create a writeup template for a task in a file called `writeup.md`.
 
 https://github.com/rerrorctf/ret/blob/main/commands/writeup.go
 
-### cheatsheet
+### cheatsheet 📚
 
 ```
 usage: ret cheatsheet
