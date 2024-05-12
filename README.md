@@ -123,19 +123,31 @@ $ ret command help
 
 ### Index
 
-https://github.com/rerrorctf/ret?tab=readme-ov-file#flag-
-https://github.com/rerrorctf/ret?tab=readme-ov-file#wizard-
-https://github.com/rerrorctf/ret?tab=readme-ov-file#add-
-https://github.com/rerrorctf/ret?tab=readme-ov-file#status-
-https://github.com/rerrorctf/ret?tab=readme-ov-file#pwn-
-https://github.com/rerrorctf/ret?tab=readme-ov-file#ghidra-
-https://github.com/rerrorctf/ret?tab=readme-ov-file#ida-
-https://github.com/rerrorctf/ret?tab=readme-ov-file#docker-
-https://github.com/rerrorctf/ret?tab=readme-ov-file#check-
-https://github.com/rerrorctf/ret?tab=readme-ov-file#syscall-
-https://github.com/rerrorctf/ret?tab=readme-ov-file#abi-
-https://github.com/rerrorctf/ret?tab=readme-ov-file#writeup-
-https://github.com/rerrorctf/ret?tab=readme-ov-file#cheatsheet-
+[flag ⛳](https://github.com/rerrorctf/ret?tab=readme-ov-file#flag-)
+
+[wizard 🧙](https://github.com/rerrorctf/ret?tab=readme-ov-file#wizard-)
+
+[add 📥](https://github.com/rerrorctf/ret?tab=readme-ov-file#add-)
+
+[status 👀](https://github.com/rerrorctf/ret?tab=readme-ov-file#status-)
+
+[pwn 🐚](https://github.com/rerrorctf/ret?tab=readme-ov-file#pwn-)
+
+[ghidra 🦖](https://github.com/rerrorctf/ret?tab=readme-ov-file#ghidra-)
+
+[ida 💃](https://github.com/rerrorctf/ret?tab=readme-ov-file#ida-)
+
+[docker 🐋](https://github.com/rerrorctf/ret?tab=readme-ov-file#docker-)
+
+[check ✅](https://github.com/rerrorctf/ret?tab=readme-ov-file#check-)
+
+[syscall 📞](https://github.com/rerrorctf/ret?tab=readme-ov-file#syscall-)
+
+[abi 🤝](https://github.com/rerrorctf/ret?tab=readme-ov-file#abi-)
+
+[writeup 📝](https://github.com/rerrorctf/ret?tab=readme-ov-file#writeup-)
+
+[cheatsheet 📚](https://github.com/rerrorctf/ret?tab=readme-ov-file#cheatsheet-)
 
 ### flag ⛳
 
