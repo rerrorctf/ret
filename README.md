@@ -1,17 +1,62 @@
 # ret
 
-## CTF Task Automation Tool
-
 This tool helps you solve CTF tasks by automating workflow and basic analysis.
 
-## Example Workflow for Typical pwn/rev Tasks
+## Basic Worflow
+
+```
+# before a ctf you may like to ensure you have all your tools installed
+# this can save time during a ctf when you realise you don't have ghidra installed on this machine for example
+# check will perform a simple test against a checklist of tools that i like to use
+# if you think something is missing let me know
+$ ret check
+```
+
+```
+# at the start of a new ctf set the flag format globally
+# note: this is a evaluated as a regex and used to perform a few things including grep2win
+$ ret flag example{.+}
+# you can inspect the current flag format with
+$ ret flag
+```
+
+```
+# setup a directory for the task containing the task's files
+$ mkdir task
+$ cd task
+$ cp ~/Downloads/task .
+# add task files to ret
+$ ret add task
+# see the files added to the current ret task including their hashes and file types
+$ ret status
+```
+
+```
+# if you want to use ghidra simply run the following
+# it will create a new ghidra project for you in a hidden directory .ret/ghidra
+# it will then import and analyse all added files in headless mode
+# when everything is ready it will open ghidra for you
+# files are stored in a directory labelled with their hash
+$ ret ghidra
+```
+
+```
+# if you want to use pwntools
+# this will infer the binary you wish to target and use a simple template to make a script for you
+$ ret pwn
+# if you have details for remote infrastructure you can supply those too
+$ ret pwn ctf.example.com 9001
+```
+
+## Advanced Workflow
 
 ```
 $ mkdir task
 $ cd task
 $ cp ~/Downloads/task.zip .
-$ ret wizard
-$ ret ghidra
+# this will perform the most typical steps for you automagically given the directory contents
+# see wizard docs for more details
+$ ret wizard && ret ghidra
 ```
 
 ## Get The Latest Build
