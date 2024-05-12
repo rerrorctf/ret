@@ -118,7 +118,6 @@ func main() {
 
 	// writeup, wizard
 	if command[0] == 'w' && len(command) > 1 {
-		fmt.Println(command)
 		if command[1] == 'r' {
 			commands.Writeup(flag.Args()[1:])
 			return
