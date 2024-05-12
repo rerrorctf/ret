@@ -121,6 +121,22 @@ You can get help for a command by giving `help` as an argument to the command:
 $ ret command help
 ```
 
+### Index
+
+https://github.com/rerrorctf/ret?tab=readme-ov-file#flag-
+https://github.com/rerrorctf/ret?tab=readme-ov-file#wizard-
+https://github.com/rerrorctf/ret?tab=readme-ov-file#add-
+https://github.com/rerrorctf/ret?tab=readme-ov-file#status-
+https://github.com/rerrorctf/ret?tab=readme-ov-file#pwn-
+https://github.com/rerrorctf/ret?tab=readme-ov-file#ghidra-
+https://github.com/rerrorctf/ret?tab=readme-ov-file#ida-
+https://github.com/rerrorctf/ret?tab=readme-ov-file#docker-
+https://github.com/rerrorctf/ret?tab=readme-ov-file#check-
+https://github.com/rerrorctf/ret?tab=readme-ov-file#syscall-
+https://github.com/rerrorctf/ret?tab=readme-ov-file#abi-
+https://github.com/rerrorctf/ret?tab=readme-ov-file#writeup-
+https://github.com/rerrorctf/ret?tab=readme-ov-file#cheatsheet-
+
 ### flag ⛳
 
 ```
