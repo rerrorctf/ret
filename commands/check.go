@@ -91,6 +91,7 @@ func Check(args []string) {
 	testCommand("one_gadget", "-h")
 	testCommand("pwn")
 	testCommand("pwn", "checksec")
+	testCommand("ROPgadget", "--h")
 
 	if !testCommand("seccomp-tools", "--version") {
 		suggestLink("https://github.com/david942j/seccomp-tools")
