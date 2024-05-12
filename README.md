@@ -378,17 +378,6 @@ The data in the config must be in the json format. You can include zero or more 
   - This will be executed by the `wizard` after they have worked their own magic.
   - It is passed to `bash -c`
 
-Here is an example config:
-
-```
-{
-  "ghidrainstallpath": "/opt/software/ghidra",
-  "ghidraprojectpath": "ghidra-project",
-  "pwnscriptname": "exploit.py"
-  "wizardpostcommand": "code ."
-}
-```
-
 ## The .ret Directory Structure
 
 Certain commands, such as `add` and `status` will use a hidden directory structure.
