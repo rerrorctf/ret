@@ -10,10 +10,11 @@ import (
 )
 
 const (
-	UserConfig      = ".config/ret"
-	FolderName      = ".ret"
-	FilesFolderName = FolderName + "/files"
-	RetFilesNames   = FilesFolderName + "/ret-files.json"
+	UserConfig        = ".config/ret"
+	FolderName        = ".ret"
+	FilesFolderName   = FolderName + "/files"
+	RetFilesNames     = FilesFolderName + "/ret-files.json"
+	DefaultBinaryName = "task"
 )
 
 var (

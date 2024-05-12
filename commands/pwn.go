@@ -13,7 +13,7 @@ import (
 func makeScript(ip string, port int) {
 	binary := util.GuessBinary()
 
-	if strings.Compare(binary, util.DefaultBinaryName) != 0 {
+	if strings.Compare(binary, config.DefaultBinaryName) != 0 {
 		if !util.BinaryIsExecutable(binary) {
 			fmt.Printf("⚠️ "+theme.ColorGray+" \""+theme.ColorReset+"%v"+theme.ColorGray+"\""+theme.ColorRed+" is not executable"+theme.ColorReset+"\n", binary)
 		}
