@@ -8,18 +8,21 @@ import (
 	"strings"
 )
 
-func GuessBinary() string {
+func GuessBinary() []string {
+	binaries := make([]string, 0)
 
 	jsonData, err := os.ReadFile(config.RetFilesNames)
 	if err != nil {
-		return config.DefaultBinaryName
+		binaries = append(binaries, config.DefaultBinaryName)
+		return binaries
 	}
 
 	var files data.Files
 
 	err = json.Unmarshal(jsonData, &files)
 	if err != nil {
-		return config.DefaultBinaryName
+		binaries = append(binaries, config.DefaultBinaryName)
+		return binaries
 	}
 
 	for _, file := range files.Files {
@@ -28,11 +31,16 @@ func GuessBinary() string {
 		}
 
 		if strings.Contains(file.Type, "ELF") {
-			return file.Filename
+			binaries = append(binaries, file.Filename)
 		}
 	}
 
-	return config.DefaultBinaryName
+	if len(binaries) > 0 {
+		return binaries
+	}
+
+	binaries = append(binaries, config.DefaultBinaryName)
+	return binaries
 }
 
 func BinaryIsExecutable(file string) bool {

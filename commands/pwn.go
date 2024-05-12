@@ -11,7 +11,16 @@ import (
 )
 
 func makeScript(ip string, port int) {
-	binary := util.GuessBinary()
+	binaries := util.GuessBinary()
+
+	if len(binaries) > 1 {
+		fmt.Printf("⚠️ multiple candidate binaries found\n")
+		for _, binary := range binaries {
+			fmt.Printf("%s\n", binary)
+		}
+	}
+
+	binary := binaries[0]
 
 	if strings.Compare(binary, config.DefaultBinaryName) != 0 {
 		if !util.BinaryIsExecutable(binary) {
