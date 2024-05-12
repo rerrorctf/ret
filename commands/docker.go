@@ -9,7 +9,9 @@ import (
 )
 
 func makeDockerFile(port int) {
-	binary := util.GuessBinary()
+	binaries := util.GuessBinary()
+
+	binary := binaries[0]
 
 	dockerfile := fmt.Sprintf(
 		"FROM ubuntu:24.04\n\n"+
