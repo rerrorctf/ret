@@ -245,7 +245,7 @@ https://github.com/rerrorctf/ret/blob/main/commands/ghidra.go
 ### ida 💃
 
 ```
-usage: ret ida [file file]
+usage: ret ida [file1 file2...]
 ```
 
 Optionally adds one or more new files.
