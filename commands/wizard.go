@@ -147,11 +147,8 @@ func Wizard(args []string) {
 	fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me show the status!" + theme.ColorReset + "\n")
 	Status([]string{})
 
-	// if there is a single elf binary then pwn
-	numElfFiles := 0
-	elfFileIndex := -1
-
-	for i, file := range filesToAdd {
+	// if there are one or more elf binaries then pwn
+	for _, file := range filesToAdd {
 		if strings.Contains(file, ".so") {
 			continue
 		}
@@ -159,16 +156,10 @@ func Wizard(args []string) {
 		result := util.RunFileCommandOnFile(file)
 
 		if strings.Contains(result, "ELF") {
-			numElfFiles += 1
-			elfFileIndex = i
+			fmt.Printf("🧙💬 " + theme.ColorGreen + "I see that there is at least one ELF." + theme.ColorReset + "\n")
+			fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me make a pwn template for you!" + theme.ColorReset + "\n")
+			Pwn([]string{})
 		}
-	}
-
-	if numElfFiles == 1 {
-		solitaryElfName := filesToAdd[elfFileIndex]
-		fmt.Printf("🧙💬 "+theme.ColorGreen+"I see that "+theme.ColorCyan+"\"%s\""+theme.ColorGreen+" is an ELF."+theme.ColorReset+"\n", solitaryElfName)
-		fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me pwn that for you!" + theme.ColorReset + "\n")
-		Pwn([]string{})
 	}
 
 	runWizardCommand(config.WizardPostCommand)
