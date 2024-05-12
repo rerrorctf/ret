@@ -10,6 +10,7 @@ import (
 func FlagHelp() {
 	fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"flag"+theme.ColorGray+" format"+theme.ColorReset+"\n")
 	fmt.Fprintf(os.Stderr, "  ⛳ set the current flag format regex with ret\n")
+	fmt.Fprintf(os.Stderr, "  🔗 "+theme.ColorGray+"https://github.com/rerrorctf/ret/blob/main/commands/flag.go"+theme.ColorReset+"\n")
 	os.Exit(0)
 }
 

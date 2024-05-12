@@ -33,6 +33,7 @@ func Ida(args []string) {
 		case "help":
 			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"ida"+theme.ColorGray+" [file file...]"+theme.ColorReset+"\n")
 			fmt.Fprintf(os.Stderr, "  💃 opens all added files then opens ida with ret\n")
+			fmt.Fprintf(os.Stderr, "  🔗 "+theme.ColorGray+"https://github.com/rerrorctf/ret/blob/main/commands/ida.go"+theme.ColorReset+"\n")
 			os.Exit(0)
 		}
 	}

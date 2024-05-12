@@ -30,7 +30,7 @@ func Check(args []string) {
 		case "help":
 			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"check"+theme.ColorReset+"\n")
 			fmt.Fprintf(os.Stderr, "  ✅ check your env/setup readiness before a ctf with ret\n")
-
+			fmt.Fprintf(os.Stderr, "  🔗 "+theme.ColorGray+"https://github.com/rerrorctf/ret/blob/main/commands/check.go"+theme.ColorReset+"\n")
 			os.Exit(0)
 		}
 	}

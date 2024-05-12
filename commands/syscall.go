@@ -21,7 +21,9 @@ func syscallHelp() {
 	fmt.Fprintf(os.Stderr, theme.ColorPurple+"    syscall x64 \" 0\""+theme.ColorReset+"\n")
 	fmt.Fprintf(os.Stderr, theme.ColorPurple+"    syscall x64 write"+theme.ColorReset+"\n")
 	fmt.Fprintf(os.Stderr, theme.ColorPurple+"    syscall 32 read"+theme.ColorReset+"\n")
-	fmt.Fprintf(os.Stderr, theme.ColorPurple+"    syscall x86 10[0-9]"+theme.ColorReset+"\n")
+	fmt.Fprintf(os.Stderr, theme.ColorPurple+"    syscall x86 10[0-9]"+theme.ColorReset+"\n\n")
+
+	fmt.Fprintf(os.Stderr, "  🔗 "+theme.ColorGray+"https://github.com/rerrorctf/ret/blob/main/commands/syscall.go"+theme.ColorReset+"\n")
 }
 
 func grep(path string, pattern string) {

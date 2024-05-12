@@ -129,6 +129,7 @@ func addFile(srcPath string) {
 func AddHelp() {
 	fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"add"+theme.ColorReset+" file "+theme.ColorGray+"[file file...]"+theme.ColorReset+"\n")
 	fmt.Fprintf(os.Stderr, "  📥 add one or more files to the current task with ret\n")
+	fmt.Fprintf(os.Stderr, "  🔗 "+theme.ColorGray+"https://github.com/rerrorctf/ret/blob/main/commands/add.go"+theme.ColorReset+"\n")
 	os.Exit(0)
 }
 

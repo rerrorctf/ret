@@ -13,6 +13,7 @@ func Writeup(args []string) {
 		case "help":
 			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"writeup"+theme.ColorReset+"\n")
 			fmt.Fprintf(os.Stderr, "  📝 create a template for a task in a file called writeup.md with ret\n")
+			fmt.Fprintf(os.Stderr, "  🔗 "+theme.ColorGray+"https://github.com/rerrorctf/ret/blob/main/commands/writeup.go"+theme.ColorReset+"\n")
 			os.Exit(0)
 		}
 	}
