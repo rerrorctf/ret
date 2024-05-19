@@ -42,14 +42,15 @@ func Docker(args []string) {
 		}
 	}
 
-	_, err := os.Stat("./Dockerfile")
-	if !os.IsNotExist(err) {
-		log.Fatalf("💥 " + theme.ColorRed + "error" + theme.ColorReset + ": \"Dockerfile\" already exists!\n")
-	}
-
 	var ip string
 	var port int
 	util.GetRemoteParams(args, &ip, &port)
+
+	_, err := os.Stat("./Dockerfile")
+	if !os.IsNotExist(err) {
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": \"Dockerfile\" already exists!\n"+
+			"🐋 "+theme.ColorGray+"ready to run:"+theme.ColorReset+" $ sudo docker build -t task . && sudo docker run -p %d:%d task\n", port, port)
+	}
 
 	makeDockerFile(port)
 }
