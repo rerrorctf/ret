@@ -18,13 +18,14 @@ func Cheatsheet(args []string) {
 	}
 
 	fmt.Println(theme.ColorCyan + "pwndbg" + theme.ColorReset)
-	fmt.Println(theme.ColorGray + "🔗 https://cdn.discordapp.com/attachments/1141077572587892857/1174249242882220114/CheatSheet.pdf" + theme.ColorReset)
+	fmt.Println(theme.ColorGray + "🔗 https://drive.google.com/file/d/16t9MV8KTFXK7oX_CzXhmDdaVnjT8IYM4/view" + theme.ColorReset)
 
 	fmt.Println(theme.ColorCyan + "ghidra" + theme.ColorReset)
 	fmt.Println(theme.ColorGray + "🔗 https://ghidra-sre.org/CheatSheet.html" + theme.ColorReset)
 
 	fmt.Println(theme.ColorCyan + "linux syscalls" + theme.ColorReset)
 	fmt.Println(theme.ColorGray + "🔗 https://chromium.googlesource.com/chromiumos/docs/+/master/constants/syscalls.md" + theme.ColorReset)
+	fmt.Println(theme.ColorGray + "🔗 https://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/" + theme.ColorReset)
 
 	fmt.Println(theme.ColorCyan + "intel sdm" + theme.ColorReset)
 	fmt.Println(theme.ColorGray + "🔗 https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html" + theme.ColorReset)
