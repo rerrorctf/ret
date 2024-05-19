@@ -97,6 +97,8 @@ func Check(args []string) {
 		suggestLink("https://github.com/david942j/seccomp-tools")
 	}
 
+	testCommand("patchelf", "-h")
+
 	// web related stuff
 	if !testCommand("stat", currentUser.HomeDir+"/BurpSuiteCommunity/BurpSuiteCommunity") {
 		suggestLink("https://portswigger.net/burp/releases/community/latest")
