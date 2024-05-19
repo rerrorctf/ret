@@ -48,4 +48,8 @@ func Cheatsheet(args []string) {
 
 	fmt.Println(theme.ColorCyan + "ctf cheatsheet" + theme.ColorReset)
 	fmt.Println(theme.ColorGray + "🔗 https://github.com/Rajchowdhury420/CTF-CheatSheet" + theme.ColorReset)
+
+	fmt.Println(theme.ColorCyan + "crypto" + theme.ColorReset)
+	fmt.Println(theme.ColorGray + "🔗 https://github.com/RsaCtfTool/RsaCtfTool/blob/master/README.md" + theme.ColorReset)
+	fmt.Println(theme.ColorGray + "🔗 https://neuromancer.sk/std/" + theme.ColorReset)
 }
