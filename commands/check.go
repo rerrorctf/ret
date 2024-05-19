@@ -123,4 +123,9 @@ func Check(args []string) {
 	// steg related stuff
 	testCommand("which", "stegseek")
 	testCommand("steghide", "--help")
+
+	// crypto related stuff
+	if !testCommand("RsaCtfTool.py", "-h") {
+		suggestLink("https://github.com/RsaCtfTool/RsaCtfTool")
+	}
 }
