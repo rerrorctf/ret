@@ -66,6 +66,14 @@ func Check(args []string) {
 	testCommand("exiftool", "--version")
 	testCommand("xxd", "-v")
 
+	if !testCommand("docker", "-v") {
+		suggestLink("https://docs.docker.com/desktop/install/ubuntu/")
+	}
+
+	if !testCommand("go", "version") {
+		suggestLink("https://go.dev/doc/install")
+	}
+
 	// python setup
 	testCommand("python3", "--version")
 	testCommand("pip", "show", "pwntools")
@@ -109,14 +117,6 @@ func Check(args []string) {
 	testCommand("sqlmap", "-h")
 	testCommand("wireshark", "-h")
 	testCommand("curl", "--version")
-
-	if !testCommand("docker", "-v") {
-		suggestLink("https://docs.docker.com/desktop/install/ubuntu/")
-	}
-
-	if !testCommand("go", "version") {
-		suggestLink("https://go.dev/doc/install")
-	}
 
 	// steg related stuff
 	testCommand("which", "stegseek")
