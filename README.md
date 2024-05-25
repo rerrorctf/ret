@@ -4,6 +4,17 @@ This tool helps you solve CTF tasks by automating workflow and basic analysis.
 
 ## Examples
 
+### tl;dr Workflow
+
+This will perform the most typical steps for you automagically given the directory contents:
+
+```
+$ mkdir task
+$ cd task
+$ cp ~/Downloads/task.zip .
+$ ret wizard task.example.com 9001 && ret ghidra
+```
+
 ### Basic Worflow
 
 Before a CTF you may like to ensure you have all your tools installed. This can save time during a ctf when you realise you don't have ghidra installed on this machine for example. Check will perform a simple test against a checklist of tools that I like to use if you think something is missing let me know.
@@ -63,19 +74,6 @@ If you have details for remote infrastructure you can supply those too:
 ```
 $ ret pwn ctf.example.com 9001
 ```
-
-### Advanced Workflow
-
-This will perform the most typical steps for you automagically given the directory contents:
-
-```
-$ mkdir task
-$ cd task
-$ cp ~/Downloads/task.zip .
-$ ret wizard && ret ghidra
-```
-
-I like to kick off ghidra right after the wizard has setup the task directory so that analysis has fully completed by the time I'm ready to start using ghidra.
 
 ## Get The Latest Build
 
@@ -164,7 +162,7 @@ https://github.com/rerrorctf/ret/blob/main/commands/flag.go
 ### wizard 🧙
 
 ```
-usage: ret wizard
+usage: ret wizard [ip] [port]
 ```
 
 Wizard is here to help! They simply run a few common commands for a typical workflow. The workflow is quite well suited for typical rev and pwn tasks. Sometimes the wizard makes mistakes!
@@ -176,6 +174,7 @@ Wizard is here to help! They simply run a few common commands for a typical work
 5) Adds any interesting files this includes those found by unzipping and ignores .zip files.
 6) Shows `status`.
 7) If the wizard thinks there is an elf file it will invoke `pwn` for you.
+8) If you provided an ip or an ip and a port wizard will pass these to `pwn` for you.
 8) Executes the `wizardpostcommand` from ~/.config/ret.
 
 https://github.com/rerrorctf/ret/blob/main/commands/wizard.go
