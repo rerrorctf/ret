@@ -128,4 +128,8 @@ func Check(args []string) {
 	if !testCommand("RsaCtfTool.py", "-h") {
 		suggestLink("https://github.com/RsaCtfTool/RsaCtfTool")
 	}
+
+	if !testCommand("sage", "--version") {
+		suggestLink("https://www.sagemath.org")
+	}
 }
