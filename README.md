@@ -171,11 +171,11 @@ Wizard is here to help! They simply run a few common commands for a typical work
 2) Searches for interesting files within the current directory.
 3) Ensures that the hidden .ret directory skeleton exists.
 4) Unzips any .zip files that it can.
-5) Adds any interesting files this includes those found by unzipping and ignores .zip files.
+5) Adds any interesting files. This includes those found by unzipping and ignores .zip files.
 6) Shows `status`.
 7) If the wizard thinks there is an elf file it will invoke `pwn` for you.
 8) If you provided an ip or an ip and a port wizard will pass these to `pwn` for you.
-8) Executes the `wizardpostcommand` from ~/.config/ret.
+9) Executes the `wizardpostcommand` from ~/.config/ret.
 
 https://github.com/rerrorctf/ret/blob/main/commands/wizard.go
 
@@ -206,8 +206,6 @@ usage: ret status
 ```
 
 Prints information about the task including any added files.
-
-Print more detailed information with the `-v` flag.
 
 https://github.com/rerrorctf/ret/blob/main/commands/status.go
 
