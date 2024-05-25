@@ -66,10 +66,6 @@ func Check(args []string) {
 	testCommand("exiftool", "--version")
 	testCommand("xxd", "-v")
 
-	if !testCommand("which", "discord") {
-		suggestLink("https://discord.com/")
-	}
-
 	// python setup
 	testCommand("python3", "--version")
 	testCommand("pip", "show", "pwntools")
