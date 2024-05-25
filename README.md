@@ -81,7 +81,7 @@ I like to kick off ghidra right after the wizard has setup the task directory so
 
 You can simply get the latest pre-built binary from https://github.com/rerrorctf/ret/releases.
 
-Please note that, while `ret` is a single static file built for x64 linux, you can use go to build this for a range of platforms (although this hasn't been tested yet).
+Please note that, while `ret` is a single file built for x64 linux, you can use go to build this for a range of platforms (although this hasn't been tested yet).
 
 ### Installation
 
