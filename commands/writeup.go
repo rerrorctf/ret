@@ -30,10 +30,10 @@ func Writeup(args []string) {
 	template := fmt.Sprintf(
 		"https://chal.link.goes.here\n\n"+
 			"# TASK-NAME (CATEGORY)\n\n"+
-			"AUTHOR DATE\n\n"+
-			"DESCRIPTION\n\n"+
+			"DESCRIPTION-GOES-HERE\n\n"+
 			"## Solution\n\n"+
-			"## Flag\n`%s`\n", config.FlagFormat)
+			"## Flag\n`%s`\n\n"+
+			"YOUR-NAME-GOES-HERE TODAYS-DATE-GOES-HERE\n", config.FlagFormat)
 
 	err = os.WriteFile(filePath, []byte(template), 0644)
 
