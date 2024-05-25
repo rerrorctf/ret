@@ -46,6 +46,12 @@ func showLinuxAbix64() {
 	fmt.Println(theme.ColorRed + "\nsyscall" + theme.ColorReset + ":" + theme.ColorReset)
 
 	fmt.Println(theme.ColorRed + "  RAX RDI RSI RDX R10 R8 R9 => RAX" + theme.ColorReset)
+
+	fmt.Println(theme.ColorPurple + "\nred zone" + theme.ColorReset + ":")
+
+	fmt.Println(theme.ColorPurple + "  [rsp-128] to [rsp-8]" + theme.ColorReset)
+
+	fmt.Println(theme.ColorGray + "  128-byte area below the stack pointer see -mno-red-zone" + theme.ColorReset)
 }
 
 func showWindowsAbix86() {
@@ -80,6 +86,12 @@ func showWindowsAbix64() {
 	fmt.Println(theme.ColorCyan + "\ncall" + theme.ColorReset + ":")
 
 	fmt.Println(theme.ColorCyan + "  RCX/ZMM0 RDX/ZMM1 R8/ZMM2 R9/ZMM3 STACK => RAX XMM0 YMM0 ZMM0" + theme.ColorReset)
+
+	fmt.Println(theme.ColorPurple + "\nshadow space" + theme.ColorReset + ":")
+
+	fmt.Println(theme.ColorPurple + "  [rsp+8] to [rsp+32]" + theme.ColorReset)
+
+	fmt.Println(theme.ColorGray + "  callers must reserve 32 bytes of storage space after the return address" + theme.ColorReset)
 }
 
 func abiHelp() {
