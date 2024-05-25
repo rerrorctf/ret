@@ -74,6 +74,8 @@ func Check(args []string) {
 		suggestLink("https://go.dev/doc/install")
 	}
 
+	testCommand("tldr", "--version")
+
 	// python setup
 	testCommand("python3", "--version")
 	testCommand("pip", "show", "pwntools")
