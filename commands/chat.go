@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 	"os/exec"
@@ -8,6 +9,16 @@ import (
 	"ret/theme"
 	"strings"
 )
+
+func sendLine(line string) {
+	line = strings.ReplaceAll(line, "\"", "\\\"")
+
+	content := fmt.Sprintf(`{"content": "%s"}`, line)
+
+	hook := exec.Command("curl", "-H", "Content-type: application/json", "-d", content, config.ChatWebhookUrl)
+
+	hook.Run()
+}
 
 func chatHelp() {
 	fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"chat"+theme.ColorGray+" message"+theme.ColorReset+"\n")
@@ -32,17 +43,20 @@ func Chat(args []string) {
 		os.Exit(1)
 	}
 
-	msg := strings.Join(args, " ")
+	if len(args) > 0 {
+		if strings.Compare("-", args[0]) == 0 {
+			sendLine(fmt.Sprintf("📢 %s:", config.ChatUsername))
 
-	fmt.Printf("📢 %s: %s\n", config.ChatUsername, msg)
-
-	content := fmt.Sprintf(`{"content": "📢 %s: %s"}`, config.ChatUsername, msg)
-
-	hook := exec.Command("curl", "-H", "Content-type: application/json", "-d", content, config.ChatWebhookUrl)
-
-	err := hook.Run()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		os.Exit(1)
+			scanner := bufio.NewScanner(os.Stdin)
+			for scanner.Scan() {
+				if scanner.Err() != nil {
+					break
+				}
+				sendLine(scanner.Text())
+			}
+			return
+		}
 	}
+
+	sendLine(fmt.Sprintf("📢 %s: %s", config.ChatUsername, strings.Join(args, " ")))
 }
