@@ -7,24 +7,17 @@ import (
 	"ret/config"
 	"ret/data"
 	"ret/theme"
+	"ret/util"
 )
 
 func displayCurrentFlag() {
-	jsonData, err := os.ReadFile(config.FlagFileName)
+	err, flag := util.GetCurrentFlag()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "⚠️ "+theme.ColorYellow+" warning"+theme.ColorReset+": flag file \"%s\" doesn't exist\n", config.FlagFileName)
 		return
 	}
 
-	var flag data.Flag
-
-	err = json.Unmarshal(jsonData, &flag)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		os.Exit(1)
-	}
-
-	fmt.Printf("🚩 "+theme.ColorPurple+"%v"+theme.ColorReset+"\n", flag.Flag)
+	fmt.Printf("🚩 "+theme.ColorPurple+"%v"+theme.ColorReset+"\n", flag)
 }
 
 func scoreNewFlag(newFlag string) {
