@@ -6,6 +6,7 @@ import (
 	"os"
 	"ret/config"
 	"ret/theme"
+	"ret/util"
 )
 
 func Writeup(args []string) {
@@ -27,13 +28,18 @@ func Writeup(args []string) {
 		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": \"%s\" already exists!\n", filePath)
 	}
 
+	err, flag := util.GetCurrentFlag()
+	if err != nil {
+		flag = config.FlagFormat
+	}
+
 	template := fmt.Sprintf(
 		"https://chal.link.goes.here\n\n"+
 			"# TASK-NAME (CATEGORY)\n\n"+
 			"DESCRIPTION-GOES-HERE\n\n"+
 			"## Solution\n\n"+
 			"## Flag\n`%s`\n\n"+
-			"YOUR-NAME-GOES-HERE TODAYS-DATE-GOES-HERE\n", config.FlagFormat)
+			"YOUR-NAME-GOES-HERE TODAYS-DATE-GOES-HERE\n", flag)
 
 	err = os.WriteFile(filePath, []byte(template), 0644)
 
