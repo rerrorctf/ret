@@ -29,7 +29,7 @@ At the start of a new CTF set the flag format globally. This is a evaluated as a
 $ ret flag example{.+}
 ```
 
-You can inspect the current flag format by specify no arguments.
+You can inspect the current flag format by specifying no arguments.
 
 ```
 $ ret flag
@@ -61,7 +61,7 @@ To automatically import and analyse all added files with ghidra simply use:
 $ ret ghidra
 ```
 
-To make a pwntool script simply use:
+To make a pwntools script simply use:
 
 ```
 $ ret pwn
