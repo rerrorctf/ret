@@ -17,6 +17,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"command"+theme.ColorGray+" [arg1 arg2...]\n\n"+theme.ColorReset)
 
 		fmt.Fprintf(os.Stderr, theme.ColorGreen+"commands"+theme.ColorReset+":\n")
+		fmt.Fprintf(os.Stderr, "  🚩 "+theme.ColorBlue+"ctf"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  🔍 "+theme.ColorBlue+"format"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  🧙 "+theme.ColorBlue+"wizard"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  📥 "+theme.ColorBlue+"add"+theme.ColorReset+"\n")
@@ -103,15 +104,20 @@ func main() {
 		}
 	}
 
-	// check, cheatsheet
-	if command[0] == 'c' && len(command) > 3 {
-		if strings.Compare("chec", command[:4]) == 0 {
-			commands.Check(flag.Args()[1:])
-			return
-		}
+	// check, cheatsheet, ctf
+	if command[0] == 'c' {
+		if len(command) > 3 {
+			if strings.Compare("chec", command[:4]) == 0 {
+				commands.Check(flag.Args()[1:])
+				return
+			}
 
-		if strings.Compare("chea", command[:4]) == 0 {
-			commands.Cheatsheet(flag.Args()[1:])
+			if strings.Compare("chea", command[:4]) == 0 {
+				commands.Cheatsheet(flag.Args()[1:])
+				return
+			}
+		} else {
+			commands.Ctf(flag.Args()[1:])
 			return
 		}
 	}

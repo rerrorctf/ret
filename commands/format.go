@@ -22,7 +22,7 @@ func Format(args []string) {
 		}
 	} else {
 		fmt.Printf(theme.ColorGray+"current flag format: "+theme.ColorReset+"%v"+theme.ColorReset+"\n", config.FlagFormat)
-		os.Exit(1)
+		os.Exit(0)
 	}
 
 	fmt.Printf(theme.ColorGray+"old flag format: "+theme.ColorRed+"%v"+theme.ColorReset+"\n", config.FlagFormat)

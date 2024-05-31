@@ -121,6 +121,8 @@ $ ret command help
 
 ### Index
 
+[ctf 🚩](https://github.com/rerrorctf/ret?tab=readme-ov-file#ctf-)
+
 [format 🔍](https://github.com/rerrorctf/ret?tab=readme-ov-file#format-)
 
 [wizard 🧙](https://github.com/rerrorctf/ret?tab=readme-ov-file#wizard-)
@@ -146,6 +148,18 @@ $ ret command help
 [writeup 📝](https://github.com/rerrorctf/ret?tab=readme-ov-file#writeup-)
 
 [cheatsheet 📚](https://github.com/rerrorctf/ret?tab=readme-ov-file#cheatsheet-)
+
+### ctf 🚩
+
+```
+usage: ret ctf [flag]
+```
+
+Records the provided flag as the solution for the current task.
+
+If no flag is provided will report the currently recorded flag if any exists.
+
+https://github.com/rerrorctf/ret/blob/main/commands/ctf.go
 
 ### format 🔍
 

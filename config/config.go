@@ -23,6 +23,7 @@ var (
 	IdaInstallPath    = "/opt/ida"
 	IdaProjectPath    = FolderName + "/ida"
 	PwnScriptName     = "go.py"
+	FlagFileName      = FolderName + "/flag.json"
 	FlagFormat        = "flag{.+}"
 	WizardPreCommand  = ""
 	WizardPostCommand = ""
