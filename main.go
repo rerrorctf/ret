@@ -17,7 +17,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"command"+theme.ColorGray+" [arg1 arg2...]\n\n"+theme.ColorReset)
 
 		fmt.Fprintf(os.Stderr, theme.ColorGreen+"commands"+theme.ColorReset+":\n")
-		fmt.Fprintf(os.Stderr, "  ⛳ "+theme.ColorBlue+"flag"+theme.ColorReset+"\n")
+		fmt.Fprintf(os.Stderr, "  🔍 "+theme.ColorBlue+"format"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  🧙 "+theme.ColorBlue+"wizard"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  📥 "+theme.ColorBlue+"add"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  👀 "+theme.ColorBlue+"status"+theme.ColorReset+"\n")
@@ -44,9 +44,9 @@ func main() {
 
 	command := flag.Arg(0)
 
-	// flag
+	// format
 	if command[0] == 'f' {
-		commands.Flag(flag.Args()[1:])
+		commands.Format(flag.Args()[1:])
 		return
 	}
 

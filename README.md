@@ -26,13 +26,13 @@ $ ret check
 At the start of a new CTF set the flag format globally. This is a evaluated as a regex and used to perform a few things including grep2win against all added files.
 
 ```
-$ ret flag example{.+}
+$ ret format example{.+}
 ```
 
 You can inspect the current flag format by specifying no arguments.
 
 ```
-$ ret flag
+$ ret format
 ```
 
 For each task you solve first setup a directory for that task:
@@ -121,7 +121,7 @@ $ ret command help
 
 ### Index
 
-[flag ⛳](https://github.com/rerrorctf/ret?tab=readme-ov-file#flag-)
+[format 🔍](https://github.com/rerrorctf/ret?tab=readme-ov-file#format-)
 
 [wizard 🧙](https://github.com/rerrorctf/ret?tab=readme-ov-file#wizard-)
 
@@ -147,17 +147,17 @@ $ ret command help
 
 [cheatsheet 📚](https://github.com/rerrorctf/ret?tab=readme-ov-file#cheatsheet-)
 
-### flag ⛳
+### format 🔍
 
 ```
-usage: ret flag [format]
+usage: ret format [regex]
 ```
 
 Prints the current flag format regex or updates it if an argument is supplied.
 
 This creates or rewrites the contents `~/.config/ret`.
 
-https://github.com/rerrorctf/ret/blob/main/commands/flag.go
+https://github.com/rerrorctf/ret/blob/main/commands/format.go
 
 ### wizard 🧙
 

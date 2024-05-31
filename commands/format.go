@@ -7,18 +7,18 @@ import (
 	"ret/theme"
 )
 
-func FlagHelp() {
-	fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"flag"+theme.ColorGray+" format"+theme.ColorReset+"\n")
-	fmt.Fprintf(os.Stderr, "  ⛳ set the current flag format regex with ret\n")
-	fmt.Fprintf(os.Stderr, "  🔗 "+theme.ColorGray+"https://github.com/rerrorctf/ret/blob/main/commands/flag.go"+theme.ColorReset+"\n")
+func FormatHelp() {
+	fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"format"+theme.ColorGray+" [regex]"+theme.ColorReset+"\n")
+	fmt.Fprintf(os.Stderr, "  🔍 set the current flag format regex with ret\n")
+	fmt.Fprintf(os.Stderr, "  🔗 "+theme.ColorGray+"https://github.com/rerrorctf/ret/blob/main/commands/format.go"+theme.ColorReset+"\n")
 	os.Exit(0)
 }
 
-func Flag(args []string) {
+func Format(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			FlagHelp()
+			FormatHelp()
 		}
 	} else {
 		fmt.Printf(theme.ColorGray+"current flag format: "+theme.ColorReset+"%v"+theme.ColorReset+"\n", config.FlagFormat)
