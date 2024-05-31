@@ -9,4 +9,6 @@ type Config struct {
 	FlagFormat        string `json:"flagformat"`
 	WizardPreCommand  string `json:"wizardprecommand"`
 	WizardPostCommand string `json:"wizardpostcommand"`
+	ChatUsername      string `json:"chatusername"`
+	ChatWebhookUrl    string `json:"chatwebhookurl"`
 }

@@ -29,6 +29,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "  ✅ "+theme.ColorBlue+"check"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  📞 "+theme.ColorBlue+"syscall"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  🤝 "+theme.ColorBlue+"abi"+theme.ColorReset+"\n")
+		fmt.Fprintf(os.Stderr, "  📢 "+theme.ColorBlue+"chat"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  📝 "+theme.ColorBlue+"writeup"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  📚 "+theme.ColorBlue+"cheatsheet"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "\n🚩 https://github.com/rerrorctf/ret 🚩\n")
@@ -104,21 +105,33 @@ func main() {
 		}
 	}
 
-	// check, cheatsheet, ctf
+	// check, cheatsheet, ctf, chat
 	if command[0] == 'c' {
-		if len(command) > 3 {
-			if strings.Compare("chec", command[:4]) == 0 {
-				commands.Check(flag.Args()[1:])
+		if len(command) > 1 {
+			if command[1] == 't' {
+				commands.Ctf(flag.Args()[1:])
 				return
 			}
 
-			if strings.Compare("chea", command[:4]) == 0 {
-				commands.Cheatsheet(flag.Args()[1:])
-				return
+			if command[1] == 'h' {
+				if len(command) > 2 {
+					if strings.Compare("cha", command[:3]) == 0 {
+						commands.Chat(flag.Args()[1:])
+						return
+					}
+				}
+				if len(command) > 3 {
+					if strings.Compare("chec", command[:4]) == 0 {
+						commands.Check(flag.Args()[1:])
+						return
+					}
+
+					if strings.Compare("chea", command[:4]) == 0 {
+						commands.Cheatsheet(flag.Args()[1:])
+						return
+					}
+				}
 			}
-		} else {
-			commands.Ctf(flag.Args()[1:])
-			return
 		}
 	}
 

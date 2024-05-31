@@ -27,6 +27,8 @@ var (
 	FlagFormat        = "flag{.+}"
 	WizardPreCommand  = ""
 	WizardPostCommand = ""
+	ChatUsername      = ""
+	ChatWebhookUrl    = ""
 )
 
 func ParseUserConfig() {
@@ -82,6 +84,14 @@ func ParseUserConfig() {
 	if len(userConfig.WizardPostCommand) > 0 {
 		WizardPostCommand = userConfig.WizardPostCommand
 	}
+
+	if len(userConfig.ChatUsername) > 0 {
+		ChatUsername = userConfig.ChatUsername
+	}
+
+	if len(userConfig.ChatWebhookUrl) > 0 {
+		ChatWebhookUrl = userConfig.ChatWebhookUrl
+	}
 }
 
 func WriteUserConfig() {
@@ -102,6 +112,8 @@ func WriteUserConfig() {
 	userConfig.FlagFormat = FlagFormat
 	userConfig.WizardPreCommand = WizardPreCommand
 	userConfig.WizardPostCommand = WizardPostCommand
+	userConfig.ChatUsername = ChatUsername
+	userConfig.ChatWebhookUrl = ChatWebhookUrl
 
 	jsonData, err := json.MarshalIndent(userConfig, "", "  ")
 	if err != nil {

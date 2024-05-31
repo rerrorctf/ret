@@ -145,6 +145,8 @@ $ ret command help
 
 [abi 🤝](https://github.com/rerrorctf/ret?tab=readme-ov-file#abi-)
 
+[chat 📢](https://github.com/rerrorctf/ret?tab=readme-ov-file#chat-)
+
 [writeup 📝](https://github.com/rerrorctf/ret?tab=readme-ov-file#writeup-)
 
 [cheatsheet 📚](https://github.com/rerrorctf/ret?tab=readme-ov-file#cheatsheet-)
@@ -329,6 +331,18 @@ Prints reference details about the abi for the given platform.
 
 https://github.com/rerrorctf/ret/blob/main/commands/abi.go
 
+### chat 📢
+
+```
+usage: ret chat message
+```
+
+Sends a message to discord via a webhook in `~/.config/ret` called `chatwebhookurl`.
+
+See https://github.com/rerrorctf/ret/blob/main/README.md#configret for more information.
+
+https://github.com/rerrorctf/ret/blob/main/commands/chat.go
+
 ### writeup 📝
 
 ```
@@ -388,6 +402,12 @@ The data in the config must be in the json format. You can include zero or more 
 - `wizardpostcommand`
   - This will be executed by the `wizard` after they have worked their own magic.
   - It is passed to `bash -c`
+
+- `chatusername`
+  - This username will be used when sending with the chat command
+
+- `chatwebhookurl`
+  - This will be used to send chat message to discord.
 
 ## The .ret Directory Structure
 
