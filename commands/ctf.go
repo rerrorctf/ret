@@ -17,7 +17,7 @@ func displayCurrentFlag() {
 		return
 	}
 
-	fmt.Printf("🚩 "+theme.ColorPurple+"%v"+theme.ColorReset+"\n", flag)
+	fmt.Printf("🚩 %s\n", flag)
 }
 
 func scoreNewFlag(newFlag string) {
@@ -37,7 +37,7 @@ func scoreNewFlag(newFlag string) {
 		os.Exit(1)
 	}
 
-	fmt.Printf("🚩 "+theme.ColorPurple+"%v"+theme.ColorReset+"\n", flag.Flag)
+	fmt.Printf("🚩 %s\n", flag)
 }
 
 func CtfHelp() {
