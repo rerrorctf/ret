@@ -28,7 +28,7 @@ func Writeup(args []string) {
 		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": \"%s\" already exists!\n", filePath)
 	}
 
-	err, flag := util.GetCurrentFlag()
+	flag, err := util.GetCurrentFlag()
 	if err != nil {
 		flag = config.FlagFormat
 	}

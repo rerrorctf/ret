@@ -11,7 +11,7 @@ import (
 )
 
 func displayCurrentFlag() {
-	err, flag := util.GetCurrentFlag()
+	flag, err := util.GetCurrentFlag()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "⚠️ "+theme.ColorYellow+" warning"+theme.ColorReset+": flag file \"%s\" doesn't exist\n", config.FlagFileName)
 		return

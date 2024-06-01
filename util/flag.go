@@ -9,10 +9,10 @@ import (
 	"ret/theme"
 )
 
-func GetCurrentFlag() (error, string) {
+func GetCurrentFlag() (string, error) {
 	jsonData, err := os.ReadFile(config.FlagFileName)
 	if err != nil {
-		return err, ""
+		return "", err
 	}
 
 	var flag data.Flag
@@ -20,8 +20,8 @@ func GetCurrentFlag() (error, string) {
 	err = json.Unmarshal(jsonData, &flag)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		return err, ""
+		return "", err
 	}
 
-	return nil, flag.Flag
+	return flag.Flag, nil
 }
