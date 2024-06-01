@@ -109,6 +109,7 @@ func main() {
 	if command[0] == 'c' {
 		if len(command) > 1 {
 			if command[1] == 't' {
+				util.EnsureSkeleton()
 				commands.Ctf(flag.Args()[1:])
 				return
 			}
