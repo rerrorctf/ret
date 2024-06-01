@@ -119,6 +119,11 @@ func Chat(args []string) {
 				os.Exit(1)
 			}
 			sendEmbed(buffer.String())
+
+			if len(args) > 1 {
+				sendChat(strings.Join(args[1:], " "))
+			}
+
 			return
 		}
 	}
