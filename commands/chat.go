@@ -1,23 +1,77 @@
 package commands
 
 import (
-	"bufio"
+	"bytes"
+	"encoding/json"
 	"fmt"
+	"io"
+	"math/rand"
+	"net/http"
 	"os"
-	"os/exec"
 	"ret/config"
 	"ret/theme"
 	"strings"
+	"time"
 )
 
-func sendLine(line string) {
-	line = strings.ReplaceAll(line, "\"", "\\\"")
+func sendToChat(line string) {
+	embed := map[string]interface{}{
+		"title": "ret chat",
+		//"description": "This is an example of a rich embed.",
+		"url":       "https://github.com/rerrorctf/ret/blob/main/commands/chat.go",
+		"color":     rand.Intn(0xFFFFFF),
+		"timestamp": time.Now().UTC().Format(time.RFC3339),
+		//"footer": map[string]string{
+		//"text":     "Footer text",
+		//"icon_url": "https://example.com/footer-icon.png",
+		//},
+		//"thumbnail": map[string]string{
+		//"url": "https://example.com/thumbnail.png",
+		//},
+		//"image": map[string]string{
+		//"url": "https://example.com/image.png",
+		//},
+		//"author": map[string]string{
+		//"name":     "Author Name",
+		//"url":      "https://example.com",
+		//"icon_url": "https://example.com/author-icon.png",
+		//},
+		"fields": []map[string]interface{}{
+			{
+				"name":   "📢",
+				"value":  "`" + line + "`",
+				"inline": false,
+			},
+		},
+	}
 
-	content := fmt.Sprintf(`{"content": "%s"}`, line)
+	message := map[string]interface{}{
+		"username": config.ChatUsername,
+		//"content":  "Hello, here is a message with an embed:",
+		"embeds": []interface{}{embed},
+	}
 
-	hook := exec.Command("curl", "-H", "Content-type: application/json", "-d", content, config.ChatWebhookUrl)
+	body, err := json.Marshal(message)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
+		os.Exit(1)
+	}
 
-	hook.Run()
+	req, err := http.NewRequest("POST", config.ChatWebhookUrl, bytes.NewBuffer(body))
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
+		os.Exit(1)
+	}
+	req.Header.Set("Content-Type", "application/json")
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
+		os.Exit(1)
+	}
+
+	resp.Body.Close()
 }
 
 func chatHelp() {
@@ -45,18 +99,16 @@ func Chat(args []string) {
 
 	if len(args) > 0 {
 		if strings.Compare("-", args[0]) == 0 {
-			sendLine(fmt.Sprintf("📢 %s:", config.ChatUsername))
-
-			scanner := bufio.NewScanner(os.Stdin)
-			for scanner.Scan() {
-				if scanner.Err() != nil {
-					break
-				}
-				sendLine(scanner.Text())
+			var buffer bytes.Buffer
+			_, err := io.Copy(&buffer, os.Stdin)
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
+				os.Exit(1)
 			}
+			sendToChat(buffer.String())
 			return
 		}
 	}
 
-	sendLine(fmt.Sprintf("📢 %s: %s", config.ChatUsername, strings.Join(args, " ")))
+	sendToChat(strings.Join(args, " "))
 }
