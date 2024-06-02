@@ -26,6 +26,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "  🦖 "+theme.ColorBlue+"ghidra"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  💃 "+theme.ColorBlue+"ida"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  🐋 "+theme.ColorBlue+"docker"+theme.ColorReset+"\n")
+		fmt.Fprintf(os.Stderr, "  🗽 "+theme.ColorBlue+"libc"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  ✅ "+theme.ColorBlue+"check"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  📞 "+theme.ColorBlue+"syscall"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  🤝 "+theme.ColorBlue+"abi"+theme.ColorReset+"\n")
@@ -147,6 +148,12 @@ func main() {
 			commands.Wizard(flag.Args()[1:])
 			return
 		}
+	}
+
+	// libc
+	if command[0] == 'l' {
+		commands.Libc(flag.Args()[1:])
+		return
 	}
 
 	// help

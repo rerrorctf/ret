@@ -139,6 +139,8 @@ $ ret command help
 
 [docker 🐋](https://github.com/rerrorctf/ret?tab=readme-ov-file#docker-)
 
+[libc 🗽](https://github.com/rerrorctf/ret?tab=readme-ov-file#libc-)
+
 [check ✅](https://github.com/rerrorctf/ret?tab=readme-ov-file#check-)
 
 [syscall 📞](https://github.com/rerrorctf/ret?tab=readme-ov-file#syscall-)
@@ -282,6 +284,26 @@ usage: ret docker [ip] [port]
 Creates a Dockerfile from a template.
 
 https://github.com/rerrorctf/ret/blob/main/commands/docker.go
+
+### libc 🗽
+
+```
+usage: ret libc [tag]
+```
+
+Creates and runs a container based on the given tag.
+
+By default will use ubuntu:latest as the tag if none is provided.
+
+In a temp directory a Dockerfile and script will be created and ran.
+
+The script will build, run, stop and remove the container.
+
+When the container is running libc.so.6 will be copied from the container.
+
+After the container is destroyed the file is copied to the cwd and added with ret.
+
+https://github.com/rerrorctf/ret/blob/main/commands/libc.go
 
 ### check ✅
 
