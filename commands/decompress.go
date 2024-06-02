@@ -22,6 +22,7 @@ func Decompress(args []string) {
 			os.Exit(0)
 		default:
 			for _, file := range args {
+				fmt.Printf("🤏 decompressing \"%s\"\n", file)
 				util.DecompressFile(file)
 			}
 		}
