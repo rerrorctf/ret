@@ -32,7 +32,7 @@ var validExtensions = map[string][]string{
 	TAR:  {"tar"},
 }
 
-func isDecompressable(path string) (string, bool) {
+func IsDecompressable(path string) (string, bool) {
 	fileType := ""
 
 	splits := strings.Split(path, ".")
@@ -115,14 +115,10 @@ func decompressFileTar(path string) {
 }
 
 func DecompressFile(path string) bool {
-	fmt.Printf(theme.ColorGray+"decompressing "+theme.ColorReset+"%s...", path)
-	fileType, decompressable := isDecompressable(path)
+	fileType, decompressable := IsDecompressable(path)
 	if !decompressable {
-		fmt.Printf(theme.ColorPurple + " skipping\n")
 		return false
 	}
-
-	fmt.Printf(theme.ColorYellow+" %s compressed"+theme.ColorReset+"...", fileType)
 
 	switch fileType {
 	case GZIP:
@@ -136,8 +132,6 @@ func DecompressFile(path string) bool {
 	case TAR:
 		decompressFileTar(path)
 	}
-
-	fmt.Printf(theme.ColorGreen + " done!" + theme.ColorReset + "\n")
 
 	return true
 }
