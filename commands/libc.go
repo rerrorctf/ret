@@ -7,7 +7,22 @@ import (
 	"os/exec"
 	"ret/theme"
 	"ret/util"
+	"time"
 )
+
+func libcSpinner() {
+	emojis := []string{
+		"🐳", "🐋", "🐟", "🐠", "🐡", "🦈", "⚓", "🛳️", "🚢", "🚤",
+		"🛶", "⛵", "🌊", "🚩",
+	}
+
+	for {
+		for _, e := range emojis {
+			fmt.Printf("\r%s", e)
+			time.Sleep(200 * time.Millisecond)
+		}
+	}
+}
 
 func libcHelp() {
 	fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"libc"+theme.ColorGray+" [tag]"+theme.ColorReset+"\n")
@@ -26,6 +41,8 @@ func Libc(args []string) {
 			libcHelp()
 		}
 	}
+
+	go libcSpinner()
 
 	tag := "ubuntu:latest"
 
