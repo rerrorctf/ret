@@ -101,6 +101,7 @@ func Wizard(args []string) {
 	for _, file := range interestingFiles {
 		decompessed := util.DecompressFile(file)
 		if decompessed {
+			fmt.Printf("🧙💬 "+theme.ColorGreen+"I decompressed "+theme.ColorCyan+"\"%s\""+theme.ColorGreen+" for you."+theme.ColorReset+"\n", file)
 			unzippedAny = true
 		}
 	}
@@ -124,10 +125,8 @@ func Wizard(args []string) {
 	filesToAdd := []string{}
 
 	for _, file := range interestingFiles {
-		result := util.RunFileCommandOnFile(file)
-
-		if strings.Contains(result, "Zip archive data") {
-			fmt.Printf("🧙💬 "+theme.ColorGreen+"Skipping "+theme.ColorCyan+"\"%s\""+theme.ColorGreen+" as it is a zip file."+theme.ColorReset+"\n", file)
+		if _, decompressable := util.IsDecompressable(file); decompressable {
+			fmt.Printf("🧙🪄 "+theme.ColorGreen+"Skipping "+theme.ColorCyan+"\"%s\""+theme.ColorGreen+" as it was decompressed."+theme.ColorReset+"\n", file)
 			continue
 		}
 
