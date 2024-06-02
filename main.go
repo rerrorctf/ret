@@ -21,6 +21,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "  🔍 "+theme.ColorBlue+"format"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  🧙 "+theme.ColorBlue+"wizard"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  📥 "+theme.ColorBlue+"add"+theme.ColorReset+"\n")
+		fmt.Fprintf(os.Stderr, "  🤏 "+theme.ColorBlue+"decompress"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  👀 "+theme.ColorBlue+"status"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  🐚 "+theme.ColorBlue+"pwn"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  🦖 "+theme.ColorBlue+"ghidra"+theme.ColorReset+"\n")
@@ -61,8 +62,17 @@ func main() {
 
 	// docker
 	if command[0] == 'd' {
-		commands.Docker(flag.Args()[1:])
-		return
+		if len(command) > 1 {
+			if command[1] == 'o' {
+				commands.Docker(flag.Args()[1:])
+				return
+			}
+
+			if command[1] == 'e' {
+				commands.Decompress(flag.Args()[1:])
+				return
+			}
+		}
 	}
 
 	// ghidra

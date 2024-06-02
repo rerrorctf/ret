@@ -129,6 +129,8 @@ $ ret command help
 
 [add 📥](https://github.com/rerrorctf/ret?tab=readme-ov-file#add-)
 
+[decompress 🤏](https://github.com/rerrorctf/ret?tab=readme-ov-file#decompress-)
+
 [status 👀](https://github.com/rerrorctf/ret?tab=readme-ov-file#status-)
 
 [pwn 🐚](https://github.com/rerrorctf/ret?tab=readme-ov-file#pwn-)
@@ -216,6 +218,14 @@ Added files are stored in in the hidden directory `.ret/files` inside a subfolde
 Added files are subject to being automatically ingested by the commands `ghidra` and `ida`.
 
 https://github.com/rerrorctf/ret/blob/main/commands/add.go
+
+### decompress 🤏
+
+```
+usage: ret decompress file1 [file2 file3...]
+```
+
+https://github.com/rerrorctf/ret/blob/main/commands/decompress.go
 
 ### status 👀
 
