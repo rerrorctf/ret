@@ -159,6 +159,7 @@ func Wizard(args []string) {
 			fmt.Printf("🧙💬 " + theme.ColorGreen + "I see that there is at least one ELF." + theme.ColorReset + "\n")
 			fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me make a pwn template for you!" + theme.ColorReset + "\n")
 			Pwn(args)
+			break
 		}
 	}
 
