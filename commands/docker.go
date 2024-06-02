@@ -15,7 +15,7 @@ func makeDockerFile(port int) {
 
 	dockerfile := fmt.Sprintf(
 		"FROM ubuntu:24.04\n\n"+
-			"RUN apt update && apt install -y socat\n\n"+
+			"RUN apt update && apt upgrade -y && apt install -y socat\n\n"+
 			"COPY %s .\n\n"+
 			"RUN echo \"flag{example}\" > flag.txt\n\n"+
 			"RUN chmod +x ./%s\n\n"+
