@@ -39,15 +39,3 @@ func RunFileCommandOnFile(path string) string {
 
 	return string(fileOutputResult[len(path)+2 : len(fileOutputResult)-1])
 }
-
-func UnzipFile(path string) {
-	fileOutput := exec.Command("unzip", path)
-
-	fileOutputResult, err := fileOutput.Output()
-	if err != nil {
-		fmt.Printf("warning: unable to unzip file %s\n", path)
-		return
-	}
-
-	fmt.Printf("%s", fileOutputResult)
-}
