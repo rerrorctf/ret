@@ -5,7 +5,6 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"io"
 	"os"
 	"path/filepath"
 	"ret/config"
@@ -17,27 +16,6 @@ import (
 func filesAlreadyExists() bool {
 	_, err := os.Stat(config.RetFilesNames)
 	return !os.IsNotExist(err)
-}
-
-func copyFile(srcPath string, dstPath string) error {
-	srcFile, err := os.Open(srcPath)
-	if err != nil {
-		return err
-	}
-	defer srcFile.Close()
-
-	dstFile, err := os.Create(dstPath)
-	if err != nil {
-		return err
-	}
-	defer dstFile.Close()
-
-	_, err = io.Copy(dstFile, srcFile)
-	if err != nil {
-		return err
-	}
-
-	return nil
 }
 
 func parseFiles(files *data.Files) {
@@ -111,7 +89,7 @@ func addFile(srcPath string) {
 		return
 	}
 
-	err = copyFile(srcPath, dstPath)
+	err = util.CopyFile(srcPath, dstPath)
 	if err != nil {
 		fmt.Println("error copying file:", dstPath)
 		return

@@ -2,8 +2,31 @@ package util
 
 import (
 	"fmt"
+	"io"
+	"os"
 	"os/exec"
 )
+
+func CopyFile(srcPath string, dstPath string) error {
+	srcFile, err := os.Open(srcPath)
+	if err != nil {
+		return err
+	}
+	defer srcFile.Close()
+
+	dstFile, err := os.Create(dstPath)
+	if err != nil {
+		return err
+	}
+	defer dstFile.Close()
+
+	_, err = io.Copy(dstFile, srcFile)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
 
 func RunFileCommandOnFile(path string) string {
 	fileOutput := exec.Command("file", path)
