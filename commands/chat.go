@@ -14,6 +14,18 @@ import (
 	"time"
 )
 
+func removeColors(message string) string {
+	message = strings.ReplaceAll(message, theme.ColorReset, "")
+	message = strings.ReplaceAll(message, theme.ColorRed, "")
+	message = strings.ReplaceAll(message, theme.ColorGreen, "")
+	message = strings.ReplaceAll(message, theme.ColorYellow, "")
+	message = strings.ReplaceAll(message, theme.ColorBlue, "")
+	message = strings.ReplaceAll(message, theme.ColorPurple, "")
+	message = strings.ReplaceAll(message, theme.ColorCyan, "")
+	message = strings.ReplaceAll(message, theme.ColorGray, "")
+	return message
+}
+
 func sendMessage(message map[string]interface{}) {
 	body, err := json.Marshal(message)
 	if err != nil {
@@ -38,20 +50,24 @@ func sendMessage(message map[string]interface{}) {
 	resp.Body.Close()
 }
 
-func sendChat(line string) {
-	message := map[string]interface{}{
+func sendChat(message string) {
+	message = removeColors(message)
+
+	body := map[string]interface{}{
 		"username": config.ChatUsername,
-		"content":  line,
+		"content":  message,
 	}
 
-	sendMessage(message)
+	sendMessage(body)
 }
 
-func sendEmbed(line string) {
+func sendEmbed(message string) {
+	message = removeColors(message)
+
 	embed := map[string]interface{}{
 		//"title": "ret chat",
 		//"description": "This is an example of a rich embed.",
-		"url":       "https://github.com/rerrorctf/ret/blob/main/commands/chat.go",
+		//"url":       "https://github.com/rerrorctf/ret/blob/main/commands/chat.go",
 		"color":     rand.Intn(0xFFFFFF),
 		"timestamp": time.Now().UTC().Format(time.RFC3339),
 		//"footer": map[string]string{
@@ -72,18 +88,18 @@ func sendEmbed(line string) {
 		"fields": []map[string]interface{}{
 			{
 				"name":   "ret chat 📢",
-				"value":  line,
+				"value":  message,
 				"inline": false,
 			},
 		},
 	}
 
-	message := map[string]interface{}{
+	body := map[string]interface{}{
 		"username": config.ChatUsername,
 		"embeds":   []interface{}{embed},
 	}
 
-	sendMessage(message)
+	sendMessage(body)
 }
 
 func chatHelp() {
