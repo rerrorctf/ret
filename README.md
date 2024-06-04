@@ -245,6 +245,54 @@ usage: ret pwn [ip] [port]
 
 Creates a pwntools script from a template.
 
+If `~/.config/ret` contains a value for `pwnscripttemplate` the contents of this file will be used as the template instead.
+
+If a custom template is in use `pwn` will take the contents of the file at this path and do the following substitutions:
+  - :%s/\%BINARY\%/task
+    - where task is the result of util.GuessBinary()
+  - :%s/\%IP\%/127.0.0.1
+    - where 127.0.0.1 is the supplied ip address
+  - :%s/\%PORT\%/9001
+    - where 9001 is the supplied port
+
+For example:
+
+```python
+#!/usr/bin/env python3
+
+from pwn import *
+
+#context.log_level = "debug"
+elf = ELF("./%BINARY%", checksec=False)
+context.binary = elf
+
+#p = elf.process()
+#p = elf.debug(gdbscript="")
+p = remote("%IP%", %PORT%)
+
+p.interactive()
+```
+
+Might be transformed into:
+
+```python
+#!/usr/bin/env python3
+
+from pwn import *
+
+#context.log_level = "debug"
+elf = ELF("./task", checksec=False)
+context.binary = elf
+
+#p = elf.process()
+#p = elf.debug(gdbscript="")
+p = remote("127.0.0.1", 9001)
+
+p.interactive()
+```
+
+Note the placement of the `"` characters.
+
 https://github.com/rerrorctf/ret/blob/main/commands/pwn.go
 
 ### ghidra 🦖
@@ -421,7 +469,10 @@ The data in the config must be in the json format. You can include zero or more 
 
 - `pwnscriptname`
   - This is what you would like the script created by `ret pwn` to be called.
-  - The default is `go.py` and is chosen to be short and not clash with any common imports as per https://github.com/rerrorctf/ret/blob/main/config/config.go#L16
+  - The default is `go.py` and is chosen to be short and not clash with any common imports as per https://github.com/rerrorctf/ret/blob/main/config/config.go#L25
+
+- `pwnscripttemplate`
+  - Path to a template to that can be used to override the default behaviour of pwn.
 
 - `flagformat`
   - This is the regular expression that matches the flag format for the ctf you are currently playing.

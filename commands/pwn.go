@@ -28,17 +28,32 @@ func makeScript(ip string, port int) {
 		}
 	}
 
-	script := fmt.Sprintf(
-		"#!/usr/bin/env python3\n\n"+
-			"from pwn import *\n\n"+
-			"#context.log_level = \"debug\"\n"+
-			"elf = ELF(\"./%s\", checksec=False)\n"+
-			"context.binary = elf\n\n"+
-			"#p = elf.process()\n"+
-			"#p = elf.debug(gdbscript=\"\")\n"+
-			"p = remote(\"%s\", %d)\n\n"+
-			"p.interactive()\n",
-		binary, ip, port)
+	var script string
+
+	if len(config.PwnScriptTemplate) > 0 {
+		fmt.Printf("🐚 "+theme.ColorGray+"using custom template: \""+theme.ColorCyan+"%s"+theme.ColorGray+"\""+theme.ColorReset+"\n", config.PwnScriptTemplate)
+		buf, err := os.ReadFile(config.PwnScriptTemplate)
+		if err != nil {
+			log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": reading \"%s\" %v\n", config.PwnScriptTemplate, err)
+		}
+
+		script = string(buf)
+		script = strings.ReplaceAll(script, "%BINARY%", binary)
+		script = strings.ReplaceAll(script, "%IP%", ip)
+		script = strings.ReplaceAll(script, "%PORT%", fmt.Sprintf("%d", port))
+	} else {
+		script = fmt.Sprintf(
+			"#!/usr/bin/env python3\n\n"+
+				"from pwn import *\n\n"+
+				"#context.log_level = \"debug\"\n"+
+				"elf = ELF(\"./%s\", checksec=False)\n"+
+				"context.binary = elf\n\n"+
+				"#p = elf.process()\n"+
+				"#p = elf.debug(gdbscript=\"\")\n"+
+				"p = remote(\"%s\", %d)\n\n"+
+				"p.interactive()\n",
+			binary, ip, port)
+	}
 
 	err := os.WriteFile(config.PwnScriptName, []byte(script), 0644)
 	if err != nil {

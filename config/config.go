@@ -23,6 +23,7 @@ var (
 	IdaInstallPath    = "/opt/ida"
 	IdaProjectPath    = FolderName + "/ida"
 	PwnScriptName     = "go.py"
+	PwnScriptTemplate = ""
 	FlagFileName      = FolderName + "/flag.json"
 	FlagFormat        = "flag{.+}"
 	WizardPreCommand  = ""
@@ -73,6 +74,10 @@ func ParseUserConfig() {
 		PwnScriptName = userConfig.PwnScriptName
 	}
 
+	if len(userConfig.PwnScriptTemplate) > 0 {
+		PwnScriptTemplate = userConfig.PwnScriptTemplate
+	}
+
 	if len(userConfig.FlagFormat) > 0 {
 		FlagFormat = userConfig.FlagFormat
 	}
@@ -109,6 +114,7 @@ func WriteUserConfig() {
 	userConfig.IdaInstallPath = IdaInstallPath
 	userConfig.IdaProjectPath = IdaProjectPath
 	userConfig.PwnScriptName = PwnScriptName
+	userConfig.PwnScriptTemplate = PwnScriptTemplate
 	userConfig.FlagFormat = FlagFormat
 	userConfig.WizardPreCommand = WizardPreCommand
 	userConfig.WizardPostCommand = WizardPostCommand
