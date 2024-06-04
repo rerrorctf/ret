@@ -30,6 +30,7 @@ var (
 	WizardPostCommand = ""
 	ChatUsername      = ""
 	ChatWebhookUrl    = ""
+	GistToken         = ""
 )
 
 func ParseUserConfig() {
@@ -97,6 +98,10 @@ func ParseUserConfig() {
 	if len(userConfig.ChatWebhookUrl) > 0 {
 		ChatWebhookUrl = userConfig.ChatWebhookUrl
 	}
+
+	if len(userConfig.GistToken) > 0 {
+		GistToken = userConfig.GistToken
+	}
 }
 
 func WriteUserConfig() {
@@ -120,6 +125,7 @@ func WriteUserConfig() {
 	userConfig.WizardPostCommand = WizardPostCommand
 	userConfig.ChatUsername = ChatUsername
 	userConfig.ChatWebhookUrl = ChatWebhookUrl
+	userConfig.GistToken = GistToken
 
 	jsonData, err := json.MarshalIndent(userConfig, "", "  ")
 	if err != nil {

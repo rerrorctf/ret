@@ -12,4 +12,5 @@ type Config struct {
 	WizardPostCommand string `json:"wizardpostcommand"`
 	ChatUsername      string `json:"chatusername"`
 	ChatWebhookUrl    string `json:"chatwebhookurl"`
+	GistToken         string `json:"gisttoken"`
 }

@@ -151,6 +151,8 @@ $ ret command help
 
 [chat 📢](https://github.com/rerrorctf/ret?tab=readme-ov-file#chat-)
 
+[gist 🤫](https://github.com/rerrorctf/ret?tab=readme-ov-file#gist-)
+
 [writeup 📝](https://github.com/rerrorctf/ret?tab=readme-ov-file#writeup-)
 
 [cheatsheet 📚](https://github.com/rerrorctf/ret?tab=readme-ov-file#cheatsheet-)
@@ -423,6 +425,25 @@ See https://github.com/rerrorctf/ret/blob/main/README.md#configret for more info
 
 https://github.com/rerrorctf/ret/blob/main/commands/chat.go
 
+### gist 🤫
+
+```
+usage: ret gist file [-]
+```
+
+Create a private gist from a file.
+
+Optionally you can read from stdin by specifying `-` after the file param. In this case file will be used only as the name.
+
+Requires `~/.config/ret` to have a valid `gisttoken`.
+
+https://github.com/settings/tokens?type=beta
+
+https://docs.github.com/en/rest/gists/gists?apiVersion=2022-11-28#create-a-gist
+
+https://github.com/rerrorctf/ret/blob/main/commands/gist.go
+
+
 ### writeup 📝
 
 ```
@@ -491,6 +512,11 @@ The data in the config must be in the json format. You can include zero or more 
 
 - `chatwebhookurl`
   - This will be used to send chat message to discord.
+
+- `gisttoken`
+  - A github gist token with read/write gist permissions is required to use the gist command.
+  - https://github.com/settings/tokens?type=beta
+  - https://docs.github.com/en/rest/gists/gists?apiVersion=2022-11-28#create-a-gist
 
 ## The .ret Directory Structure
 
