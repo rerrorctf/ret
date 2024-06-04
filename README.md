@@ -83,10 +83,10 @@ Please note that, while `ret` is a single file built for x64 linux, you can use 
 
 ### Installation
 
-Here installation just means putting `ret` somewhere on your path. I like to copy it to `/usr/local/bin`.
+Here installation just means putting `ret` somewhere on your path. I like to make a symlink it to in `/usr/local/bin`.
 
 ```
-$ sudo cp ./ret /usr/local/bin
+$ sudo ln -s ./ret /usr/local/bin/ret
 ```
 
 Other options are available and you may do whatever works best for you.
