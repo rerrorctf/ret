@@ -12,10 +12,6 @@ import (
 	"strings"
 )
 
-type Responce struct {
-	Title string `json:"title"`
-}
-
 func gistHelp() {
 	fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"gist"+theme.ColorGray+" file [-]"+theme.ColorReset+"\n")
 	fmt.Fprintf(os.Stderr, "  🤫 make private gists with ret\n")
