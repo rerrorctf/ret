@@ -26,13 +26,15 @@ func GuessBinary() []string {
 	}
 
 	for _, file := range files.Files {
+
+		if file.FileType != data.FILE_TYPE_ELF {
+			continue
+		}
 		if strings.Contains(file.Filename, ".so") {
 			continue
 		}
 
-		if strings.Contains(file.Type, "ELF") {
-			binaries = append(binaries, file.Filename)
-		}
+		binaries = append(binaries, file.Filename)
 	}
 
 	if len(binaries) > 0 {

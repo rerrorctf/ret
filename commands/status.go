@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"os/exec"
 	"ret/config"
 	"ret/data"
 	"ret/theme"
@@ -35,7 +36,19 @@ func Status(args []string) {
 			fmt.Printf(theme.ColorGreen+" %s ", file.Filename)
 			fmt.Printf(theme.ColorReset+"%s\n", file.SHA256)
 
-			fmt.Printf(theme.ColorGray+"  type:   "+theme.ColorReset+"%s\n", file.Type)
+			if file.FileType == data.FILE_TYPE_ELF {
+				checksec := exec.Command("pwn", "checksec", file.Filepath)
+
+				checksecOutput, err := checksec.CombinedOutput()
+				if err != nil {
+					fmt.Printf(theme.ColorGray+"    "+theme.ColorReset+"%s\n", file.FileOutput)
+					continue
+				}
+
+				fmt.Printf("%s\n", checksecOutput)
+			} else {
+				fmt.Printf(theme.ColorGray+"    "+theme.ColorReset+"%s\n", file.FileOutput)
+			}
 		}
 	}
 }

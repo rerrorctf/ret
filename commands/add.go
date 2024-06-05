@@ -62,6 +62,25 @@ func addFile(srcPath string) {
 		return
 	}
 
+	fileType := data.FILE_TYPE_UNKNOWN
+
+	for magicType, magic := range data.FileMagics {
+		match := true
+		for j := range magic {
+			if content[j] != magic[j] {
+				match = false
+				break
+			}
+		}
+
+		if !match {
+			continue
+		}
+
+		fileType = magicType
+		break
+	}
+
 	sha256Hash := sha256.New()
 	sha256Hash.Write(content)
 	sha256HashString := hex.EncodeToString(sha256Hash.Sum(nil))
@@ -70,11 +89,12 @@ func addFile(srcPath string) {
 	dstPath := dirPath + "/" + fileName
 
 	file := data.File{
-		Filename: fileName,
-		Filepath: dstPath,
-		Size:     len(content),
-		Type:     fileOutput,
-		SHA256:   sha256HashString,
+		Filename:   fileName,
+		Filepath:   dstPath,
+		Size:       len(content),
+		FileType:   fileType,
+		FileOutput: fileOutput,
+		SHA256:     sha256HashString,
 	}
 
 	if _, err := os.Stat(dirPath); !os.IsNotExist(err) {
