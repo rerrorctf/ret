@@ -6,12 +6,21 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"ret/config"
 	"ret/data"
 	"ret/theme"
 	"ret/util"
 )
+
+func grep2Win(path string) {
+	grep2win := exec.Command("grep", "-aEoi", config.FlagFormat, path)
+	grep2winOutput, err := grep2win.Output()
+	if err == nil && len(grep2winOutput) > 0 {
+		fmt.Printf(theme.ColorPurple+"[grep2win]"+theme.ColorReset+": %s", grep2winOutput)
+	}
+}
 
 func filesAlreadyExists() bool {
 	_, err := os.Stat(config.RetFilesNames)
@@ -121,7 +130,7 @@ func addFile(srcPath string) {
 
 	writeFiles(&files)
 
-	util.ProcessFile(dstPath)
+	grep2Win(dstPath)
 }
 
 func AddHelp() {
