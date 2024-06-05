@@ -50,7 +50,7 @@ func Libc(args []string) {
 		tag = args[0]
 	}
 
-	dir, err := os.MkdirTemp("", "ret-libc")
+	dir, err := os.MkdirTemp("", "ret-libc-")
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 		os.Exit(1)
