@@ -6,7 +6,6 @@ import (
 	"os"
 	"os/exec"
 	"ret/theme"
-	"ret/util"
 	"time"
 )
 
@@ -70,11 +69,11 @@ func Libc(args []string) {
 	}
 
 	script := fmt.Sprintf(
-		"docker build -t ret-libc .\n" +
-			"docker run -d --name ret-libc-container ret-libc tail -f /dev/null\n" +
-			"docker cp ret-libc-container:/lib/x86_64-linux-gnu/libc.so.6 .\n" +
-			"docker stop ret-libc-container\n" +
-			"docker rm ret-libc-container\n")
+		"docker build -t ret-libc .\n"+
+			"docker run -d --name ret-libc-container ret-libc tail -f /dev/null\n"+
+			"docker cp ret-libc-container:/lib/x86_64-linux-gnu/libc.so.6 ./%s.libc.so.6\n"+
+			"docker stop ret-libc-container\n"+
+			"docker rm ret-libc-container\n", tag)
 
 	err = os.WriteFile(dir+"/go.sh", []byte(script), 0644)
 	if err != nil {
@@ -93,12 +92,5 @@ func Libc(args []string) {
 		log.Fatalln(err)
 	}
 
-	util.CopyFile(dir+"/libc.so.6", "./libc.so.6")
-
-	err = os.Chmod("./libc.so.6", 0744)
-	if err != nil {
-		log.Fatalln("error chmoding file:", err)
-	}
-
-	Add([]string{"./libc.so.6"})
+	Add([]string{dir + "/" + tag + ".libc.so.6"})
 }
