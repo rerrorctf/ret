@@ -86,9 +86,9 @@ func Libc(args []string) {
 		log.Fatalln("error chmoding file:", err)
 	}
 
-	magic := exec.Command("bash", "-c", "(cd "+dir+" && sudo ./go.sh)")
+	libc := exec.Command("bash", "-c", "(cd "+dir+" && sudo ./go.sh)")
 
-	err = magic.Run()
+	err = libc.Run()
 	if err != nil {
 		log.Fatalln(err)
 	}
