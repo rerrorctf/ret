@@ -32,7 +32,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "  📞 "+theme.ColorBlue+"syscall"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  🤝 "+theme.ColorBlue+"abi"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  📢 "+theme.ColorBlue+"chat"+theme.ColorReset+"\n")
-		fmt.Fprintf(os.Stderr, "  🤫 "+theme.ColorBlue+"gist"+theme.ColorReset+"\n")
+		fmt.Fprintf(os.Stderr, "  🐙 "+theme.ColorBlue+"gist"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  📝 "+theme.ColorBlue+"writeup"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  📚 "+theme.ColorBlue+"cheatsheet"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "\n🚩 https://github.com/rerrorctf/ret 🚩\n")

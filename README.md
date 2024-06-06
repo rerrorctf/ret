@@ -151,7 +151,7 @@ $ ret command help
 
 [chat 📢](https://github.com/rerrorctf/ret?tab=readme-ov-file#chat-)
 
-[gist 🤫](https://github.com/rerrorctf/ret?tab=readme-ov-file#gist-)
+[gist 🐙](https://github.com/rerrorctf/ret?tab=readme-ov-file#gist-)
 
 [writeup 📝](https://github.com/rerrorctf/ret?tab=readme-ov-file#writeup-)
 
@@ -425,7 +425,7 @@ See https://github.com/rerrorctf/ret/blob/main/README.md#configret for more info
 
 https://github.com/rerrorctf/ret/blob/main/commands/chat.go
 
-### gist 🤫
+### gist 🐙
 
 ```
 usage: ret gist file [-]

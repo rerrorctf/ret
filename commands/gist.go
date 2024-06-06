@@ -14,7 +14,7 @@ import (
 
 func gistHelp() {
 	fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"gist"+theme.ColorGray+" file [-]"+theme.ColorReset+"\n")
-	fmt.Fprintf(os.Stderr, "  🤫 make private gists with ret\n")
+	fmt.Fprintf(os.Stderr, "  🐙 make private gists with ret\n")
 	fmt.Fprintf(os.Stderr, "     "+theme.ColorGray+"specify the path of the file to upload"+theme.ColorReset+"\n")
 	fmt.Fprintf(os.Stderr, "     "+theme.ColorGray+"use file - to read from stdin in which case file is used for the name only"+theme.ColorReset+"\n")
 	fmt.Fprintf(os.Stderr, "  🔗 "+theme.ColorGray+"https://github.com/rerrorctf/ret/blob/main/commands/gist.go"+theme.ColorReset+"\n")
@@ -63,7 +63,7 @@ func Gist(args []string) {
 	filename := splits[len(splits)-1]
 
 	gist := map[string]interface{}{
-		"description": "🤫 made with https://github.com/rerrorctf/ret",
+		"description": "🐙 made with https://github.com/rerrorctf/ret",
 		"public":      false,
 		"files": map[string]interface{}{
 			filename: map[string]interface{}{
