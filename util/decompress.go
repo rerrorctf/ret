@@ -33,8 +33,6 @@ var validExtensions = map[string][]string{
 }
 
 func IsDecompressable(path string) (string, bool) {
-	fileType := ""
-
 	splits := strings.Split(path, ".")
 	if len(splits) < 2 {
 		return "", false
@@ -42,10 +40,11 @@ func IsDecompressable(path string) (string, bool) {
 
 	extension := splits[len(splits)-1]
 
-	for x, exts := range validExtensions {
+	fileType := ""
+	for fType, exts := range validExtensions {
 		for _, ext := range exts {
 			if extension == ext {
-				fileType = x
+				fileType = fType
 			}
 		}
 	}
