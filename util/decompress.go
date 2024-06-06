@@ -63,6 +63,9 @@ func IsDecompressable(path string) (string, bool) {
 	magic := magics[fileType]
 
 	if fileType == TAR {
+		if len(buffer) < (0x101 + len(magic)) {
+			return "", false
+		}
 		for i, b := range magic {
 			// tar magic starts in the middle of the file
 			if buffer[i+0x101] != b {
@@ -70,6 +73,9 @@ func IsDecompressable(path string) (string, bool) {
 			}
 		}
 	} else {
+		if len(buffer) < len(magic) {
+			return "", false
+		}
 		for i, b := range magic {
 			if buffer[i] != b {
 				return "", false
