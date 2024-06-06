@@ -97,7 +97,7 @@ func Gist(args []string) {
 	body, err = io.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Println("Error reading response body:", err)
-		return
+		os.Exit(1)
 	}
 
 	var result map[string]interface{}
