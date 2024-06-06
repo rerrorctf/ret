@@ -13,4 +13,5 @@ type Config struct {
 	ChatUsername      string `json:"chatusername"`
 	ChatWebhookUrl    string `json:"chatwebhookurl"`
 	GistToken         string `json:"gisttoken"`
+	OpenAIKey         string `json:"openaikey"`
 }

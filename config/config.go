@@ -31,6 +31,7 @@ var (
 	ChatUsername      = ""
 	ChatWebhookUrl    = ""
 	GistToken         = ""
+	OpenAIKey         = ""
 )
 
 func ParseUserConfig() {
@@ -102,6 +103,10 @@ func ParseUserConfig() {
 	if len(userConfig.GistToken) > 0 {
 		GistToken = userConfig.GistToken
 	}
+
+	if len(userConfig.OpenAIKey) > 0 {
+		OpenAIKey = userConfig.OpenAIKey
+	}
 }
 
 func WriteUserConfig() {
@@ -126,6 +131,7 @@ func WriteUserConfig() {
 	userConfig.ChatUsername = ChatUsername
 	userConfig.ChatWebhookUrl = ChatWebhookUrl
 	userConfig.GistToken = GistToken
+	userConfig.OpenAIKey = OpenAIKey
 
 	jsonData, err := json.MarshalIndent(userConfig, "", "  ")
 	if err != nil {

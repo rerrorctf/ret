@@ -35,6 +35,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "  🐙 "+theme.ColorBlue+"gist"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  📝 "+theme.ColorBlue+"writeup"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "  📚 "+theme.ColorBlue+"cheatsheet"+theme.ColorReset+"\n")
+		fmt.Fprintf(os.Stderr, "  🧠 "+theme.ColorBlue+"gpt"+theme.ColorReset+"\n")
 		fmt.Fprintf(os.Stderr, "\n🚩 https://github.com/rerrorctf/ret 🚩\n")
 	}
 
@@ -87,6 +88,11 @@ func main() {
 
 			if command[1] == 'i' {
 				commands.Gist(flag.Args()[1:])
+				return
+			}
+
+			if command[1] == 'p' {
+				commands.Gpt(flag.Args()[1:])
 				return
 			}
 		}

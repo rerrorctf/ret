@@ -157,6 +157,8 @@ $ ret command help
 
 [cheatsheet 📚](https://github.com/rerrorctf/ret?tab=readme-ov-file#cheatsheet-)
 
+[gpt 🧠](https://github.com/rerrorctf/ret?tab=readme-ov-file#gpt-)
+
 ### ctf 🚩
 
 ```
@@ -463,6 +465,14 @@ usage: ret cheatsheet
 Prints a list of cheatsheets for quick reference.
 
 https://github.com/rerrorctf/ret/blob/main/commands/cheatsheet.go
+
+### gpt 🧠
+
+```
+usage: ret gpt
+```
+
+https://github.com/rerrorctf/ret/blob/main/commands/gpt.go
 
 ## ~/.config/ret
 
