@@ -22,8 +22,13 @@ func Decompress(args []string) {
 			os.Exit(0)
 		default:
 			for _, file := range args {
-				fmt.Printf("🤏 decompressing \"%s\"\n", file)
-				util.DecompressFile(file)
+				decompressed := util.DecompressFile(file)
+
+				if decompressed {
+					fmt.Printf("🤏 "+theme.ColorGreen+"decompressed"+theme.ColorReset+":\"%s\"\n", file)
+				} else {
+					fmt.Printf("⚠️ "+theme.ColorYellow+"unable to decompress"+theme.ColorReset+":\"%s\"\n", file)
+				}
 			}
 		}
 	} else {
