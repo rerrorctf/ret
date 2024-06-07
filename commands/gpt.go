@@ -9,11 +9,13 @@ import (
 	"os"
 	"ret/config"
 	"ret/theme"
+	"strings"
 )
 
 func gptHelp() {
 	fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"gpt"+theme.ColorGray+" question"+theme.ColorReset+"\n")
 	fmt.Fprintf(os.Stderr, "  🧠 ask ChatGPT with ret\n")
+	fmt.Fprintf(os.Stderr, "     "+theme.ColorGray+"use - to read from stdin"+theme.ColorReset+"\n")
 	fmt.Fprintf(os.Stderr, "  🔗 "+theme.ColorGray+"https://github.com/rerrorctf/ret/blob/main/commands/gpt.go"+theme.ColorReset+"\n")
 	os.Exit(0)
 }
@@ -32,6 +34,18 @@ func Gpt(args []string) {
 	if config.OpenAIKey == "" {
 		fmt.Fprintf(os.Stderr, "💥 "+theme.ColorRed+" error"+theme.ColorReset+": no OpenAI key found in %s\n", config.UserConfig)
 		os.Exit(1)
+	}
+
+	content := args[0]
+
+	if strings.Compare("-", args[0]) == 0 {
+		var buffer bytes.Buffer
+		_, err := io.Copy(&buffer, os.Stdin)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
+			os.Exit(1)
+		}
+		content = buffer.String()
 	}
 
 	query := map[string]interface{}{
@@ -53,7 +67,7 @@ func Gpt(args []string) {
 			},
 			{
 				"role":    "user",
-				"content": args[0],
+				"content": content,
 			},
 		},
 		"temperature": 0.7,
