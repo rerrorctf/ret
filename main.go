@@ -14,29 +14,20 @@ import (
 
 func main() {
 	flag.Usage = func() {
-		fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"command"+theme.ColorGray+" [arg1 arg2...]\n\n"+theme.ColorReset)
+		fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"command"+theme.ColorGray+" [arg1 arg2...]\n"+theme.ColorReset)
 
-		fmt.Fprintf(os.Stderr, theme.ColorGreen+"commands"+theme.ColorReset+":\n")
-		fmt.Fprintf(os.Stderr, "  🚩 "+theme.ColorBlue+"ctf"+theme.ColorReset+"\n")
-		fmt.Fprintf(os.Stderr, "  🔍 "+theme.ColorBlue+"format"+theme.ColorReset+"\n")
-		fmt.Fprintf(os.Stderr, "  🧙 "+theme.ColorBlue+"wizard"+theme.ColorReset+"\n")
-		fmt.Fprintf(os.Stderr, "  📥 "+theme.ColorBlue+"add"+theme.ColorReset+"\n")
-		fmt.Fprintf(os.Stderr, "  🤏 "+theme.ColorBlue+"decompress"+theme.ColorReset+"\n")
-		fmt.Fprintf(os.Stderr, "  👀 "+theme.ColorBlue+"status"+theme.ColorReset+"\n")
-		fmt.Fprintf(os.Stderr, "  🐚 "+theme.ColorBlue+"pwn"+theme.ColorReset+"\n")
-		fmt.Fprintf(os.Stderr, "  🦖 "+theme.ColorBlue+"ghidra"+theme.ColorReset+"\n")
-		fmt.Fprintf(os.Stderr, "  💃 "+theme.ColorBlue+"ida"+theme.ColorReset+"\n")
-		fmt.Fprintf(os.Stderr, "  🐋 "+theme.ColorBlue+"docker"+theme.ColorReset+"\n")
-		fmt.Fprintf(os.Stderr, "  🗽 "+theme.ColorBlue+"libc"+theme.ColorReset+"\n")
-		fmt.Fprintf(os.Stderr, "  ✅ "+theme.ColorBlue+"check"+theme.ColorReset+"\n")
-		fmt.Fprintf(os.Stderr, "  📞 "+theme.ColorBlue+"syscall"+theme.ColorReset+"\n")
-		fmt.Fprintf(os.Stderr, "  🤝 "+theme.ColorBlue+"abi"+theme.ColorReset+"\n")
-		fmt.Fprintf(os.Stderr, "  📢 "+theme.ColorBlue+"chat"+theme.ColorReset+"\n")
-		fmt.Fprintf(os.Stderr, "  🐙 "+theme.ColorBlue+"gist"+theme.ColorReset+"\n")
-		fmt.Fprintf(os.Stderr, "  📝 "+theme.ColorBlue+"writeup"+theme.ColorReset+"\n")
-		fmt.Fprintf(os.Stderr, "  📚 "+theme.ColorBlue+"cheatsheet"+theme.ColorReset+"\n")
-		fmt.Fprintf(os.Stderr, "  🧠 "+theme.ColorBlue+"gpt"+theme.ColorReset+"\n")
-		fmt.Fprintf(os.Stderr, "\n🚩 https://github.com/rerrorctf/ret 🚩\n")
+		fmt.Fprintf(os.Stderr, theme.ColorGray+
+			"   core            rev            pwn            info            util\n"+
+			"-------------------------------------------------------------------------\n"+
+			theme.ColorBlue+
+			"🚩 ctf          🦖 ghidra      🐚 pwn         🤝 abi         🤏 decompress\n"+
+			"🔍 format       💃 ida         🐋 docker      📞 syscall     ✅ check\n"+
+			"👀 status                      🗽 libc        📚 cheatsheet  📢 chat\n"+
+			"📥 add                                                       🧠 gpt\n"+
+			"🧙 wizard                                                    📝 writeup\n"+
+			"                                                             🐙 gist\n"+theme.ColorReset)
+
+		fmt.Fprintf(os.Stderr, "🚩 https://github.com/rerrorctf/ret 🚩\n")
 	}
 
 	flag.Parse()
