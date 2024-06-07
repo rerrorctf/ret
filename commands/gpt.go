@@ -29,6 +29,11 @@ func Gpt(args []string) {
 		return
 	}
 
+	if config.OpenAIKey == "" {
+		fmt.Fprintf(os.Stderr, "💥 "+theme.ColorRed+" error"+theme.ColorReset+": no OpenAI key found in %s\n", config.UserConfig)
+		os.Exit(1)
+	}
+
 	query := map[string]interface{}{
 		"model": "gpt-4o",
 		"messages": []map[string]interface{}{
