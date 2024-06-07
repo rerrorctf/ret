@@ -94,7 +94,7 @@ If you have details for remote infrastructure you can supply those too:
 $ ret pwn ctf.example.com 9001
 ```
 
-### Installation
+## Installation
 
 You can simply get the latest pre-built binary from https://github.com/rerrorctf/ret/releases.
 
