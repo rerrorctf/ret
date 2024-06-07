@@ -2,27 +2,44 @@
 
 <img src="https://github.com/rerrorctf/ret/assets/93072266/5a998dbb-5730-4b10-9636-45e35e9fe77e" alt="rounding error ctf team logo" width="400"/>
 
-This tool helps you solve CTF tasks by automating workflow and basic analysis.
+This tool helps you solve CTF tasks by automating workflow and basic analysis and providing useful utilities.
 
-## Examples
+## Table of Contents
+1. [Introduction](https://github.com/rerrorctf/ret?tab=readme-ov-file#Introduction-)
+2. [Installation](https://github.com/rerrorctf/ret?tab=readme-ov-file#Installation-)
+3. [Commands](https://github.com/rerrorctf/ret?tab=readme-ov-file#Commands-)
+  - Core Commands
+    - [ctf 🚩](https://github.com/rerrorctf/ret?tab=readme-ov-file#ctf-)
+    - [format 🔍](https://github.com/rerrorctf/ret?tab=readme-ov-file#format-)
+    - [status 👀](https://github.com/rerrorctf/ret?tab=readme-ov-file#status-)
+    - [add 📥](https://github.com/rerrorctf/ret?tab=readme-ov-file#add-)
+    - [wizard 🧙](https://github.com/rerrorctf/ret?tab=readme-ov-file#wizard-)
+  - Rev Commands
+    - [ghidra 🦖](https://github.com/rerrorctf/ret?tab=readme-ov-file#ghidra-)
+    - [ida 💃](https://github.com/rerrorctf/ret?tab=readme-ov-file#ida-)
+  - Pwn Commands
+    - [pwn 🐚](https://github.com/rerrorctf/ret?tab=readme-ov-file#pwn-)
+    - [docker 🐋](https://github.com/rerrorctf/ret?tab=readme-ov-file#docker-)
+    - [libc 🗽](https://github.com/rerrorctf/ret?tab=readme-ov-file#libc-)
+  - Informational Commands
+    - [abi 🤝](https://github.com/rerrorctf/ret?tab=readme-ov-file#abi-)
+    - [syscall 📞](https://github.com/rerrorctf/ret?tab=readme-ov-file#syscall-)
+    - [cheatsheet 📚](https://github.com/rerrorctf/ret?tab=readme-ov-file#cheatsheet-)
+  - Utility Commands
+    - [decompress 🤏](https://github.com/rerrorctf/ret?tab=readme-ov-file#decompress-)
+    - [check ✅](https://github.com/rerrorctf/ret?tab=readme-ov-file#check-)
+    - [chat 📢](https://github.com/rerrorctf/ret?tab=readme-ov-file#chat-)
+    - [gist 🐙](https://github.com/rerrorctf/ret?tab=readme-ov-file#gist-)
+    - [writeup 📝](https://github.com/rerrorctf/ret?tab=readme-ov-file#writeup-)
+    - [gpt 🧠](https://github.com/rerrorctf/ret?tab=readme-ov-file#gpt-)
+4. [Config](https://github.com/rerrorctf/ret?tab=readme-ov-file#configret)
 
-### tl;dr Workflow
+## Introduction
 
-This will perform the most typical steps for you automagically given the directory contents:
+To see a list of available commands:
 
 ```
-$ mkdir task
-$ cd task
-$ cp ~/Downloads/task.zip .
-$ ret wizard task.example.com 9001 && ret ghidra
-```
-
-### Basic Worflow
-
-Before a CTF you may like to ensure you have all your tools installed. This can save time during a ctf when you realise you don't have ghidra installed on this machine for example. Check will perform a simple test against a checklist of tools that I like to use if you think something is missing let me know.
-
-```
-$ ret check
+$ ret help
 ```
 
 At the start of a new CTF set the flag format globally. This is a evaluated as a regex and used to perform a few things including grep2win against all added files.
@@ -77,13 +94,11 @@ If you have details for remote infrastructure you can supply those too:
 $ ret pwn ctf.example.com 9001
 ```
 
-## Get The Latest Build
+### Installation
 
 You can simply get the latest pre-built binary from https://github.com/rerrorctf/ret/releases.
 
 Please note that, while `ret` is a single file built for x64 linux, you can use go to build this for a range of platforms (although this hasn't been tested yet).
-
-### Installation
 
 Here installation just means putting `ret` somewhere on your path. I like to make a symlink it to in `/usr/local/bin`.
 
@@ -120,46 +135,6 @@ You can get help for a command by giving `help` as an argument to the command:
 ```
 $ ret command help
 ```
-
-### Index
-
-[ctf 🚩](https://github.com/rerrorctf/ret?tab=readme-ov-file#ctf-)
-
-[format 🔍](https://github.com/rerrorctf/ret?tab=readme-ov-file#format-)
-
-[wizard 🧙](https://github.com/rerrorctf/ret?tab=readme-ov-file#wizard-)
-
-[add 📥](https://github.com/rerrorctf/ret?tab=readme-ov-file#add-)
-
-[decompress 🤏](https://github.com/rerrorctf/ret?tab=readme-ov-file#decompress-)
-
-[status 👀](https://github.com/rerrorctf/ret?tab=readme-ov-file#status-)
-
-[pwn 🐚](https://github.com/rerrorctf/ret?tab=readme-ov-file#pwn-)
-
-[ghidra 🦖](https://github.com/rerrorctf/ret?tab=readme-ov-file#ghidra-)
-
-[ida 💃](https://github.com/rerrorctf/ret?tab=readme-ov-file#ida-)
-
-[docker 🐋](https://github.com/rerrorctf/ret?tab=readme-ov-file#docker-)
-
-[libc 🗽](https://github.com/rerrorctf/ret?tab=readme-ov-file#libc-)
-
-[check ✅](https://github.com/rerrorctf/ret?tab=readme-ov-file#check-)
-
-[syscall 📞](https://github.com/rerrorctf/ret?tab=readme-ov-file#syscall-)
-
-[abi 🤝](https://github.com/rerrorctf/ret?tab=readme-ov-file#abi-)
-
-[chat 📢](https://github.com/rerrorctf/ret?tab=readme-ov-file#chat-)
-
-[gist 🐙](https://github.com/rerrorctf/ret?tab=readme-ov-file#gist-)
-
-[writeup 📝](https://github.com/rerrorctf/ret?tab=readme-ov-file#writeup-)
-
-[cheatsheet 📚](https://github.com/rerrorctf/ret?tab=readme-ov-file#cheatsheet-)
-
-[gpt 🧠](https://github.com/rerrorctf/ret?tab=readme-ov-file#gpt-)
 
 ### ctf 🚩
 
