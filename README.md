@@ -5,9 +5,9 @@
 This tool helps you solve CTF tasks by automating workflow and basic analysis and providing useful utilities.
 
 ## Table of Contents
-1. [Introduction](https://github.com/rerrorctf/ret?tab=readme-ov-file#Introduction-)
-2. [Installation](https://github.com/rerrorctf/ret?tab=readme-ov-file#Installation-)
-3. [Commands](https://github.com/rerrorctf/ret?tab=readme-ov-file#Commands-)
+1. [Introduction](https://github.com/rerrorctf/ret?tab=readme-ov-file#introduction)
+2. [Installation](https://github.com/rerrorctf/ret?tab=readme-ov-file#installation)
+3. [Commands](https://github.com/rerrorctf/ret?tab=readme-ov-file#commands)
   - Core Commands
     - [ctf 🚩](https://github.com/rerrorctf/ret?tab=readme-ov-file#ctf-)
     - [format 🔍](https://github.com/rerrorctf/ret?tab=readme-ov-file#format-)
