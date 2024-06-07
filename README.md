@@ -206,6 +206,12 @@ https://github.com/rerrorctf/ret/blob/main/commands/add.go
 usage: ret decompress file1 [file2 file3...]
 ```
 
+Decompresses files by first checking if they have a suitable extension and then a suitable magic.
+
+Supports .zip, .gzip, .xz, .tar and .7z.
+
+Note that we check the extension to avoid decompressing things like .apk files.
+
 https://github.com/rerrorctf/ret/blob/main/commands/decompress.go
 
 ### status 👀
@@ -416,6 +422,8 @@ Optionally you can read from stdin by specifying `-` after the file param. In th
 
 Requires `~/.config/ret` to have a valid `gisttoken`.
 
+See https://github.com/rerrorctf/ret/blob/main/README.md#configret for more information.
+
 https://github.com/settings/tokens?type=beta
 
 https://docs.github.com/en/rest/gists/gists?apiVersion=2022-11-28#create-a-gist
@@ -446,8 +454,19 @@ https://github.com/rerrorctf/ret/blob/main/commands/cheatsheet.go
 ### gpt 🧠
 
 ```
-usage: ret gpt
+usage: ret gpt question
 ```
+
+Pose a question to ChatGPT with ret's ctf specific prompt.
+
+Optionally you can read from stdin by specifying `-` as the first param.
+
+```
+$ ret gpt how do i pwn?
+$ cat go.py | ret gpt - how do i make this pwn better?
+```
+
+See https://github.com/rerrorctf/ret/blob/main/README.md#configret for more information.
 
 https://github.com/rerrorctf/ret/blob/main/commands/gpt.go
 
@@ -495,15 +514,20 @@ The data in the config must be in the json format. You can include zero or more 
   - It is passed to `bash -c`
 
 - `chatusername`
-  - This username will be used when sending with the chat command
+  - This username will be used when sending messages with the chat command.
+  - Note there is no username authentication present.
 
 - `chatwebhookurl`
-  - This will be used to send chat message to discord.
+  - An optional discord webhook url.
+  - This will be used by the `chat` command to send messages to discord.
 
 - `gisttoken`
-  - A github gist token with read/write gist permissions is required to use the gist command.
+  - An optional github gist token with read/write gist permissions is required to use the gist command.
   - https://github.com/settings/tokens?type=beta
   - https://docs.github.com/en/rest/gists/gists?apiVersion=2022-11-28#create-a-gist
+
+- `openaikey`
+  - An optional OpenAI key used with the `gpt` command
 
 ## The .ret Directory Structure
 
@@ -529,3 +553,6 @@ This directory is structured as follows:
 - `.ret/ida`
   - This directory is created to store the ida project created if you use the `ida` command
   - Note that you can change this with `~/.config/ret` as above
+
+- `.ret/flag.json`
+  - This file contains the flag saved with the `ctf` command
