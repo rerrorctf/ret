@@ -55,10 +55,32 @@ func Libc(args []string) {
 		os.Exit(1)
 	}
 
+	setup := "#!/bin/sh\n\n" +
+		"update_apt() {\n" +
+		"\tapt update\n" +
+		"\tapt upgrade -y\n" +
+		"}\n\n" +
+		"update_pacman() {\n" +
+		"\tpacman -Syu --noconfirm\n" +
+		"}\n\n" +
+		"if command -v apt >/dev/null 2>&1; then\n" +
+		"\tupdate_apt\n" +
+		"elif command -v pacman >/dev/null 2>&1; then\n" +
+		"\tupdate_pacman\n" +
+		"else\n" +
+		"\techo \"Unsupported package manager\"\n" +
+		"exit 1\n" +
+		"fi\n"
+
+	err = os.WriteFile(dir+"/setup.sh", []byte(setup), 0744)
+	if err != nil {
+		log.Fatalln("error writing to file:", err)
+	}
+
 	dockerfile := fmt.Sprintf(
 		"FROM %s\n\n"+
-			"RUN apt update\n"+
-			"RUN apt upgrade -y\n"+
+			"COPY setup.sh .\n"+
+			"RUN ./setup.sh\n"+
 			"CMD [\"sh\"]\n",
 		tag)
 
@@ -71,8 +93,9 @@ func Libc(args []string) {
 		"docker build -t ret-libc .\n"+
 			"docker run -d --name ret-libc-container ret-libc tail -f /dev/null\n"+
 			"docker cp ret-libc-container:/lib/x86_64-linux-gnu/libc.so.6 ./%s.libc.so.6\n"+
+			"docker cp ret-libc-container:/usr/lib/libc.so.6 ./%s.libc.so.6\n"+
 			"docker stop ret-libc-container\n"+
-			"docker rm ret-libc-container\n", tag)
+			"docker rm ret-libc-container\n", tag, tag)
 
 	err = os.WriteFile(dir+"/go.sh", []byte(script), 0644)
 	if err != nil {
