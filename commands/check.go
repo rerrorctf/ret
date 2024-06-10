@@ -89,6 +89,9 @@ func Check(args []string) {
 		suggestLink("https://hex-rays.com/ida-free/")
 	}
 
+	// wabt
+	testCommand("wasm-decompile", "--version")
+
 	// pwn related stuff
 	if !testCommand("stat", currentUser.HomeDir+"/pwndbg/setup.sh") {
 		suggestLink("https://github.com/pwndbg/pwndbg")
