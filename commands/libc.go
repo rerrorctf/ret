@@ -54,7 +54,6 @@ func Libc(args []string) {
 		fmt.Fprintf(os.Stderr, "💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 		os.Exit(1)
 	}
-	defer os.RemoveAll(dir)
 
 	dockerfile := fmt.Sprintf(
 		"FROM %s\n\n"+
