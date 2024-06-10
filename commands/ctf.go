@@ -58,5 +58,7 @@ func Ctf(args []string) {
 		return
 	}
 
+	util.EnsureSkeleton()
+
 	scoreNewFlag(args[0])
 }
