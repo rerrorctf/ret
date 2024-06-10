@@ -72,9 +72,9 @@ func Pwn(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"pwn"+theme.ColorGray+" [ip] [port]"+theme.ColorReset+"\n")
-			fmt.Fprintf(os.Stderr, "  🐚 create a pwntools script template with ret\n")
-			fmt.Fprintf(os.Stderr, "  🔗 "+theme.ColorGray+"https://github.com/rerrorctf/ret/blob/main/commands/pwn.go"+theme.ColorReset+"\n")
+			fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "pwn" + theme.ColorGray + " [ip] [port]" + theme.ColorReset + "\n")
+			fmt.Printf("  🐚 create a pwntools script template with ret\n")
+			fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/pwn.go" + theme.ColorReset + "\n")
 			os.Exit(0)
 		}
 	}

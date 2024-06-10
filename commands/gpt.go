@@ -38,13 +38,13 @@ const (
 func sendRequest(query map[string]interface{}) {
 	body, err := json.Marshal(query)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
+		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 		os.Exit(1)
 	}
 
 	req, err := http.NewRequest("POST", "https://api.openai.com/v1/chat/completions", bytes.NewBuffer(body))
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
+		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 		os.Exit(1)
 	}
 	req.Header.Set("Content-Type", "application/json")
@@ -53,7 +53,7 @@ func sendRequest(query map[string]interface{}) {
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
+		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 		os.Exit(1)
 	}
 	defer resp.Body.Close()
@@ -66,7 +66,7 @@ func sendRequest(query map[string]interface{}) {
 
 	var result map[string]interface{}
 	if err := json.Unmarshal(body, &result); err != nil {
-		fmt.Fprintf(os.Stderr, "💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
+		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 		os.Exit(1)
 	}
 
@@ -90,7 +90,7 @@ func readInput(args []string) string {
 		var buffer bytes.Buffer
 		_, err := io.Copy(&buffer, os.Stdin)
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
+			fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 			os.Exit(1)
 		}
 		content = buffer.String() + " " + strings.Join(args[1:], " ")
@@ -100,10 +100,10 @@ func readInput(args []string) string {
 }
 
 func gptHelp() {
-	fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"gpt"+theme.ColorGray+" question"+theme.ColorReset+"\n")
-	fmt.Fprintf(os.Stderr, "  🧠 ask ChatGPT with ret\n")
-	fmt.Fprintf(os.Stderr, "     "+theme.ColorGray+"use - to read from stdin"+theme.ColorReset+"\n")
-	fmt.Fprintf(os.Stderr, "  🔗 "+theme.ColorGray+"https://github.com/rerrorctf/ret/blob/main/commands/gpt.go"+theme.ColorReset+"\n")
+	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "gpt" + theme.ColorGray + " question" + theme.ColorReset + "\n")
+	fmt.Printf("  🧠 ask ChatGPT with ret\n")
+	fmt.Printf("     " + theme.ColorGray + "use - to read from stdin" + theme.ColorReset + "\n")
+	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/gpt.go" + theme.ColorReset + "\n")
 	os.Exit(0)
 }
 
@@ -119,7 +119,7 @@ func Gpt(args []string) {
 	}
 
 	if config.OpenAIKey == "" {
-		fmt.Fprintf(os.Stderr, "💥 "+theme.ColorRed+" error"+theme.ColorReset+": no OpenAI key found in %s\n", config.UserConfig)
+		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": no OpenAI key found in %s\n", config.UserConfig)
 		os.Exit(1)
 	}
 

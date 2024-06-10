@@ -29,13 +29,13 @@ func removeColors(message string) string {
 func sendMessage(message map[string]interface{}) {
 	body, err := json.Marshal(message)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
+		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 		os.Exit(1)
 	}
 
 	req, err := http.NewRequest("POST", config.ChatWebhookUrl, bytes.NewBuffer(body))
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
+		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 		os.Exit(1)
 	}
 	req.Header.Set("Content-Type", "application/json")
@@ -43,7 +43,7 @@ func sendMessage(message map[string]interface{}) {
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
+		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 		os.Exit(1)
 	}
 
@@ -103,10 +103,10 @@ func sendEmbed(message string) {
 }
 
 func chatHelp() {
-	fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"chat"+theme.ColorGray+" message"+theme.ColorReset+"\n")
-	fmt.Fprintf(os.Stderr, "  📢 chat with ret\n")
-	fmt.Fprintf(os.Stderr, "     "+theme.ColorGray+"use - to read from stdin"+theme.ColorReset+"\n")
-	fmt.Fprintf(os.Stderr, "  🔗 "+theme.ColorGray+"https://github.com/rerrorctf/ret/blob/main/commands/chat.go"+theme.ColorReset+"\n")
+	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "chat" + theme.ColorGray + " message" + theme.ColorReset + "\n")
+	fmt.Printf("  📢 chat with ret\n")
+	fmt.Printf("     " + theme.ColorGray + "use - to read from stdin" + theme.ColorReset + "\n")
+	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/chat.go" + theme.ColorReset + "\n")
 	os.Exit(0)
 }
 
@@ -122,7 +122,7 @@ func Chat(args []string) {
 	}
 
 	if config.ChatWebhookUrl == "" {
-		fmt.Fprintf(os.Stderr, "💥 "+theme.ColorRed+" error"+theme.ColorReset+": no chat webhook url found in %s\n", config.UserConfig)
+		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": no chat webhook url found in %s\n", config.UserConfig)
 		os.Exit(1)
 	}
 
@@ -131,7 +131,7 @@ func Chat(args []string) {
 			var buffer bytes.Buffer
 			_, err := io.Copy(&buffer, os.Stdin)
 			if err != nil {
-				fmt.Fprintf(os.Stderr, "💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
+				fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 				os.Exit(1)
 			}
 			sendEmbed(buffer.String())

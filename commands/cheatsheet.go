@@ -10,9 +10,9 @@ func Cheatsheet(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"cheatsheet"+theme.ColorReset+"\n")
-			fmt.Fprintf(os.Stderr, "  📚 prints a list of cheatsheet links with ret\n")
-			fmt.Fprintf(os.Stderr, "  🔗 "+theme.ColorGray+"https://github.com/rerrorctf/ret/blob/main/commands/cheatsheet.go"+theme.ColorReset+"\n")
+			fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "cheatsheet" + theme.ColorReset + "\n")
+			fmt.Printf("  📚 prints a list of cheatsheet links with ret\n")
+			fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/cheatsheet.go" + theme.ColorReset + "\n")
 			os.Exit(0)
 		}
 	}

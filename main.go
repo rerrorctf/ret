@@ -14,31 +14,31 @@ import (
 
 func main() {
 	flag.Usage = func() {
-		fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"command"+theme.ColorGray+" [arg1 arg2...]\n"+theme.ColorReset)
+		fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "command" + theme.ColorGray + " [arg1 arg2...]\n" + theme.ColorReset)
 
-		fmt.Fprintf(os.Stderr, theme.ColorGray+
-			"---core------------rev------------pwn------------info------------util-----\n"+
-			theme.ColorBlue+
-			"🚩 "+theme.StartUnderline+"ct"+theme.StopUnderline+"f          "+
-			"🦖 "+theme.StartUnderline+"gh"+theme.StopUnderline+"idra      "+
-			"🐚 "+theme.StartUnderline+"p"+theme.StopUnderline+"wn         "+
-			"🤝 "+theme.StartUnderline+"ab"+theme.StopUnderline+"i         "+
-			"🤏 "+theme.StartUnderline+"de"+theme.StopUnderline+"compress\n"+
-			"🔍 "+theme.StartUnderline+"f"+theme.StopUnderline+"ormat       "+
-			"💃 "+theme.StartUnderline+"i"+theme.StopUnderline+"da         "+
-			"🐋 "+theme.StartUnderline+"do"+theme.StopUnderline+"cker      "+
-			"📞 "+theme.StartUnderline+"sy"+theme.StopUnderline+"scall     "+
-			"✅ "+theme.StartUnderline+"chec"+theme.StopUnderline+"k\n"+
-			"👀 "+theme.StartUnderline+"st"+theme.StopUnderline+"atus                      "+
-			"🗽 "+theme.StartUnderline+"l"+theme.StopUnderline+"ibc        "+
-			"📚 "+theme.StartUnderline+"chea"+theme.StopUnderline+"tsheet  "+
-			"📢 "+theme.StartUnderline+"chat"+theme.StopUnderline+"\n"+
-			"📥 "+theme.StartUnderline+"ad"+theme.StopUnderline+"d                                                       "+
-			"🧠 "+theme.StartUnderline+"gp"+theme.StopUnderline+"t\n"+
-			"🧙 "+theme.StartUnderline+"wi"+theme.StopUnderline+"zard                                                    "+
-			"📝 "+theme.StartUnderline+"wr"+theme.StopUnderline+"iteup\n"+
-			"🚩 "+theme.ColorGray+"https://github.com/rerrorctf/ret"+theme.ColorBlue+" 🚩                       "+
-			"🐙 "+theme.StartUnderline+"gi"+theme.StopUnderline+"st\n"+theme.StopUnderline+theme.ColorReset)
+		fmt.Printf(theme.ColorGray +
+			"---core------------rev------------pwn------------info------------util-----\n" +
+			theme.ColorBlue +
+			"🚩 " + theme.StartUnderline + "ct" + theme.StopUnderline + "f          " +
+			"🦖 " + theme.StartUnderline + "gh" + theme.StopUnderline + "idra      " +
+			"🐚 " + theme.StartUnderline + "p" + theme.StopUnderline + "wn         " +
+			"🤝 " + theme.StartUnderline + "ab" + theme.StopUnderline + "i         " +
+			"🤏 " + theme.StartUnderline + "de" + theme.StopUnderline + "compress\n" +
+			"🔍 " + theme.StartUnderline + "f" + theme.StopUnderline + "ormat       " +
+			"💃 " + theme.StartUnderline + "i" + theme.StopUnderline + "da         " +
+			"🐋 " + theme.StartUnderline + "do" + theme.StopUnderline + "cker      " +
+			"📞 " + theme.StartUnderline + "sy" + theme.StopUnderline + "scall     " +
+			"✅ " + theme.StartUnderline + "chec" + theme.StopUnderline + "k\n" +
+			"👀 " + theme.StartUnderline + "st" + theme.StopUnderline + "atus                      " +
+			"🗽 " + theme.StartUnderline + "l" + theme.StopUnderline + "ibc        " +
+			"📚 " + theme.StartUnderline + "chea" + theme.StopUnderline + "tsheet  " +
+			"📢 " + theme.StartUnderline + "chat" + theme.StopUnderline + "\n" +
+			"📥 " + theme.StartUnderline + "ad" + theme.StopUnderline + "d                                                       " +
+			"🧠 " + theme.StartUnderline + "gp" + theme.StopUnderline + "t\n" +
+			"🧙 " + theme.StartUnderline + "wi" + theme.StopUnderline + "zard                                                    " +
+			"📝 " + theme.StartUnderline + "wr" + theme.StopUnderline + "iteup\n" +
+			"🚩 " + theme.ColorGray + "https://github.com/rerrorctf/ret" + theme.ColorBlue + " 🚩                       " +
+			"🐙 " + theme.StartUnderline + "gi" + theme.StopUnderline + "st\n" + theme.StopUnderline + theme.ColorReset)
 	}
 
 	flag.Parse()

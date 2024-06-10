@@ -19,7 +19,7 @@ func GetCurrentFlag() (string, error) {
 
 	err = json.Unmarshal(jsonData, &flag)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
+		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 		return "", err
 	}
 

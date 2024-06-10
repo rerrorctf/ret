@@ -8,9 +8,9 @@ import (
 )
 
 func FormatHelp() {
-	fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"format"+theme.ColorGray+" [regex]"+theme.ColorReset+"\n")
-	fmt.Fprintf(os.Stderr, "  🔍 set the current flag format regex with ret\n")
-	fmt.Fprintf(os.Stderr, "  🔗 "+theme.ColorGray+"https://github.com/rerrorctf/ret/blob/main/commands/format.go"+theme.ColorReset+"\n")
+	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "format" + theme.ColorGray + " [regex]" + theme.ColorReset + "\n")
+	fmt.Printf("  🔍 set the current flag format regex with ret\n")
+	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/format.go" + theme.ColorReset + "\n")
 	os.Exit(0)
 }
 

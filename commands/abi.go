@@ -95,9 +95,9 @@ func showWindowsAbix64() {
 }
 
 func abiHelp() {
-	fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"abi"+theme.ColorReset+" [(x86/32)/(x64/64)]"+theme.ColorReset+" [linux/windows]\n")
-	fmt.Fprintf(os.Stderr, "  🤝 view abi details with ret\n")
-	fmt.Fprintf(os.Stderr, "  🔗 "+theme.ColorGray+"https://github.com/rerrorctf/ret/blob/main/commands/abi.go"+theme.ColorReset+"\n")
+	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "abi" + theme.ColorReset + " [(x86/32)/(x64/64)]" + theme.ColorReset + " [linux/windows]\n")
+	fmt.Printf("  🤝 view abi details with ret\n")
+	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/abi.go" + theme.ColorReset + "\n")
 }
 
 func Abi(args []string) {

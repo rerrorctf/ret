@@ -91,7 +91,7 @@ func decompressFileZip(path string) {
 
 	unzipOutput, err := unzip.Output()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "%s", unzipOutput)
+		fmt.Printf("%s", unzipOutput)
 		fmt.Printf("💥 "+theme.ColorRed+"error: "+theme.ColorReset+"%v\n", err)
 		return
 	}
@@ -102,7 +102,7 @@ func decompressFile7z(path string) {
 
 	sevenZipXOutput, err := sevenZipX.Output()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "%s", sevenZipXOutput)
+		fmt.Printf("%s", sevenZipXOutput)
 		fmt.Printf("💥 "+theme.ColorRed+"error: "+theme.ColorReset+"%v\n", err)
 		return
 	}
@@ -113,7 +113,7 @@ func decompressFileTar(path string) {
 
 	tarXFOutput, err := tarXF.Output()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "%s", tarXFOutput)
+		fmt.Printf("%s", tarXFOutput)
 		fmt.Printf("💥 "+theme.ColorRed+"error: "+theme.ColorReset+"%v\n", err)
 		return
 	}

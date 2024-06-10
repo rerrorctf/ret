@@ -134,9 +134,9 @@ func addFile(srcPath string) {
 }
 
 func AddHelp() {
-	fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"add"+theme.ColorReset+" file1 "+theme.ColorGray+"[file2 file3...]"+theme.ColorReset+"\n")
-	fmt.Fprintf(os.Stderr, "  📥 add one or more files to the current task with ret\n")
-	fmt.Fprintf(os.Stderr, "  🔗 "+theme.ColorGray+"https://github.com/rerrorctf/ret/blob/main/commands/add.go"+theme.ColorReset+"\n")
+	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "add" + theme.ColorReset + " file1 " + theme.ColorGray + "[file2 file3...]" + theme.ColorReset + "\n")
+	fmt.Printf("  📥 add one or more files to the current task with ret\n")
+	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/add.go" + theme.ColorReset + "\n")
 	os.Exit(0)
 }
 

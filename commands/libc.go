@@ -24,12 +24,12 @@ func libcSpinner() {
 }
 
 func libcHelp() {
-	fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"libc"+theme.ColorGray+" [tag]"+theme.ColorReset+"\n")
-	fmt.Fprintf(os.Stderr, "  🗽 get a version of libc by copying it from a docker container with ret\n")
-	fmt.Fprintf(os.Stderr, "     "+theme.ColorGray+"specify an image tag like \"ubuntu:24.04\" to get a specific version"+theme.ColorReset+"\n")
-	fmt.Fprintf(os.Stderr, "     "+theme.ColorGray+"without args this command will use the tag \"ubuntu:latest\""+theme.ColorReset+"\n")
-	fmt.Fprintf(os.Stderr, "     "+theme.ColorGray+"the file will be copied to the cwd and added with ret"+theme.ColorReset+"\n")
-	fmt.Fprintf(os.Stderr, "  🔗 "+theme.ColorGray+"https://github.com/rerrorctf/ret/blob/main/commands/libc.go"+theme.ColorReset+"\n")
+	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "libc" + theme.ColorGray + " [tag]" + theme.ColorReset + "\n")
+	fmt.Printf("  🗽 get a version of libc by copying it from a docker container with ret\n")
+	fmt.Printf("     " + theme.ColorGray + "specify an image tag like \"ubuntu:24.04\" to get a specific version" + theme.ColorReset + "\n")
+	fmt.Printf("     " + theme.ColorGray + "without args this command will use the tag \"ubuntu:latest\"" + theme.ColorReset + "\n")
+	fmt.Printf("     " + theme.ColorGray + "the file will be copied to the cwd and added with ret" + theme.ColorReset + "\n")
+	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/libc.go" + theme.ColorReset + "\n")
 	os.Exit(0)
 }
 
@@ -51,7 +51,7 @@ func Libc(args []string) {
 
 	dir, err := os.MkdirTemp("", "ret-libc-")
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
+		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 		os.Exit(1)
 	}
 

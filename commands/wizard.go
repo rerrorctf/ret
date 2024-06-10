@@ -74,9 +74,9 @@ func Wizard(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Fprintf(os.Stderr, theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"wizard"+theme.ColorGray+" [ip] [port]"+theme.ColorReset+"\n")
-			fmt.Fprintf(os.Stderr, "  🧙 do "+theme.ColorPurple+"m"+theme.ColorBlue+"a"+theme.ColorGreen+"g"+theme.ColorYellow+"i"+theme.ColorRed+"c"+theme.ColorReset+" with ret\n")
-			fmt.Fprintf(os.Stderr, "  🔗 "+theme.ColorGray+"https://github.com/rerrorctf/ret/blob/main/commands/wizard.go"+theme.ColorReset+"\n")
+			fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "wizard" + theme.ColorGray + " [ip] [port]" + theme.ColorReset + "\n")
+			fmt.Printf("  🧙 do " + theme.ColorPurple + "m" + theme.ColorBlue + "a" + theme.ColorGreen + "g" + theme.ColorYellow + "i" + theme.ColorRed + "c" + theme.ColorReset + " with ret\n")
+			fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/wizard.go" + theme.ColorReset + "\n")
 			os.Exit(0)
 		}
 	}
