@@ -9,16 +9,23 @@ import (
 	"time"
 )
 
-func libcSpinner() {
+func libcSpinner(stop chan bool) {
 	emojis := []string{
-		"🐳", "🐋", "🐟", "🐠", "🐡", "🦈", "⚓", "🛳️", "🚢", "🚤",
-		"🛶", "⛵", "🌊", "🚩",
+		"🖱️", "⌨️", "🔧", "⚙️", "📂", "📁", "💾", "📟", "🛠️",
+		"🔌", "📡", "🔍", "💿", "🖨️", "🧰", "🔒", "📜", "🚩",
+		"🇱", "🇮", "🇧", "🇨",
 	}
 
 	for {
 		for _, e := range emojis {
-			fmt.Printf("\r%s", e)
-			time.Sleep(200 * time.Millisecond)
+			select {
+			case <-stop:
+				return
+			default:
+				fmt.Printf("\r%s", e)
+				time.Sleep(200 * time.Millisecond)
+			}
+
 		}
 	}
 }
@@ -41,7 +48,9 @@ func Libc(args []string) {
 		}
 	}
 
-	go libcSpinner()
+	stop := make(chan bool)
+
+	go libcSpinner(stop)
 
 	tag := "ubuntu:latest"
 
@@ -113,6 +122,10 @@ func Libc(args []string) {
 	if err != nil {
 		log.Fatalln(err)
 	}
+
+	stop <- true
+
+	fmt.Printf("\r")
 
 	Add([]string{dir + "/" + tag + ".libc.so.6"})
 }
