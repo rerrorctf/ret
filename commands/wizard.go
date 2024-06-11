@@ -22,12 +22,14 @@ func runWizardCommand(command string) {
 
 	magic := exec.Command("bash", "-c", command)
 
-	out, err := magic.CombinedOutput()
+	magic.Stdin = os.Stdin
+	magic.Stdout = os.Stdout
+	magic.Stderr = os.Stderr
+
+	err := magic.Run()
 	if err != nil {
 		log.Fatalln(err)
 	}
-
-	fmt.Print(string(out))
 }
 
 func findInterestingFiles() []string {
