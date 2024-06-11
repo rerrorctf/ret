@@ -39,13 +39,15 @@ func Status(args []string) {
 			if file.FileType == data.FILE_TYPE_ELF {
 				checksec := exec.Command("pwn", "checksec", file.Filepath)
 
-				checksecOutput, err := checksec.CombinedOutput()
+				checksec.Stdout = os.Stdout
+				checksec.Stderr = os.Stderr
+				checksec.Stdin = os.Stdin
+
+				err := checksec.Run()
 				if err != nil {
 					fmt.Printf(theme.ColorGray+"    "+theme.ColorReset+"%s\n", file.FileOutput)
 					continue
 				}
-
-				fmt.Printf("%s\n", checksecOutput)
 			} else {
 				fmt.Printf(theme.ColorGray+"    "+theme.ColorReset+"%s\n", file.FileOutput)
 			}
