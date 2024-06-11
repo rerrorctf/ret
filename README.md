@@ -32,6 +32,7 @@ This tool helps you solve CTF tasks by automating workflow and basic analysis an
     - [gist 🐙](https://github.com/rerrorctf/ret?tab=readme-ov-file#gist-)
     - [writeup 📝](https://github.com/rerrorctf/ret?tab=readme-ov-file#writeup-)
     - [gpt 🧠](https://github.com/rerrorctf/ret?tab=readme-ov-file#gpt-)
+    - [sage 🌿](https://github.com/rerrorctf/ret?tab=readme-ov-file#sage-)
 4. [Config](https://github.com/rerrorctf/ret?tab=readme-ov-file#configret)
 
 ## Introduction
@@ -469,6 +470,24 @@ $ cat go.py | ret gpt - how do i make this pwn better?
 See https://github.com/rerrorctf/ret/blob/main/README.md#configret for more information.
 
 https://github.com/rerrorctf/ret/blob/main/commands/gpt.go
+
+
+### sage 🌿
+
+```
+usage: ret sage
+```
+
+Just runs:
+
+```bash
+$ sudo docker pull sagemath/sagemath
+$ sudo docker run -it sagemath/sagemath:latest
+```
+
+See https://hub.docker.com/r/sagemath/sagemath for more information.
+
+https://github.com/rerrorctf/ret/blob/main/commands/sage.go
 
 ## ~/.config/ret
 

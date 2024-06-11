@@ -20,29 +20,34 @@ func main() {
 	flag.Usage = func() {
 		fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "command" + theme.ColorGray + " [arg1 arg2...]\n" + theme.ColorReset)
 
-		fmt.Printf(theme.ColorGray+
-			"---core------------rev------------pwn------------info------------util-----\n"+
-			theme.ColorBlue+
-			"🚩 "+theme.StartUnderline+"ct"+theme.StopUnderline+"f          "+
-			"🦖 "+theme.StartUnderline+"gh"+theme.StopUnderline+"idra      "+
-			"🐚 "+theme.StartUnderline+"p"+theme.StopUnderline+"wn         "+
-			"🤝 "+theme.StartUnderline+"ab"+theme.StopUnderline+"i         "+
-			"🤏 "+theme.StartUnderline+"de"+theme.StopUnderline+"compress\n"+
-			"🔍 "+theme.StartUnderline+"f"+theme.StopUnderline+"ormat       "+
-			"💃 "+theme.StartUnderline+"i"+theme.StopUnderline+"da         "+
-			"🐋 "+theme.StartUnderline+"do"+theme.StopUnderline+"cker      "+
-			"📞 "+theme.StartUnderline+"sy"+theme.StopUnderline+"scall     "+
-			"✅ "+theme.StartUnderline+"chec"+theme.StopUnderline+"k\n"+
-			"👀 "+theme.StartUnderline+"st"+theme.StopUnderline+"atus                      "+
-			"🗽 "+theme.StartUnderline+"l"+theme.StopUnderline+"ibc        "+
-			"📚 "+theme.StartUnderline+"chea"+theme.StopUnderline+"tsheet  "+
-			"📢 "+theme.StartUnderline+"chat"+theme.StopUnderline+"\n"+
-			"📥 "+theme.StartUnderline+"ad"+theme.StopUnderline+"d                                                       "+
-			"🧠 "+theme.StartUnderline+"gp"+theme.StopUnderline+"t\n"+
-			"🧙 "+theme.StartUnderline+"wi"+theme.StopUnderline+"zard                                                    "+
-			"📝 "+theme.StartUnderline+"wr"+theme.StopUnderline+"iteup\n"+
-			"🚩 "+theme.ColorGray+"https://github.com/rerrorctf/ret 🚩 version: "+theme.ColorPurple+"%s"+theme.ColorBlue+"       "+
-			"🐙 "+theme.StartUnderline+"gi"+theme.StopUnderline+"st\n"+theme.StopUnderline+theme.ColorReset, VERSION)
+		fmt.Printf(theme.ColorGray +
+			"---core------------rev------------pwn------------info------------util-----\n" +
+			theme.ColorBlue +
+			"🚩 " + theme.StartUnderline + "ct" + theme.StopUnderline + "f          " +
+			"🦖 " + theme.StartUnderline + "gh" + theme.StopUnderline + "idra      " +
+			"🐚 " + theme.StartUnderline + "p" + theme.StopUnderline + "wn         " +
+			"🤝 " + theme.StartUnderline + "ab" + theme.StopUnderline + "i         " +
+			"🤏 " + theme.StartUnderline + "de" + theme.StopUnderline + "compress\n" +
+			"🔍 " + theme.StartUnderline + "f" + theme.StopUnderline + "ormat       " +
+			"💃 " + theme.StartUnderline + "i" + theme.StopUnderline + "da         " +
+			"🐋 " + theme.StartUnderline + "do" + theme.StopUnderline + "cker      " +
+			"📞 " + theme.StartUnderline + "sy" + theme.StopUnderline + "scall     " +
+			"✅ " + theme.StartUnderline + "chec" + theme.StopUnderline + "k\n" +
+			"👀 " + theme.StartUnderline + "st" + theme.StopUnderline + "atus                      " +
+			"🗽 " + theme.StartUnderline + "l" + theme.StopUnderline + "ibc        " +
+			"📚 " + theme.StartUnderline + "chea" + theme.StopUnderline + "tsheet  " +
+			"📢 " + theme.StartUnderline + "chat" + theme.StopUnderline + "\n" +
+			"📥 " + theme.StartUnderline + "ad" + theme.StopUnderline + "d                                                       " +
+			"🧠 " + theme.StartUnderline + "gp" + theme.StopUnderline + "t\n" +
+			"🧙 " + theme.StartUnderline + "wi" + theme.StopUnderline + "zard                                                    " +
+			"📝 " + theme.StartUnderline + "wr" + theme.StopUnderline + "iteup\n" +
+			"                                                             " +
+			"🐙 " + theme.StartUnderline + "gi" + theme.StopUnderline + "st\n" +
+			"                                                             " +
+			"🌿 " + theme.StartUnderline + "sa" + theme.StopUnderline + "ge\n" +
+			theme.StopUnderline + theme.ColorReset)
+
+		fmt.Printf(theme.ColorGray+"https://github.com/rerrorctf/ret version: "+theme.ColorPurple+"%s\n"+theme.ColorBlue, VERSION)
 	}
 
 	flag.Parse()
@@ -125,7 +130,7 @@ func main() {
 		}
 	}
 
-	// status, syscall
+	// status, syscall, sage
 	if command[0] == 's' && len(command) > 1 {
 		if command[1] == 't' {
 			commands.Status(flag.Args()[1:])
@@ -134,6 +139,11 @@ func main() {
 
 		if command[1] == 'y' {
 			commands.Syscall(flag.Args()[1:])
+			return
+		}
+
+		if command[1] == 'a' {
+			commands.Sage(flag.Args()[1:])
 			return
 		}
 	}
