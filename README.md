@@ -8,30 +8,30 @@ This tool helps you solve CTF tasks by automating workflow and basic analysis an
 1. [Introduction](https://github.com/rerrorctf/ret?tab=readme-ov-file#introduction)
 2. [Installation](https://github.com/rerrorctf/ret?tab=readme-ov-file#installation)
 3. [Commands](https://github.com/rerrorctf/ret?tab=readme-ov-file#commands)
-  - Core Commands
+  - Core
     - [ctf 🚩](https://github.com/rerrorctf/ret?tab=readme-ov-file#ctf-)
     - [format 🔍](https://github.com/rerrorctf/ret?tab=readme-ov-file#format-)
     - [status 👀](https://github.com/rerrorctf/ret?tab=readme-ov-file#status-)
     - [add 📥](https://github.com/rerrorctf/ret?tab=readme-ov-file#add-)
     - [wizard 🧙](https://github.com/rerrorctf/ret?tab=readme-ov-file#wizard-)
-  - Rev Commands
+  - Rev
     - [ghidra 🦖](https://github.com/rerrorctf/ret?tab=readme-ov-file#ghidra-)
     - [ida 💃](https://github.com/rerrorctf/ret?tab=readme-ov-file#ida-)
-  - Pwn Commands
+  - Pwn
     - [pwn 🐚](https://github.com/rerrorctf/ret?tab=readme-ov-file#pwn-)
     - [docker 🐋](https://github.com/rerrorctf/ret?tab=readme-ov-file#docker-)
     - [libc 🗽](https://github.com/rerrorctf/ret?tab=readme-ov-file#libc-)
-  - Informational Commands
+  - Info
     - [abi 🤝](https://github.com/rerrorctf/ret?tab=readme-ov-file#abi-)
     - [syscall 📞](https://github.com/rerrorctf/ret?tab=readme-ov-file#syscall-)
     - [cheatsheet 📚](https://github.com/rerrorctf/ret?tab=readme-ov-file#cheatsheet-)
-  - Utility Commands
+  - Util
     - [decompress 🤏](https://github.com/rerrorctf/ret?tab=readme-ov-file#decompress-)
     - [check ✅](https://github.com/rerrorctf/ret?tab=readme-ov-file#check-)
     - [chat 📢](https://github.com/rerrorctf/ret?tab=readme-ov-file#chat-)
-    - [gist 🐙](https://github.com/rerrorctf/ret?tab=readme-ov-file#gist-)
-    - [writeup 📝](https://github.com/rerrorctf/ret?tab=readme-ov-file#writeup-)
     - [gpt 🧠](https://github.com/rerrorctf/ret?tab=readme-ov-file#gpt-)
+    - [writeup 📝](https://github.com/rerrorctf/ret?tab=readme-ov-file#writeup-)
+    - [gist 🐙](https://github.com/rerrorctf/ret?tab=readme-ov-file#gist-)
     - [sage 🌿](https://github.com/rerrorctf/ret?tab=readme-ov-file#sage-)
 4. [Config](https://github.com/rerrorctf/ret?tab=readme-ov-file#configret)
 
