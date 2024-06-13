@@ -67,26 +67,8 @@ func sendEmbed(message string) {
 	message = removeColors(message)
 
 	embed := map[string]interface{}{
-		//"title": "ret chat",
-		//"description": "This is an example of a rich embed.",
-		//"url":       "https://github.com/rerrorctf/ret/blob/main/commands/chat.go",
 		"color":     rand.Intn(0xFFFFFF),
 		"timestamp": time.Now().UTC().Format(time.RFC3339),
-		//"footer": map[string]string{
-		//"text":     "https://github.com/rerrorctf/ret/blob/main/commands/chat.go",
-		//"icon_url": "https://example.com/footer-icon.png",
-		//},
-		//"thumbnail": map[string]string{
-		//"url": "https://example.com/thumbnail.png",
-		//},
-		//"image": map[string]string{
-		//"url": "https://example.com/image.png",
-		//},
-		//"author": map[string]string{
-		//"name":     "Author Name",
-		//"url":      "https://example.com",
-		//"icon_url": "https://example.com/author-icon.png",
-		//},
 		"fields": []map[string]interface{}{
 			{
 				"name":   "ret chat 📢",
