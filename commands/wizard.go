@@ -35,7 +35,7 @@ func runWizardCommand(command string) {
 func findInterestingFiles() []string {
 	files, err := os.ReadDir(".")
 	if err != nil {
-		log.Fatalf("💥 " + theme.ColorRed + "error" + theme.ColorReset + ": unable read cwd!\n")
+		log.Fatalf("💥 " + theme.ColorRed + "error" + theme.ColorReset + ": unable to read cwd!\n")
 	}
 
 	interestingFiles := []string{}
