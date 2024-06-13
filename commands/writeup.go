@@ -7,6 +7,7 @@ import (
 	"ret/config"
 	"ret/theme"
 	"ret/util"
+	"time"
 )
 
 func Writeup(args []string) {
@@ -40,6 +41,8 @@ func Writeup(args []string) {
 		name = "YOUR-NAME-GOES-HERE"
 	}
 
+	date := time.Now().Format("2006/01/02")
+
 	template := fmt.Sprintf(
 		"https://chal.link.goes.here\n\n"+
 			"# TASK-NAME (CATEGORY)\n\n"+
@@ -49,7 +52,7 @@ func Writeup(args []string) {
 			"%s"+
 			"```\n\n"+
 			"## Flag\n`%s`\n\n"+
-			"%s TODAYS-DATE-GOES-HERE\n", script, flag, name)
+			"%s %s\n", script, flag, name, date)
 
 	err = os.WriteFile(filePath, []byte(template), 0644)
 
