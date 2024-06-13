@@ -132,7 +132,8 @@ func Check(args []string) {
 		suggestLink("https://github.com/RsaCtfTool/RsaCtfTool")
 	}
 
-	if !testCommand("sage", "--version") {
-		suggestLink("https://www.sagemath.org")
+	// gcloud
+	if !testCommand("gcloud", "--version") {
+		suggestLink("https://cloud.google.com/sdk/docs/install#deb")
 	}
 }
