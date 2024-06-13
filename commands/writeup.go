@@ -35,6 +35,11 @@ func Writeup(args []string) {
 
 	script, _ := os.ReadFile("./" + config.PwnScriptName)
 
+	name := config.Username
+	if name == "" {
+		name = "YOUR-NAME-GOES-HERE"
+	}
+
 	template := fmt.Sprintf(
 		"https://chal.link.goes.here\n\n"+
 			"# TASK-NAME (CATEGORY)\n\n"+
@@ -44,7 +49,7 @@ func Writeup(args []string) {
 			"%s"+
 			"```\n\n"+
 			"## Flag\n`%s`\n\n"+
-			"YOUR-NAME-GOES-HERE TODAYS-DATE-GOES-HERE\n", script, flag)
+			"%s TODAYS-DATE-GOES-HERE\n", script, flag, name)
 
 	err = os.WriteFile(filePath, []byte(template), 0644)
 
