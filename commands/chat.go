@@ -110,6 +110,11 @@ func Chat(args []string) {
 		os.Exit(1)
 	}
 
+	if config.Username == "" {
+		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": no username found in %s\n", config.UserConfig)
+		os.Exit(1)
+	}
+
 	if len(args) > 0 {
 		if strings.Compare("-", args[0]) == 0 {
 			var buffer bytes.Buffer
