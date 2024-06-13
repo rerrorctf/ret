@@ -42,16 +42,34 @@ func findInterestingFiles() []string {
 
 	for _, file := range files {
 		if file.IsDir() {
-			continue
+			dirName := file.Name()
+
+			if dirName[0] == '.' {
+				continue
+			}
+			dirFiles, err := os.ReadDir("./" + dirName)
+			if err != nil {
+				log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": unable to read %s\n", dirName)
+			}
+			for _, dirfile := range dirFiles {
+				fileName := dirfile.Name()
+
+				if fileName[0] == '.' {
+					continue
+				}
+
+				interestingFiles = append(interestingFiles, "./"+dirName+"/"+fileName)
+			}
+		} else {
+			fileName := file.Name()
+
+			if fileName[0] == '.' {
+				continue
+			}
+
+			interestingFiles = append(interestingFiles, fileName)
 		}
 
-		fileName := file.Name()
-
-		if fileName[0] == '.' {
-			continue
-		}
-
-		interestingFiles = append(interestingFiles, fileName)
 	}
 
 	if len(interestingFiles) < 1 {
