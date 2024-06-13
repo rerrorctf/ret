@@ -23,6 +23,8 @@ func removeColors(message string) string {
 	message = strings.ReplaceAll(message, theme.ColorPurple, "")
 	message = strings.ReplaceAll(message, theme.ColorCyan, "")
 	message = strings.ReplaceAll(message, theme.ColorGray, "")
+	message = strings.ReplaceAll(message, theme.StartUnderline, "")
+	message = strings.ReplaceAll(message, theme.StopUnderline, "")
 	return message
 }
 
