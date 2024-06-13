@@ -28,7 +28,7 @@ var (
 	FlagFormat        = "flag{.+}"
 	WizardPreCommand  = ""
 	WizardPostCommand = ""
-	ChatUsername      = ""
+	Username          = ""
 	ChatWebhookUrl    = ""
 	GistToken         = ""
 	OpenAIKey         = ""
@@ -92,8 +92,8 @@ func ParseUserConfig() {
 		WizardPostCommand = userConfig.WizardPostCommand
 	}
 
-	if len(userConfig.ChatUsername) > 0 {
-		ChatUsername = userConfig.ChatUsername
+	if len(userConfig.Username) > 0 {
+		Username = userConfig.Username
 	}
 
 	if len(userConfig.ChatWebhookUrl) > 0 {
@@ -128,7 +128,7 @@ func WriteUserConfig() {
 	userConfig.FlagFormat = FlagFormat
 	userConfig.WizardPreCommand = WizardPreCommand
 	userConfig.WizardPostCommand = WizardPostCommand
-	userConfig.ChatUsername = ChatUsername
+	userConfig.Username = Username
 	userConfig.ChatWebhookUrl = ChatWebhookUrl
 	userConfig.GistToken = GistToken
 	userConfig.OpenAIKey = OpenAIKey

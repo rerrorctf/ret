@@ -56,7 +56,7 @@ func sendChat(message string) {
 	message = removeColors(message)
 
 	body := map[string]interface{}{
-		"username": config.ChatUsername,
+		"username": config.Username,
 		"content":  message,
 	}
 
@@ -79,7 +79,7 @@ func sendEmbed(message string) {
 	}
 
 	body := map[string]interface{}{
-		"username": config.ChatUsername,
+		"username": config.Username,
 		"embeds":   []interface{}{embed},
 	}
 

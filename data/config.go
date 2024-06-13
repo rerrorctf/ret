@@ -10,7 +10,7 @@ type Config struct {
 	FlagFormat        string `json:"flagformat"`
 	WizardPreCommand  string `json:"wizardprecommand"`
 	WizardPostCommand string `json:"wizardpostcommand"`
-	ChatUsername      string `json:"chatusername"`
+	Username          string `json:"username"`
 	ChatWebhookUrl    string `json:"chatwebhookurl"`
 	GistToken         string `json:"gisttoken"`
 	OpenAIKey         string `json:"openaikey"`
