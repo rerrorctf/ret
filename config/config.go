@@ -18,20 +18,23 @@ const (
 )
 
 var (
-	GhidraInstallPath = "/opt/ghidra"
-	GhidraProjectPath = FolderName + "/ghidra"
-	IdaInstallPath    = "/opt/ida"
-	IdaProjectPath    = FolderName + "/ida"
-	PwnScriptName     = "go.py"
-	PwnScriptTemplate = ""
-	FlagFileName      = FolderName + "/flag.json"
-	FlagFormat        = "flag{.+}"
-	WizardPreCommand  = ""
-	WizardPostCommand = ""
-	Username          = ""
-	ChatWebhookUrl    = ""
-	GistToken         = ""
-	OpenAIKey         = ""
+	GhidraInstallPath  = "/opt/ghidra"
+	GhidraProjectPath  = FolderName + "/ghidra"
+	IdaInstallPath     = "/opt/ida"
+	IdaProjectPath     = FolderName + "/ida"
+	PwnScriptName      = "go.py"
+	PwnScriptTemplate  = ""
+	FlagFileName       = FolderName + "/flag.json"
+	FlagFormat         = "flag{.+}"
+	WizardPreCommand   = ""
+	WizardPostCommand  = ""
+	Username           = ""
+	ChatWebhookUrl     = ""
+	GistToken          = ""
+	OpenAIKey          = ""
+	GoogleCloudProject = "default"
+	GoogleCloudRegion  = "europe-west3-c"
+	GoogleCloudSSHKey  = ""
 )
 
 func ParseUserConfig() {
@@ -107,6 +110,18 @@ func ParseUserConfig() {
 	if len(userConfig.OpenAIKey) > 0 {
 		OpenAIKey = userConfig.OpenAIKey
 	}
+
+	if len(userConfig.GoogleCloudProject) > 0 {
+		GoogleCloudProject = userConfig.GoogleCloudProject
+	}
+
+	if len(userConfig.GoogleCloudRegion) > 0 {
+		GoogleCloudRegion = userConfig.GoogleCloudRegion
+	}
+
+	if len(userConfig.GoogleCloudSSHKey) > 0 {
+		GoogleCloudSSHKey = userConfig.GoogleCloudSSHKey
+	}
 }
 
 func WriteUserConfig() {
@@ -132,6 +147,9 @@ func WriteUserConfig() {
 	userConfig.ChatWebhookUrl = ChatWebhookUrl
 	userConfig.GistToken = GistToken
 	userConfig.OpenAIKey = OpenAIKey
+	userConfig.GoogleCloudProject = GoogleCloudProject
+	userConfig.GoogleCloudRegion = GoogleCloudRegion
+	userConfig.GoogleCloudSSHKey = GoogleCloudSSHKey
 
 	jsonData, err := json.MarshalIndent(userConfig, "", "  ")
 	if err != nil {

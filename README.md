@@ -33,6 +33,7 @@ This tool helps you solve CTF tasks by automating workflow and basic analysis an
     - [writeup 📝](https://github.com/rerrorctf/ret?tab=readme-ov-file#writeup-)
     - [gist 🐙](https://github.com/rerrorctf/ret?tab=readme-ov-file#gist-)
     - [sage 🌿](https://github.com/rerrorctf/ret?tab=readme-ov-file#sage-)
+    - [vps ☁️](https://github.com/rerrorctf/ret?tab=readme-ov-file#vps-)
 4. [Config](https://github.com/rerrorctf/ret?tab=readme-ov-file#configret)
 
 ## Introduction
@@ -471,7 +472,6 @@ See https://github.com/rerrorctf/ret/blob/main/README.md#configret for more info
 
 https://github.com/rerrorctf/ret/blob/main/commands/gpt.go
 
-
 ### sage 🌿
 
 ```
@@ -488,6 +488,16 @@ $ sudo docker run -it sagemath/sagemath:latest
 See https://hub.docker.com/r/sagemath/sagemath for more information.
 
 https://github.com/rerrorctf/ret/blob/main/commands/sage.go
+
+### vps ☁️
+
+```
+usage: ret vps [create/list/destroy]
+```
+
+Requests the google cloud cli be installed. See https://cloud.google.com/sdk/docs/install for more information.
+
+https://github.com/rerrorctf/ret/blob/main/commands/vps.go
 
 ## ~/.config/ret
 

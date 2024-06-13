@@ -45,6 +45,8 @@ func main() {
 			"🐙 " + theme.StartUnderline + "gi" + theme.StopUnderline + "st\n" +
 			"                                                             " +
 			"🌿 " + theme.StartUnderline + "sa" + theme.StopUnderline + "ge\n" +
+			"                                                             " +
+			"☁️  " + theme.StartUnderline + "v" + theme.StopUnderline + "ps\n" +
 			theme.StopUnderline + theme.ColorReset)
 
 		fmt.Printf(theme.ColorGray+"https://github.com/rerrorctf/ret "+theme.ColorPurple+"%s\n"+theme.ColorBlue, VERSION)
@@ -194,6 +196,12 @@ func main() {
 	// libc
 	if command[0] == 'l' {
 		commands.Libc(flag.Args()[1:])
+		return
+	}
+
+	// vps
+	if command[0] == 'v' {
+		commands.Vps(flag.Args()[1:])
 		return
 	}
 
