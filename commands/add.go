@@ -31,13 +31,13 @@ func parseFiles(files *data.Files) {
 	if filesAlreadyExists() {
 		jsonData, err := os.ReadFile(config.RetFilesNames)
 		if err != nil {
-			fmt.Println("error reading:", config.RetFilesNames)
+			fmt.Println("💥 "+theme.ColorRed+"error"+theme.ColorReset+": reading:", config.RetFilesNames)
 			os.Exit(1)
 		}
 
 		err = json.Unmarshal(jsonData, &files)
 		if err != nil {
-			fmt.Println("error unmarshalling json:", err)
+			fmt.Println("💥 "+theme.ColorRed+"error"+theme.ColorReset+": unmarshalling json:", err)
 			os.Exit(1)
 		}
 	}
@@ -46,13 +46,13 @@ func parseFiles(files *data.Files) {
 func writeFiles(files *data.Files) {
 	jsonData, err := json.MarshalIndent(files, "", "  ")
 	if err != nil {
-		fmt.Println("error marshalling json:", err)
+		fmt.Println("💥 "+theme.ColorRed+"error"+theme.ColorReset+": marshalling json:", err)
 		os.Exit(1)
 	}
 
 	err = os.WriteFile(config.RetFilesNames, jsonData, 0644)
 	if err != nil {
-		fmt.Println("error writing to file:", err)
+		fmt.Println("💥 "+theme.ColorRed+"error"+theme.ColorReset+": writing to file:", err)
 		os.Exit(1)
 	}
 }
@@ -67,7 +67,7 @@ func addFile(srcPath string) {
 
 	content, err := os.ReadFile(srcPath)
 	if err != nil {
-		fmt.Println("error reading file:", srcPath)
+		fmt.Println("💥 "+theme.ColorRed+"error"+theme.ColorReset+": reading file:", srcPath)
 		return
 	}
 
@@ -114,13 +114,13 @@ func addFile(srcPath string) {
 
 	err = os.MkdirAll(dirPath, 0755)
 	if err != nil {
-		fmt.Println("error making directory:", dirPath)
+		fmt.Println("💥 "+theme.ColorRed+"error"+theme.ColorReset+": making directory:", dirPath)
 		return
 	}
 
 	err = util.CopyFile(srcPath, dstPath)
 	if err != nil {
-		fmt.Println("error copying file:", dstPath)
+		fmt.Println("💥 "+theme.ColorRed+"error"+theme.ColorReset+": copying file:", dstPath)
 		return
 	}
 
