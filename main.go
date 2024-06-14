@@ -25,7 +25,7 @@ func main() {
 			theme.ColorBlue +
 			"🚩 " + theme.StartUnderline + "ct" + theme.StopUnderline + "f          " +
 			"🦖 " + theme.StartUnderline + "gh" + theme.StopUnderline + "idra      " +
-			"🐚 " + theme.StartUnderline + "p" + theme.StopUnderline + "wn         " +
+			"🐚 " + theme.StartUnderline + "pw" + theme.StopUnderline + "n         " +
 			"🤝 " + theme.StartUnderline + "ab" + theme.StopUnderline + "i         " +
 			"🤏 " + theme.StartUnderline + "de" + theme.StopUnderline + "compress\n" +
 			"🔍 " + theme.StartUnderline + "f" + theme.StopUnderline + "ormat       " +
@@ -47,6 +47,8 @@ func main() {
 			"🌿 " + theme.StartUnderline + "sa" + theme.StopUnderline + "ge\n" +
 			"                                                             " +
 			"☁️  " + theme.StartUnderline + "v" + theme.StopUnderline + "ps\n" +
+			"                                                             " +
+			"📡 " + theme.StartUnderline + "pr" + theme.StopUnderline + "oxy\n" +
 			theme.StopUnderline + theme.ColorReset)
 
 		fmt.Printf(theme.ColorGray+"https://github.com/rerrorctf/ret "+theme.ColorPurple+"%s\n"+theme.ColorBlue, VERSION)
@@ -71,8 +73,17 @@ func main() {
 
 	// pwn
 	if command[0] == 'p' {
-		commands.Pwn(flag.Args()[1:])
-		return
+		if len(command) > 1 {
+			if command[1] == 'w' {
+				commands.Pwn(flag.Args()[1:])
+				return
+			}
+
+			if command[1] == 'r' {
+				commands.Proxy(flag.Args()[1:])
+				return
+			}
+		}
 	}
 
 	// docker

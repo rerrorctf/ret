@@ -34,6 +34,7 @@ This tool helps you solve CTF tasks by automating workflow and basic analysis an
     - [gist 🐙](https://github.com/rerrorctf/ret?tab=readme-ov-file#gist-)
     - [sage 🌿](https://github.com/rerrorctf/ret?tab=readme-ov-file#sage-)
     - [vps ☁️](https://github.com/rerrorctf/ret?tab=readme-ov-file#vps-%EF%B8%8F)
+    - [proxy 📡](https://github.com/rerrorctf/ret?tab=readme-ov-file#proxy-)
 4. [Config](https://github.com/rerrorctf/ret?tab=readme-ov-file#configret)
 
 ## Introduction
@@ -498,6 +499,14 @@ usage: ret vps [create/list/destroy]
 Requires the google cloud cli be installed. See https://cloud.google.com/sdk/docs/install for more information.
 
 https://github.com/rerrorctf/ret/blob/main/commands/vps.go
+
+### proxy 📡
+
+```
+usage: ret proxy ip port vps-ip
+```
+
+https://github.com/rerrorctf/ret/blob/main/commands/proxy.go
 
 ## ~/.config/ret
 
