@@ -495,7 +495,7 @@ https://github.com/rerrorctf/ret/blob/main/commands/sage.go
 usage: ret vps [create/list/destroy]
 ```
 
-Requests the google cloud cli be installed. See https://cloud.google.com/sdk/docs/install for more information.
+Requires the google cloud cli be installed. See https://cloud.google.com/sdk/docs/install for more information.
 
 https://github.com/rerrorctf/ret/blob/main/commands/vps.go
 
