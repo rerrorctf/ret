@@ -33,7 +33,7 @@ This tool helps you solve CTF tasks by automating workflow and basic analysis an
     - [writeup 📝](https://github.com/rerrorctf/ret?tab=readme-ov-file#writeup-)
     - [gist 🐙](https://github.com/rerrorctf/ret?tab=readme-ov-file#gist-)
     - [sage 🌿](https://github.com/rerrorctf/ret?tab=readme-ov-file#sage-)
-    - [vps ☁️](https://github.com/rerrorctf/ret?tab=readme-ov-file#vps-)
+    - [vps ☁️](https://github.com/rerrorctf/ret?tab=readme-ov-file#vps-%EF%B8%8F)
 4. [Config](https://github.com/rerrorctf/ret?tab=readme-ov-file#configret)
 
 ## Introduction
