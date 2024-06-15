@@ -278,15 +278,108 @@ https://github.com/rerrorctf/ret/blob/main/commands/format.go
 ret ghidra [file1 file2...]
 ```
 
-The `Ghidra` command in this package is designed to ingest files and open them with Ghidra, a software reverse engineering tool.
+The `Ghidra` command in this package is designed to ingest files and open them with ghidra, a software reverse engineering tool.
 
-- Ensures the Ghidra project directory exists.
-- Adds files to the Ghidra project.
-- Analyzes files and opens the Ghidra project.
+- Ensures the ghidra project directory exists.
+- Optionally add one or more files.
+- Analyzes all added files and opens the ghidra project.
 
 Make sure ghidra is installed (or symlinked) at `/opt/ghidra` or use the config file to adjust the default ghidra installation location.
 
 https://github.com/rerrorctf/ret/blob/main/commands/ghidra.go
+
+### gist 🐙
+
+```
+ret gist file [-]
+```
+
+Create a private gist from a file.
+
+Optionally you can read from stdin by specifying `-` after the file param. In this case file will be used only as the name.
+
+Requires `~/.config/ret` to have a valid `gisttoken`.
+
+See https://github.com/rerrorctf/ret/blob/main/README.md#configret for more information.
+
+See your tokens here https://github.com/settings/tokens?type=beta.
+
+Read about creating gists programatically here https://docs.github.com/en/rest/gists/gists?apiVersion=2022-11-28#create-a-gist.
+
+https://github.com/rerrorctf/ret/blob/main/commands/gist.go
+
+### gpt 🧠
+
+```
+ret gpt question
+```
+
+Pose a question to ChatGPT with ret's ctf specific prompt.
+
+Optionally you can read from stdin by specifying `-` as the first param.
+
+```
+$ ret gpt how do i pwn?
+$ cat go.py | ret gpt - how do i make this pwn better?
+```
+
+See https://github.com/rerrorctf/ret/blob/main/README.md#configret for more information.
+
+https://github.com/rerrorctf/ret/blob/main/commands/gpt.go
+
+### ida 💃
+
+```
+ret ida [file1 file2...]
+```
+
+Optionally adds one or more new files.
+
+Imports all added files.
+
+Opens ida.
+
+Make sure ida is installed (or symlinked) at `/opt/ida` or use the config file to adjust the default ida installation location.
+
+https://github.com/rerrorctf/ret/blob/main/commands/ida.go
+
+### libc 🗽
+
+```
+ret libc [tag]
+```
+
+Creates and runs a Docker container based on the given tag.
+
+By default will use ubuntu:latest as the tag if none is provided.
+
+A Dockerfile and a script will be created and then run in a temp directory.
+
+The script will build, run, stop and remove the container.
+
+When the container is running `libc.so.6` will be copied from the container.
+
+After the container is destroyed the file is added with ret.
+
+https://github.com/rerrorctf/ret/blob/main/commands/libc.go
+
+### proxy 📡
+
+```
+ret proxy [list/create]
+```
+
+This command manages SSH proxies.
+
+1. **Listing Proxies**:
+   - Command: `ret proxy list`
+   - Description: Lists all currently active SSH proxies that are using local port forwarding (`ssh -L`). It parses the output of `ps aux` to find relevant SSH processes and displays their details, including the local port, remote IP, remote port, and process ID.
+
+2. **Creating Proxies**:
+   - Command: `ret proxy create local-port remote-ip remote-port [ssh-ip]`
+   - Description: Creates a new SSH proxy with local port forwarding. It requires the local port, remote IP, and remote port as arguments. Optionally, an SSH IP can be specified. The command uses the current user's credentials to establish the SSH connection.
+
+https://github.com/rerrorctf/ret/blob/main/commands/proxy.go
 
 ### wizard 🧙
 
@@ -376,44 +469,6 @@ Note the placement of the `"` characters.
 
 https://github.com/rerrorctf/ret/blob/main/commands/pwn.go
 
-### ida 💃
-
-```
-ret ida [file1 file2...]
-```
-
-Optionally adds one or more new files.
-
-Imports all added files.
-
-Opens ida.
-
-Make sure ida is installed (or symlinked) at `/opt/ida` or use the config file to adjust the default ida installation location.
-
-Note: this command doesn't work well and needs an ida user's love and care.
-
-https://github.com/rerrorctf/ret/blob/main/commands/ida.go
-
-### libc 🗽
-
-```
-ret libc [tag]
-```
-
-Creates and runs a container based on the given tag.
-
-By default will use ubuntu:latest as the tag if none is provided.
-
-In a temp directory a Dockerfile and script will be created and ran.
-
-The script will build, run, stop and remove the container.
-
-When the container is running libc.so.6 will be copied from the container.
-
-After the container is destroyed the file is copied to the cwd and added with ret.
-
-https://github.com/rerrorctf/ret/blob/main/commands/libc.go
-
 ### syscall 📞
 
 ```
@@ -440,27 +495,6 @@ For example:
 
 https://github.com/rerrorctf/ret/blob/main/commands/syscall.go
 
-### gist 🐙
-
-```
-ret gist file [-]
-```
-
-Create a private gist from a file.
-
-Optionally you can read from stdin by specifying `-` after the file param. In this case file will be used only as the name.
-
-Requires `~/.config/ret` to have a valid `gisttoken`.
-
-See https://github.com/rerrorctf/ret/blob/main/README.md#configret for more information.
-
-https://github.com/settings/tokens?type=beta
-
-https://docs.github.com/en/rest/gists/gists?apiVersion=2022-11-28#create-a-gist
-
-https://github.com/rerrorctf/ret/blob/main/commands/gist.go
-
-
 ### writeup 📝
 
 ```
@@ -470,25 +504,6 @@ ret writeup
 Create a writeup template for a task in a file called `writeup.md`.
 
 https://github.com/rerrorctf/ret/blob/main/commands/writeup.go
-
-### gpt 🧠
-
-```
-ret gpt question
-```
-
-Pose a question to ChatGPT with ret's ctf specific prompt.
-
-Optionally you can read from stdin by specifying `-` as the first param.
-
-```
-$ ret gpt how do i pwn?
-$ cat go.py | ret gpt - how do i make this pwn better?
-```
-
-See https://github.com/rerrorctf/ret/blob/main/README.md#configret for more information.
-
-https://github.com/rerrorctf/ret/blob/main/commands/gpt.go
 
 ### sage 🌿
 
@@ -516,14 +531,6 @@ ret vps [create/list/destroy]
 Requires the google cloud cli be installed. See https://cloud.google.com/sdk/docs/install for more information.
 
 https://github.com/rerrorctf/ret/blob/main/commands/vps.go
-
-### proxy 📡
-
-```
-ret proxy [list/create]
-```
-
-https://github.com/rerrorctf/ret/blob/main/commands/proxy.go
 
 ## ~/.config/ret
 
