@@ -11,8 +11,8 @@ import (
 	"ret/util"
 )
 
-const (
-	VERSION = "0.1.24"
+var (
+	COMMIT = ""
 )
 
 func main() {
@@ -52,7 +52,7 @@ func main() {
 			"🔪 " + theme.StartUnderline + "chef" + theme.StopUnderline + "\n" +
 			theme.StopUnderline + theme.ColorReset)
 
-		fmt.Printf(theme.ColorGray+"https://github.com/rerrorctf/ret "+theme.ColorPurple+"%s\n"+theme.ColorBlue, VERSION)
+		fmt.Printf(theme.ColorReset+"https://github.com/rerrorctf/ret "+theme.ColorPurple+"%s\n"+theme.ColorBlue, COMMIT)
 	}
 
 	flag.Parse()
