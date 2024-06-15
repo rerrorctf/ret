@@ -567,6 +567,19 @@ The data in the config must be in the json format. You can include zero or more 
 - `openaikey`
   - An optional OpenAI key used with the `gpt` command
 
+- `googlecloudproject`
+  - The optional name of the GCP project you wish to create virtual machines within when using the vps command.
+
+- `googlecloudregion`
+  - The optional GCP region to create virtual machines within when using the vps command.
+  - Default is `europe-west3-c`.
+
+- `googlecloudsshkey`
+  - The optional ssh key to supply as metadata when creating GCP virtual machines when using the vps command.
+  - Should be of the following form:
+    - `"user:pubkey"`
+      - Where `user` is the username you wish to use to login to the server.
+
 ## The .ret Directory Structure
 
 Certain commands, such as `add` and `status` will use a hidden directory structure.
