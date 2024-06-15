@@ -124,7 +124,7 @@ Now, the project root directory, you can simply do:
 $ go build
 ```
 
-This will produce the `ret` binary. This static binary / single file is all you need to use `ret`.
+This will produce the `ret` binary. This single file is all you need to use `ret`.
 
 There is also a `build.sh` that I use to create the binaries that get uploaded to github.
 
