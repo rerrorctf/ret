@@ -400,14 +400,6 @@ Prints reference details about the abi for the given platform.
 
 For more detailed information on calling conventions, refer to the [Agner Fog's Calling Conventions PDF](https://www.agner.org/optimize/calling_conventions.pdf).
 
-#### Example
-
-To view the ABI details for Linux x64:
-
-```
-ret abi x64 linux
-```
-
 https://github.com/rerrorctf/ret/blob/main/commands/abi.go
 
 
