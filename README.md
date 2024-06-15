@@ -140,6 +140,36 @@ You can get help for a command by giving `help` as an argument to the command:
 $ ret command help
 ```
 
+### abi 🤝
+
+```
+ret abi [architecture] [os]
+```
+
+Prints reference details about the abi for the given platform.
+
+- **architecture**: Specify `x86/32` or `x64/64`.
+- **os**: Specify `linux` or `windows`.
+
+For more detailed information on calling conventions, refer to the [Agner Fog's Calling Conventions PDF](https://www.agner.org/optimize/calling_conventions.pdf).
+
+https://github.com/rerrorctf/ret/blob/main/commands/abi.go
+
+### add 📥
+
+```
+ret add file1 [file2 file3...]
+```
+
+This command will:
+1. Analyze each file to determine its type.
+2. Generate a SHA-256 hash for each file.
+3. Added files are stored in in the hidden directory `.ret/files` inside a subfolder that is named using the SHA2-256 hex digest of the file content.
+4. Save metadata about the file in a JSON file.
+5. Searches for patterns within the file content.
+
+https://github.com/rerrorctf/ret/blob/main/commands/add.go
+
 ### ctf 🚩
 
 ```
@@ -183,21 +213,6 @@ Wizard is here to help! They simply run a few common commands for a typical work
 9) Executes the `wizardpostcommand` from ~/.config/ret.
 
 https://github.com/rerrorctf/ret/blob/main/commands/wizard.go
-
-### add 📥
-
-```
-ret add file1 [file2 file3...]
-```
-
-This command will:
-1. Analyze each file to determine its type.
-2. Generate a SHA-256 hash for each file.
-3. Added files are stored in in the hidden directory `.ret/files` inside a subfolder that is named using the SHA2-256 hex digest of the file content.
-4. Save metadata about the file in a JSON file.
-5. Searches for patterns within the file content.
-
-https://github.com/rerrorctf/ret/blob/main/commands/add.go
 
 ### decompress 🤏
 
@@ -386,22 +401,6 @@ For example:
 `syscall x86 10[0-9]`
 
 https://github.com/rerrorctf/ret/blob/main/commands/syscall.go
-
-### abi 🤝
-
-```
-ret abi [architecture] [os]
-```
-
-Prints reference details about the abi for the given platform.
-
-- **architecture**: Specify `x86/32` or `x64/64`.
-- **os**: Specify `linux` or `windows`.
-
-For more detailed information on calling conventions, refer to the [Agner Fog's Calling Conventions PDF](https://www.agner.org/optimize/calling_conventions.pdf).
-
-https://github.com/rerrorctf/ret/blob/main/commands/abi.go
-
 
 ### chat 📢
 
