@@ -228,7 +228,35 @@ Records the provided flag as the solution for the current task.
 
 If no flag is provided will report the currently recorded flag if any exists.
 
+Note that if you set the flag for the current task the `writeup` command will automatically include it for you.
+
 https://github.com/rerrorctf/ret/blob/main/commands/ctf.go
+
+### decompress 🤏
+
+```
+ret decompress file1 [file2 file3...]
+```
+
+Decompresses files by first checking if they have a suitable extension and then a suitable magic.
+
+Supports .zip, .gzip, .xz, .tar and .7z.
+
+Note that we check the extension to avoid decompressing things like .apk files.
+
+https://github.com/rerrorctf/ret/blob/main/commands/decompress.go
+
+### docker 🐋
+
+```
+ret docker [ip] [port]
+```
+
+Creates a Dockerfile from a template.
+
+This is potentially useful for pwning locally.
+
+https://github.com/rerrorctf/ret/blob/main/commands/docker.go
 
 ### format 🔍
 
@@ -240,7 +268,25 @@ Prints the current flag format regex or updates it if an argument is supplied.
 
 This creates or rewrites the contents `~/.config/ret`.
 
+Note that if don't set the flag for the current task the `writeup` command will automatically include the format regex for you as a placeholder.
+
 https://github.com/rerrorctf/ret/blob/main/commands/format.go
+
+### ghidra 🦖
+
+```
+ret ghidra [file1 file2...]
+```
+
+The `Ghidra` command in this package is designed to ingest files and open them with Ghidra, a software reverse engineering tool.
+
+- Ensures the Ghidra project directory exists.
+- Adds files to the Ghidra project.
+- Analyzes files and opens the Ghidra project.
+
+Make sure ghidra is installed (or symlinked) at `/opt/ghidra` or use the config file to adjust the default ghidra installation location.
+
+https://github.com/rerrorctf/ret/blob/main/commands/ghidra.go
 
 ### wizard 🧙
 
@@ -261,20 +307,6 @@ Wizard is here to help! They simply run a few common commands for a typical work
 9) Executes the `wizardpostcommand` from ~/.config/ret.
 
 https://github.com/rerrorctf/ret/blob/main/commands/wizard.go
-
-### decompress 🤏
-
-```
-ret decompress file1 [file2 file3...]
-```
-
-Decompresses files by first checking if they have a suitable extension and then a suitable magic.
-
-Supports .zip, .gzip, .xz, .tar and .7z.
-
-Note that we check the extension to avoid decompressing things like .apk files.
-
-https://github.com/rerrorctf/ret/blob/main/commands/decompress.go
 
 ### status 👀
 
@@ -344,26 +376,6 @@ Note the placement of the `"` characters.
 
 https://github.com/rerrorctf/ret/blob/main/commands/pwn.go
 
-### ghidra 🦖
-
-```
-ret ghidra [file1 file2...]
-```
-
-Creates a ghidra project in the hidden directory `.ret/ghidra`.
-
-Optionally adds one or more new files.
-
-Imports and analyzes all added files using headless mode.
-
-Opens the ghidra project after the analysis has completed.
-
-Make sure ghidra is installed (or symlinked) at `/opt/ghidra` or use the config file to adjust the default ghidra installation location.
-
-From a workflow point of view I tend to run this after running the wizard in the background. This means that when i'm ready to use ghidra everything is already fully analyzed.
-
-https://github.com/rerrorctf/ret/blob/main/commands/ghidra.go
-
 ### ida 💃
 
 ```
@@ -381,16 +393,6 @@ Make sure ida is installed (or symlinked) at `/opt/ida` or use the config file t
 Note: this command doesn't work well and needs an ida user's love and care.
 
 https://github.com/rerrorctf/ret/blob/main/commands/ida.go
-
-### docker 🐋
-
-```
-ret docker [ip] [port]
-```
-
-Creates a Dockerfile from a template.
-
-https://github.com/rerrorctf/ret/blob/main/commands/docker.go
 
 ### libc 🗽
 
