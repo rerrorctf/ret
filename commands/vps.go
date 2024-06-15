@@ -2,6 +2,7 @@ package commands
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"os/exec"
 	"ret/config"
@@ -51,8 +52,7 @@ func createVps() string {
 
 	err := create.Run()
 	if err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+"error: "+theme.ColorReset+"%v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	args = []string{
@@ -66,8 +66,7 @@ func createVps() string {
 
 	getIpOutput, err := getIp.CombinedOutput()
 	if err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+"error: "+theme.ColorReset+"%v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	ip := string(getIpOutput)
@@ -92,8 +91,7 @@ func listVps() {
 
 	err := create.Run()
 	if err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+"error: "+theme.ColorReset+"%v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 }
 
@@ -114,21 +112,17 @@ func destroyVps(instanceName string) {
 
 	err := create.Run()
 	if err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+"error: "+theme.ColorReset+"%v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 }
 
-func validateConfig() bool {
+func validateConfig() {
 	if config.GoogleCloudProject == "" {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": no google cloud project found in %s\n", config.UserConfig)
-		return false
+		log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": no google cloud project found in %s\n", config.UserConfig)
 	}
 	if config.GoogleCloudRegion == "" {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": no google cloud region found in %s\n", config.UserConfig)
-		return false
+		log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": no google cloud region found in %s\n", config.UserConfig)
 	}
-	return true
 }
 
 func Vps(args []string) {
@@ -136,11 +130,9 @@ func Vps(args []string) {
 		switch args[0] {
 		case "help":
 			vpsHelp()
-			os.Exit(1)
+			return
 		case "create", "list", "destroy":
-			if !validateConfig() {
-				os.Exit(1)
-			}
+			validateConfig()
 			switch args[0] {
 			case "create":
 				createVps()
@@ -150,17 +142,13 @@ func Vps(args []string) {
 				if len(args) < 2 {
 					fmt.Printf("💥 " + theme.ColorRed + " error" + theme.ColorReset + ": missing instance name for destroy\n")
 					listVps()
-					os.Exit(1)
+					return
 				}
 				destroyVps(args[1])
 			}
 			return
-		default:
-			vpsHelp()
-			os.Exit(1)
 		}
-	} else {
-		vpsHelp()
-		os.Exit(1)
 	}
+
+	vpsHelp()
 }

@@ -2,6 +2,7 @@ package commands
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"os/exec"
 	"ret/theme"
@@ -18,7 +19,7 @@ func Sage(args []string) {
 		switch args[0] {
 		case "help":
 			sageHelp()
-			os.Exit(1)
+			return
 		}
 	}
 
@@ -30,8 +31,7 @@ func Sage(args []string) {
 
 	err := pull.Run()
 	if err != nil {
-		fmt.Printf("%v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	run := exec.Command("sudo", "docker", "run", "-it", "sagemath/sagemath:latest")
@@ -43,7 +43,6 @@ func Sage(args []string) {
 	err = run.Run()
 
 	if err != nil {
-		fmt.Printf("%v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 }

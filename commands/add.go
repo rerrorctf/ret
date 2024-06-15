@@ -5,6 +5,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"log"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -31,14 +32,12 @@ func parseFiles(files *data.Files) {
 	if filesAlreadyExists() {
 		jsonData, err := os.ReadFile(config.RetFilesNames)
 		if err != nil {
-			fmt.Println("💥 "+theme.ColorRed+"error"+theme.ColorReset+": reading:", config.RetFilesNames)
-			os.Exit(1)
+			log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 		}
 
 		err = json.Unmarshal(jsonData, &files)
 		if err != nil {
-			fmt.Println("💥 "+theme.ColorRed+"error"+theme.ColorReset+": unmarshalling json:", err)
-			os.Exit(1)
+			log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 		}
 	}
 }
@@ -46,14 +45,12 @@ func parseFiles(files *data.Files) {
 func writeFiles(files *data.Files) {
 	jsonData, err := json.MarshalIndent(files, "", "  ")
 	if err != nil {
-		fmt.Println("💥 "+theme.ColorRed+"error"+theme.ColorReset+": marshalling json:", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	err = os.WriteFile(config.RetFilesNames, jsonData, 0644)
 	if err != nil {
-		fmt.Println("💥 "+theme.ColorRed+"error"+theme.ColorReset+": writing to file:", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 }
 
@@ -137,7 +134,6 @@ func AddHelp() {
 	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "add" + theme.ColorReset + " file1 " + theme.ColorGray + "[file2 file3...]" + theme.ColorReset + "\n")
 	fmt.Printf("  📥 add one or more files to the current task with ret\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/add.go" + theme.ColorReset + "\n")
-	os.Exit(0)
 }
 
 func Add(args []string) {
@@ -145,7 +141,7 @@ func Add(args []string) {
 		switch args[0] {
 		case "help":
 			AddHelp()
-			os.Exit(0)
+			return
 		default:
 			for _, file := range args {
 				addFile(file)
@@ -153,6 +149,5 @@ func Add(args []string) {
 		}
 	} else {
 		AddHelp()
-		os.Exit(1)
 	}
 }

@@ -3,6 +3,7 @@ package commands
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"os"
 	"os/exec"
 	"ret/config"
@@ -10,20 +11,24 @@ import (
 	"ret/theme"
 )
 
+func statusHelp() {
+	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "status" + theme.ColorReset + "\n")
+	fmt.Printf("  👀 displays the status for the current task with ret\n")
+	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/status.go" + theme.ColorReset + "\n")
+}
+
 func Status(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "status" + theme.ColorReset + "\n")
-			fmt.Printf("  👀 displays the status for the current task with ret\n")
-			fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/status.go" + theme.ColorReset + "\n")
-			os.Exit(0)
+			statusHelp()
+			return
 		}
 	}
 
 	jsonData, err := os.ReadFile(config.RetFilesNames)
 	if err != nil {
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	var files data.Files

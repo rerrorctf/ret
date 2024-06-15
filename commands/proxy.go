@@ -3,6 +3,7 @@ package commands
 import (
 	"bytes"
 	"fmt"
+	"log"
 	"os"
 	"os/exec"
 	"os/user"
@@ -22,8 +23,7 @@ func proxyList() {
 
 	psOutput, err := ps.StdoutPipe()
 	if err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	grepSsh := exec.Command("grep", "ssh.*-L")
@@ -33,20 +33,16 @@ func proxyList() {
 	grepSsh.Stdout = &output
 
 	if err := ps.Start(); err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 	if err := grepSsh.Start(); err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 	if err := ps.Wait(); err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 	if err := grepSsh.Wait(); err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	lines := strings.Split(output.String(), "\n")
@@ -71,7 +67,7 @@ func ProxyList(args []string) {
 		switch args[0] {
 		case "help":
 			proxyListHelp()
-			os.Exit(-1)
+			return
 		}
 	}
 
@@ -87,8 +83,7 @@ func proxyCreateHelp() {
 func proxyCreate(localPort int, remoteIp string, remotePort int, proxyIp string) {
 	currentUser, err := user.Current()
 	if err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	proxy := exec.Command("ssh", "-Nf", "-L", fmt.Sprintf("%d:%s:%d", localPort, remoteIp, remotePort), fmt.Sprintf("%s@%s", currentUser.Name, proxyIp))
@@ -99,8 +94,7 @@ func proxyCreate(localPort int, remoteIp string, remotePort int, proxyIp string)
 
 	err = proxy.Run()
 	if err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 }
 
@@ -109,29 +103,24 @@ func ProxyCreate(args []string) {
 		switch args[0] {
 		case "help":
 			proxyCreateHelp()
-			os.Exit(-1)
+			return
 		}
 	}
 
 	if len(args) < 4 {
-		fmt.Printf("💥 " + theme.ColorRed + " error" + theme.ColorReset + ": not enough args\n")
-		proxyCreateHelp()
-		os.Exit(-1)
+		log.Fatalf("💥 " + theme.ColorRed + " error" + theme.ColorReset + ": not enough args\n")
 	}
+
 	localPort, err := strconv.Atoi(args[0])
 	if err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		proxyCreateHelp()
-		os.Exit(-1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	remoteIp := args[1]
 
 	remotePort, err := strconv.Atoi(args[2])
 	if err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		proxyCreateHelp()
-		os.Exit(-1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	// TODO make optional - use default vps if one exists
@@ -151,7 +140,7 @@ func Proxy(args []string) {
 		switch args[0] {
 		case "help":
 			proxyHelp()
-			os.Exit(-1)
+			return
 		case "list":
 			ProxyList(args[1:])
 			return
@@ -162,5 +151,4 @@ func Proxy(args []string) {
 	}
 
 	proxyHelp()
-	os.Exit(-1)
 }

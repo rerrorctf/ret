@@ -2,7 +2,7 @@ package commands
 
 import (
 	"fmt"
-	"os"
+	"log"
 	"ret/theme"
 )
 
@@ -107,7 +107,7 @@ func Abi(args []string) {
 		switch args[0] {
 		case "help":
 			abiHelp()
-			os.Exit(1)
+			return
 		}
 	}
 
@@ -136,9 +136,7 @@ func Abi(args []string) {
 		}
 	default:
 		{
-			fmt.Printf("💥 " + theme.ColorRed + "error" + theme.ColorReset + ": unsupported architecture. use 'x86/32' or 'x64/64'\n" + theme.ColorReset)
-			abiHelp()
-			os.Exit(1)
+			log.Fatalf("💥 " + theme.ColorRed + "error" + theme.ColorReset + ": unsupported architecture. use 'x86/32' or 'x64/64'\n" + theme.ColorReset)
 		}
 	}
 

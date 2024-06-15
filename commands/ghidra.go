@@ -2,6 +2,7 @@ package commands
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -26,29 +27,31 @@ func ghidraSpinner() {
 	}
 }
 
+func ghidraHelp() {
+	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "ghidra" + theme.ColorGray + " [file1 file2...]" + theme.ColorReset + "\n")
+	fmt.Printf("  🦖 ingests all added files then opens ghidra with ret\n")
+	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/ghidra.go" + theme.ColorReset + "\n")
+}
+
 func Ghidra(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "ghidra" + theme.ColorGray + " [file1 file2...]" + theme.ColorReset + "\n")
-			fmt.Printf("  🦖 ingests all added files then opens ghidra with ret\n")
-			fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/ghidra.go" + theme.ColorReset + "\n")
-			os.Exit(0)
+			ghidraHelp()
+			return
 		}
 	}
 
 	if _, err := os.Stat(config.GhidraProjectPath); os.IsNotExist(err) {
 		err := os.MkdirAll(config.GhidraProjectPath, 0755)
 		if err != nil {
-			fmt.Println("error creating directory:", err)
-			os.Exit(1)
+			log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 		}
 	}
 
 	absoluteProjectPath, err := filepath.Abs(config.GhidraProjectPath + "/project.gpr")
 	if err != nil {
-		fmt.Println("error abs:", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	if len(args) > 0 {

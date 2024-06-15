@@ -1,17 +1,17 @@
 package util
 
 import (
-	"fmt"
+	"log"
 	"os"
 	"ret/config"
+	"ret/theme"
 )
 
 func EnsureDirectory(dirPath string) {
 	if _, err := os.Stat(dirPath); os.IsNotExist(err) {
 		err := os.MkdirAll(dirPath, 0755)
 		if err != nil {
-			fmt.Println("error creating directory:", err)
-			os.Exit(1)
+			log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 		}
 	}
 }

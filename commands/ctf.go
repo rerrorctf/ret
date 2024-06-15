@@ -3,6 +3,7 @@ package commands
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"os"
 	"ret/config"
 	"ret/data"
@@ -27,14 +28,12 @@ func scoreNewFlag(newFlag string) {
 
 	jsonData, err := json.MarshalIndent(flag, "", "  ")
 	if err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	err = os.WriteFile(config.FlagFileName, jsonData, 0644)
 	if err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	fmt.Printf("🚩 "+theme.ColorPurple+"%s"+theme.ColorPurple+"\n", flag.Flag)
@@ -44,7 +43,6 @@ func CtfHelp() {
 	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "ctf" + theme.ColorGray + " [flag]" + theme.ColorReset + "\n")
 	fmt.Printf("  🚩 capture the flag with ret\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/ctf.go" + theme.ColorReset + "\n")
-	os.Exit(0)
 }
 
 func Ctf(args []string) {
@@ -52,6 +50,7 @@ func Ctf(args []string) {
 		switch args[0] {
 		case "help":
 			CtfHelp()
+			return
 		}
 	} else {
 		displayCurrentFlag()

@@ -3,10 +3,12 @@ package config
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"os"
 	"os/user"
 	"path/filepath"
 	"ret/data"
+	"ret/theme"
 )
 
 const (
@@ -55,8 +57,7 @@ func ParseUserConfig() {
 
 	err = json.Unmarshal(jsonData, &userConfig)
 	if err != nil {
-		fmt.Println("error unmarshalling json:", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	if len(userConfig.GhidraInstallPath) > 0 {
@@ -153,13 +154,11 @@ func WriteUserConfig() {
 
 	jsonData, err := json.MarshalIndent(userConfig, "", "  ")
 	if err != nil {
-		fmt.Println("error marshalling json:", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	err = os.WriteFile(configPath, jsonData, 0644)
 	if err != nil {
-		fmt.Println("error writing to file:", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 }

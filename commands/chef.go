@@ -5,6 +5,7 @@ import (
 	"encoding/base64"
 	"fmt"
 	"io"
+	"log"
 	"os"
 	"os/exec"
 	"ret/theme"
@@ -20,7 +21,6 @@ func chefHelp() {
 	fmt.Printf("  🔪 open cyberchef with ret\n")
 	fmt.Printf("     " + theme.ColorGray + "use file - to read from stdin" + theme.ColorReset + "\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/chef.go" + theme.ColorReset + "\n")
-	os.Exit(0)
 }
 
 func Chef(args []string) {
@@ -28,13 +28,10 @@ func Chef(args []string) {
 		switch args[0] {
 		case "help":
 			chefHelp()
-			os.Exit(0)
+			return
 		}
-	}
-
-	if len(args) == 0 {
+	} else {
 		chefHelp()
-		os.Exit(-1)
 		return
 	}
 
@@ -43,8 +40,7 @@ func Chef(args []string) {
 		var buffer bytes.Buffer
 		_, err := io.Copy(&buffer, os.Stdin)
 		if err != nil {
-			fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-			os.Exit(1)
+			log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 		}
 
 		input += buffer.String()
@@ -63,7 +59,6 @@ func Chef(args []string) {
 
 	err := open.Run()
 	if err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 }

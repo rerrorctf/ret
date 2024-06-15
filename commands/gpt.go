@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"os"
 	"ret/config"
@@ -36,14 +37,12 @@ const (
 func sendRequest(query map[string]interface{}) {
 	body, err := json.Marshal(query)
 	if err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 	}
 
 	req, err := http.NewRequest("POST", "https://api.openai.com/v1/chat/completions", bytes.NewBuffer(body))
 	if err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 	}
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", config.OpenAIKey))
@@ -51,21 +50,18 @@ func sendRequest(query map[string]interface{}) {
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 	}
 	defer resp.Body.Close()
 
 	body, err = io.ReadAll(resp.Body)
 	if err != nil {
-		fmt.Println("Error reading response body:", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 	}
 
 	var result map[string]interface{}
 	if err := json.Unmarshal(body, &result); err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 	}
 
 	if choices, ok := result["choices"].([]interface{}); ok {
@@ -88,8 +84,7 @@ func readInput(args []string) string {
 		var buffer bytes.Buffer
 		_, err := io.Copy(&buffer, os.Stdin)
 		if err != nil {
-			fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-			os.Exit(1)
+			log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 		}
 		content = buffer.String() + " " + strings.Join(args[1:], " ")
 	}
@@ -102,7 +97,6 @@ func gptHelp() {
 	fmt.Printf("  🧠 ask ChatGPT with ret\n")
 	fmt.Printf("     " + theme.ColorGray + "use - to read from stdin" + theme.ColorReset + "\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/gpt.go" + theme.ColorReset + "\n")
-	os.Exit(0)
 }
 
 func Gpt(args []string) {
@@ -110,6 +104,7 @@ func Gpt(args []string) {
 		switch args[0] {
 		case "help":
 			gptHelp()
+			return
 		}
 	} else {
 		gptHelp()
@@ -117,8 +112,7 @@ func Gpt(args []string) {
 	}
 
 	if config.OpenAIKey == "" {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": no OpenAI key found in %s\n", config.UserConfig)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": no OpenAI key found in %s\n", config.UserConfig)
 	}
 
 	content := readInput(args)

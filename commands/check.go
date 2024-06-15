@@ -2,7 +2,6 @@ package commands
 
 import (
 	"fmt"
-	"os"
 	"os/exec"
 	"os/user"
 	"ret/config"
@@ -24,14 +23,18 @@ func suggestLink(link string) {
 	fmt.Println(theme.ColorGray + "       -> 🔗 " + theme.ColorCyan + link + theme.ColorReset)
 }
 
+func checkHelp() {
+	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "check" + theme.ColorReset + "\n")
+	fmt.Printf("  ✅ check your env/setup readiness before a ctf with ret\n")
+	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/check.go" + theme.ColorReset + "\n")
+}
+
 func Check(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "check" + theme.ColorReset + "\n")
-			fmt.Printf("  ✅ check your env/setup readiness before a ctf with ret\n")
-			fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/check.go" + theme.ColorReset + "\n")
-			os.Exit(0)
+			checkHelp()
+			return
 		}
 	}
 

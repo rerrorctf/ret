@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"os"
 	"ret/config"
@@ -18,7 +19,6 @@ func gistHelp() {
 	fmt.Printf("     " + theme.ColorGray + "specify the path of the file to upload" + theme.ColorReset + "\n")
 	fmt.Printf("     " + theme.ColorGray + "use file - to read from stdin in which case file is used for the name only" + theme.ColorReset + "\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/gist.go" + theme.ColorReset + "\n")
-	os.Exit(0)
 }
 
 func Gist(args []string) {
@@ -26,14 +26,15 @@ func Gist(args []string) {
 		switch args[0] {
 		case "help":
 			gistHelp()
+			return
 		}
 	} else {
 		gistHelp()
+		return
 	}
 
 	if len(config.GistToken) == 0 {
-		fmt.Printf("💥 " + theme.ColorRed + " error" + theme.ColorReset + ": no gist token in ~/.config/ret\n")
-		os.Exit(1)
+		log.Fatalf("💥 " + theme.ColorRed + "error" + theme.ColorReset + ":  no gist token in ~/.config/ret\n")
 	}
 
 	file := args[0]
@@ -44,16 +45,14 @@ func Gist(args []string) {
 		var buffer bytes.Buffer
 		_, err := io.Copy(&buffer, os.Stdin)
 		if err != nil {
-			fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-			os.Exit(1)
+			log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 		}
 
 		content = buffer.String()
 	} else {
 		buffer, err := os.ReadFile(file)
 		if err != nil {
-			fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-			os.Exit(1)
+			log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 		}
 
 		content = string(buffer)
@@ -74,14 +73,12 @@ func Gist(args []string) {
 
 	body, err := json.Marshal(gist)
 	if err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 	}
 
 	req, err := http.NewRequest("POST", "https://api.github.com/gists", bytes.NewBuffer(body))
 	if err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 	}
 	req.Header.Set("Accept", "application/vnd.github+json")
 	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", config.GistToken))
@@ -90,20 +87,17 @@ func Gist(args []string) {
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 	}
 
 	body, err = io.ReadAll(resp.Body)
 	if err != nil {
-		fmt.Println("Error reading response body:", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 	}
 
 	var result map[string]interface{}
 	if err := json.Unmarshal(body, &result); err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 	}
 
 	fmt.Printf("%s\n", result["html_url"].(string))

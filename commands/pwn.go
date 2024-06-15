@@ -57,25 +57,29 @@ func makeScript(ip string, port int) {
 
 	err := os.WriteFile(config.PwnScriptName, []byte(script), 0644)
 	if err != nil {
-		log.Fatalln("error writing to file:", err)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	err = os.Chmod(config.PwnScriptName, 0744)
 	if err != nil {
-		log.Fatalln("error chmoding file:", err)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	fmt.Printf("🐚 "+theme.ColorGray+"ready to pwn:"+theme.ColorReset+" $ ./%s\n", config.PwnScriptName)
+}
+
+func pwnHelp() {
+	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "pwn" + theme.ColorGray + " [ip] [port]" + theme.ColorReset + "\n")
+	fmt.Printf("  🐚 create a pwntools script template with ret\n")
+	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/pwn.go" + theme.ColorReset + "\n")
 }
 
 func Pwn(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "pwn" + theme.ColorGray + " [ip] [port]" + theme.ColorReset + "\n")
-			fmt.Printf("  🐚 create a pwntools script template with ret\n")
-			fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/pwn.go" + theme.ColorReset + "\n")
-			os.Exit(0)
+			pwnHelp()
+			return
 		}
 	}
 

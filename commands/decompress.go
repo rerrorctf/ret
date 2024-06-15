@@ -2,7 +2,6 @@ package commands
 
 import (
 	"fmt"
-	"os"
 	"ret/theme"
 	"ret/util"
 )
@@ -11,7 +10,6 @@ func decompressHelp() {
 	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "decompress" + theme.ColorGray + " file1 [file2 file3...]" + theme.ColorReset + "\n")
 	fmt.Printf("  🤏 decompress one or more files with ret\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/decompress.go" + theme.ColorReset + "\n")
-	os.Exit(0)
 }
 
 func Decompress(args []string) {
@@ -19,7 +17,7 @@ func Decompress(args []string) {
 		switch args[0] {
 		case "help":
 			decompressHelp()
-			os.Exit(0)
+			return
 		default:
 			for _, file := range args {
 				decompressed := util.DecompressFile(file)
@@ -33,6 +31,5 @@ func Decompress(args []string) {
 		}
 	} else {
 		decompressHelp()
-		os.Exit(1)
 	}
 }

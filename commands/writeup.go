@@ -10,14 +10,18 @@ import (
 	"time"
 )
 
+func writeupHelp() {
+	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "writeup" + theme.ColorReset + "\n")
+	fmt.Printf("  📝 create a template for a task in a file called writeup.md with ret\n")
+	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/writeup.go" + theme.ColorReset + "\n")
+}
+
 func Writeup(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "writeup" + theme.ColorReset + "\n")
-			fmt.Printf("  📝 create a template for a task in a file called writeup.md with ret\n")
-			fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/writeup.go" + theme.ColorReset + "\n")
-			os.Exit(0)
+			writeupHelp()
+			return
 		}
 	}
 

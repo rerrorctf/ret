@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"os"
 	"strings"
 
 	"ret/commands"
@@ -60,7 +59,7 @@ func main() {
 
 	if flag.NArg() < 1 {
 		flag.Usage()
-		os.Exit(1)
+		return
 	}
 
 	config.ParseUserConfig()
@@ -225,5 +224,4 @@ func main() {
 
 	// help
 	flag.Usage()
-	os.Exit(1)
 }

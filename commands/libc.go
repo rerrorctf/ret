@@ -37,7 +37,6 @@ func libcHelp() {
 	fmt.Printf("     " + theme.ColorGray + "without args this command will use the tag \"ubuntu:latest\"" + theme.ColorReset + "\n")
 	fmt.Printf("     " + theme.ColorGray + "the file will be copied to the cwd and added with ret" + theme.ColorReset + "\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/libc.go" + theme.ColorReset + "\n")
-	os.Exit(0)
 }
 
 func Libc(args []string) {
@@ -45,6 +44,7 @@ func Libc(args []string) {
 		switch args[0] {
 		case "help":
 			libcHelp()
+			return
 		}
 	}
 
@@ -60,8 +60,7 @@ func Libc(args []string) {
 
 	dir, err := os.MkdirTemp("", "ret-libc-")
 	if err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	setup := "#!/bin/sh\n\n" +
@@ -83,7 +82,7 @@ func Libc(args []string) {
 
 	err = os.WriteFile(dir+"/setup.sh", []byte(setup), 0744)
 	if err != nil {
-		log.Fatalln("error writing to file:", err)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	dockerfile := fmt.Sprintf(
@@ -95,7 +94,7 @@ func Libc(args []string) {
 
 	err = os.WriteFile(dir+"/Dockerfile", []byte(dockerfile), 0644)
 	if err != nil {
-		log.Fatalln("error writing to file:", err)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	script := fmt.Sprintf(
@@ -108,19 +107,19 @@ func Libc(args []string) {
 
 	err = os.WriteFile(dir+"/go.sh", []byte(script), 0644)
 	if err != nil {
-		log.Fatalln("error writing to file:", err)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	err = os.Chmod(dir+"/go.sh", 0744)
 	if err != nil {
-		log.Fatalln("error chmoding file:", err)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	libc := exec.Command("bash", "-c", "(cd "+dir+" && sudo ./go.sh)")
 
 	err = libc.Run()
 	if err != nil {
-		log.Fatalln(err)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	stop <- true

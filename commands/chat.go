@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"math/rand"
 	"net/http"
 	"os"
@@ -31,22 +32,19 @@ func removeColors(message string) string {
 func sendMessage(message map[string]interface{}) {
 	body, err := json.Marshal(message)
 	if err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	req, err := http.NewRequest("POST", config.ChatWebhookUrl, bytes.NewBuffer(body))
 	if err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 	req.Header.Set("Content-Type", "application/json")
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	resp.Body.Close()
@@ -91,7 +89,6 @@ func chatHelp() {
 	fmt.Printf("  📢 chat with ret\n")
 	fmt.Printf("     " + theme.ColorGray + "use - to read from stdin" + theme.ColorReset + "\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/chat.go" + theme.ColorReset + "\n")
-	os.Exit(0)
 }
 
 func Chat(args []string) {
@@ -99,6 +96,7 @@ func Chat(args []string) {
 		switch args[0] {
 		case "help":
 			chatHelp()
+			return
 		}
 	} else {
 		chatHelp()
@@ -106,13 +104,11 @@ func Chat(args []string) {
 	}
 
 	if config.ChatWebhookUrl == "" {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": no chat webhook url found in %s\n", config.UserConfig)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": no chat webhook url found in %s\n", config.UserConfig)
 	}
 
 	if config.Username == "" {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": no username found in %s\n", config.UserConfig)
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": no username found in %s\n", config.UserConfig)
 	}
 
 	if len(args) > 0 {
@@ -120,8 +116,7 @@ func Chat(args []string) {
 			var buffer bytes.Buffer
 			_, err := io.Copy(&buffer, os.Stdin)
 			if err != nil {
-				fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-				os.Exit(1)
+				log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 			}
 			sendEmbed(buffer.String())
 

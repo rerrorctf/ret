@@ -29,9 +29,7 @@ func syscallHelp() {
 func grep(path string, pattern string) {
 	file, err := os.Open(path)
 	if err != nil {
-		fmt.Printf("Error opening file: %v\n", err)
 		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": opening file %v\n", path)
-		os.Exit(1)
 	}
 	defer file.Close()
 
@@ -44,7 +42,7 @@ func grep(path string, pattern string) {
 	}
 
 	if err := scanner.Err(); err != nil {
-		os.Exit(1)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 }
 
@@ -53,7 +51,7 @@ func Syscall(args []string) {
 		switch args[0] {
 		case "help":
 			syscallHelp()
-			os.Exit(0)
+			return
 		}
 	}
 
@@ -87,8 +85,7 @@ func Syscall(args []string) {
 	default:
 		{
 			syscallHelp()
-			log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": invalid arch \"%v\"\n", args[0])
-			os.Exit(1)
+			log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": invalid arch btw \"%v\"\n", args[0])
 		}
 	}
 }
