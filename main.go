@@ -49,6 +49,8 @@ func main() {
 			"☁️  " + theme.StartUnderline + "v" + theme.StopUnderline + "ps\n" +
 			"                                                             " +
 			"📡 " + theme.StartUnderline + "pr" + theme.StopUnderline + "oxy\n" +
+			"                                                             " +
+			"🔪 " + theme.StartUnderline + "chef" + theme.StopUnderline + "\n" +
 			theme.StopUnderline + theme.ColorReset)
 
 		fmt.Printf(theme.ColorGray+"https://github.com/rerrorctf/ret "+theme.ColorPurple+"%s\n"+theme.ColorBlue, VERSION)
@@ -184,6 +186,11 @@ func main() {
 
 					if strings.Compare("chea", command[:4]) == 0 {
 						commands.Cheatsheet(flag.Args()[1:])
+						return
+					}
+
+					if strings.Compare("chef", command[:4]) == 0 {
+						commands.Chef(flag.Args()[1:])
 						return
 					}
 				}

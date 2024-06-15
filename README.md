@@ -35,6 +35,7 @@ This tool helps you solve CTF tasks by automating workflow and basic analysis an
     - [sage 🌿](https://github.com/rerrorctf/ret?tab=readme-ov-file#sage-)
     - [vps ☁️](https://github.com/rerrorctf/ret?tab=readme-ov-file#vps-%EF%B8%8F)
     - [proxy 📡](https://github.com/rerrorctf/ret?tab=readme-ov-file#proxy-)
+    - [chef 🔪](https://github.com/rerrorctf/ret?tab=readme-ov-file#chef-)
 4. [Config](https://github.com/rerrorctf/ret?tab=readme-ov-file#configret)
 
 ## Introduction
@@ -505,6 +506,18 @@ https://github.com/rerrorctf/ret/blob/main/commands/vps.go
 ```
 usage: ret proxy [list/create]
 ```
+
+https://github.com/rerrorctf/ret/blob/main/commands/proxy.go
+
+### chef 🔪
+
+```
+usage: ret chef text
+```
+
+use - to read from stdin
+
+See https://gchq.github.io/CyberChef for more information.
 
 https://github.com/rerrorctf/ret/blob/main/commands/proxy.go
 
