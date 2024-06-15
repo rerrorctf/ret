@@ -96,7 +96,7 @@ func showWindowsAbix64() {
 
 func abiHelp() {
 	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "abi" + theme.ColorReset + " [architecture] [os]\n")
-	fmt.Printf("  🤝 view ABI details with ret\n")
+	fmt.Printf("  🤝 view abi details with ret\n")
 	fmt.Printf("  architecture: " + theme.ColorYellow + "x86/32" + theme.ColorReset + " or " + theme.ColorYellow + "x64/64" + theme.ColorReset + "\n")
 	fmt.Printf("  os: " + theme.ColorYellow + "linux" + theme.ColorReset + " or " + theme.ColorYellow + "windows" + theme.ColorReset + "\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/abi.go" + theme.ColorReset + "\n")
