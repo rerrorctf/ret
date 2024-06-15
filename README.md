@@ -126,6 +126,12 @@ $ go build
 
 This will produce the `ret` binary. This static binary / single file is all you need to use `ret`.
 
+There is also a `build.sh` that I use to create the binaries that get uploaded to github.
+
+```
+$ ./build.sh
+```
+
 ## Commands
 
 You can list all the commands by using `-h`, `--help`, `help` or simply providing no arguments:
