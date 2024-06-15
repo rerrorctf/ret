@@ -19,40 +19,34 @@ func main() {
 	flag.Usage = func() {
 		fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "command" + theme.ColorGray + " [arg1 arg2...]\n" + theme.ColorReset)
 
-		fmt.Printf(theme.ColorGray +
-			"---core------------rev------------pwn------------info------------util-----\n" +
+		fmt.Printf(
 			theme.ColorBlue +
-			"🚩 " + theme.StartUnderline + "ct" + theme.StopUnderline + "f          " +
-			"🦖 " + theme.StartUnderline + "gh" + theme.StopUnderline + "idra      " +
-			"🐚 " + theme.StartUnderline + "pw" + theme.StopUnderline + "n         " +
-			"🤝 " + theme.StartUnderline + "ab" + theme.StopUnderline + "i         " +
-			"🤏 " + theme.StartUnderline + "de" + theme.StopUnderline + "compress\n" +
-			"🔍 " + theme.StartUnderline + "f" + theme.StopUnderline + "ormat       " +
-			"💃 " + theme.StartUnderline + "i" + theme.StopUnderline + "da         " +
-			"🐋 " + theme.StartUnderline + "do" + theme.StopUnderline + "cker      " +
-			"📞 " + theme.StartUnderline + "sy" + theme.StopUnderline + "scall     " +
-			"✅ " + theme.StartUnderline + "chec" + theme.StopUnderline + "k\n" +
-			"👀 " + theme.StartUnderline + "st" + theme.StopUnderline + "atus                      " +
-			"🗽 " + theme.StartUnderline + "l" + theme.StopUnderline + "ibc        " +
-			"📚 " + theme.StartUnderline + "chea" + theme.StopUnderline + "tsheet  " +
-			"📢 " + theme.StartUnderline + "chat" + theme.StopUnderline + "\n" +
-			"📥 " + theme.StartUnderline + "ad" + theme.StopUnderline + "d                                                       " +
-			"🧠 " + theme.StartUnderline + "gp" + theme.StopUnderline + "t\n" +
-			"🧙 " + theme.StartUnderline + "wi" + theme.StopUnderline + "zard                                                    " +
-			"📝 " + theme.StartUnderline + "wr" + theme.StopUnderline + "iteup\n" +
-			"                                                             " +
-			"🐙 " + theme.StartUnderline + "gi" + theme.StopUnderline + "st\n" +
-			"                                                             " +
-			"🌿 " + theme.StartUnderline + "sa" + theme.StopUnderline + "ge\n" +
-			"                                                             " +
-			"☁️  " + theme.StartUnderline + "v" + theme.StopUnderline + "ps\n" +
-			"                                                             " +
-			"📡 " + theme.StartUnderline + "pr" + theme.StopUnderline + "oxy\n" +
-			"                                                             " +
-			"🔪 " + theme.StartUnderline + "chef" + theme.StopUnderline + "\n" +
-			theme.StopUnderline + theme.ColorReset)
+				"🤝 " + theme.StartUnderline + "ab" + theme.StopUnderline + "i\n" +
+				"📥 " + theme.StartUnderline + "ad" + theme.StopUnderline + "d\n" +
+				"📢 " + theme.StartUnderline + "chat" + theme.StopUnderline + "\n" +
+				"✅ " + theme.StartUnderline + "chec" + theme.StopUnderline + "k\n" +
+				"🔪 " + theme.StartUnderline + "chef" + theme.StopUnderline + "\n" +
+				"📚 " + theme.StartUnderline + "chea" + theme.StopUnderline + "tsheet\n" +
+				"🚩 " + theme.StartUnderline + "ct" + theme.StopUnderline + "f\n" +
+				"🤏 " + theme.StartUnderline + "de" + theme.StopUnderline + "compress\n" +
+				"🐋 " + theme.StartUnderline + "do" + theme.StopUnderline + "cker\n" +
+				"🔍 " + theme.StartUnderline + "f" + theme.StopUnderline + "ormat\n" +
+				"🦖 " + theme.StartUnderline + "gh" + theme.StopUnderline + "idra\n" +
+				"🐙 " + theme.StartUnderline + "gi" + theme.StopUnderline + "st\n" +
+				"🧠 " + theme.StartUnderline + "gp" + theme.StopUnderline + "t\n" +
+				"💃 " + theme.StartUnderline + "i" + theme.StopUnderline + "da\n" +
+				"🗽 " + theme.StartUnderline + "l" + theme.StopUnderline + "ibc\n" +
+				"📡 " + theme.StartUnderline + "pr" + theme.StopUnderline + "oxy\n" +
+				"🐚 " + theme.StartUnderline + "pw" + theme.StopUnderline + "n\n" +
+				"🌿 " + theme.StartUnderline + "sa" + theme.StopUnderline + "ge\n" +
+				"👀 " + theme.StartUnderline + "st" + theme.StopUnderline + "atus\n" +
+				"📞 " + theme.StartUnderline + "sy" + theme.StopUnderline + "scall\n" +
+				"☁️  " + theme.StartUnderline + "v" + theme.StopUnderline + "ps\n" +
+				"🧙 " + theme.StartUnderline + "wi" + theme.StopUnderline + "zard\n" +
+				"📝 " + theme.StartUnderline + "wr" + theme.StopUnderline + "iteup\n" +
+				theme.StopUnderline + theme.ColorReset)
 
-		fmt.Printf(theme.ColorReset+"https://github.com/rerrorctf/ret "+theme.ColorPurple+"%s\n"+theme.ColorBlue, COMMIT)
+		fmt.Printf(theme.ColorReset+"https://github.com/rerrorctf/ret "+theme.ColorYellow+"%s\n"+theme.ColorReset, COMMIT)
 	}
 
 	flag.Parse()
