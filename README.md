@@ -180,6 +180,16 @@ Sends a message to discord via a webhook in `~/.config/ret` called `chatwebhooku
 
 https://github.com/rerrorctf/ret/blob/main/commands/chat.go
 
+### cheatsheet 📚
+
+```
+usage: ret cheatsheet
+```
+
+Prints a list of cheatsheets for quick reference.
+
+https://github.com/rerrorctf/ret/blob/main/commands/cheatsheet.go
+
 ### ctf 🚩
 
 ```
@@ -442,16 +452,6 @@ usage: ret writeup
 Create a writeup template for a task in a file called `writeup.md`.
 
 https://github.com/rerrorctf/ret/blob/main/commands/writeup.go
-
-### cheatsheet 📚
-
-```
-usage: ret cheatsheet
-```
-
-Prints a list of cheatsheets for quick reference.
-
-https://github.com/rerrorctf/ret/blob/main/commands/cheatsheet.go
 
 ### gpt 🧠
 
