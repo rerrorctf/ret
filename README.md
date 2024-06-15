@@ -173,7 +173,7 @@ https://github.com/rerrorctf/ret/blob/main/commands/add.go
 ### chat 📢
 
 ```
-usage: ret chat message
+ret chat message
 ```
 
 Sends a message to discord via a webhook in `~/.config/ret` called `chatwebhookurl`.
@@ -183,17 +183,45 @@ https://github.com/rerrorctf/ret/blob/main/commands/chat.go
 ### cheatsheet 📚
 
 ```
-usage: ret cheatsheet
+ret cheatsheet
 ```
 
 Prints a list of cheatsheets for quick reference.
 
 https://github.com/rerrorctf/ret/blob/main/commands/cheatsheet.go
 
+### check ✅
+
+```
+ret check
+```
+
+Check your environment for ctf readiness by checking if various pieces of commonly used software are installed.
+
+If something is not installed `ret` tries to give you a link to help you install it quickly.
+
+https://github.com/rerrorctf/ret/blob/main/commands/check.go
+
+### chef 🔪
+
+```
+ret chef [-] [text]
+```
+
+The `chef` command allows you to open CyberChef with a specified input directly from the command line.
+
+CyberChef is a web-based tool for performing various encoding, decoding, and data transformation operations.
+
+See https://gchq.github.io/CyberChef for more information.
+
+Use - to read from stdin.
+
+https://github.com/rerrorctf/ret/blob/main/commands/chef.go
+
 ### ctf 🚩
 
 ```
-usage: ret ctf [flag]
+ret ctf [flag]
 ```
 
 Records the provided flag as the solution for the current task.
@@ -205,7 +233,7 @@ https://github.com/rerrorctf/ret/blob/main/commands/ctf.go
 ### format 🔍
 
 ```
-usage: ret format [regex]
+ret format [regex]
 ```
 
 Prints the current flag format regex or updates it if an argument is supplied.
@@ -217,7 +245,7 @@ https://github.com/rerrorctf/ret/blob/main/commands/format.go
 ### wizard 🧙
 
 ```
-usage: ret wizard [ip] [port]
+ret wizard [ip] [port]
 ```
 
 Wizard is here to help! They simply run a few common commands for a typical workflow. The workflow is quite well suited for typical rev and pwn tasks. Sometimes the wizard makes mistakes!
@@ -237,7 +265,7 @@ https://github.com/rerrorctf/ret/blob/main/commands/wizard.go
 ### decompress 🤏
 
 ```
-usage: ret decompress file1 [file2 file3...]
+ret decompress file1 [file2 file3...]
 ```
 
 Decompresses files by first checking if they have a suitable extension and then a suitable magic.
@@ -251,7 +279,7 @@ https://github.com/rerrorctf/ret/blob/main/commands/decompress.go
 ### status 👀
 
 ```
-usage: ret status
+ret status
 ```
 
 Prints information about the task including any added files.
@@ -261,7 +289,7 @@ https://github.com/rerrorctf/ret/blob/main/commands/status.go
 ### pwn 🐚
 
 ```
-usage: ret pwn [ip] [port]
+ret pwn [ip] [port]
 ```
 
 Creates a pwntools script from a template.
@@ -319,7 +347,7 @@ https://github.com/rerrorctf/ret/blob/main/commands/pwn.go
 ### ghidra 🦖
 
 ```
-usage: ret ghidra [file1 file2...]
+ret ghidra [file1 file2...]
 ```
 
 Creates a ghidra project in the hidden directory `.ret/ghidra`.
@@ -339,7 +367,7 @@ https://github.com/rerrorctf/ret/blob/main/commands/ghidra.go
 ### ida 💃
 
 ```
-usage: ret ida [file1 file2...]
+ret ida [file1 file2...]
 ```
 
 Optionally adds one or more new files.
@@ -357,7 +385,7 @@ https://github.com/rerrorctf/ret/blob/main/commands/ida.go
 ### docker 🐋
 
 ```
-usage: ret docker [ip] [port]
+ret docker [ip] [port]
 ```
 
 Creates a Dockerfile from a template.
@@ -367,7 +395,7 @@ https://github.com/rerrorctf/ret/blob/main/commands/docker.go
 ### libc 🗽
 
 ```
-usage: ret libc [tag]
+ret libc [tag]
 ```
 
 Creates and runs a container based on the given tag.
@@ -384,22 +412,10 @@ After the container is destroyed the file is copied to the cwd and added with re
 
 https://github.com/rerrorctf/ret/blob/main/commands/libc.go
 
-### check ✅
-
-```
-usage: ret check
-```
-
-Check your environment for ctf readiness by checking if various pieces of commonly used software are installed.
-
-If something is not installed `ret` tries to give you a link to help you install it quickly.
-
-https://github.com/rerrorctf/ret/blob/main/commands/check.go
-
 ### syscall 📞
 
 ```
-usage: ret syscall [(x86/32)/(x64/64)] [regex-pattern]
+ret syscall [(x86/32)/(x64/64)] [regex-pattern]
 ```
 
 Greps syscall headers for x86 and x64 linux.
@@ -425,7 +441,7 @@ https://github.com/rerrorctf/ret/blob/main/commands/syscall.go
 ### gist 🐙
 
 ```
-usage: ret gist file [-]
+ret gist file [-]
 ```
 
 Create a private gist from a file.
@@ -446,7 +462,7 @@ https://github.com/rerrorctf/ret/blob/main/commands/gist.go
 ### writeup 📝
 
 ```
-usage: ret writeup
+ret writeup
 ```
 
 Create a writeup template for a task in a file called `writeup.md`.
@@ -456,7 +472,7 @@ https://github.com/rerrorctf/ret/blob/main/commands/writeup.go
 ### gpt 🧠
 
 ```
-usage: ret gpt question
+ret gpt question
 ```
 
 Pose a question to ChatGPT with ret's ctf specific prompt.
@@ -475,7 +491,7 @@ https://github.com/rerrorctf/ret/blob/main/commands/gpt.go
 ### sage 🌿
 
 ```
-usage: ret sage
+ret sage
 ```
 
 Just runs:
@@ -492,7 +508,7 @@ https://github.com/rerrorctf/ret/blob/main/commands/sage.go
 ### vps ☁️
 
 ```
-usage: ret vps [create/list/destroy]
+ret vps [create/list/destroy]
 ```
 
 Requires the google cloud cli be installed. See https://cloud.google.com/sdk/docs/install for more information.
@@ -502,20 +518,8 @@ https://github.com/rerrorctf/ret/blob/main/commands/vps.go
 ### proxy 📡
 
 ```
-usage: ret proxy [list/create]
+ret proxy [list/create]
 ```
-
-https://github.com/rerrorctf/ret/blob/main/commands/proxy.go
-
-### chef 🔪
-
-```
-usage: ret chef text
-```
-
-use - to read from stdin
-
-See https://gchq.github.io/CyberChef for more information.
 
 https://github.com/rerrorctf/ret/blob/main/commands/proxy.go
 
