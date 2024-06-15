@@ -187,20 +187,15 @@ https://github.com/rerrorctf/ret/blob/main/commands/wizard.go
 ### add 📥
 
 ```
-usage: ret add file1 [file2 file3...]
+ret add file1 [file2 file3...]
 ```
 
-This command adds one or more files to the task.
-
-This involves taking a copy of the file and performing some basic analysis on the file.
-
-Added files can be viewed with the `status` command.
-
-This command deduplicates files by comparing a file content's SHA2-256 hash with the hash of files previously added.
-
-Added files are stored in in the hidden directory `.ret/files` inside a subfolder that is named using the SHA2-256 hex digest of the file content.
-
-Added files are subject to being automatically ingested by the commands `ghidra` and `ida`.
+This command will:
+1. Analyze each file to determine its type.
+2. Generate a SHA-256 hash for each file.
+3. Added files are stored in in the hidden directory `.ret/files` inside a subfolder that is named using the SHA2-256 hex digest of the file content.
+4. Save metadata about the file in a JSON file.
+5. Searches for patterns within the file content.
 
 https://github.com/rerrorctf/ret/blob/main/commands/add.go
 
