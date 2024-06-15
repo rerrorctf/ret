@@ -149,6 +149,7 @@ func Vps(args []string) {
 			case "destroy":
 				if len(args) < 2 {
 					fmt.Printf("💥 " + theme.ColorRed + " error" + theme.ColorReset + ": missing instance name for destroy\n")
+					listVps()
 					os.Exit(1)
 				}
 				destroyVps(args[1])
