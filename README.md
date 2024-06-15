@@ -170,6 +170,16 @@ This command will:
 
 https://github.com/rerrorctf/ret/blob/main/commands/add.go
 
+### chat 📢
+
+```
+usage: ret chat message
+```
+
+Sends a message to discord via a webhook in `~/.config/ret` called `chatwebhookurl`.
+
+https://github.com/rerrorctf/ret/blob/main/commands/chat.go
+
 ### ctf 🚩
 
 ```
@@ -401,18 +411,6 @@ For example:
 `syscall x86 10[0-9]`
 
 https://github.com/rerrorctf/ret/blob/main/commands/syscall.go
-
-### chat 📢
-
-```
-usage: ret chat message
-```
-
-Sends a message to discord via a webhook in `~/.config/ret` called `chatwebhookurl`.
-
-See https://github.com/rerrorctf/ret/blob/main/README.md#configret for more information.
-
-https://github.com/rerrorctf/ret/blob/main/commands/chat.go
 
 ### gist 🐙
 
