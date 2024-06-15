@@ -503,7 +503,7 @@ https://github.com/rerrorctf/ret/blob/main/commands/vps.go
 ### proxy 📡
 
 ```
-usage: ret proxy ip port vps-ip
+usage: ret proxy [list/create]
 ```
 
 https://github.com/rerrorctf/ret/blob/main/commands/proxy.go
