@@ -2,107 +2,11 @@
 
 <img src="https://github.com/rerrorctf/ret/assets/93072266/5a998dbb-5730-4b10-9636-45e35e9fe77e" alt="rounding error ctf team logo" width="400"/>
 
-This tool helps you solve CTF tasks by automating workflow and basic analysis and providing useful utilities.
-
-## Table of Contents
-1. [Introduction](https://github.com/rerrorctf/ret?tab=readme-ov-file#introduction)
-2. [Installation](https://github.com/rerrorctf/ret?tab=readme-ov-file#installation)
-3. [Commands](https://github.com/rerrorctf/ret?tab=readme-ov-file#commands)
-  - Core
-    - [ctf 🚩](https://github.com/rerrorctf/ret?tab=readme-ov-file#ctf-)
-    - [format 🔍](https://github.com/rerrorctf/ret?tab=readme-ov-file#format-)
-    - [status 👀](https://github.com/rerrorctf/ret?tab=readme-ov-file#status-)
-    - [add 📥](https://github.com/rerrorctf/ret?tab=readme-ov-file#add-)
-    - [wizard 🧙](https://github.com/rerrorctf/ret?tab=readme-ov-file#wizard-)
-  - Rev
-    - [ghidra 🦖](https://github.com/rerrorctf/ret?tab=readme-ov-file#ghidra-)
-    - [ida 💃](https://github.com/rerrorctf/ret?tab=readme-ov-file#ida-)
-  - Pwn
-    - [pwn 🐚](https://github.com/rerrorctf/ret?tab=readme-ov-file#pwn-)
-    - [docker 🐋](https://github.com/rerrorctf/ret?tab=readme-ov-file#docker-)
-    - [libc 🗽](https://github.com/rerrorctf/ret?tab=readme-ov-file#libc-)
-  - Info
-    - [abi 🤝](https://github.com/rerrorctf/ret?tab=readme-ov-file#abi-)
-    - [syscall 📞](https://github.com/rerrorctf/ret?tab=readme-ov-file#syscall-)
-    - [cheatsheet 📚](https://github.com/rerrorctf/ret?tab=readme-ov-file#cheatsheet-)
-  - Util
-    - [decompress 🤏](https://github.com/rerrorctf/ret?tab=readme-ov-file#decompress-)
-    - [check ✅](https://github.com/rerrorctf/ret?tab=readme-ov-file#check-)
-    - [chat 📢](https://github.com/rerrorctf/ret?tab=readme-ov-file#chat-)
-    - [gpt 🧠](https://github.com/rerrorctf/ret?tab=readme-ov-file#gpt-)
-    - [writeup 📝](https://github.com/rerrorctf/ret?tab=readme-ov-file#writeup-)
-    - [gist 🐙](https://github.com/rerrorctf/ret?tab=readme-ov-file#gist-)
-    - [sage 🌿](https://github.com/rerrorctf/ret?tab=readme-ov-file#sage-)
-    - [vps ☁️](https://github.com/rerrorctf/ret?tab=readme-ov-file#vps-%EF%B8%8F)
-    - [proxy 📡](https://github.com/rerrorctf/ret?tab=readme-ov-file#proxy-)
-    - [chef 🔪](https://github.com/rerrorctf/ret?tab=readme-ov-file#chef-)
-4. [Config](https://github.com/rerrorctf/ret?tab=readme-ov-file#configret)
-
-## Introduction
-
-To see a list of available commands:
-
-```
-$ ret help
-```
-
-At the start of a new CTF set the flag format globally. This is a evaluated as a regex and used to perform a few things including grep2win against all added files.
-
-```
-$ ret format example{.+}
-```
-
-You can inspect the current flag format by specifying no arguments.
-
-```
-$ ret format
-```
-
-For each task you solve first setup a directory for that task:
-
-```
-$ mkdir task
-$ cd task
-$ cp ~/Downloads/task .
-```
-
-For each file associated with that task add it:
-
-```
-$ ret add task
-```
-
-You can see the currently added files with status:
-
-```
-$ ret status
-```
-
-To automatically import and analyse all added files with ghidra simply use:
-
-```
-$ ret ghidra
-```
-
-To make a pwntools script simply use:
-
-```
-$ ret pwn
-```
-
-This will infer the binary you wish to target and use a simple template to make a script for you.
-
-If you have details for remote infrastructure you can supply those too:
-
-```
-$ ret pwn ctf.example.com 9001
-```
+This tool helps you solve ctf tasks by automating workflow and basic analysis and providing useful utilities.
 
 ## Installation
 
-You can simply get the latest pre-built binary from https://github.com/rerrorctf/ret/releases.
-
-Please note that, while `ret` is a single file built for x64 linux, you can use go to build this for a range of platforms (although this hasn't been tested yet).
+You can get the latest binary from https://github.com/rerrorctf/ret/releases.
 
 Here installation just means putting `ret` somewhere on your path. I like to make a symlink it to in `/usr/local/bin`.
 
