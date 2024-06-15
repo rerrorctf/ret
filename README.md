@@ -381,36 +381,6 @@ This command manages SSH proxies.
 
 https://github.com/rerrorctf/ret/blob/main/commands/proxy.go
 
-### wizard 🧙
-
-```
-ret wizard [ip] [port]
-```
-
-Wizard is here to help! They simply run a few common commands for a typical workflow. The workflow is quite well suited for typical rev and pwn tasks. Sometimes the wizard makes mistakes!
-
-1) Executes the `wizardprecommand` from ~/.config/ret.
-2) Searches for interesting files within the current directory.
-3) Ensures that the hidden .ret directory skeleton exists.
-4) Unzips any .zip files that it can.
-5) Adds any interesting files. This includes those found by unzipping and ignores .zip files.
-6) Shows `status`.
-7) If the wizard thinks there is an elf file it will invoke `pwn` for you.
-8) If you provided an ip or an ip and a port wizard will pass these to `pwn` for you.
-9) Executes the `wizardpostcommand` from ~/.config/ret.
-
-https://github.com/rerrorctf/ret/blob/main/commands/wizard.go
-
-### status 👀
-
-```
-ret status
-```
-
-Prints information about the task including any added files.
-
-https://github.com/rerrorctf/ret/blob/main/commands/status.go
-
 ### pwn 🐚
 
 ```
@@ -469,6 +439,33 @@ Note the placement of the `"` characters.
 
 https://github.com/rerrorctf/ret/blob/main/commands/pwn.go
 
+### sage 🌿
+
+```
+ret sage
+```
+
+Just runs:
+
+```bash
+$ sudo docker pull sagemath/sagemath
+$ sudo docker run -it sagemath/sagemath:latest
+```
+
+See https://hub.docker.com/r/sagemath/sagemath for more information.
+
+https://github.com/rerrorctf/ret/blob/main/commands/sage.go
+
+### status 👀
+
+```
+ret status
+```
+
+Prints information about the task including any added files.
+
+https://github.com/rerrorctf/ret/blob/main/commands/status.go
+
 ### syscall 📞
 
 ```
@@ -495,6 +492,38 @@ For example:
 
 https://github.com/rerrorctf/ret/blob/main/commands/syscall.go
 
+### vps ☁️
+
+```
+ret vps [create/list/destroy]
+```
+
+Simply create and manage google cloud compute instances.
+
+Requires the google cloud cli be installed. See https://cloud.google.com/sdk/docs/install for more information.
+
+https://github.com/rerrorctf/ret/blob/main/commands/vps.go
+
+### wizard 🧙
+
+```
+ret wizard [ip] [port]
+```
+
+Wizard is here to help! They simply run a few common commands for a typical workflow. The workflow is quite well suited for typical rev and pwn tasks. Sometimes the wizard makes mistakes!
+
+1) Executes the `wizardprecommand` from ~/.config/ret.
+2) Searches for interesting files within the current directory.
+3) Ensures that the hidden .ret directory skeleton exists.
+4) Unzips any .zip files that it can.
+5) Adds any interesting files. This includes those found by unzipping and ignores .zip files.
+6) Shows `status`.
+7) If the wizard thinks there is an elf file it will invoke `pwn` for you.
+8) If you provided an ip or an ip and a port wizard will pass these to `pwn` for you.
+9) Executes the `wizardpostcommand` from ~/.config/ret.
+
+https://github.com/rerrorctf/ret/blob/main/commands/wizard.go
+
 ### writeup 📝
 
 ```
@@ -504,33 +533,6 @@ ret writeup
 Create a writeup template for a task in a file called `writeup.md`.
 
 https://github.com/rerrorctf/ret/blob/main/commands/writeup.go
-
-### sage 🌿
-
-```
-ret sage
-```
-
-Just runs:
-
-```bash
-$ sudo docker pull sagemath/sagemath
-$ sudo docker run -it sagemath/sagemath:latest
-```
-
-See https://hub.docker.com/r/sagemath/sagemath for more information.
-
-https://github.com/rerrorctf/ret/blob/main/commands/sage.go
-
-### vps ☁️
-
-```
-ret vps [create/list/destroy]
-```
-
-Requires the google cloud cli be installed. See https://cloud.google.com/sdk/docs/install for more information.
-
-https://github.com/rerrorctf/ret/blob/main/commands/vps.go
 
 ## ~/.config/ret
 
