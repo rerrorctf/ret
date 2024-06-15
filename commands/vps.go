@@ -9,6 +9,12 @@ import (
 	"time"
 )
 
+func vpsHelp() {
+	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "vps" + theme.ColorGray + " [create/list/destroy]" + theme.ColorReset + "\n")
+	fmt.Printf("  ☁️  create and manage google cloud compute instances with ret\n")
+	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/vps.go" + theme.ColorReset + "\n")
+}
+
 func createVps() string {
 	instanceName := fmt.Sprintf("ret-vps-instance-%v", time.Now().UTC().Format("20060102150405"))
 
@@ -111,12 +117,6 @@ func destroyVps(instanceName string) {
 		fmt.Printf("💥 "+theme.ColorRed+"error: "+theme.ColorReset+"%v\n", err)
 		os.Exit(1)
 	}
-}
-
-func vpsHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "vps" + theme.ColorGray + " [create/list/destroy]" + theme.ColorReset + "\n")
-	fmt.Printf("  ☁️  create and manage google cloud compute instances with ret\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/vps.go" + theme.ColorReset + "\n")
 }
 
 func validateConfig() bool {
