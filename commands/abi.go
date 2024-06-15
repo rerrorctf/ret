@@ -95,8 +95,10 @@ func showWindowsAbix64() {
 }
 
 func abiHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "abi" + theme.ColorReset + " [(x86/32)/(x64/64)]" + theme.ColorReset + " [linux/windows]\n")
-	fmt.Printf("  🤝 view abi details with ret\n")
+	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "abi" + theme.ColorReset + " [architecture] [os]\n")
+	fmt.Printf("  🤝 view ABI details with ret\n")
+	fmt.Printf("  architecture: " + theme.ColorYellow + "x86/32" + theme.ColorReset + " or " + theme.ColorYellow + "x64/64" + theme.ColorReset + "\n")
+	fmt.Printf("  os: " + theme.ColorYellow + "linux" + theme.ColorReset + " or " + theme.ColorYellow + "windows" + theme.ColorReset + "\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/abi.go" + theme.ColorReset + "\n")
 }
 
@@ -110,47 +112,33 @@ func Abi(args []string) {
 	}
 
 	arch := "x64"
-	os := "linux"
+	opsys := "linux"
 
 	if len(args) > 1 {
 		arch = args[0]
-		os = args[1]
+		opsys = args[1]
 	} else if len(args) > 0 {
 		arch = args[0]
 	}
 
 	switch arch {
-	case "x86":
-		{
-			if os == "linux" {
-				showLinuxAbix86()
-			} else {
-				showWindowsAbix86()
-			}
+	case "x86", "32":
+		if opsys == "linux" {
+			showLinuxAbix86()
+		} else {
+			showWindowsAbix86()
 		}
-	case "32":
-		{
-			if os == "linux" {
-				showLinuxAbix86()
-			} else {
-				showWindowsAbix86()
-			}
+	case "x64", "64":
+		if opsys == "linux" {
+			showLinuxAbix64()
+		} else {
+			showWindowsAbix64()
 		}
-	case "x64":
+	default:
 		{
-			if os == "linux" {
-				showLinuxAbix64()
-			} else {
-				showWindowsAbix64()
-			}
-		}
-	case "64":
-		{
-			if os == "linux" {
-				showLinuxAbix64()
-			} else {
-				showWindowsAbix64()
-			}
+			fmt.Printf("💥 " + theme.ColorRed + "error" + theme.ColorReset + ": unsupported architecture. use 'x86/32' or 'x64/64'\n" + theme.ColorReset)
+			abiHelp()
+			os.Exit(1)
 		}
 	}
 
