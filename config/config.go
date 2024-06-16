@@ -20,9 +20,8 @@ const (
 
 var (
 	GhidraInstallPath  = "/opt/ghidra"
-	GhidraProjectPath  = FolderName + "/ghidra"
+	GhidraProject      = "ghidra"
 	IdaInstallPath     = "/opt/ida"
-	IdaProjectPath     = FolderName + "/ida"
 	PwnScriptName      = "go.py"
 	PwnScriptTemplate  = ""
 	FlagFileName       = FolderName + "/flag.json"
@@ -40,9 +39,8 @@ var (
 
 type Config struct {
 	GhidraInstallPath  string `json:"ghidrainstallpath"`
-	GhidraProjectPath  string `json:"ghidraprojectpath"`
+	GhidraProject      string `json:"ghidraproject"`
 	IdaInstallPath     string `json:"idainstallpath"`
-	IdaProjectPath     string `json:"idaprojectpath"`
 	PwnScriptName      string `json:"pwnscriptname"`
 	PwnScriptTemplate  string `json:"pwnscripttemplate"`
 	FlagFormat         string `json:"flagformat"`
@@ -82,16 +80,12 @@ func ParseUserConfig() {
 		GhidraInstallPath = userConfig.GhidraInstallPath
 	}
 
-	if len(userConfig.GhidraProjectPath) > 0 {
-		GhidraProjectPath = userConfig.GhidraProjectPath
+	if len(userConfig.GhidraProject) > 0 {
+		GhidraProject = userConfig.GhidraProject
 	}
 
 	if len(userConfig.IdaInstallPath) > 0 {
 		IdaInstallPath = userConfig.IdaInstallPath
-	}
-
-	if len(userConfig.IdaProjectPath) > 0 {
-		IdaProjectPath = userConfig.IdaProjectPath
 	}
 
 	if len(userConfig.PwnScriptName) > 0 {
@@ -162,9 +156,8 @@ func WriteUserConfig() {
 
 	var userConfig Config
 	userConfig.GhidraInstallPath = GhidraInstallPath
-	userConfig.GhidraProjectPath = GhidraProjectPath
+	userConfig.GhidraProject = GhidraProject
 	userConfig.IdaInstallPath = IdaInstallPath
-	userConfig.IdaProjectPath = IdaProjectPath
 	userConfig.PwnScriptName = PwnScriptName
 	userConfig.PwnScriptTemplate = PwnScriptTemplate
 	userConfig.FlagFormat = FlagFormat

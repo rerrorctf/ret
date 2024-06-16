@@ -362,6 +362,16 @@ See https://hub.docker.com/r/sagemath/sagemath for more information.
 
 https://github.com/rerrorctf/ret/blob/main/commands/sage.go
 
+### setup 🔧
+
+```
+ret setup
+```
+
+Asks you a bunch of questions to help setup your ~/.config/ret.
+
+https://github.com/rerrorctf/ret/blob/main/commands/setup.go
+
 ### status 👀
 
 ```
@@ -459,10 +469,6 @@ The data in the config must be in the json format. You can include zero or more 
 - `idainstallpath`
   - This is the location where you have installed ghidra, e.g. `/opt/ida`, so that `ret ida` knows where to find ida.
   - The current default value is `/opt/ida` as per https://github.com/rerrorctf/ret/blob/main/config/config.go#L14
-
-- `idaprojectpath`
-  - This is what you would like the ida folder, created by `ret`, to be called within the `.ret` folder to be called e.g. `./.ret/ida`.
-  - The current default value is `./.ret/ida` as per https://github.com/rerrorctf/ret/blob/main/config/config.go#L15
 
 - `pwnscriptname`
   - This is what you would like the script created by `ret pwn` to be called.

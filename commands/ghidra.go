@@ -42,14 +42,14 @@ func Ghidra(args []string) {
 		}
 	}
 
-	if _, err := os.Stat(config.GhidraProjectPath); os.IsNotExist(err) {
-		err := os.MkdirAll(config.GhidraProjectPath, 0755)
+	if _, err := os.Stat(config.FolderName + "/" + config.GhidraProject); os.IsNotExist(err) {
+		err := os.MkdirAll(config.FolderName+"/"+config.GhidraProject, 0755)
 		if err != nil {
 			log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 		}
 	}
 
-	absoluteProjectPath, err := filepath.Abs(config.GhidraProjectPath + "/project.gpr")
+	absoluteProjectPath, err := filepath.Abs(config.FolderName + "/" + config.GhidraProject + "/project.gpr")
 	if err != nil {
 		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
@@ -62,7 +62,7 @@ func Ghidra(args []string) {
 
 	analyzeFile := exec.Command(
 		config.GhidraInstallPath+"/support/analyzeHeadless",
-		config.GhidraProjectPath,
+		config.FolderName+"/"+config.GhidraProject,
 		"project", "-recursive",
 		"-import", config.FilesFolderName)
 
