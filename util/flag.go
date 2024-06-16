@@ -2,11 +2,9 @@ package util
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 	"ret/config"
 	"ret/data"
-	"ret/theme"
 )
 
 func GetCurrentFlag() (string, error) {
@@ -19,7 +17,6 @@ func GetCurrentFlag() (string, error) {
 
 	err = json.Unmarshal(jsonData, &flag)
 	if err != nil {
-		fmt.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 		return "", err
 	}
 
