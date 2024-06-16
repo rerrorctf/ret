@@ -46,7 +46,7 @@ func main() {
 				"📝 " + theme.StartUnderline + "wr" + theme.StopUnderline + "iteup\n" +
 				theme.StopUnderline + theme.ColorReset)
 
-		fmt.Printf(theme.ColorReset+"https://github.com/rerrorctf/ret "+theme.ColorYellow+"%s\n"+theme.ColorReset, COMMIT)
+		fmt.Printf(theme.ColorGray+"https://github.com/rerrorctf/ret ~ %s\n"+theme.ColorReset, COMMIT)
 	}
 
 	flag.Parse()
