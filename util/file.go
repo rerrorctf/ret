@@ -28,6 +28,11 @@ func CopyFile(srcPath string, dstPath string) error {
 	return nil
 }
 
+func FileExists(path string) bool {
+	_, err := os.Stat(path)
+	return !os.IsNotExist(err)
+}
+
 func RunFileCommandOnFile(path string) string {
 	fileOutput := exec.Command("file", path)
 
