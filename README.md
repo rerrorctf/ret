@@ -210,8 +210,6 @@ Optionally you can read from stdin by specifying `-` after the file param. In th
 
 Requires `~/.config/ret` to have a valid `gisttoken`.
 
-See https://github.com/rerrorctf/ret/blob/main/README.md#configret for more information.
-
 See your tokens here https://github.com/settings/tokens?type=beta.
 
 Read about creating gists programatically here https://docs.github.com/en/rest/gists/gists?apiVersion=2022-11-28#create-a-gist.
@@ -232,8 +230,6 @@ Optionally you can read from stdin by specifying `-` as the first param.
 $ ret gpt how do i pwn?
 $ cat go.py | ret gpt - how do i make this pwn better?
 ```
-
-See https://github.com/rerrorctf/ret/blob/main/README.md#configret for more information.
 
 https://github.com/rerrorctf/ret/blob/main/commands/gpt.go
 
