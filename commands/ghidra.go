@@ -49,7 +49,7 @@ func Ghidra(args []string) {
 		}
 	}
 
-	absoluteProjectPath, err := filepath.Abs(config.FolderName + "/" + config.GhidraProject + "/project.gpr")
+	absoluteProjectPath, err := filepath.Abs(config.FolderName + "/" + config.GhidraProject + "/" + config.GhidraProject + ".gpr")
 	if err != nil {
 		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
@@ -63,7 +63,7 @@ func Ghidra(args []string) {
 	analyzeFile := exec.Command(
 		config.GhidraInstallPath+"/support/analyzeHeadless",
 		config.FolderName+"/"+config.GhidraProject,
-		"project", "-recursive",
+		config.GhidraProject, "-recursive",
 		"-import", config.FilesFolderName)
 
 	analyzeFileOutput, err := analyzeFile.CombinedOutput()
