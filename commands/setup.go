@@ -108,6 +108,22 @@ func Setup(args []string) {
 		}
 	}
 
+	// config.IdaInstallPath
+	fmt.Printf("💃 ida install path: \"%s\"\n", config.IdaInstallPath)
+
+	if !yesOrNo(fmt.Sprintf("is ida is installed here \"%s\"?", config.IdaInstallPath)) {
+		for {
+			askQuestion("where is ida installed?")
+
+			newIdaInstallPath := readLine()
+
+			if yesOrNo(fmt.Sprintf("is ida is installed here \"%s\"?", newIdaInstallPath)) {
+				config.IdaInstallPath = newIdaInstallPath
+				break
+			}
+		}
+	}
+
 	fmt.Printf("💾 " + theme.ColorGray + "saving config... ")
 
 	config.WriteUserConfig()
