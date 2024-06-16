@@ -7,7 +7,6 @@ import (
 	"os"
 	"os/user"
 	"path/filepath"
-	"ret/data"
 	"ret/theme"
 )
 
@@ -39,6 +38,25 @@ var (
 	GoogleCloudSSHKey  = ""
 )
 
+type Config struct {
+	GhidraInstallPath  string `json:"ghidrainstallpath"`
+	GhidraProjectPath  string `json:"ghidraprojectpath"`
+	IdaInstallPath     string `json:"idainstallpath"`
+	IdaProjectPath     string `json:"idaprojectpath"`
+	PwnScriptName      string `json:"pwnscriptname"`
+	PwnScriptTemplate  string `json:"pwnscripttemplate"`
+	FlagFormat         string `json:"flagformat"`
+	WizardPreCommand   string `json:"wizardprecommand"`
+	WizardPostCommand  string `json:"wizardpostcommand"`
+	Username           string `json:"username"`
+	ChatWebhookUrl     string `json:"chatwebhookurl"`
+	GistToken          string `json:"gisttoken"`
+	OpenAIKey          string `json:"openaikey"`
+	GoogleCloudProject string `json:"googlecloudproject"`
+	GoogleCloudRegion  string `json:"googlecloudregion"`
+	GoogleCloudSSHKey  string `json:"googlecloudsshkey"`
+}
+
 func ParseUserConfig() {
 	currentUser, err := user.Current()
 	if err != nil {
@@ -53,7 +71,7 @@ func ParseUserConfig() {
 		return
 	}
 
-	var userConfig data.Config
+	var userConfig Config
 
 	err = json.Unmarshal(jsonData, &userConfig)
 	if err != nil {
@@ -125,16 +143,24 @@ func ParseUserConfig() {
 	}
 }
 
-func WriteUserConfig() {
+func GetConfigPath() (string, error) {
 	currentUser, err := user.Current()
 	if err != nil {
-		fmt.Println("Error:", err)
-		return
+		return "", err
 	}
 
 	configPath := filepath.Join(currentUser.HomeDir, UserConfig)
+	return configPath, nil
+}
 
-	var userConfig data.Config
+func WriteUserConfig() {
+	configPath, err := GetConfigPath()
+	if err != nil {
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
+		return
+	}
+
+	var userConfig Config
 	userConfig.GhidraInstallPath = GhidraInstallPath
 	userConfig.GhidraProjectPath = GhidraProjectPath
 	userConfig.IdaInstallPath = IdaInstallPath
