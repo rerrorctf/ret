@@ -3,12 +3,12 @@ package commands
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"os"
 	"os/exec"
 	"ret/config"
 	"ret/data"
 	"ret/theme"
+	"ret/util"
 )
 
 func statusHelp() {
@@ -27,35 +27,40 @@ func Status(args []string) {
 	}
 
 	jsonData, err := os.ReadFile(config.RetFilesNames)
-	if err != nil {
-		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
-	}
-
-	var files data.Files
-
-	err = json.Unmarshal(jsonData, &files)
 	if err == nil {
-		for idx, file := range files.Files {
+		var files data.Files
 
-			fmt.Printf(theme.ColorGray+"["+theme.ColorBlue+"%v"+theme.ColorGray+"]"+theme.ColorReset, idx)
-			fmt.Printf(theme.ColorGreen+" %s ", file.Filename)
-			fmt.Printf(theme.ColorReset+"%s\n", file.SHA256)
+		err = json.Unmarshal(jsonData, &files)
+		if err == nil {
+			for idx, file := range files.Files {
 
-			if file.FileType == data.FILE_TYPE_ELF {
-				checksec := exec.Command("pwn", "checksec", file.Filepath)
+				fmt.Printf(theme.ColorGray+"["+theme.ColorBlue+"%v"+theme.ColorGray+"]"+theme.ColorReset, idx)
+				fmt.Printf(theme.ColorGreen+" %s ", file.Filename)
+				fmt.Printf(theme.ColorReset+"%s\n", file.SHA256)
 
-				checksec.Stdout = os.Stdout
-				checksec.Stderr = os.Stderr
-				checksec.Stdin = os.Stdin
+				if file.FileType == data.FILE_TYPE_ELF {
+					checksec := exec.Command("pwn", "checksec", file.Filepath)
 
-				err := checksec.Run()
-				if err != nil {
+					checksec.Stdout = os.Stdout
+					checksec.Stderr = os.Stderr
+					checksec.Stdin = os.Stdin
+
+					err := checksec.Run()
+					if err != nil {
+						fmt.Printf(theme.ColorGray+"    "+theme.ColorReset+"%s\n", file.FileOutput)
+						continue
+					}
+				} else {
 					fmt.Printf(theme.ColorGray+"    "+theme.ColorReset+"%s\n", file.FileOutput)
-					continue
 				}
-			} else {
-				fmt.Printf(theme.ColorGray+"    "+theme.ColorReset+"%s\n", file.FileOutput)
 			}
 		}
+	}
+
+	flag, err := util.GetCurrentFlag()
+	if err == nil {
+		fmt.Printf("🚩 "+theme.ColorPurple+"%s"+theme.ColorPurple+"\n", flag)
+	} else if config.FlagFormat != "" {
+		fmt.Printf("🔍 "+theme.ColorPurple+"%s"+theme.ColorPurple+"\n", config.FlagFormat)
 	}
 }
