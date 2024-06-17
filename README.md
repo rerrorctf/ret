@@ -362,16 +362,6 @@ See https://hub.docker.com/r/sagemath/sagemath for more information.
 
 https://github.com/rerrorctf/ret/blob/main/commands/sage.go
 
-### setup 🔧
-
-```
-ret setup
-```
-
-Asks you a bunch of questions to help setup your ~/.config/ret.
-
-https://github.com/rerrorctf/ret/blob/main/commands/setup.go
-
 ### status 👀
 
 ```
