@@ -444,94 +444,22 @@ https://github.com/rerrorctf/ret/blob/main/commands/writeup.go
 
 `ret` will parse `~/.config/ret`.
 
-While I aim to keep this readme in sync; for the current structure of the config file please consult https://github.com/rerrorctf/ret/blob/main/data/config.go#L3.
-
-The data in the config must be in the json format. You can include zero or more of the following in your config:
-
-- `ghidrainstallpath`
-  - This is the location where you have installed ghidra, e.g. `/opt/ghidra` is what I use, so that `ret ghidra` knows where to find `ghidraRun`.
-  - The current default value is `/opt/ghidra` as per https://github.com/rerrorctf/ret/blob/main/config/config.go#L12
-
-- `ghidraprojectpath`
-  - This is what you would like the ghidra folder, created by `ret`, to be called within the `.ret` folder to be called e.g. `./.ret/ghidra`.
-  - The current default value is `./.ret/ghidra` as per https://github.com/rerrorctf/ret/blob/main/config/config.go#L13
-
-- `idainstallpath`
-  - This is the location where you have installed ghidra, e.g. `/opt/ida`, so that `ret ida` knows where to find ida.
-  - The current default value is `/opt/ida` as per https://github.com/rerrorctf/ret/blob/main/config/config.go#L14
-
-- `pwnscriptname`
-  - This is what you would like the script created by `ret pwn` to be called.
-  - The default is `go.py` and is chosen to be short and not clash with any common imports as per https://github.com/rerrorctf/ret/blob/main/config/config.go#L25
-
-- `pwnscripttemplate`
-  - Path to a template to that can be used to override the default behaviour of pwn.
-
-- `flagformat`
-  - This is the regular expression that matches the flag format for the ctf you are currently playing.
-  - The default is `flag{.+}`.
-
-- `wizardprecommand`
-  - This will be executed by the `wizard` before they do any of their own magic.
-  - It is passed to `bash -c`
-
-- `wizardpostcommand`
-  - This will be executed by the `wizard` after they have worked their own magic.
-  - It is passed to `bash -c`
-
-- `chatusername`
-  - This username will be used when sending messages with the chat command.
-  - Note there is no username authentication present.
-
-- `chatwebhookurl`
-  - An optional discord webhook url.
-  - This will be used by the `chat` command to send messages to discord.
-
-- `gisttoken`
-  - An optional github gist token with read/write gist permissions is required to use the gist command.
-  - https://github.com/settings/tokens?type=beta
-  - https://docs.github.com/en/rest/gists/gists?apiVersion=2022-11-28#create-a-gist
-
-- `openaikey`
-  - An optional OpenAI key used with the `gpt` command
-
-- `googlecloudproject`
-  - The optional name of the GCP project you wish to create virtual machines within when using the vps command.
-
-- `googlecloudregion`
-  - The optional GCP region to create virtual machines within when using the vps command.
-  - Default is `europe-west3-c`.
-
-- `googlecloudsshkey`
-  - The optional ssh key to supply as metadata when creating GCP virtual machines when using the vps command.
-  - Should be of the following form:
-    - `"user:pubkey"`
-      - Where `user` is the username you wish to use to login to the server.
-
-## The .ret Directory Structure
-
-Certain commands, such as `add` and `status` will use a hidden directory structure.
-
-This is technically configurable via https://github.com/rerrorctf/ret/blob/main/config/config.go#L5 but this is not exposed to the user config. In other words you can change this be changing the source code and building your own version if you wish. If there is a strong desire to change this I would consider adding it to the user config.
-
-You can delete this directory if you like or make changes as you see fit but just be aware that the tool makes certain assumptions about the contents.
-
-This directory is structured as follows:
-
-- `.ret/files`
-  - This directory contains files and metadata about files added to the task by the `add` command
-  - For each file added a subdirectory of files is created that is named using the SHA2-256 hex digest of the file content
-    - e.g. `.ret/files/7ebfc53f17925af4340d4218aafd16ba39b5afa8b6ac1f7adc3dd92952a2a237`
-    - Inside of the folder created for each file
-      - There is a copy of the file that was added
-
-- `.ret/ghidra`
-  - This directory is created to store the ghidra project created if you use the `ghidra` command
-  - Note that you can change this with `~/.config/ret` as above
-
-- `.ret/ida`
-  - This directory is created to store the ida project created if you use the `ida` command
-  - Note that you can change this with `~/.config/ret` as above
-
-- `.ret/flag.json`
-  - This file contains the flag saved with the `ctf` command
+```json
+{
+  "ghidrainstallpath": "/opt/ghidra",
+  "ghidraproject": "project",
+  "idainstallpath": "/opt/ida",
+  "pwnscriptname": "go.py",
+  "pwnscripttemplate": "",
+  "flagformat": "flag{.+}",
+  "wizardprecommand": "",
+  "wizardpostcommand": "",
+  "username": "smiley",
+  "chatwebhookurl": "",
+  "gisttoken": "",
+  "openaikey": "",
+  "googlecloudproject": "",
+  "googlecloudregion": "europe-west3-c",
+  "googlecloudsshkey": ""
+}
+```
