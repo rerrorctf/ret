@@ -124,6 +124,38 @@ func Setup(args []string) {
 		}
 	}
 
+	// config.PwnScriptName
+	fmt.Printf("🐚 pwn script name: \"%s\"\n", config.PwnScriptName)
+
+	if yesOrNo("would you like to change the pwn script name?") {
+		for {
+			askQuestion("what should the pwn script name be?")
+
+			newPwnScriptName := readLine()
+
+			if yesOrNo(fmt.Sprintf("should the pwn script name be \"%s\"?", newPwnScriptName)) {
+				config.PwnScriptName = newPwnScriptName
+				break
+			}
+		}
+	}
+
+	// config.PwnScriptTemplate
+	fmt.Printf("🐚 pwn script template path: \"%s\"\n", config.PwnScriptTemplate)
+
+	if yesOrNo("would you like to change the pwn template path?") {
+		for {
+			askQuestion("what should the pwn script template path be?")
+
+			newPwnScriptTemplate := readLine()
+
+			if yesOrNo(fmt.Sprintf("should the pwn script template path be \"%s\"?", newPwnScriptTemplate)) {
+				config.PwnScriptTemplate = newPwnScriptTemplate
+				break
+			}
+		}
+	}
+
 	fmt.Printf("💾 " + theme.ColorGray + "saving config... ")
 
 	config.WriteUserConfig()
