@@ -111,6 +111,10 @@ func Check(args []string) {
 
 	testCommand("patchelf", "-h")
 
+	if !testCommand("msfvenom", "--list", "args") {
+		suggestLink("https://docs.metasploit.com/docs/using-metasploit/getting-started/nightly-installers.html")
+	}
+
 	// web related stuff
 	if !testCommand("stat", currentUser.HomeDir+"/BurpSuiteCommunity/BurpSuiteCommunity") {
 		suggestLink("https://portswigger.net/burp/releases/community/latest")
