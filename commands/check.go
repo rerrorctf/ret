@@ -70,7 +70,7 @@ func Check(args []string) {
 	testCommand("xxd", "-v")
 
 	if !testCommand("docker", "-v") {
-		suggestLink("https://docs.docker.com/desktop/install/ubuntu/")
+		suggestLink("https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository")
 	}
 
 	if !testCommand("go", "version") {
