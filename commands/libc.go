@@ -48,6 +48,13 @@ func Libc(args []string) {
 		}
 	}
 
+	c := exec.Command("docker", "-v")
+	err := c.Run()
+	if err != nil {
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
+		return
+	}
+
 	stop := make(chan bool)
 
 	go libcSpinner(stop)
