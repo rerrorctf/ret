@@ -60,10 +60,6 @@ func Check(args []string) {
 		suggestLink("https://code.visualstudio.com/")
 	}
 
-	if !testCommand("subl", "--version") {
-		suggestLink("https://www.sublimetext.com/")
-	}
-
 	testCommand("nmap", "--version")
 	testCommand("jq", "--version")
 	testCommand("exiftool", "--version")
