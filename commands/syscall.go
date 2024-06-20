@@ -1,12 +1,10 @@
 package commands
 
 import (
-	"bufio"
 	"fmt"
 	"log"
-	"os"
-	"regexp"
 	"ret/theme"
+	"ret/util"
 )
 
 func syscallHelp() {
@@ -24,26 +22,6 @@ func syscallHelp() {
 	fmt.Printf(theme.ColorPurple + "    syscall x86 10[0-9]" + theme.ColorReset + "\n\n")
 
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/syscall.go" + theme.ColorReset + "\n")
-}
-
-func grep(path string, pattern string) {
-	file, err := os.Open(path)
-	if err != nil {
-		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": opening file %v\n", path)
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		line := scanner.Text()
-		if match, _ := regexp.MatchString(pattern, line); match {
-			fmt.Println(line)
-		}
-	}
-
-	if err := scanner.Err(); err != nil {
-		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
-	}
 }
 
 func Syscall(args []string) {
@@ -68,19 +46,19 @@ func Syscall(args []string) {
 	switch arch {
 	case "x86":
 		{
-			grep("/usr/include/x86_64-linux-gnu/asm/unistd_32.h", pattern)
+			util.Grep("/usr/include/x86_64-linux-gnu/asm/unistd_32.h", pattern)
 		}
 	case "32":
 		{
-			grep("/usr/include/x86_64-linux-gnu/asm/unistd_32.h", pattern)
+			util.Grep("/usr/include/x86_64-linux-gnu/asm/unistd_32.h", pattern)
 		}
 	case "x64":
 		{
-			grep("/usr/include/x86_64-linux-gnu/asm/unistd_64.h", pattern)
+			util.Grep("/usr/include/x86_64-linux-gnu/asm/unistd_64.h", pattern)
 		}
 	case "64":
 		{
-			grep("/usr/include/x86_64-linux-gnu/asm/unistd_64.h", pattern)
+			util.Grep("/usr/include/x86_64-linux-gnu/asm/unistd_64.h", pattern)
 		}
 	default:
 		{
