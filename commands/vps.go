@@ -23,7 +23,7 @@ func createVps() string {
 
 	region := config.GoogleCloudRegion
 
-	image := "projects/ubuntu-os-cloud/global/images/ubuntu-minimal-2404-noble-amd64-v20240608"
+	image := "projects/ubuntu-os-cloud/global/images/ubuntu-minimal-2404-noble-amd64-v20240616"
 
 	args := []string{
 		"compute", "instances", "create", instanceName,
