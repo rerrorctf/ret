@@ -57,7 +57,10 @@ func Check(args []string) {
 	testCommand("unzip")
 
 	if !testCommand("code", "--version") {
-		suggestLink("https://code.visualstudio.com/")
+		// note that i symlink codium like this
+		// $ ls -lah /usr/local/bin/code
+		// lrwxrwxrwx 2 root root 28 May 24 16:32 /usr/local/bin/code -> /usr/share/codium/bin/codium
+		suggestLink("https://github.com/VSCodium/vscodium/releases")
 	}
 
 	testCommand("nmap", "--version")
