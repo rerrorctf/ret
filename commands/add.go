@@ -1,6 +1,8 @@
 package commands
 
 import (
+	"bufio"
+	"bytes"
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
@@ -15,11 +17,23 @@ import (
 	"ret/util"
 )
 
-func grep2Win(path string) {
-	grep2win := exec.Command("grep", "-aEoi", config.FlagFormat, path)
-	grep2winOutput, err := grep2win.Output()
-	if err == nil && len(grep2winOutput) > 0 {
-		fmt.Printf(theme.ColorPurple+"[grep2win]"+theme.ColorReset+": %s", grep2winOutput)
+func grep2Win(path string, flags string) {
+	stringsCmd := exec.Command("strings", flags, path)
+	var stringsOutput bytes.Buffer
+	stringsCmd.Stdout = &stringsOutput
+	_ = stringsCmd.Run()
+
+	grepCmd := exec.Command("grep", "-Eoi", config.FlagFormat)
+	grepCmd.Stdin = &stringsOutput
+	var grepOutput bytes.Buffer
+	grepCmd.Stdout = &grepOutput
+	if err := grepCmd.Run(); err != nil {
+		return
+	}
+
+	scanner := bufio.NewScanner(&grepOutput)
+	for scanner.Scan() {
+		fmt.Printf(theme.ColorPurple+"[grep2win]"+theme.ColorReset+": %s\n", scanner.Text())
 	}
 }
 
@@ -127,7 +141,9 @@ func addFile(srcPath string) {
 
 	writeFiles(&files)
 
-	grep2Win(dstPath)
+	grep2Win(dstPath, "")
+	grep2Win(dstPath, "-el")
+	grep2Win(dstPath, "-eL")
 }
 
 func AddHelp() {
