@@ -10,12 +10,11 @@ var FileMagics = map[string][]byte{
 }
 
 type File struct {
-	Filename   string `json:"filename"`
-	Filepath   string `json:"filepath"`
-	Size       int    `json:"size"`
-	FileType   string `json:"filetype"`
-	FileOutput string `json:"fileoutput"`
-	SHA256     string `json:"sha256"`
+	Filename string `json:"filename"`
+	Filepath string `json:"filepath"`
+	Size     int    `json:"size"`
+	FileType string `json:"filetype"`
+	SHA256   string `json:"sha256"`
 }
 
 type Files struct {

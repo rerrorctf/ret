@@ -47,11 +47,13 @@ func Status(args []string) {
 
 					err := checksec.Run()
 					if err != nil {
-						fmt.Printf(theme.ColorGray+"    "+theme.ColorReset+"%s\n", file.FileOutput)
+						fileOutput := util.RunFileCommandOnFile(file.Filepath)
+						fmt.Printf(theme.ColorGray+"    "+theme.ColorReset+"%s\n", fileOutput)
 						continue
 					}
 				} else {
-					fmt.Printf(theme.ColorGray+"    "+theme.ColorReset+"%s\n", file.FileOutput)
+					fileOutput := util.RunFileCommandOnFile(file.Filepath)
+					fmt.Printf(theme.ColorGray+"    "+theme.ColorReset+"%s\n", fileOutput)
 				}
 			}
 		}

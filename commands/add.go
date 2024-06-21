@@ -74,8 +74,6 @@ func addFile(srcPath string) {
 
 	_, fileName := filepath.Split(srcPath)
 
-	fileOutput := util.RunFileCommandOnFile(srcPath)
-
 	content, err := os.ReadFile(srcPath)
 	if err != nil {
 		fmt.Println("💥 "+theme.ColorRed+"error"+theme.ColorReset+": reading file:", srcPath)
@@ -109,12 +107,11 @@ func addFile(srcPath string) {
 	dstPath := dirPath + "/" + fileName
 
 	file := data.File{
-		Filename:   fileName,
-		Filepath:   dstPath,
-		Size:       len(content),
-		FileType:   fileType,
-		FileOutput: fileOutput,
-		SHA256:     sha256HashString,
+		Filename: fileName,
+		Filepath: dstPath,
+		Size:     len(content),
+		FileType: fileType,
+		SHA256:   sha256HashString,
 	}
 
 	if _, err := os.Stat(dirPath); !os.IsNotExist(err) {
