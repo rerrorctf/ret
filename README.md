@@ -201,12 +201,10 @@ https://github.com/rerrorctf/ret/blob/main/commands/ghidra.go
 ### gist 🐙
 
 ```
-ret gist file [-]
+ret gist file1 [file2 file3...]
 ```
 
-Create a private gist from a file.
-
-Optionally you can read from stdin by specifying `-` after the file param. In this case file will be used only as the name.
+Create a private gist from one or more files.
 
 Requires `~/.config/ret` to have a valid `gisttoken`.
 
