@@ -128,7 +128,6 @@ func ParseUserConfig() {
 
 	if len(userConfig.OpenAIModel) > 0 {
 		OpenAIModel = userConfig.OpenAIModel
-		fmt.Println(OpenAIModel)
 	}
 
 	if len(userConfig.GoogleCloudProject) > 0 {
