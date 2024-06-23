@@ -11,6 +11,7 @@ import (
 	"ret/config"
 	"ret/theme"
 	"strings"
+	"time"
 )
 
 const (
@@ -33,7 +34,26 @@ const (
 	CTF Question:`
 )
 
-func sendRequest(query map[string]interface{}) {
+func gptSpinner(stop chan bool) {
+	emojis := []string{
+		"🧠", "🤖", "💻", "🌐", "🔍", "📚", "🔬", "🚀", "🔮", "🚩",
+	}
+
+	for {
+		for _, e := range emojis {
+			select {
+			case <-stop:
+				return
+			default:
+				fmt.Printf("\r%s", e)
+				time.Sleep(200 * time.Millisecond)
+			}
+
+		}
+	}
+}
+
+func sendRequest(query map[string]interface{}) string {
 	body, err := json.Marshal(query)
 	if err != nil {
 		log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
@@ -68,12 +88,14 @@ func sendRequest(query map[string]interface{}) {
 			if choice, ok := choices[0].(map[string]interface{}); ok {
 				if message, ok := choice["message"].(map[string]interface{}); ok {
 					if content, ok := message["content"].(string); ok {
-						fmt.Printf("%s\n", content)
+						return content
 					}
 				}
 			}
 		}
 	}
+
+	return ""
 }
 
 func readInput(args []string) string {
@@ -133,5 +155,15 @@ func Gpt(args []string) {
 
 	fmt.Printf("🧠 " + theme.ColorGray + config.OpenAIModel + theme.ColorReset + "\n")
 
-	sendRequest(query)
+	stop := make(chan bool)
+
+	go gptSpinner(stop)
+
+	answer := sendRequest(query)
+
+	stop <- true
+
+	fmt.Printf("\r")
+
+	fmt.Printf("%s\n", answer)
 }
