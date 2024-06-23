@@ -131,5 +131,7 @@ func Gpt(args []string) {
 		"temperature": 0.3,
 	}
 
+	fmt.Printf("🧠 " + theme.ColorGray + config.OpenAIModel + theme.ColorReset + "\n")
+
 	sendRequest(query)
 }
