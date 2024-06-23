@@ -14,7 +14,6 @@ import (
 )
 
 const (
-	GPT_MODEL  string = "gpt-4o"
 	GPT_PROMPT string = `You are a CTF assistant specializing in various categories:
 
 	- **Cryptography**: Decrypting messages, encryption algorithms, cryptographic puzzles.
@@ -118,7 +117,7 @@ func Gpt(args []string) {
 	content := readInput(args)
 
 	query := map[string]interface{}{
-		"model": GPT_MODEL,
+		"model": config.OpenAIModel,
 		"messages": []map[string]interface{}{
 			{
 				"role":    "system",

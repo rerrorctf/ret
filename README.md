@@ -456,6 +456,7 @@ https://github.com/rerrorctf/ret/blob/main/commands/writeup.go
   "chatwebhookurl": "",
   "gisttoken": "",
   "openaikey": "",
+  "openaimodel": "gpt-4o",
   "googlecloudproject": "",
   "googlecloudregion": "europe-west3-c",
   "googlecloudsshkey": ""
