@@ -23,6 +23,7 @@ func main() {
 			theme.ColorBlue +
 				"🤝 " + theme.StartUnderline + "ab" + theme.StopUnderline + "i\n" +
 				"📥 " + theme.StartUnderline + "ad" + theme.StopUnderline + "d\n" +
+				"😠 " + theme.StartUnderline + "an" + theme.StopUnderline + "gr\n" +
 				"📢 " + theme.StartUnderline + "chat" + theme.StopUnderline + "\n" +
 				"✅ " + theme.StartUnderline + "chec" + theme.StopUnderline + "k\n" +
 				"🔪 " + theme.StartUnderline + "chef" + theme.StopUnderline + "\n" +
@@ -134,6 +135,11 @@ func main() {
 
 		if command[1] == 'b' {
 			commands.Abi(flag.Args()[1:])
+			return
+		}
+
+		if command[1] == 'n' {
+			commands.Angr(flag.Args()[1:])
 			return
 		}
 	}

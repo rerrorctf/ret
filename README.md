@@ -80,6 +80,24 @@ This command will:
 
 https://github.com/rerrorctf/ret/blob/main/commands/add.go
 
+### angr 😠
+
+```
+ret angr
+```
+
+Just runs:
+
+```bash
+$ sudo docker pull angr/angr
+$ sudo docker run -it -v $PWD:/home/angr/x angr/angr
+```
+
+See https://docs.angr.io/en/latest/getting-started/installing.html#installing-with-docker for more information.
+
+https://github.com/rerrorctf/ret/blob/main/commands/angr.go
+
+
 ### chat 📢
 
 ```
