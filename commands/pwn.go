@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-func makeScript(ip string, port int) {
+func makePwnScript(ip string, port int) {
 	binaries := util.GuessBinary()
 
 	if len(binaries) > 1 {
@@ -92,5 +92,5 @@ func Pwn(args []string) {
 	var port int
 	util.GetRemoteParams(args, &ip, &port)
 
-	makeScript(ip, port)
+	makePwnScript(ip, port)
 }
