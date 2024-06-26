@@ -86,34 +86,12 @@ func IsDecompressable(path string) (string, bool) {
 	return fileType, true
 }
 
-func decompressFileZip(path string) {
-	unzip := exec.Command("unzip", path)
-
-	unzipOutput, err := unzip.Output()
-	if err != nil {
-		fmt.Printf("%s", unzipOutput)
-		fmt.Printf("💥 "+theme.ColorRed+"error: "+theme.ColorReset+"%v\n", err)
-		return
-	}
-}
-
 func decompressFile7z(path string) {
-	sevenZipX := exec.Command("7z", "x", path)
+	sevenZipX := exec.Command("7z", "e", path, "-y")
 
 	sevenZipXOutput, err := sevenZipX.Output()
 	if err != nil {
 		fmt.Printf("%s", sevenZipXOutput)
-		fmt.Printf("💥 "+theme.ColorRed+"error: "+theme.ColorReset+"%v\n", err)
-		return
-	}
-}
-
-func decompressFileTar(path string) {
-	tarXF := exec.Command("tar", "xf", path)
-
-	tarXFOutput, err := tarXF.Output()
-	if err != nil {
-		fmt.Printf("%s", tarXFOutput)
 		fmt.Printf("💥 "+theme.ColorRed+"error: "+theme.ColorReset+"%v\n", err)
 		return
 	}
@@ -126,16 +104,8 @@ func DecompressFile(path string) bool {
 	}
 
 	switch fileType {
-	case GZIP:
-		decompressFileTar(path)
-	case ZIP:
-		decompressFileZip(path)
-	case XZ:
-		decompressFileTar(path)
-	case VIIZ:
+	case GZIP, ZIP, XZ, VIIZ, TAR:
 		decompressFile7z(path)
-	case TAR:
-		decompressFileTar(path)
 	}
 
 	return true
