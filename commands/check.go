@@ -79,6 +79,10 @@ func Check(args []string) {
 
 	testCommand("tldr", "--version")
 
+	if !testCommand("shellcheck", "--help") {
+		suggestLink("https://github.com/koalaman/shellcheck")
+	}
+
 	// python setup
 	testCommand("python3", "--version")
 	testCommand("pip", "show", "pwntools")
