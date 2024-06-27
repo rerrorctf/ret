@@ -35,7 +35,8 @@ func main() {
 				"🦖 " + theme.StartUnderline + "gh" + theme.StopUnderline + "idra\n" +
 				"🐙 " + theme.StartUnderline + "gi" + theme.StopUnderline + "st\n" +
 				"🧠 " + theme.StartUnderline + "gp" + theme.StopUnderline + "t\n" +
-				"💃 " + theme.StartUnderline + "i" + theme.StopUnderline + "da\n" +
+				"💃 " + theme.StartUnderline + "id" + theme.StopUnderline + "a\n" +
+				"🔬 " + theme.StartUnderline + "in" + theme.StopUnderline + "scount\n" +
 				"🗽 " + theme.StartUnderline + "l" + theme.StopUnderline + "ibc\n" +
 				"📡 " + theme.StartUnderline + "pr" + theme.StopUnderline + "oxy\n" +
 				"🐚 " + theme.StartUnderline + "pw" + theme.StopUnderline + "n\n" +
@@ -118,11 +119,20 @@ func main() {
 		}
 	}
 
-	// ida
+	// ida, inscount
 	if command[0] == 'i' {
-		util.EnsureSkeleton()
-		commands.Ida(flag.Args()[1:])
-		return
+		if len(command) > 1 {
+			if command[1] == 'd' {
+				util.EnsureSkeleton()
+				commands.Ida(flag.Args()[1:])
+				return
+			}
+
+			if command[1] == 'n' {
+				commands.Inscount(flag.Args()[1:])
+				return
+			}
+		}
 	}
 
 	// add, abi
@@ -162,7 +172,7 @@ func main() {
 		}
 	}
 
-	// check, cheatsheet, ctf, chat
+	// check, cheatsheet, ctf, chat, chef
 	if command[0] == 'c' {
 		if len(command) > 1 {
 			if command[1] == 't' {

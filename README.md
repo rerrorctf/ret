@@ -265,6 +265,14 @@ Make sure ida is installed (or symlinked) at `/opt/ida` or use the config file t
 
 https://github.com/rerrorctf/ret/blob/main/commands/ida.go
 
+### inscount 🔬
+
+```
+ret inscount file
+```
+
+https://github.com/rerrorctf/ret/blob/main/commands/inscount.go
+
 ### libc 🗽
 
 ```
