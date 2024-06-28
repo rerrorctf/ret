@@ -47,7 +47,7 @@ type Config struct {
 	PwnScriptName            string `json:"pwnscriptname"`
 	PwnScriptTemplate        string `json:"pwnscripttemplate"`
 	InscountGoScriptName     string `json:"inscountgoscriptname"`
-	InscountPythonScriptName string `json:"inscountpythonscriptname`
+	InscountPythonScriptName string `json:"inscountpythonscriptname"`
 	FlagFormat               string `json:"flagformat"`
 	WizardPreCommand         string `json:"wizardprecommand"`
 	WizardPostCommand        string `json:"wizardpostcommand"`
