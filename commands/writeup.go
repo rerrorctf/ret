@@ -48,7 +48,7 @@ func Writeup(args []string) {
 		err = json.Unmarshal(jsonData, &notes)
 		if err == nil {
 			for _, note := range notes.Notes {
-				notesStr += fmt.Sprintf("✏️ `%v`\n%s\n", note.Timestamp, note.Note)
+				notesStr += fmt.Sprintf("✏️ `%v`\n\n%s\n\n", note.Timestamp, note.Note)
 			}
 		}
 
