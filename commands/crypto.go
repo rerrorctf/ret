@@ -1,19 +1,14 @@
 package commands
 
 import (
-	"embed"
 	"encoding/json"
 	"fmt"
-	"log"
 	"os"
-	"os/exec"
 	"ret/config"
 	"ret/data"
 	"ret/theme"
+	"ret/util"
 )
-
-//go:embed yara-crypto.yar
-var embedFS embed.FS
 
 func cryptoHelp() {
 	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "crypto " + theme.ColorGray + "[file1 file2 file3...]" + theme.ColorReset + "\n")
@@ -30,19 +25,6 @@ func Crypto(args []string) {
 		}
 	}
 
-	rules, _ := embedFS.ReadFile("yara-crypto.yar")
-
-	tmpfile, _ := os.CreateTemp("", "yara-crypto.yar")
-	defer os.Remove(tmpfile.Name())
-
-	if _, err := tmpfile.Write(rules); err != nil {
-		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
-	}
-
-	if err := tmpfile.Close(); err != nil {
-		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
-	}
-
 	jsonData, err := os.ReadFile(config.RetFilesNames)
 	if err == nil {
 		var files data.Files
@@ -50,18 +32,12 @@ func Crypto(args []string) {
 		err = json.Unmarshal(jsonData, &files)
 		if err == nil {
 			for _, file := range files.Files {
-				cmd := exec.Command("yara", "--no-warnings", "-s", tmpfile.Name(), file.Filepath)
-				cmd.Stdout = os.Stdout
-				cmd.Stderr = os.Stderr
-				cmd.Run()
+				util.CryptoWithYara(file.Filename)
 			}
 		}
 	}
 
 	for _, file := range args {
-		cmd := exec.Command("yara", "--no-warnings", "-s", tmpfile.Name(), file)
-		cmd.Stdout = os.Stdout
-		cmd.Stderr = os.Stderr
-		cmd.Run()
+		util.CryptoWithYara(file)
 	}
 }
