@@ -27,6 +27,7 @@ func main() {
 				"📢 " + theme.StartUnderline + "chat" + theme.StopUnderline + "\n" +
 				"✅ " + theme.StartUnderline + "chec" + theme.StopUnderline + "k\n" +
 				"🔪 " + theme.StartUnderline + "chef" + theme.StopUnderline + "\n" +
+				"🚀 " + theme.StartUnderline + "cr" + theme.StopUnderline + "ypto\n" +
 				"📚 " + theme.StartUnderline + "chea" + theme.StopUnderline + "tsheet\n" +
 				"🚩 " + theme.StartUnderline + "ct" + theme.StopUnderline + "f\n" +
 				"🤏 " + theme.StartUnderline + "de" + theme.StopUnderline + "compress\n" +
@@ -173,7 +174,7 @@ func main() {
 		}
 	}
 
-	// check, cheatsheet, ctf, chat, chef
+	// check, cheatsheet, ctf, chat, chef, crypto
 	if command[0] == 'c' {
 		if len(command) > 1 {
 			if command[1] == 't' {
@@ -204,6 +205,11 @@ func main() {
 						return
 					}
 				}
+			}
+
+			if command[1] == 'r' {
+				commands.Crypto(flag.Args()[1:])
+				return
 			}
 		}
 	}

@@ -146,6 +146,14 @@ Use - to read from stdin.
 
 https://github.com/rerrorctf/ret/blob/main/commands/chef.go
 
+### crypto 🚀
+
+```
+ret crypto
+```
+
+https://github.com/rerrorctf/ret/blob/main/commands/crypto.go
+
 ### ctf 🚩
 
 ```
