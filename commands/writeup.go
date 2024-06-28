@@ -1,10 +1,12 @@
 package commands
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
 	"ret/config"
+	"ret/data"
 	"ret/theme"
 	"ret/util"
 	"time"
@@ -38,6 +40,20 @@ func Writeup(args []string) {
 		flag = config.FlagFormat
 	}
 
+	notesStr := ""
+
+	jsonData, err := os.ReadFile(config.NotesFileName)
+	if err == nil {
+		var notes data.Notes
+		err = json.Unmarshal(jsonData, &notes)
+		if err == nil {
+			for _, note := range notes.Notes {
+				notesStr += fmt.Sprintf("✏️ `%v`\n%s\n", note.Timestamp, note.Note)
+			}
+		}
+
+	}
+
 	script, _ := os.ReadFile("./" + config.PwnScriptName)
 
 	name := config.Username
@@ -51,12 +67,13 @@ func Writeup(args []string) {
 		"https://chal.link.goes.here\n\n"+
 			"# TASK-NAME (CATEGORY)\n\n"+
 			"DESCRIPTION-GOES-HERE\n\n"+
-			"## Solution\n\n"+
+			"## Solution\n"+
+			"%s\n"+
 			"```python\n"+
 			"%s"+
 			"```\n\n"+
 			"## Flag\n`%s`\n\n"+
-			"%s %s\n", script, flag, name, date)
+			"%s %s\n", notesStr, script, flag, name, date)
 
 	err = os.WriteFile(filePath, []byte(template), 0644)
 
