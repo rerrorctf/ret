@@ -32,7 +32,7 @@ func Crypto(args []string) {
 		err = json.Unmarshal(jsonData, &files)
 		if err == nil {
 			for _, file := range files.Files {
-				util.CryptoWithYara(file.Filename)
+				util.CryptoWithYara(file.Filepath)
 			}
 		}
 	}
