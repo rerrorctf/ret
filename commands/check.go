@@ -100,6 +100,8 @@ func Check(args []string) {
 		suggestLink("https://www.intel.com/content/www/us/en/developer/articles/tool/pin-a-binary-instrumentation-tool-downloads.html")
 	}
 
+	testCommand("yara", "--help")
+
 	// wabt
 	testCommand("wasm-decompile", "--version")
 
