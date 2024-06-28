@@ -136,6 +136,8 @@ func addFile(srcPath string) {
 	grep2Win(dstPath, "")
 	grep2Win(dstPath, "-el")
 	grep2Win(dstPath, "-eL")
+
+	util.CryptoWithYara(dstPath)
 }
 
 func AddHelp() {

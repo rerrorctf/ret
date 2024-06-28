@@ -181,11 +181,5 @@ func Wizard(args []string) {
 		}
 	}
 
-	fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me check for crypto constants!" + theme.ColorReset + "\n")
-
-	for _, file := range filesToAdd {
-		util.CryptoWithYara(file)
-	}
-
 	runWizardCommand(config.WizardPostCommand)
 }
