@@ -19,42 +19,44 @@ const (
 )
 
 var (
-	GhidraInstallPath  = "/opt/ghidra"
-	GhidraProject      = "ghidra"
-	IdaInstallPath     = "/opt/ida"
-	PwnScriptName      = "go.py"
-	PwnScriptTemplate  = ""
-	FlagFileName       = FolderName + "/flag.json"
-	FlagFormat         = "flag{.+}"
-	WizardPreCommand   = ""
-	WizardPostCommand  = ""
-	Username           = ""
-	ChatWebhookUrl     = ""
-	GistToken          = ""
-	OpenAIKey          = ""
-	OpenAIModel        = "gpt-4o"
-	GoogleCloudProject = "default"
-	GoogleCloudRegion  = "europe-west3-c"
-	GoogleCloudSSHKey  = ""
+	GhidraInstallPath    = "/opt/ghidra"
+	GhidraProject        = "ghidra"
+	IdaInstallPath       = "/opt/ida"
+	PwnScriptName        = "go.py"
+	PwnScriptTemplate    = ""
+	InscountGoScriptName = "inscount.go"
+	FlagFileName         = FolderName + "/flag.json"
+	FlagFormat           = "flag{.+}"
+	WizardPreCommand     = ""
+	WizardPostCommand    = ""
+	Username             = ""
+	ChatWebhookUrl       = ""
+	GistToken            = ""
+	OpenAIKey            = ""
+	OpenAIModel          = "gpt-4o"
+	GoogleCloudProject   = "default"
+	GoogleCloudRegion    = "europe-west3-c"
+	GoogleCloudSSHKey    = ""
 )
 
 type Config struct {
-	GhidraInstallPath  string `json:"ghidrainstallpath"`
-	GhidraProject      string `json:"ghidraproject"`
-	IdaInstallPath     string `json:"idainstallpath"`
-	PwnScriptName      string `json:"pwnscriptname"`
-	PwnScriptTemplate  string `json:"pwnscripttemplate"`
-	FlagFormat         string `json:"flagformat"`
-	WizardPreCommand   string `json:"wizardprecommand"`
-	WizardPostCommand  string `json:"wizardpostcommand"`
-	Username           string `json:"username"`
-	ChatWebhookUrl     string `json:"chatwebhookurl"`
-	GistToken          string `json:"gisttoken"`
-	OpenAIKey          string `json:"openaikey"`
-	OpenAIModel        string `json:"openaimodel"`
-	GoogleCloudProject string `json:"googlecloudproject"`
-	GoogleCloudRegion  string `json:"googlecloudregion"`
-	GoogleCloudSSHKey  string `json:"googlecloudsshkey"`
+	GhidraInstallPath    string `json:"ghidrainstallpath"`
+	GhidraProject        string `json:"ghidraproject"`
+	IdaInstallPath       string `json:"idainstallpath"`
+	PwnScriptName        string `json:"pwnscriptname"`
+	PwnScriptTemplate    string `json:"pwnscripttemplate"`
+	InscountGoScriptName string `json:"inscountgoscriptname"`
+	FlagFormat           string `json:"flagformat"`
+	WizardPreCommand     string `json:"wizardprecommand"`
+	WizardPostCommand    string `json:"wizardpostcommand"`
+	Username             string `json:"username"`
+	ChatWebhookUrl       string `json:"chatwebhookurl"`
+	GistToken            string `json:"gisttoken"`
+	OpenAIKey            string `json:"openaikey"`
+	OpenAIModel          string `json:"openaimodel"`
+	GoogleCloudProject   string `json:"googlecloudproject"`
+	GoogleCloudRegion    string `json:"googlecloudregion"`
+	GoogleCloudSSHKey    string `json:"googlecloudsshkey"`
 }
 
 func ParseUserConfig() {
@@ -96,6 +98,10 @@ func ParseUserConfig() {
 
 	if len(userConfig.PwnScriptTemplate) > 0 {
 		PwnScriptTemplate = userConfig.PwnScriptTemplate
+	}
+
+	if len(userConfig.InscountGoScriptName) > 0 {
+		InscountGoScriptName = userConfig.InscountGoScriptName
 	}
 
 	if len(userConfig.FlagFormat) > 0 {
@@ -166,6 +172,7 @@ func WriteUserConfig() {
 	userConfig.IdaInstallPath = IdaInstallPath
 	userConfig.PwnScriptName = PwnScriptName
 	userConfig.PwnScriptTemplate = PwnScriptTemplate
+	userConfig.InscountGoScriptName = InscountGoScriptName
 	userConfig.FlagFormat = FlagFormat
 	userConfig.WizardPreCommand = WizardPreCommand
 	userConfig.WizardPostCommand = WizardPostCommand

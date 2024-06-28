@@ -1,40 +1,57 @@
 package commands
 
 import (
+	"fmt"
+	"log"
+	"os"
+	"ret/config"
+	"ret/theme"
+	"ret/util"
+	"strings"
+)
+
+func makeInscountScript() {
+	binaries := util.GuessBinary()
+
+	if len(binaries) > 1 {
+		fmt.Printf("⚠️ multiple candidate binaries found\n")
+		for _, binary := range binaries {
+			fmt.Printf("%s\n", binary)
+		}
+	}
+
+	binary := binaries[0]
+
+	if strings.Compare(binary, config.DefaultBinaryName) != 0 {
+		if !util.BinaryIsExecutable(binary) {
+			fmt.Printf("⚠️ "+theme.ColorGray+" \""+theme.ColorReset+"%v"+theme.ColorGray+"\""+theme.ColorRed+" is not executable"+theme.ColorReset+"\n", binary)
+		}
+	}
+
+	script := fmt.Sprintf(
+		`package main
+
+import (
 	"bufio"
 	"bytes"
 	"fmt"
 	"os/exec"
-	"ret/theme"
 	"strconv"
 	"strings"
 )
 
-func inscountHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "inscount " + theme.ColorGray + "file" + theme.ColorReset + "\n")
-	fmt.Printf("  🔬 use pin to count instructions with ret\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/inscount.go" + theme.ColorReset + "\n")
-}
+const (
+	PIN             = "/opt/pin/pin"
+	INSCOUNT2_MT_SO = "/opt/pin/source/tools/SimpleExamples/obj-intel64/inscount2_mt.so"
+	BINARY          = "./%s"
+)
 
-func Inscount(args []string) {
-	if len(args) > 0 {
-		switch args[0] {
-		case "help":
-			inscountHelp()
-			return
-		}
-	} else {
-		inscountHelp()
-		return
-	}
-
+func main() {
 	flag := ""
 
-	file := args[0]
-
 	cmdArgs := []string{
-		"-t", "/opt/pin/source/tools/SimpleExamples/obj-intel64/inscount2_mt.so",
-		"--", file,
+		"-t", INSCOUNT2_MT_SO,
+		"--", BINARY,
 	}
 
 	var printableBytes []byte
@@ -55,7 +72,7 @@ func Inscount(args []string) {
 	for {
 		for _, i := range printableBytes {
 			go func(i byte) {
-				cmd := exec.Command("/opt/pin/pin", cmdArgs...)
+				cmd := exec.Command(PIN, cmdArgs...)
 
 				var cmdStdin bytes.Buffer
 				var cmdStdout bytes.Buffer
@@ -68,7 +85,12 @@ func Inscount(args []string) {
 				cmd.Stdout = &cmdStdout
 				cmd.Stderr = &cmdStderr
 
-				_ = cmd.Run()
+				err := cmd.Run()
+
+				if err != nil {
+					fmt.Printf("%%s\n", cmdStdout.String())
+					fmt.Printf("%%s\n", cmdStderr.String())
+				}
 
 				totalCount := 0
 				scanner := bufio.NewScanner(&cmdStdout)
@@ -95,7 +117,44 @@ func Inscount(args []string) {
 			}
 		}
 
-		flag = fmt.Sprintf("%s%c", flag, bestByte)
-		fmt.Printf("🔬 %s\n", flag)
+		flag = fmt.Sprintf("%%s%%c", flag, bestByte)
+		fmt.Printf("%%s\n", flag)
 	}
+}
+`, binary)
+
+	err := os.WriteFile(config.InscountGoScriptName, []byte(script), 0644)
+	if err != nil {
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
+	}
+
+	err = os.Chmod(config.InscountGoScriptName, 0744)
+	if err != nil {
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
+	}
+
+	fmt.Printf("🔬 "+theme.ColorGray+"ready to count instructions:"+theme.ColorReset+" $ go run ./%s\n", config.InscountGoScriptName)
+}
+
+func inscountHelp() {
+	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "inscount" + theme.ColorReset + "\n")
+	fmt.Printf("  🔬 create a pin script to count instructions from a template with ret\n")
+	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/inscount.go" + theme.ColorReset + "\n")
+}
+
+func Inscount(args []string) {
+	if len(args) > 0 {
+		switch args[0] {
+		case "help":
+			inscountHelp()
+			return
+		}
+	}
+
+	_, err := os.Stat(config.InscountGoScriptName)
+	if !os.IsNotExist(err) {
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": \"%s\" already exists!\n", config.InscountGoScriptName)
+	}
+
+	makeInscountScript()
 }

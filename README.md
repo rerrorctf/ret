@@ -475,6 +475,7 @@ https://github.com/rerrorctf/ret/blob/main/commands/writeup.go
   "idainstallpath": "/opt/ida",
   "pwnscriptname": "go.py",
   "pwnscripttemplate": "",
+  "inscountgoscriptname": "inscount.go",
   "flagformat": "flag{.+}",
   "wizardprecommand": "",
   "wizardpostcommand": "",
