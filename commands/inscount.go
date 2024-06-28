@@ -10,24 +10,7 @@ import (
 	"strings"
 )
 
-func makeInscountScript() {
-	binaries := util.GuessBinary()
-
-	if len(binaries) > 1 {
-		fmt.Printf("⚠️ multiple candidate binaries found\n")
-		for _, binary := range binaries {
-			fmt.Printf("%s\n", binary)
-		}
-	}
-
-	binary := binaries[0]
-
-	if strings.Compare(binary, config.DefaultBinaryName) != 0 {
-		if !util.BinaryIsExecutable(binary) {
-			fmt.Printf("⚠️ "+theme.ColorGray+" \""+theme.ColorReset+"%v"+theme.ColorGray+"\""+theme.ColorRed+" is not executable"+theme.ColorReset+"\n", binary)
-		}
-	}
-
+func makeInscountGoScript(binary string) {
 	script := fmt.Sprintf(
 		`package main
 
@@ -128,12 +111,55 @@ func main() {
 		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
-	err = os.Chmod(config.InscountGoScriptName, 0744)
+	fmt.Printf("🔬 "+theme.ColorGray+"ready to count instructions with golang:"+theme.ColorReset+" $ go run ./%s\n", config.InscountGoScriptName)
+}
+
+func makeInscountPythonScript(binary string) {
+	script := fmt.Sprintf(
+		`#!/usr/bin/env python3
+
+import string
+from pwn import *
+
+PIN             = "/opt/pin/pin"
+INSCOUNT2_MT_SO = "/opt/pin/source/tools/SimpleExamples/obj-intel64/inscount2_mt.so"
+BINARY          = "./%s"
+
+flag = b""
+
+while True:
+	highest_count = 0
+	best_byte = b"\x00"
+	for c in string.printable:
+		b = c.encode()
+		with process(argv=[PIN, "-t", INSCOUNT2_MT_SO, "--", BINARY], level="CRITICAL") as p:
+			p.sendline(flag + b)
+
+			lines = p.recvall().split(b"\n")
+
+			count = 0
+			for line in lines:
+				if b"Count[" in line:
+					count += int(line.split(b" = ")[1])
+
+			if count > highest_count:
+				highest_count = count
+				best_byte = b
+	flag += best_byte
+	log.success(flag.decode())
+`, binary)
+
+	err := os.WriteFile(config.InscountPythonScriptName, []byte(script), 0644)
 	if err != nil {
 		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
-	fmt.Printf("🔬 "+theme.ColorGray+"ready to count instructions:"+theme.ColorReset+" $ go run ./%s\n", config.InscountGoScriptName)
+	err = os.Chmod(config.InscountPythonScriptName, 0744)
+	if err != nil {
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
+	}
+
+	fmt.Printf("🔬 "+theme.ColorGray+"ready to count instructions with python:"+theme.ColorReset+" $ ./%s\n", config.InscountPythonScriptName)
 }
 
 func inscountHelp() {
@@ -151,10 +177,34 @@ func Inscount(args []string) {
 		}
 	}
 
+	binaries := util.GuessBinary()
+
+	if len(binaries) > 1 {
+		fmt.Printf("⚠️ multiple candidate binaries found\n")
+		for _, binary := range binaries {
+			fmt.Printf("%s\n", binary)
+		}
+	}
+
+	binary := binaries[0]
+
+	if strings.Compare(binary, config.DefaultBinaryName) != 0 {
+		if !util.BinaryIsExecutable(binary) {
+			fmt.Printf("⚠️ "+theme.ColorGray+" \""+theme.ColorReset+"%v"+theme.ColorGray+"\""+theme.ColorRed+" is not executable"+theme.ColorReset+"\n", binary)
+		}
+	}
+
 	_, err := os.Stat(config.InscountGoScriptName)
 	if !os.IsNotExist(err) {
 		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": \"%s\" already exists!\n", config.InscountGoScriptName)
 	}
 
-	makeInscountScript()
+	makeInscountGoScript(binary)
+
+	_, err = os.Stat(config.InscountPythonScriptName)
+	if !os.IsNotExist(err) {
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": \"%s\" already exists!\n", config.InscountPythonScriptName)
+	}
+
+	makeInscountPythonScript(binary)
 }

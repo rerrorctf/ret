@@ -268,8 +268,10 @@ https://github.com/rerrorctf/ret/blob/main/commands/ida.go
 ### inscount 🔬
 
 ```
-ret inscount file
+ret inscount
 ```
+
+Creates a python and a golang script for counting instructions with pin.
 
 https://github.com/rerrorctf/ret/blob/main/commands/inscount.go
 
@@ -476,6 +478,7 @@ https://github.com/rerrorctf/ret/blob/main/commands/writeup.go
   "pwnscriptname": "go.py",
   "pwnscripttemplate": "",
   "inscountgoscriptname": "inscount.go",
+  "inscountpythonscriptname": "inscount.py",
   "flagformat": "flag{.+}",
   "wizardprecommand": "",
   "wizardpostcommand": "",

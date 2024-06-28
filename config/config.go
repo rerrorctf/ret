@@ -19,44 +19,46 @@ const (
 )
 
 var (
-	GhidraInstallPath    = "/opt/ghidra"
-	GhidraProject        = "ghidra"
-	IdaInstallPath       = "/opt/ida"
-	PwnScriptName        = "go.py"
-	PwnScriptTemplate    = ""
-	InscountGoScriptName = "inscount.go"
-	FlagFileName         = FolderName + "/flag.json"
-	FlagFormat           = "flag{.+}"
-	WizardPreCommand     = ""
-	WizardPostCommand    = ""
-	Username             = ""
-	ChatWebhookUrl       = ""
-	GistToken            = ""
-	OpenAIKey            = ""
-	OpenAIModel          = "gpt-4o"
-	GoogleCloudProject   = "default"
-	GoogleCloudRegion    = "europe-west3-c"
-	GoogleCloudSSHKey    = ""
+	GhidraInstallPath        = "/opt/ghidra"
+	GhidraProject            = "ghidra"
+	IdaInstallPath           = "/opt/ida"
+	PwnScriptName            = "go.py"
+	PwnScriptTemplate        = ""
+	InscountGoScriptName     = "inscount.go"
+	InscountPythonScriptName = "inscount.py"
+	FlagFileName             = FolderName + "/flag.json"
+	FlagFormat               = "flag{.+}"
+	WizardPreCommand         = ""
+	WizardPostCommand        = ""
+	Username                 = ""
+	ChatWebhookUrl           = ""
+	GistToken                = ""
+	OpenAIKey                = ""
+	OpenAIModel              = "gpt-4o"
+	GoogleCloudProject       = "default"
+	GoogleCloudRegion        = "europe-west3-c"
+	GoogleCloudSSHKey        = ""
 )
 
 type Config struct {
-	GhidraInstallPath    string `json:"ghidrainstallpath"`
-	GhidraProject        string `json:"ghidraproject"`
-	IdaInstallPath       string `json:"idainstallpath"`
-	PwnScriptName        string `json:"pwnscriptname"`
-	PwnScriptTemplate    string `json:"pwnscripttemplate"`
-	InscountGoScriptName string `json:"inscountgoscriptname"`
-	FlagFormat           string `json:"flagformat"`
-	WizardPreCommand     string `json:"wizardprecommand"`
-	WizardPostCommand    string `json:"wizardpostcommand"`
-	Username             string `json:"username"`
-	ChatWebhookUrl       string `json:"chatwebhookurl"`
-	GistToken            string `json:"gisttoken"`
-	OpenAIKey            string `json:"openaikey"`
-	OpenAIModel          string `json:"openaimodel"`
-	GoogleCloudProject   string `json:"googlecloudproject"`
-	GoogleCloudRegion    string `json:"googlecloudregion"`
-	GoogleCloudSSHKey    string `json:"googlecloudsshkey"`
+	GhidraInstallPath        string `json:"ghidrainstallpath"`
+	GhidraProject            string `json:"ghidraproject"`
+	IdaInstallPath           string `json:"idainstallpath"`
+	PwnScriptName            string `json:"pwnscriptname"`
+	PwnScriptTemplate        string `json:"pwnscripttemplate"`
+	InscountGoScriptName     string `json:"inscountgoscriptname"`
+	InscountPythonScriptName string `json:"inscountpythonscriptname`
+	FlagFormat               string `json:"flagformat"`
+	WizardPreCommand         string `json:"wizardprecommand"`
+	WizardPostCommand        string `json:"wizardpostcommand"`
+	Username                 string `json:"username"`
+	ChatWebhookUrl           string `json:"chatwebhookurl"`
+	GistToken                string `json:"gisttoken"`
+	OpenAIKey                string `json:"openaikey"`
+	OpenAIModel              string `json:"openaimodel"`
+	GoogleCloudProject       string `json:"googlecloudproject"`
+	GoogleCloudRegion        string `json:"googlecloudregion"`
+	GoogleCloudSSHKey        string `json:"googlecloudsshkey"`
 }
 
 func ParseUserConfig() {
@@ -102,6 +104,10 @@ func ParseUserConfig() {
 
 	if len(userConfig.InscountGoScriptName) > 0 {
 		InscountGoScriptName = userConfig.InscountGoScriptName
+	}
+
+	if len(userConfig.InscountPythonScriptName) > 0 {
+		InscountPythonScriptName = userConfig.InscountPythonScriptName
 	}
 
 	if len(userConfig.FlagFormat) > 0 {
@@ -173,6 +179,7 @@ func WriteUserConfig() {
 	userConfig.PwnScriptName = PwnScriptName
 	userConfig.PwnScriptTemplate = PwnScriptTemplate
 	userConfig.InscountGoScriptName = InscountGoScriptName
+	userConfig.InscountPythonScriptName = InscountPythonScriptName
 	userConfig.FlagFormat = FlagFormat
 	userConfig.WizardPreCommand = WizardPreCommand
 	userConfig.WizardPostCommand = WizardPostCommand
