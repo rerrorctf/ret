@@ -38,6 +38,7 @@ func main() {
 				"💃 " + theme.StartUnderline + "id" + theme.StopUnderline + "a\n" +
 				"🔬 " + theme.StartUnderline + "in" + theme.StopUnderline + "scount\n" +
 				"🗽 " + theme.StartUnderline + "l" + theme.StopUnderline + "ibc\n" +
+				"✏️  " + theme.StartUnderline + "n" + theme.StopUnderline + "otes\n" +
 				"📡 " + theme.StartUnderline + "pr" + theme.StopUnderline + "oxy\n" +
 				"🐚 " + theme.StartUnderline + "pw" + theme.StopUnderline + "n\n" +
 				"🌿 " + theme.StartUnderline + "sa" + theme.StopUnderline + "ge\n" +
@@ -223,6 +224,12 @@ func main() {
 	// libc
 	if command[0] == 'l' {
 		commands.Libc(flag.Args()[1:])
+		return
+	}
+
+	// notes
+	if command[0] == 'n' {
+		commands.Notes(flag.Args()[1:])
 		return
 	}
 

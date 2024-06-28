@@ -16,6 +16,7 @@ const (
 	FilesFolderName   = FolderName + "/files"
 	RetFilesNames     = FilesFolderName + "/ret-files.json"
 	DefaultBinaryName = "task"
+	NotesFileName     = FolderName + "/notes.json"
 )
 
 var (

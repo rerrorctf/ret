@@ -295,6 +295,14 @@ After the container is destroyed the file is added with ret.
 
 https://github.com/rerrorctf/ret/blob/main/commands/libc.go
 
+### notes ✏️
+
+```
+ret notes [message]
+```
+
+https://github.com/rerrorctf/ret/blob/main/commands/notes.go
+
 ### proxy 📡
 
 ```
