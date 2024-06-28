@@ -37,13 +37,8 @@ func grep2Win(path string, flags string) {
 	}
 }
 
-func filesAlreadyExists() bool {
-	_, err := os.Stat(config.RetFilesNames)
-	return !os.IsNotExist(err)
-}
-
 func parseFiles(files *data.Files) {
-	if filesAlreadyExists() {
+	if util.FileExists(config.RetFilesNames) {
 		jsonData, err := os.ReadFile(config.RetFilesNames)
 		if err != nil {
 			log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
