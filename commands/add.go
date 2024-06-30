@@ -137,7 +137,18 @@ func addFile(srcPath string) {
 	grep2Win(dstPath, "-el")
 	grep2Win(dstPath, "-eL")
 
-	util.CryptoWithYara(dstPath)
+	var buffer bytes.Buffer
+	util.CryptoWithYara(dstPath, &buffer)
+
+	scanner := bufio.NewScanner(&buffer)
+	for i := 0; i < 4; i++ {
+		if scanner.Scan() {
+			fmt.Printf(theme.ColorPurple+"🚀 %s"+theme.ColorReset+"\n", scanner.Text())
+		}
+	}
+	if scanner.Scan() {
+		fmt.Printf(theme.ColorGray + "🚀 one or more lines hidden" + theme.ColorReset + "\n")
+	}
 }
 
 func AddHelp() {

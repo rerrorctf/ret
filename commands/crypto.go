@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -32,12 +33,16 @@ func Crypto(args []string) {
 		err = json.Unmarshal(jsonData, &files)
 		if err == nil {
 			for _, file := range files.Files {
-				util.CryptoWithYara(file.Filepath)
+				var buffer bytes.Buffer
+				util.CryptoWithYara(file.Filepath, &buffer)
+				fmt.Printf("%s", buffer.String())
 			}
 		}
 	}
 
 	for _, file := range args {
-		util.CryptoWithYara(file)
+		var buffer bytes.Buffer
+		util.CryptoWithYara(file, &buffer)
+		fmt.Printf("%s", buffer.String())
 	}
 }

@@ -1,6 +1,7 @@
 package util
 
 import (
+	"bytes"
 	"embed"
 	"log"
 	"os"
@@ -11,7 +12,7 @@ import (
 //go:embed yara-crypto.yar
 var embedFS embed.FS
 
-func CryptoWithYara(file string) {
+func CryptoWithYara(file string, buffer *bytes.Buffer) {
 	rules, _ := embedFS.ReadFile("yara-crypto.yar")
 
 	tmpfile, _ := os.CreateTemp("", "yara-crypto.yar")
@@ -26,7 +27,7 @@ func CryptoWithYara(file string) {
 	}
 
 	cmd := exec.Command("yara", "--no-warnings", "-s", tmpfile.Name(), file)
-	cmd.Stdout = os.Stdout
+	cmd.Stdout = buffer
 	cmd.Stderr = os.Stderr
 	cmd.Run()
 }
