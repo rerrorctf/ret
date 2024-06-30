@@ -18,7 +18,7 @@ func displayCurrentFlag() {
 		return
 	}
 
-	fmt.Printf("🚩 "+theme.ColorPurple+"%s"+theme.ColorPurple+"\n", flag)
+	fmt.Printf("🚩 "+theme.ColorPurple+"%s"+theme.ColorReset+"\n", flag)
 }
 
 func scoreNewFlag(newFlag string) {
@@ -36,7 +36,7 @@ func scoreNewFlag(newFlag string) {
 		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
-	fmt.Printf("🚩 "+theme.ColorPurple+"%s"+theme.ColorPurple+"\n", flag.Flag)
+	fmt.Printf("🚩 "+theme.ColorPurple+"%s"+theme.ColorReset+"\n", flag.Flag)
 }
 
 func CtfHelp() {
