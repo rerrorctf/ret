@@ -49,6 +49,9 @@ func Cheatsheet(args []string) {
 	fmt.Println(theme.ColorCyan + "pwn" + theme.ColorReset)
 	fmt.Println(theme.ColorGray + "🔗 https://ir0nstone.gitbook.io/notes/" + theme.ColorReset)
 
+	fmt.Println(theme.ColorCyan + "re" + theme.ColorReset)
+	fmt.Println(theme.ColorGray + "🔗 https://book.hacktricks.xyz/reversing/reversing-tools-basic-methods/angr/angr-examples" + theme.ColorReset)
+
 	fmt.Println(theme.ColorCyan + "ctf cheatsheet" + theme.ColorReset)
 	fmt.Println(theme.ColorGray + "🔗 https://github.com/Rajchowdhury420/CTF-CheatSheet" + theme.ColorReset)
 
