@@ -67,8 +67,8 @@ func Writeup(args []string) {
 		"https://chal.link.goes.here\n\n"+
 			"# TASK-NAME (CATEGORY)\n\n"+
 			"DESCRIPTION-GOES-HERE\n\n"+
-			"## Solution\n"+
-			"%s\n"+
+			"%s"+
+			"## Solution\n\n"+
 			"```python\n"+
 			"%s"+
 			"```\n\n"+
