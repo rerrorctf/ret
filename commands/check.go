@@ -56,6 +56,8 @@ func Check(args []string) {
 	testCommand("vim", "--version")
 	testCommand("unzip")
 	testCommand("strings", "-v")
+	testCommand("nc", "-h")
+	testCommand("ncat", "-h")
 
 	if !testCommand("code", "--version") {
 		// note that i symlink codium like this
