@@ -108,7 +108,8 @@ func ProxyCreate(args []string) {
 	}
 
 	if len(args) < 4 {
-		log.Fatalf("💥 " + theme.ColorRed + " error" + theme.ColorReset + ": not enough args\n")
+		proxyCreateHelp()
+		return
 	}
 
 	localPort, err := strconv.Atoi(args[0])
