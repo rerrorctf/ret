@@ -24,7 +24,7 @@ func main() {
 				"🤝 " + theme.StartUnderline + "ab" + theme.StopUnderline + "i\n" +
 				"📥 " + theme.StartUnderline + "ad" + theme.StopUnderline + "d\n" +
 				"😠 " + theme.StartUnderline + "an" + theme.StopUnderline + "gr\n" +
-				"📢 " + theme.StartUnderline + "chat" + theme.StopUnderline + "\n" +
+				"📢 " + theme.StartUnderline + "cha" + theme.StopUnderline + "t\n" +
 				"✅ " + theme.StartUnderline + "chec" + theme.StopUnderline + "k\n" +
 				"🔪 " + theme.StartUnderline + "chef" + theme.StopUnderline + "\n" +
 				"🚀 " + theme.StartUnderline + "cr" + theme.StopUnderline + "ypto\n" +
