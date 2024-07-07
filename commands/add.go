@@ -79,6 +79,10 @@ func addFile(srcPath string) {
 
 	for magicType, magic := range data.FileMagics {
 		match := true
+		if len(content) < len(magic) {
+			continue
+		}
+
 		for j := range magic {
 			if content[j] != magic[j] {
 				match = false
