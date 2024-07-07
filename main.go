@@ -28,7 +28,6 @@ func main() {
 				"✅ " + theme.StartUnderline + "chec" + theme.StopUnderline + "k\n" +
 				"🔪 " + theme.StartUnderline + "chef" + theme.StopUnderline + "\n" +
 				"🚀 " + theme.StartUnderline + "cr" + theme.StopUnderline + "ypto\n" +
-				"📚 " + theme.StartUnderline + "chea" + theme.StopUnderline + "tsheet\n" +
 				"🚩 " + theme.StartUnderline + "ct" + theme.StopUnderline + "f\n" +
 				"🤏 " + theme.StartUnderline + "de" + theme.StopUnderline + "compress\n" +
 				"🐋 " + theme.StartUnderline + "do" + theme.StopUnderline + "cker\n" +
@@ -174,7 +173,7 @@ func main() {
 		}
 	}
 
-	// check, cheatsheet, ctf, chat, chef, crypto
+	// check, ctf, chat, chef, crypto
 	if command[0] == 'c' {
 		if len(command) > 1 {
 			if command[1] == 't' {
@@ -192,11 +191,6 @@ func main() {
 				if len(command) > 3 {
 					if strings.Compare("chec", command[:4]) == 0 {
 						commands.Check(flag.Args()[1:])
-						return
-					}
-
-					if strings.Compare("chea", command[:4]) == 0 {
-						commands.Cheatsheet(flag.Args()[1:])
 						return
 					}
 

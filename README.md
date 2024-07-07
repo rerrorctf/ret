@@ -108,16 +108,6 @@ Sends a message to discord via a webhook in `~/.config/ret` called `chatwebhooku
 
 https://github.com/rerrorctf/ret/blob/main/commands/chat.go
 
-### cheatsheet 📚
-
-```
-ret cheatsheet
-```
-
-Prints a list of cheatsheets for quick reference.
-
-https://github.com/rerrorctf/ret/blob/main/commands/cheatsheet.go
-
 ### check ✅
 
 ```
