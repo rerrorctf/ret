@@ -108,18 +108,6 @@ Sends a message to discord via a webhook in `~/.config/ret` called `chatwebhooku
 
 https://github.com/rerrorctf/ret/blob/main/commands/chat.go
 
-### check ✅
-
-```
-ret check
-```
-
-Check your environment for ctf readiness by checking if various pieces of commonly used software are installed.
-
-If something is not installed `ret` tries to give you a link to help you install it quickly.
-
-https://github.com/rerrorctf/ret/blob/main/commands/check.go
-
 ### chef 🔪
 
 ```
