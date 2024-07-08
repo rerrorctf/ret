@@ -53,18 +53,17 @@ func Ida(args []string) {
 
 	jsonData, err := os.ReadFile(config.RetFilesNames)
 	if err == nil {
-		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
-	}
+		var files data.Files
 
-	var files data.Files
+		err = json.Unmarshal(jsonData, &files)
+		if err != nil {
+			log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
+		}
 
-	err = json.Unmarshal(jsonData, &files)
-	if err != nil {
-		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
-	}
+		for _, file := range files.Files {
+			idaArgs = append(idaArgs, file.Filepath)
+		}
 
-	for _, file := range files.Files {
-		idaArgs = append(idaArgs, file.Filepath)
 	}
 
 	launchIda := exec.Command(config.IdaInstallPath+"/ida64", idaArgs...)
