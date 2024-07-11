@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	URL = "https://gchq.github.io/CyberChef/#input="
+	CHEF_URL = "https://gchq.github.io/CyberChef/#input="
 )
 
 func chefHelp() {
@@ -51,7 +51,7 @@ func Chef(args []string) {
 
 	encoded := base64.RawStdEncoding.EncodeToString([]byte(input))
 
-	finalUrl := URL + encoded
+	finalUrl := CHEF_URL + encoded
 
 	fmt.Printf("%s\n", finalUrl)
 
