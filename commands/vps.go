@@ -10,7 +10,23 @@ import (
 	"time"
 )
 
-func vpsHelp() {
+func init() {
+	Commands = append(Commands, Command{
+		Name:  "vps",
+		Emoji: "☁️ ",
+		Func:  Vps,
+		Help:  VpsHelp,
+		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/vps.go",
+		Arguments: []Argument{
+			{
+				Name:     "create/list/destroy",
+				Optional: true,
+				List:     false,
+			},
+		}})
+}
+
+func VpsHelp() {
 	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "vps" + theme.ColorGray + " [create/list/destroy]" + theme.ColorReset + "\n")
 	fmt.Printf("  ☁️  create and manage google cloud compute instances with ret\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/vps.go" + theme.ColorReset + "\n")
@@ -129,7 +145,7 @@ func Vps(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			vpsHelp()
+			VpsHelp()
 			return
 		case "create", "list", "destroy":
 			validateConfig()
@@ -150,5 +166,5 @@ func Vps(args []string) {
 		}
 	}
 
-	vpsHelp()
+	VpsHelp()
 }

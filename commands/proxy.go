@@ -12,6 +12,22 @@ import (
 	"strings"
 )
 
+func init() {
+	Commands = append(Commands, Command{
+		Name:  "proxy",
+		Emoji: "📡",
+		Func:  Proxy,
+		Help:  ProxyHelp,
+		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/proxy.go",
+		Arguments: []Argument{
+			{
+				Name:     "list/create",
+				Optional: true,
+				List:     false,
+			},
+		}})
+}
+
 func proxyListHelp() {
 	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "proxy" + theme.ColorGray + " list" + theme.ColorReset + "\n")
 	fmt.Printf("  📡 list the current proxies with ret\n")
@@ -130,7 +146,7 @@ func ProxyCreate(args []string) {
 	proxyCreate(localPort, remoteIp, remotePort, proxyIp)
 }
 
-func proxyHelp() {
+func ProxyHelp() {
 	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "proxy" + theme.ColorGray + " [list/create]" + theme.ColorReset + "\n")
 	fmt.Printf("  📡 manage proxies with ret\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/proxy.go" + theme.ColorReset + "\n")
@@ -140,7 +156,7 @@ func Proxy(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			proxyHelp()
+			ProxyHelp()
 			return
 		case "list":
 			ProxyList(args[1:])
@@ -151,5 +167,5 @@ func Proxy(args []string) {
 		}
 	}
 
-	proxyHelp()
+	ProxyHelp()
 }

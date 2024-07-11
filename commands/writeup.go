@@ -12,7 +12,17 @@ import (
 	"time"
 )
 
-func writeupHelp() {
+func init() {
+	Commands = append(Commands, Command{
+		Name:      "writeup",
+		Emoji:     "📝",
+		Func:      Writeup,
+		Help:      WriteupHelp,
+		Url:       "https://github.com/rerrorctf/ret/blob/main/commands/wizard.go",
+		Arguments: nil})
+}
+
+func WriteupHelp() {
 	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "writeup" + theme.ColorReset + "\n")
 	fmt.Printf("  📝 create a template for a task in a file called writeup.md with ret\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/writeup.go" + theme.ColorReset + "\n")
@@ -22,7 +32,7 @@ func Writeup(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			writeupHelp()
+			WriteupHelp()
 			return
 		}
 	}

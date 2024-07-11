@@ -17,6 +17,22 @@ import (
 	"ret/util"
 )
 
+func init() {
+	Commands = append(Commands, Command{
+		Name:  "add",
+		Emoji: "📥",
+		Func:  Add,
+		Help:  AddHelp,
+		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/add.go",
+		Arguments: []Argument{
+			{
+				Name:     "file",
+				Optional: false,
+				List:     true,
+			},
+		}})
+}
+
 func grep2Win(path string, flags string) {
 	stringsCmd := exec.Command("strings", flags, path)
 	var stringsOutput bytes.Buffer

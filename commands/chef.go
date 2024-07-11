@@ -16,7 +16,28 @@ const (
 	CHEF_URL = "https://gchq.github.io/CyberChef/#input="
 )
 
-func chefHelp() {
+func init() {
+	Commands = append(Commands, Command{
+		Name:  "chef",
+		Emoji: "🔪",
+		Func:  Chef,
+		Help:  ChefHelp,
+		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/chef.go",
+		Arguments: []Argument{
+			{
+				Name:     "-",
+				Optional: true,
+				List:     false,
+			},
+			{
+				Name:     "text",
+				Optional: true,
+				List:     true,
+			},
+		}})
+}
+
+func ChefHelp() {
 	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "chef" + theme.ColorGray + " [-] [text]" + theme.ColorReset + "\n")
 	fmt.Printf("  🔪 open cyberchef with ret\n")
 	fmt.Printf("     " + theme.ColorGray + "use file - to read from stdin" + theme.ColorReset + "\n")
@@ -27,11 +48,11 @@ func Chef(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			chefHelp()
+			ChefHelp()
 			return
 		}
 	} else {
-		chefHelp()
+		ChefHelp()
 		return
 	}
 

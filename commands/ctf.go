@@ -11,6 +11,22 @@ import (
 	"ret/util"
 )
 
+func init() {
+	Commands = append(Commands, Command{
+		Name:  "ctf",
+		Emoji: "🚩",
+		Func:  Ctf,
+		Help:  CtfHelp,
+		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/ctf.go",
+		Arguments: []Argument{
+			{
+				Name:     "flag",
+				Optional: true,
+				List:     false,
+			},
+		}})
+}
+
 func displayCurrentFlag() {
 	flag, err := util.GetCurrentFlag()
 	if err != nil {

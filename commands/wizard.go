@@ -11,6 +11,27 @@ import (
 	"strings"
 )
 
+func init() {
+	Commands = append(Commands, Command{
+		Name:  "wizard",
+		Emoji: "🧙",
+		Func:  Wizard,
+		Help:  WizardHelp,
+		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/wizard.go",
+		Arguments: []Argument{
+			{
+				Name:     "ip",
+				Optional: true,
+				List:     false,
+			},
+			{
+				Name:     "port",
+				Optional: true,
+				List:     false,
+			},
+		}})
+}
+
 func runWizardCommand(command string) {
 	if len(command) == 0 {
 		return
@@ -90,7 +111,7 @@ func findInterestingFiles() []string {
 	return interestingFiles
 }
 
-func wizardHelp() {
+func WizardHelp() {
 	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "wizard" + theme.ColorGray + " [ip] [port]" + theme.ColorReset + "\n")
 	fmt.Printf("  🧙 do " + theme.ColorPurple + "m" + theme.ColorBlue + "a" + theme.ColorGreen + "g" + theme.ColorYellow + "i" + theme.ColorRed + "c" + theme.ColorReset + " with ret\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/wizard.go" + theme.ColorReset + "\n")
@@ -100,7 +121,7 @@ func Wizard(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			wizardHelp()
+			WizardHelp()
 			return
 		}
 	}

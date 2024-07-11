@@ -11,6 +11,22 @@ import (
 	"time"
 )
 
+func init() {
+	Commands = append(Commands, Command{
+		Name:  "ghidra",
+		Emoji: "🦖",
+		Func:  Ghidra,
+		Help:  GhidraHelp,
+		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/ghidra.go",
+		Arguments: []Argument{
+			{
+				Name:     "file",
+				Optional: true,
+				List:     true,
+			},
+		}})
+}
+
 func ghidraSpinner() {
 	emojis := []string{
 		"🍎", "🥑", "🥓", "🥖", "🍌", "🥯", "🫐", "🍔", "🥦", "🥩",
@@ -27,7 +43,7 @@ func ghidraSpinner() {
 	}
 }
 
-func ghidraHelp() {
+func GhidraHelp() {
 	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "ghidra" + theme.ColorGray + " [file1 file2...]" + theme.ColorReset + "\n")
 	fmt.Printf("  🦖 ingests all added files then opens ghidra with ret\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/ghidra.go" + theme.ColorReset + "\n")
@@ -37,7 +53,7 @@ func Ghidra(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			ghidraHelp()
+			GhidraHelp()
 			return
 		}
 	}

@@ -8,7 +8,17 @@ import (
 	"ret/theme"
 )
 
-func angrHelp() {
+func init() {
+	Commands = append(Commands, Command{
+		Name:      "angr",
+		Emoji:     "😠",
+		Func:      Angr,
+		Help:      AngrHelp,
+		Url:       "https://github.com/rerrorctf/ret/blob/main/commands/angr.go",
+		Arguments: nil})
+}
+
+func AngrHelp() {
 	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "angr" + theme.ColorReset + "\n")
 	fmt.Printf("  😠 open angr with ret\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/angr.go" + theme.ColorReset + "\n")
@@ -18,7 +28,7 @@ func Angr(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			angrHelp()
+			AngrHelp()
 			return
 		}
 	}

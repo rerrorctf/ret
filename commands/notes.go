@@ -15,6 +15,27 @@ import (
 	"time"
 )
 
+func init() {
+	Commands = append(Commands, Command{
+		Name:  "notes",
+		Emoji: "✏️ ",
+		Func:  Notes,
+		Help:  NotesHelp,
+		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/notes.go",
+		Arguments: []Argument{
+			{
+				Name:     "-",
+				Optional: true,
+				List:     false,
+			},
+			{
+				Name:     "note",
+				Optional: true,
+				List:     true,
+			},
+		}})
+}
+
 func displayNotes() {
 	jsonData, err := os.ReadFile(config.NotesFileName)
 	if err != nil {
@@ -65,7 +86,7 @@ func addNote(note string) {
 	}
 }
 
-func notesHelp() {
+func NotesHelp() {
 	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "notes" + theme.ColorGray + " message" + theme.ColorReset + "\n")
 	fmt.Printf("  ✏️  take notes with ret\n")
 	fmt.Printf("     " + theme.ColorGray + "use - to read from stdin" + theme.ColorReset + "\n")
@@ -76,7 +97,7 @@ func Notes(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			notesHelp()
+			NotesHelp()
 			return
 		}
 	} else {

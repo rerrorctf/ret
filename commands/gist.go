@@ -13,7 +13,23 @@ import (
 	"strings"
 )
 
-func gistHelp() {
+func init() {
+	Commands = append(Commands, Command{
+		Name:  "gist",
+		Emoji: "🐙",
+		Func:  Gist,
+		Help:  GistHelp,
+		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/gist.go",
+		Arguments: []Argument{
+			{
+				Name:     "file",
+				Optional: false,
+				List:     true,
+			},
+		}})
+}
+
+func GistHelp() {
 	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "gist" + theme.ColorGray + " file1 [file2 file3...]" + theme.ColorReset + "\n")
 	fmt.Printf("  🐙 make private gists with ret\n")
 	fmt.Printf("     " + theme.ColorGray + "specify the path of one or more files to upload" + theme.ColorReset + "\n")
@@ -24,11 +40,11 @@ func Gist(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			gistHelp()
+			GistHelp()
 			return
 		}
 	} else {
-		gistHelp()
+		GistHelp()
 		return
 	}
 

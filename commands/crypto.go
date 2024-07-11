@@ -11,7 +11,23 @@ import (
 	"ret/util"
 )
 
-func cryptoHelp() {
+func init() {
+	Commands = append(Commands, Command{
+		Name:  "crypto",
+		Emoji: "🚀",
+		Func:  Crypto,
+		Help:  CryptoHelp,
+		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/crypto.go",
+		Arguments: []Argument{
+			{
+				Name:     "file",
+				Optional: true,
+				List:     true,
+			},
+		}})
+}
+
+func CryptoHelp() {
 	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "crypto " + theme.ColorGray + "[file1 file2 file3...]" + theme.ColorReset + "\n")
 	fmt.Printf("  🚀 search for crypto constants using yara rules with ret\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/crypto.go" + theme.ColorReset + "\n")
@@ -21,7 +37,7 @@ func Crypto(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			cryptoHelp()
+			CryptoHelp()
 			return
 		}
 	}

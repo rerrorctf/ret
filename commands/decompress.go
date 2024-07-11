@@ -6,7 +6,23 @@ import (
 	"ret/util"
 )
 
-func decompressHelp() {
+func init() {
+	Commands = append(Commands, Command{
+		Name:  "decompress",
+		Emoji: "🤏",
+		Func:  Decompress,
+		Help:  DecompressHelp,
+		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/decompress.go",
+		Arguments: []Argument{
+			{
+				Name:     "file",
+				Optional: false,
+				List:     true,
+			},
+		}})
+}
+
+func DecompressHelp() {
 	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "decompress" + theme.ColorGray + " file1 [file2 file3...]" + theme.ColorReset + "\n")
 	fmt.Printf("  🤏 decompress one or more files with ret\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/decompress.go" + theme.ColorReset + "\n")
@@ -16,7 +32,7 @@ func Decompress(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			decompressHelp()
+			DecompressHelp()
 			return
 		default:
 			for _, file := range args {
@@ -30,6 +46,6 @@ func Decompress(args []string) {
 			}
 		}
 	} else {
-		decompressHelp()
+		DecompressHelp()
 	}
 }

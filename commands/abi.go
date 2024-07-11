@@ -6,6 +6,28 @@ import (
 	"ret/theme"
 )
 
+func init() {
+	Commands = append(Commands, Command{
+		Name:  "abi",
+		Emoji: "🤝",
+		Func:  Abi,
+		Help:  AbiHelp,
+		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/abi.go",
+		Arguments: []Argument{
+			{
+				Name:     "architecture",
+				Optional: true,
+				List:     false,
+			},
+			{
+				Name:     "os",
+				Optional: true,
+				List:     false,
+			},
+		},
+	})
+}
+
 func showLinuxAbix86() {
 	fmt.Println(theme.ColorPurple + "linux 🐧 " + theme.ColorPurple + "x86" + theme.ColorReset)
 
@@ -94,7 +116,7 @@ func showWindowsAbix64() {
 	fmt.Println(theme.ColorGray + "  callers must reserve 32 bytes of storage space after the return address" + theme.ColorReset)
 }
 
-func abiHelp() {
+func AbiHelp() {
 	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "abi" + theme.ColorReset + " [architecture] [os]\n")
 	fmt.Printf("  🤝 view abi details with ret\n")
 	fmt.Printf("  architecture: " + theme.ColorYellow + "x86/32" + theme.ColorReset + " or " + theme.ColorYellow + "x64/64" + theme.ColorReset + "\n")
@@ -106,7 +128,7 @@ func Abi(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			abiHelp()
+			AbiHelp()
 			return
 		}
 	}

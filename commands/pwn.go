@@ -10,6 +10,27 @@ import (
 	"strings"
 )
 
+func init() {
+	Commands = append(Commands, Command{
+		Name:  "pwn",
+		Emoji: "🐚",
+		Func:  Pwn,
+		Help:  PwnHelp,
+		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/pwn.go",
+		Arguments: []Argument{
+			{
+				Name:     "ip",
+				Optional: true,
+				List:     false,
+			},
+			{
+				Name:     "port",
+				Optional: true,
+				List:     false,
+			},
+		}})
+}
+
 func makePwnScript(ip string, port int) {
 	binaries := util.GuessBinary()
 
@@ -68,7 +89,7 @@ func makePwnScript(ip string, port int) {
 	fmt.Printf("🐚 "+theme.ColorGray+"ready to pwn:"+theme.ColorReset+" $ ./%s\n", config.PwnScriptName)
 }
 
-func pwnHelp() {
+func PwnHelp() {
 	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "pwn" + theme.ColorGray + " [ip] [port]" + theme.ColorReset + "\n")
 	fmt.Printf("  🐚 create a pwntools script template with ret\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/pwn.go" + theme.ColorReset + "\n")
@@ -78,7 +99,7 @@ func Pwn(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			pwnHelp()
+			PwnHelp()
 			return
 		}
 	}

@@ -12,6 +12,22 @@ import (
 	"time"
 )
 
+func init() {
+	Commands = append(Commands, Command{
+		Name:  "ida",
+		Emoji: "💃",
+		Func:  Ida,
+		Help:  IdaHelp,
+		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/ida.go",
+		Arguments: []Argument{
+			{
+				Name:     "file",
+				Optional: false,
+				List:     true,
+			},
+		}})
+}
+
 func idaSpinner() {
 	emojis := []string{
 		"🍎", "🥑", "🥓", "🥖", "🍌", "🥯", "🫐", "🍔", "🥦", "🥩",
@@ -28,7 +44,7 @@ func idaSpinner() {
 	}
 }
 
-func idaHelp() {
+func IdaHelp() {
 	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "ida" + theme.ColorGray + " [file1 file2...]" + theme.ColorReset + "\n")
 	fmt.Printf("  💃 opens all added files then opens ida with ret\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/ida.go" + theme.ColorReset + "\n")
@@ -38,7 +54,7 @@ func Ida(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			idaHelp()
+			IdaHelp()
 			return
 		}
 	}

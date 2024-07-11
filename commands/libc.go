@@ -9,6 +9,22 @@ import (
 	"time"
 )
 
+func init() {
+	Commands = append(Commands, Command{
+		Name:  "libc",
+		Emoji: "🗽",
+		Func:  Libc,
+		Help:  LibcHelp,
+		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/libc.go",
+		Arguments: []Argument{
+			{
+				Name:     "tag",
+				Optional: true,
+				List:     false,
+			},
+		}})
+}
+
 func libcSpinner(stop chan bool) {
 	emojis := []string{
 		"🖱️", "⌨️", "🔧", "⚙️", "📂", "📁", "💾", "📟", "🛠️",
@@ -30,7 +46,7 @@ func libcSpinner(stop chan bool) {
 	}
 }
 
-func libcHelp() {
+func LibcHelp() {
 	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "libc" + theme.ColorGray + " [tag]" + theme.ColorReset + "\n")
 	fmt.Printf("  🗽 get a version of libc by copying it from a docker container with ret\n")
 	fmt.Printf("     " + theme.ColorGray + "specify an image tag like \"ubuntu:24.04\" to get a specific version" + theme.ColorReset + "\n")
@@ -43,7 +59,7 @@ func Libc(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			libcHelp()
+			LibcHelp()
 			return
 		}
 	}

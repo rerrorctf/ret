@@ -15,6 +15,27 @@ import (
 	"time"
 )
 
+func init() {
+	Commands = append(Commands, Command{
+		Name:  "chat",
+		Emoji: "📢",
+		Func:  Chat,
+		Help:  ChatHelp,
+		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/chat.go",
+		Arguments: []Argument{
+			{
+				Name:     "-",
+				Optional: true,
+				List:     false,
+			},
+			{
+				Name:     "message",
+				Optional: true,
+				List:     true,
+			},
+		}})
+}
+
 func removeColors(message string) string {
 	message = strings.ReplaceAll(message, theme.ColorReset, "")
 	message = strings.ReplaceAll(message, theme.ColorRed, "")
@@ -84,7 +105,7 @@ func sendEmbed(message string) {
 	sendMessage(body)
 }
 
-func chatHelp() {
+func ChatHelp() {
 	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "chat" + theme.ColorGray + " message" + theme.ColorReset + "\n")
 	fmt.Printf("  📢 chat with ret\n")
 	fmt.Printf("     " + theme.ColorGray + "use - to read from stdin" + theme.ColorReset + "\n")
@@ -95,11 +116,11 @@ func Chat(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			chatHelp()
+			ChatHelp()
 			return
 		}
 	} else {
-		chatHelp()
+		ChatHelp()
 		return
 	}
 

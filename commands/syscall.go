@@ -7,7 +7,28 @@ import (
 	"ret/util"
 )
 
-func syscallHelp() {
+func init() {
+	Commands = append(Commands, Command{
+		Name:  "syscall",
+		Emoji: "📞",
+		Func:  Syscall,
+		Help:  SyscallHelp,
+		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/status.go",
+		Arguments: []Argument{
+			{
+				Name:     "(x86/32)/(x64/64)",
+				Optional: true,
+				List:     false,
+			},
+			{
+				Name:     "regex",
+				Optional: true,
+				List:     false,
+			},
+		}})
+}
+
+func SyscallHelp() {
 	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "syscall" + theme.ColorReset + " [(x86/32)/(x64/64)]" + theme.ColorReset + " [regex-pattern]\n")
 	fmt.Printf("  📞 check syscalls by regex with ret\n")
 
@@ -28,7 +49,7 @@ func Syscall(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			syscallHelp()
+			SyscallHelp()
 			return
 		}
 	}
@@ -62,7 +83,7 @@ func Syscall(args []string) {
 		}
 	default:
 		{
-			syscallHelp()
+			SyscallHelp()
 			log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": invalid arch btw \"%v\"\n", args[0])
 		}
 	}

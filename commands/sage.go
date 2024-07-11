@@ -8,7 +8,17 @@ import (
 	"ret/theme"
 )
 
-func sageHelp() {
+func init() {
+	Commands = append(Commands, Command{
+		Name:      "sage",
+		Emoji:     "🌿",
+		Func:      Sage,
+		Help:      SageHelp,
+		Url:       "https://github.com/rerrorctf/ret/blob/main/commands/sage.go",
+		Arguments: nil})
+}
+
+func SageHelp() {
 	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "sage" + theme.ColorReset + "\n")
 	fmt.Printf("  🌿 open sage with ret\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/sage.go" + theme.ColorReset + "\n")
@@ -18,7 +28,7 @@ func Sage(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
 		case "help":
-			sageHelp()
+			SageHelp()
 			return
 		}
 	}

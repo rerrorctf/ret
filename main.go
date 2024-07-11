@@ -19,34 +19,10 @@ func main() {
 	flag.Usage = func() {
 		fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "command" + theme.ColorGray + " [arg1 arg2...]\n" + theme.ColorReset)
 
-		fmt.Printf(
-			theme.ColorBlue +
-				"🤝 " + theme.StartUnderline + "ab" + theme.StopUnderline + "i\n" +
-				"📥 " + theme.StartUnderline + "ad" + theme.StopUnderline + "d\n" +
-				"😠 " + theme.StartUnderline + "an" + theme.StopUnderline + "gr\n" +
-				"📢 " + theme.StartUnderline + "cha" + theme.StopUnderline + "t\n" +
-				"🔪 " + theme.StartUnderline + "che" + theme.StopUnderline + "f\n" +
-				"🚀 " + theme.StartUnderline + "cr" + theme.StopUnderline + "ypto\n" +
-				"🚩 " + theme.StartUnderline + "ct" + theme.StopUnderline + "f\n" +
-				"🤏 " + theme.StartUnderline + "de" + theme.StopUnderline + "compress\n" +
-				"🐋 " + theme.StartUnderline + "do" + theme.StopUnderline + "cker\n" +
-				"🔍 " + theme.StartUnderline + "f" + theme.StopUnderline + "ormat\n" +
-				"🦖 " + theme.StartUnderline + "gh" + theme.StopUnderline + "idra\n" +
-				"🐙 " + theme.StartUnderline + "gi" + theme.StopUnderline + "st\n" +
-				"🧠 " + theme.StartUnderline + "gp" + theme.StopUnderline + "t\n" +
-				"💃 " + theme.StartUnderline + "id" + theme.StopUnderline + "a\n" +
-				"🔬 " + theme.StartUnderline + "in" + theme.StopUnderline + "scount\n" +
-				"🗽 " + theme.StartUnderline + "l" + theme.StopUnderline + "ibc\n" +
-				"✏️  " + theme.StartUnderline + "n" + theme.StopUnderline + "otes\n" +
-				"📡 " + theme.StartUnderline + "pr" + theme.StopUnderline + "oxy\n" +
-				"🐚 " + theme.StartUnderline + "pw" + theme.StopUnderline + "n\n" +
-				"🌿 " + theme.StartUnderline + "sa" + theme.StopUnderline + "ge\n" +
-				"👀 " + theme.StartUnderline + "st" + theme.StopUnderline + "atus\n" +
-				"📞 " + theme.StartUnderline + "sy" + theme.StopUnderline + "scall\n" +
-				"☁️  " + theme.StartUnderline + "v" + theme.StopUnderline + "ps\n" +
-				"🧙 " + theme.StartUnderline + "wi" + theme.StopUnderline + "zard\n" +
-				"📝 " + theme.StartUnderline + "wr" + theme.StopUnderline + "iteup\n" +
-				theme.StopUnderline + theme.ColorReset)
+		for _, cmd := range commands.Commands {
+			fmt.Printf("%s ", cmd.Emoji)
+			fmt.Printf(theme.ColorBlue+"%s\n"+theme.ColorReset, cmd.Name)
+		}
 
 		fmt.Printf(theme.ColorGray+"https://github.com/rerrorctf/ret ~ %s\n"+theme.ColorReset, COMMIT)
 	}
