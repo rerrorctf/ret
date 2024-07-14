@@ -32,8 +32,8 @@ func init() {
 		}})
 }
 
-func WizardHelp() {
-	fmt.Printf("  🧙 do " + theme.ColorPurple + "m" + theme.ColorBlue + "a" + theme.ColorGreen + "g" + theme.ColorYellow + "i" + theme.ColorRed + "c" + theme.ColorReset + " with ret\n")
+func WizardHelp() string {
+	return fmt.Sprintf("do " + theme.ColorPurple + "m" + theme.ColorBlue + "a" + theme.ColorGreen + "g" + theme.ColorYellow + "i" + theme.ColorRed + "c" + theme.ColorReset + " with ret\n")
 }
 
 func runWizardCommand(command string) {

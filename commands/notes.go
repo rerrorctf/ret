@@ -36,9 +36,9 @@ func init() {
 		}})
 }
 
-func NotesHelp() {
-	fmt.Printf("  ✏️  take notes with ret\n")
-	fmt.Printf("     " + theme.ColorGray + "use - to read from stdin" + theme.ColorReset + "\n")
+func NotesHelp() string {
+	return fmt.Sprintf("take notes with ret\n") +
+		fmt.Sprintf(theme.ColorGray+"use - to read from stdin"+theme.ColorReset+"\n")
 }
 
 func displayNotes() {

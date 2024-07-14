@@ -21,8 +21,8 @@ func init() {
 		Arguments: nil})
 }
 
-func StatusHelp() {
-	fmt.Printf("  👀 displays the status for the current task with ret\n")
+func StatusHelp() string {
+	return fmt.Sprintf("displays the status for the current task with ret\n")
 }
 
 func Status(args []string) {

@@ -28,10 +28,10 @@ func init() {
 	})
 }
 
-func AbiHelp() {
-	fmt.Printf("  🤝 view abi details with ret\n")
-	fmt.Printf("  architecture: " + theme.ColorYellow + "x86/32" + theme.ColorReset + " or " + theme.ColorYellow + "x64/64" + theme.ColorReset + "\n")
-	fmt.Printf("  os: " + theme.ColorYellow + "linux" + theme.ColorReset + " or " + theme.ColorYellow + "windows" + theme.ColorReset + "\n")
+func AbiHelp() string {
+	return fmt.Sprintf("view abi details with ret\n") +
+		fmt.Sprintf("architecture: "+theme.ColorYellow+"x86/32"+theme.ColorReset+" or "+theme.ColorYellow+"x64/64"+theme.ColorReset+"\n") +
+		fmt.Sprintf("os: "+theme.ColorYellow+"linux"+theme.ColorReset+" or "+theme.ColorYellow+"windows"+theme.ColorReset+"\n")
 }
 
 func showLinuxAbix86() {

@@ -1,7 +1,7 @@
 package commands
 
 type CommandFunc func([]string)
-type CommandHelpFunc func()
+type CommandHelpFunc func() string
 
 type Argument struct {
 	Name     string

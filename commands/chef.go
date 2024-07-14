@@ -37,14 +37,14 @@ func init() {
 		}})
 }
 
-func ChefHelp() {
-	fmt.Printf("  🔪 open cyberchef with ret\n")
-	fmt.Printf("     " + theme.ColorGray + "use file - to read from stdin" + theme.ColorReset + "\n")
+func ChefHelp() string {
+	return fmt.Sprintf("open cyberchef with ret\n") +
+		fmt.Sprintf(theme.ColorGray+"use file - to read from stdin"+theme.ColorReset+"\n")
 }
 
 func Chef(args []string) {
 	if len(args) == 0 {
-		ChefHelp()
+		log.Fatalf("💥 " + theme.ColorRed + "error" + theme.ColorReset + ": expected 1 or more arguments\n")
 		return
 	}
 

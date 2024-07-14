@@ -28,8 +28,8 @@ func init() {
 		}})
 }
 
-func ProxyHelp() {
-	fmt.Printf("  📡 manage proxies with ret\n")
+func ProxyHelp() string {
+	return fmt.Sprintf("manage proxies with ret\n")
 }
 
 func proxyList() {
@@ -119,16 +119,16 @@ func ProxyCreate(args []string) {
 }
 
 func Proxy(args []string) {
-	if len(args) > 0 {
-		switch args[0] {
-		case "list":
-			proxyList()
-			return
-		case "create":
-			ProxyCreate(args[1:])
-			return
-		}
+	if len(args) == 0 {
+		log.Fatalf("💥 " + theme.ColorRed + "error" + theme.ColorReset + ": expected 1 or more arguments\n")
 	}
 
-	ProxyHelp()
+	switch args[0] {
+	case "list":
+		proxyList()
+		break
+	case "create":
+		ProxyCreate(args[1:])
+		break
+	}
 }

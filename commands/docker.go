@@ -29,8 +29,8 @@ func init() {
 		}})
 }
 
-func DockerHelp() {
-	fmt.Printf("  🐋 create a dockerfile from a template with ret\n")
+func DockerHelp() string {
+	return fmt.Sprintf("create a dockerfile from a template with ret\n")
 }
 
 func makeDockerFile(port int) {

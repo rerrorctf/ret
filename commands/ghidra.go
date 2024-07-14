@@ -27,8 +27,8 @@ func init() {
 		}})
 }
 
-func GhidraHelp() {
-	fmt.Printf("  🦖 ingests all added files then opens ghidra with ret\n")
+func GhidraHelp() string {
+	return fmt.Sprintf("ingests all added files then opens ghidra with ret\n")
 }
 
 func ghidraSpinner() {

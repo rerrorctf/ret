@@ -2,6 +2,7 @@ package commands
 
 import (
 	"fmt"
+	"log"
 	"ret/theme"
 	"ret/util"
 )
@@ -22,14 +23,13 @@ func init() {
 		}})
 }
 
-func DecompressHelp() {
-	fmt.Printf("  🤏 decompress one or more files with ret\n")
+func DecompressHelp() string {
+	return fmt.Sprintf("decompress one or more files with ret\n")
 }
 
 func Decompress(args []string) {
 	if len(args) == 0 {
-		DecompressHelp()
-		return
+		log.Fatalf("💥 " + theme.ColorRed + "error" + theme.ColorReset + ": expected 1 or more arguments\n")
 	}
 
 	for _, file := range args {

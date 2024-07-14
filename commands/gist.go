@@ -29,19 +29,18 @@ func init() {
 		}})
 }
 
-func GistHelp() {
-	fmt.Printf("  🐙 make private gists with ret\n")
-	fmt.Printf("     " + theme.ColorGray + "specify the path of one or more files to upload" + theme.ColorReset + "\n")
+func GistHelp() string {
+	return fmt.Sprintf("make private gists with ret\n") +
+		fmt.Sprintf(theme.ColorGray+"specify the path of one or more files to upload"+theme.ColorReset+"\n")
 }
 
 func Gist(args []string) {
 	if len(args) == 0 {
-		GistHelp()
-		return
+		log.Fatalf("💥 " + theme.ColorRed + "error" + theme.ColorReset + ": exepcted 1 or more arguments\n")
 	}
 
 	if len(config.GistToken) == 0 {
-		log.Fatalf("💥 " + theme.ColorRed + "error" + theme.ColorReset + ":  no gist token in ~/.config/ret\n")
+		log.Fatalf("💥 " + theme.ColorRed + "error" + theme.ColorReset + ": no gist token in ~/.config/ret\n")
 	}
 
 	files := map[string]interface{}{}

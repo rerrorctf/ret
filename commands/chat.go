@@ -36,9 +36,9 @@ func init() {
 		}})
 }
 
-func ChatHelp() {
-	fmt.Printf("  📢 chat with ret\n")
-	fmt.Printf("     " + theme.ColorGray + "use - to read from stdin" + theme.ColorReset + "\n")
+func ChatHelp() string {
+	return fmt.Sprintf("chat with ret\n") +
+		fmt.Sprintf(theme.ColorGray+"use - to read from stdin"+theme.ColorReset+"\n")
 }
 
 func removeColors(message string) string {
@@ -112,8 +112,7 @@ func sendEmbed(message string) {
 
 func Chat(args []string) {
 	if len(args) == 0 {
-		ChatHelp()
-		return
+		log.Fatalf("💥 " + theme.ColorRed + " error" + theme.ColorReset + ": expected 1 or more arguments\n")
 	}
 
 	if config.ChatWebhookUrl == "" {

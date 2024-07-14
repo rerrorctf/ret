@@ -33,8 +33,8 @@ func init() {
 		}})
 }
 
-func AddHelp() {
-	fmt.Printf("  📥 add one or more files to the current task with ret\n")
+func AddHelp() string {
+	return fmt.Sprintf("add one or more files to the current task with ret\n")
 }
 
 func grep2Win(path string, flags string) {
@@ -177,7 +177,7 @@ func addFile(srcPath string) {
 
 func Add(args []string) {
 	if len(args) == 0 {
-		AddHelp()
+		fmt.Println("💥 " + theme.ColorRed + "error" + theme.ColorReset + ": excepted 1 or more arguments")
 		return
 	}
 

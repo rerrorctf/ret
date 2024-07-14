@@ -22,8 +22,8 @@ func init() {
 		Arguments: nil})
 }
 
-func WriteupHelp() {
-	fmt.Printf("  📝 create a template for a task in a file called writeup.md with ret\n")
+func WriteupHelp() string {
+	return fmt.Sprintf("create a template for a task in a file called writeup.md with ret\n")
 }
 
 func Writeup(args []string) {

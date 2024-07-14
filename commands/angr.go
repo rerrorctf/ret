@@ -18,8 +18,8 @@ func init() {
 		Arguments: nil})
 }
 
-func AngrHelp() {
-	fmt.Printf("  😠 open angr with ret\n")
+func AngrHelp() string {
+	return fmt.Sprintf("open angr with ret\n")
 }
 
 func Angr(args []string) {

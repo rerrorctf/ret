@@ -14,8 +14,8 @@ func init() {
 	})
 }
 
-func ReadmeHelp() {
-	fmt.Printf("  🖨️  make the readme with ret\n")
+func ReadmeHelp() string {
+	return fmt.Sprintf("make the readme with ret\n")
 }
 
 func Readme(args []string) {

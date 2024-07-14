@@ -27,8 +27,8 @@ func init() {
 		}})
 }
 
-func CtfHelp() {
-	fmt.Printf("  🚩 capture the flag with ret\n")
+func CtfHelp() string {
+	return fmt.Sprintf("capture the flag with ret\n")
 }
 
 func displayCurrentFlag() {

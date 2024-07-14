@@ -18,8 +18,8 @@ func init() {
 		Arguments: nil})
 }
 
-func SageHelp() {
-	fmt.Printf("  🌿 open sage with ret\n")
+func SageHelp() string {
+	return fmt.Sprintf("open sage with ret\n")
 }
 
 func Sage(args []string) {

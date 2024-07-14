@@ -22,8 +22,8 @@ func init() {
 		}})
 }
 
-func FormatHelp() {
-	fmt.Printf("  🔍 set the current flag format regex with ret\n")
+func FormatHelp() string {
+	return fmt.Sprintf("set the current flag format regex with ret\n")
 }
 
 func Format(args []string) {

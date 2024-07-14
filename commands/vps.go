@@ -26,8 +26,8 @@ func init() {
 		}})
 }
 
-func VpsHelp() {
-	fmt.Printf("  ☁️  create and manage google cloud compute instances with ret\n")
+func VpsHelp() string {
+	return fmt.Sprintf("create and manage google cloud compute instances with ret\n")
 }
 
 func createVps() string {
@@ -140,26 +140,26 @@ func validateConfig() {
 }
 
 func Vps(args []string) {
-	if len(args) > 0 {
-		switch args[0] {
-		case "create", "list", "destroy":
-			validateConfig()
-			switch args[0] {
-			case "create":
-				createVps()
-			case "list":
-				listVps()
-			case "destroy":
-				if len(args) < 2 {
-					fmt.Printf("💥 " + theme.ColorRed + " error" + theme.ColorReset + ": missing instance name for destroy\n")
-					listVps()
-					return
-				}
-				destroyVps(args[1])
-			}
-			return
-		}
+	if len(args) == 0 {
+		log.Fatalf("💥 " + theme.ColorRed + " error" + theme.ColorReset + ": expected 1 or more arguments\n")
 	}
 
-	VpsHelp()
+	switch args[0] {
+	case "create", "list", "destroy":
+		validateConfig()
+		switch args[0] {
+		case "create":
+			createVps()
+		case "list":
+			listVps()
+		case "destroy":
+			if len(args) < 2 {
+				fmt.Printf("💥 " + theme.ColorRed + " error" + theme.ColorReset + ": missing instance name for destroy\n")
+				listVps()
+				return
+			}
+			destroyVps(args[1])
+		}
+		return
+	}
 }

@@ -35,9 +35,9 @@ func init() {
 		}})
 }
 
-func GptHelp() {
-	fmt.Printf("  🧠 ask ChatGPT with ret\n")
-	fmt.Printf("     " + theme.ColorGray + "use - to read from stdin" + theme.ColorReset + "\n")
+func GptHelp() string {
+	return fmt.Sprintf("ask ChatGPT with ret\n") +
+		fmt.Sprintf(theme.ColorGray+"use - to read from stdin"+theme.ColorReset+"\n")
 }
 
 const (
@@ -141,7 +141,7 @@ func readInput(args []string) string {
 
 func Gpt(args []string) {
 	if len(args) == 0 {
-		GptHelp()
+		log.Fatalf("💥 " + theme.ColorRed + " error" + theme.ColorReset + ": expected 1 or more arguments\n")
 		return
 	}
 

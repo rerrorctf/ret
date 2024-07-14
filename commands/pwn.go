@@ -31,8 +31,8 @@ func init() {
 		}})
 }
 
-func PwnHelp() {
-	fmt.Printf("  🐚 create a pwntools script template with ret\n")
+func PwnHelp() string {
+	return fmt.Sprintf("create a pwntools script template with ret\n")
 }
 
 func makePwnScript(ip string, port int) {

@@ -20,8 +20,8 @@ func init() {
 		Arguments: nil})
 }
 
-func InscountHelp() {
-	fmt.Printf("  🔬 create a pin script to count instructions from a template with ret\n")
+func InscountHelp() string {
+	return fmt.Sprintf("create a pin script to count instructions from a template with ret\n")
 }
 
 func makeInscountGoScript(binary string) {
