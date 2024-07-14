@@ -16,12 +16,15 @@ var (
 )
 
 func main() {
+	commands.PrepareCommands()
+
 	flag.Usage = func() {
 		fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "command" + theme.ColorGray + " [arg1 arg2...]\n" + theme.ColorReset)
 
 		for _, cmd := range commands.Commands {
 			fmt.Printf("%s ", cmd.Emoji)
-			fmt.Printf(theme.ColorBlue+"%s\n"+theme.ColorReset, cmd.Name)
+			shortestValidPrefix, restOfCommand := commands.CommandsTrie.ShortestPrefix(cmd.Name)
+			fmt.Printf(theme.ColorBlue+theme.StartUnderline+"%s"+theme.StopUnderline+"%s\n"+theme.ColorReset, shortestValidPrefix, restOfCommand)
 		}
 
 		fmt.Printf(theme.ColorGray+"https://github.com/rerrorctf/ret ~ %s\n"+theme.ColorReset, COMMIT)
