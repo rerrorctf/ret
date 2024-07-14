@@ -1,5 +1,9 @@
 package commands
 
+import (
+	"ret/util"
+)
+
 type CommandFunc func([]string)
 type CommandHelpFunc func()
 
@@ -19,5 +23,14 @@ type Command struct {
 }
 
 var (
-	Commands []Command
+	Commands     []Command
+	CommandsTrie *util.Trie
 )
+
+func PrepareCommands() {
+	CommandsTrie = util.NewTrie()
+
+	for _, command := range Commands {
+		CommandsTrie.Insert(command.Name)
+	}
+}
