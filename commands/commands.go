@@ -81,4 +81,14 @@ func PrepareCommands() {
 	for _, command := range Commands {
 		CommandsTrie.Insert(command.Name, &command)
 	}
+
+	for _, command := range Commands {
+		prefix, rest := CommandsTrie.ShortestPrefix(command.Name)
+		CommandsTrie.Insert(prefix, &command)
+		prefixWithRest := prefix
+		for _, c := range rest {
+			prefixWithRest += string(c)
+			CommandsTrie.Insert(prefixWithRest, &command)
+		}
+	}
 }
