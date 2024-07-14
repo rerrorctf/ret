@@ -41,20 +41,6 @@ func ChatHelp() string {
 		fmt.Sprintf(theme.ColorGray+"use - to read from stdin"+theme.ColorReset+"\n")
 }
 
-func removeColors(message string) string {
-	message = strings.ReplaceAll(message, theme.ColorReset, "")
-	message = strings.ReplaceAll(message, theme.ColorRed, "")
-	message = strings.ReplaceAll(message, theme.ColorGreen, "")
-	message = strings.ReplaceAll(message, theme.ColorYellow, "")
-	message = strings.ReplaceAll(message, theme.ColorBlue, "")
-	message = strings.ReplaceAll(message, theme.ColorPurple, "")
-	message = strings.ReplaceAll(message, theme.ColorCyan, "")
-	message = strings.ReplaceAll(message, theme.ColorGray, "")
-	message = strings.ReplaceAll(message, theme.StartUnderline, "")
-	message = strings.ReplaceAll(message, theme.StopUnderline, "")
-	return message
-}
-
 func sendMessage(message map[string]interface{}) {
 	body, err := json.Marshal(message)
 	if err != nil {
@@ -77,7 +63,7 @@ func sendMessage(message map[string]interface{}) {
 }
 
 func sendChat(message string) {
-	message = removeColors(message)
+	message = theme.RemoveColors(message)
 
 	body := map[string]interface{}{
 		"username": config.Username,
@@ -88,7 +74,7 @@ func sendChat(message string) {
 }
 
 func sendEmbed(message string) {
-	message = removeColors(message)
+	message = theme.RemoveColors(message)
 
 	embed := map[string]interface{}{
 		"color":     rand.Intn(0xFFFFFF),
