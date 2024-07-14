@@ -18,20 +18,25 @@ func init() {
 				Name:     "architecture",
 				Optional: true,
 				List:     false,
+				Default:  "x64",
 			},
 			{
 				Name:     "os",
 				Optional: true,
 				List:     false,
+				Default:  "linux",
 			},
 		},
 	})
 }
 
 func AbiHelp() string {
-	return fmt.Sprintf("view abi details with ret\n") +
-		fmt.Sprintf("architecture: "+theme.ColorYellow+"x86/32"+theme.ColorReset+" or "+theme.ColorYellow+"x64/64"+theme.ColorReset+"\n") +
-		fmt.Sprintf("os: "+theme.ColorYellow+"linux"+theme.ColorReset+" or "+theme.ColorYellow+"windows"+theme.ColorReset+"\n")
+	return "view abi details with ret\n\n" +
+		"output includes calling conventions and register volatility\n\n" +
+		"architecture: specify one of x86/32 or x64/64 ~ the default is x64\n" +
+		"os: specify one of linux or windows ~ the default is linux\n\n" +
+		"for example: $ ret abi x64 linux\n\n" +
+		"for more detailed information on calling conventions refer to https://www.agner.org/optimize/calling_conventions.pdf\n"
 }
 
 func showLinuxAbix86() {
