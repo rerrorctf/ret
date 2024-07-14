@@ -17,7 +17,7 @@ func main() {
 	commands.PrepareCommands()
 
 	flag.Usage = func() {
-		fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "command" + theme.ColorGray + " [arg1 arg2...]\n" + theme.ColorReset)
+		fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorPurple + "[help] " + theme.ColorBlue + "command" + theme.ColorGray + " [arg1 arg2...]\n" + theme.ColorReset)
 
 		for _, cmd := range commands.Commands {
 			fmt.Printf("%s ", cmd.Emoji)

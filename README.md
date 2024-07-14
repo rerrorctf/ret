@@ -44,10 +44,10 @@ You can list all the commands by using `-h`, `--help`, `help` or simply providin
 $ ret help
 ```
 
-You can get help for a command by giving `help` as an argument to the command:
+You can get help for a command by prefixing `help` to the command:
 
 ```
-$ ret command help
+$ ret help command
 ```
 
 ### abi 🤝
