@@ -55,25 +55,30 @@ func main() {
 		fmt.Printf(theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"%s "+theme.ColorReset, cmd.Name)
 
 		for _, arg := range cmd.Arguments {
+			name := arg.Name
+			if arg.Default != "" {
+				name = fmt.Sprintf("%s=%s", name, arg.Default)
+			}
 
 			if arg.List {
+
 				if arg.Optional {
-					fmt.Printf(theme.ColorGray+"[%s1 %s2 %s3...] ", arg.Name, arg.Name, arg.Name)
+					fmt.Printf(theme.ColorGray+"[%s1 %s2 %s3...] ", name, name, name)
 				} else {
-					fmt.Printf(theme.ColorReset+"%s1 "+theme.ColorGray+"[%s2 %s3...] ", arg.Name, arg.Name, arg.Name)
+					fmt.Printf(theme.ColorReset+"%s1 "+theme.ColorGray+"[%s2 %s3...] ", name, name, name)
 				}
 			} else {
 				if arg.Optional {
-					fmt.Printf(theme.ColorGray+"[%s] ", arg.Name)
+					fmt.Printf(theme.ColorGray+"[%s] ", name)
 				} else {
-					fmt.Printf(theme.ColorReset+"%s ", arg.Name)
+					fmt.Printf(theme.ColorReset+"%s ", name)
 				}
 			}
 		}
 
 		fmt.Printf("\n" + theme.ColorReset)
 
-		fmt.Printf("%s %s", cmd.Emoji, cmd.Help())
+		fmt.Printf("%s %s\n", cmd.Emoji, cmd.Help())
 
 		fmt.Printf("🔗 "+theme.ColorGray+"%s"+theme.ColorReset+"\n", cmd.Url)
 		return
