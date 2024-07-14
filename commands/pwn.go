@@ -22,11 +22,13 @@ func init() {
 				Name:     "ip",
 				Optional: true,
 				List:     false,
+				Default:  "127.0.0.1",
 			},
 			{
 				Name:     "port",
 				Optional: true,
 				List:     false,
+				Default:  "9001",
 			},
 		}})
 }
