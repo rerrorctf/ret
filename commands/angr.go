@@ -25,14 +25,6 @@ func AngrHelp() {
 }
 
 func Angr(args []string) {
-	if len(args) > 0 {
-		switch args[0] {
-		case "help":
-			AngrHelp()
-			return
-		}
-	}
-
 	pull := exec.Command("sudo", "docker", "pull", "angr/angr")
 
 	pull.Stdin = os.Stdin

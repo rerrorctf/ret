@@ -28,9 +28,9 @@ func init() {
 		}})
 }
 
-func proxyListHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "proxy" + theme.ColorGray + " list" + theme.ColorReset + "\n")
-	fmt.Printf("  📡 list the current proxies with ret\n")
+func ProxyHelp() {
+	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "proxy" + theme.ColorGray + " [list/create]" + theme.ColorReset + "\n")
+	fmt.Printf("  📡 manage proxies with ret\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/proxy.go" + theme.ColorReset + "\n")
 }
 
@@ -78,24 +78,6 @@ func proxyList() {
 	}
 }
 
-func ProxyList(args []string) {
-	if len(args) > 0 {
-		switch args[0] {
-		case "help":
-			proxyListHelp()
-			return
-		}
-	}
-
-	proxyList()
-}
-
-func proxyCreateHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "proxy" + theme.ColorGray + " create local-port remote-ip remote-port [ssh-ip]" + theme.ColorReset + "\n")
-	fmt.Printf("  📡 create a new proxy with ret\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/proxy.go" + theme.ColorReset + "\n")
-}
-
 func proxyCreate(localPort int, remoteIp string, remotePort int, proxyIp string) {
 	currentUser, err := user.Current()
 	if err != nil {
@@ -115,16 +97,8 @@ func proxyCreate(localPort int, remoteIp string, remotePort int, proxyIp string)
 }
 
 func ProxyCreate(args []string) {
-	if len(args) > 0 {
-		switch args[0] {
-		case "help":
-			proxyCreateHelp()
-			return
-		}
-	}
-
 	if len(args) < 4 {
-		proxyCreateHelp()
+		log.Fatalf("💥 " + theme.ColorRed + "error" + theme.ColorReset + ": expected local-port remote-ip remote-port proxy-ip\n")
 		return
 	}
 
@@ -146,20 +120,11 @@ func ProxyCreate(args []string) {
 	proxyCreate(localPort, remoteIp, remotePort, proxyIp)
 }
 
-func ProxyHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "proxy" + theme.ColorGray + " [list/create]" + theme.ColorReset + "\n")
-	fmt.Printf("  📡 manage proxies with ret\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/proxy.go" + theme.ColorReset + "\n")
-}
-
 func Proxy(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
-		case "help":
-			ProxyHelp()
-			return
 		case "list":
-			ProxyList(args[1:])
+			proxyList()
 			return
 		case "create":
 			ProxyCreate(args[1:])

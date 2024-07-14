@@ -35,6 +35,13 @@ func init() {
 		}})
 }
 
+func GptHelp() {
+	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "gpt" + theme.ColorGray + " question" + theme.ColorReset + "\n")
+	fmt.Printf("  🧠 ask ChatGPT with ret\n")
+	fmt.Printf("     " + theme.ColorGray + "use - to read from stdin" + theme.ColorReset + "\n")
+	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/gpt.go" + theme.ColorReset + "\n")
+}
+
 const (
 	GPT_PROMPT string = `You are a CTF assistant specializing in various categories:
 
@@ -134,21 +141,8 @@ func readInput(args []string) string {
 	return content
 }
 
-func GptHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "gpt" + theme.ColorGray + " question" + theme.ColorReset + "\n")
-	fmt.Printf("  🧠 ask ChatGPT with ret\n")
-	fmt.Printf("     " + theme.ColorGray + "use - to read from stdin" + theme.ColorReset + "\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/gpt.go" + theme.ColorReset + "\n")
-}
-
 func Gpt(args []string) {
-	if len(args) > 0 {
-		switch args[0] {
-		case "help":
-			GptHelp()
-			return
-		}
-	} else {
+	if len(args) == 0 {
 		GptHelp()
 		return
 	}

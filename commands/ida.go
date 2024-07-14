@@ -28,6 +28,12 @@ func init() {
 		}})
 }
 
+func IdaHelp() {
+	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "ida" + theme.ColorGray + " [file1 file2...]" + theme.ColorReset + "\n")
+	fmt.Printf("  💃 opens all added files then opens ida with ret\n")
+	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/ida.go" + theme.ColorReset + "\n")
+}
+
 func idaSpinner() {
 	emojis := []string{
 		"🍎", "🥑", "🥓", "🥖", "🍌", "🥯", "🫐", "🍔", "🥦", "🥩",
@@ -44,21 +50,7 @@ func idaSpinner() {
 	}
 }
 
-func IdaHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "ida" + theme.ColorGray + " [file1 file2...]" + theme.ColorReset + "\n")
-	fmt.Printf("  💃 opens all added files then opens ida with ret\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/ida.go" + theme.ColorReset + "\n")
-}
-
 func Ida(args []string) {
-	if len(args) > 0 {
-		switch args[0] {
-		case "help":
-			IdaHelp()
-			return
-		}
-	}
-
 	if len(args) > 0 {
 		Add(args)
 	}

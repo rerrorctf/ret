@@ -29,23 +29,18 @@ func DecompressHelp() {
 }
 
 func Decompress(args []string) {
-	if len(args) > 0 {
-		switch args[0] {
-		case "help":
-			DecompressHelp()
-			return
-		default:
-			for _, file := range args {
-				decompressed := util.DecompressFile(file)
-
-				if decompressed {
-					fmt.Printf("🤏 "+theme.ColorGreen+"decompressed"+theme.ColorReset+":\"%s\"\n", file)
-				} else {
-					fmt.Printf("⚠️ "+theme.ColorYellow+"unable to decompress"+theme.ColorReset+":\"%s\"\n", file)
-				}
-			}
-		}
-	} else {
+	if len(args) == 0 {
 		DecompressHelp()
+		return
+	}
+
+	for _, file := range args {
+		decompressed := util.DecompressFile(file)
+
+		if decompressed {
+			fmt.Printf("🤏 "+theme.ColorGreen+"decompressed"+theme.ColorReset+":\"%s\"\n", file)
+		} else {
+			fmt.Printf("⚠️  "+theme.ColorYellow+"unable to decompress"+theme.ColorReset+":\"%s\"\n", file)
+		}
 	}
 }

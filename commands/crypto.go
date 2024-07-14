@@ -34,14 +34,6 @@ func CryptoHelp() {
 }
 
 func Crypto(args []string) {
-	if len(args) > 0 {
-		switch args[0] {
-		case "help":
-			CryptoHelp()
-			return
-		}
-	}
-
 	jsonData, err := os.ReadFile(config.RetFilesNames)
 	if err == nil {
 		var files data.Files

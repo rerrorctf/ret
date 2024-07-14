@@ -36,6 +36,13 @@ func init() {
 		}})
 }
 
+func NotesHelp() {
+	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "notes" + theme.ColorGray + " message" + theme.ColorReset + "\n")
+	fmt.Printf("  ✏️  take notes with ret\n")
+	fmt.Printf("     " + theme.ColorGray + "use - to read from stdin" + theme.ColorReset + "\n")
+	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/notes.go" + theme.ColorReset + "\n")
+}
+
 func displayNotes() {
 	jsonData, err := os.ReadFile(config.NotesFileName)
 	if err != nil {
@@ -86,21 +93,8 @@ func addNote(note string) {
 	}
 }
 
-func NotesHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "notes" + theme.ColorGray + " message" + theme.ColorReset + "\n")
-	fmt.Printf("  ✏️  take notes with ret\n")
-	fmt.Printf("     " + theme.ColorGray + "use - to read from stdin" + theme.ColorReset + "\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/notes.go" + theme.ColorReset + "\n")
-}
-
 func Notes(args []string) {
-	if len(args) > 0 {
-		switch args[0] {
-		case "help":
-			NotesHelp()
-			return
-		}
-	} else {
+	if len(args) == 0 {
 		displayNotes()
 		return
 	}

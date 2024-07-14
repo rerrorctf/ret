@@ -144,9 +144,6 @@ func validateConfig() {
 func Vps(args []string) {
 	if len(args) > 0 {
 		switch args[0] {
-		case "help":
-			VpsHelp()
-			return
 		case "create", "list", "destroy":
 			validateConfig()
 			switch args[0] {

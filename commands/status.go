@@ -28,14 +28,6 @@ func StatusHelp() {
 }
 
 func Status(args []string) {
-	if len(args) > 0 {
-		switch args[0] {
-		case "help":
-			StatusHelp()
-			return
-		}
-	}
-
 	jsonData, err := os.ReadFile(config.RetFilesNames)
 	if err == nil {
 		var files data.Files

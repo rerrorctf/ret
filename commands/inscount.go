@@ -20,6 +20,12 @@ func init() {
 		Arguments: nil})
 }
 
+func InscountHelp() {
+	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "inscount" + theme.ColorReset + "\n")
+	fmt.Printf("  🔬 create a pin script to count instructions from a template with ret\n")
+	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/inscount.go" + theme.ColorReset + "\n")
+}
+
 func makeInscountGoScript(binary string) {
 	script := fmt.Sprintf(
 		`package main
@@ -172,21 +178,7 @@ while True:
 	fmt.Printf("🔬 "+theme.ColorGray+"ready to count instructions with python:"+theme.ColorReset+" $ ./%s\n", config.InscountPythonScriptName)
 }
 
-func InscountHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "inscount" + theme.ColorReset + "\n")
-	fmt.Printf("  🔬 create a pin script to count instructions from a template with ret\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/inscount.go" + theme.ColorReset + "\n")
-}
-
 func Inscount(args []string) {
-	if len(args) > 0 {
-		switch args[0] {
-		case "help":
-			InscountHelp()
-			return
-		}
-	}
-
 	binaries := util.GuessBinary()
 
 	if len(binaries) > 1 {

@@ -45,13 +45,7 @@ func ChefHelp() {
 }
 
 func Chef(args []string) {
-	if len(args) > 0 {
-		switch args[0] {
-		case "help":
-			ChefHelp()
-			return
-		}
-	} else {
+	if len(args) == 0 {
 		ChefHelp()
 		return
 	}

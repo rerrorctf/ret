@@ -31,6 +31,12 @@ func init() {
 		}})
 }
 
+func PwnHelp() {
+	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "pwn" + theme.ColorGray + " [ip] [port]" + theme.ColorReset + "\n")
+	fmt.Printf("  🐚 create a pwntools script template with ret\n")
+	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/pwn.go" + theme.ColorReset + "\n")
+}
+
 func makePwnScript(ip string, port int) {
 	binaries := util.GuessBinary()
 
@@ -89,21 +95,7 @@ func makePwnScript(ip string, port int) {
 	fmt.Printf("🐚 "+theme.ColorGray+"ready to pwn:"+theme.ColorReset+" $ ./%s\n", config.PwnScriptName)
 }
 
-func PwnHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "pwn" + theme.ColorGray + " [ip] [port]" + theme.ColorReset + "\n")
-	fmt.Printf("  🐚 create a pwntools script template with ret\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/pwn.go" + theme.ColorReset + "\n")
-}
-
 func Pwn(args []string) {
-	if len(args) > 0 {
-		switch args[0] {
-		case "help":
-			PwnHelp()
-			return
-		}
-	}
-
 	_, err := os.Stat(config.PwnScriptName)
 	if !os.IsNotExist(err) {
 		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": \"%s\" already exists!\n", config.PwnScriptName)

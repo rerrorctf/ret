@@ -33,6 +33,12 @@ func init() {
 		}})
 }
 
+func AddHelp() {
+	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "add" + theme.ColorReset + " file1 " + theme.ColorGray + "[file2 file3...]" + theme.ColorReset + "\n")
+	fmt.Printf("  📥 add one or more files to the current task with ret\n")
+	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/add.go" + theme.ColorReset + "\n")
+}
+
 func grep2Win(path string, flags string) {
 	stringsCmd := exec.Command("strings", flags, path)
 	var stringsOutput bytes.Buffer
@@ -171,24 +177,13 @@ func addFile(srcPath string) {
 	}
 }
 
-func AddHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "add" + theme.ColorReset + " file1 " + theme.ColorGray + "[file2 file3...]" + theme.ColorReset + "\n")
-	fmt.Printf("  📥 add one or more files to the current task with ret\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/add.go" + theme.ColorReset + "\n")
-}
-
 func Add(args []string) {
-	if len(args) > 0 {
-		switch args[0] {
-		case "help":
-			AddHelp()
-			return
-		default:
-			for _, file := range args {
-				addFile(file)
-			}
-		}
-	} else {
+	if len(args) == 0 {
 		AddHelp()
+		return
+	}
+
+	for _, file := range args {
+		addFile(file)
 	}
 }

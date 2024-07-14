@@ -37,13 +37,7 @@ func GistHelp() {
 }
 
 func Gist(args []string) {
-	if len(args) > 0 {
-		switch args[0] {
-		case "help":
-			GistHelp()
-			return
-		}
-	} else {
+	if len(args) == 0 {
 		GistHelp()
 		return
 	}

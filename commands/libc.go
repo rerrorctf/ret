@@ -25,6 +25,15 @@ func init() {
 		}})
 }
 
+func LibcHelp() {
+	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "libc" + theme.ColorGray + " [tag]" + theme.ColorReset + "\n")
+	fmt.Printf("  🗽 get a version of libc by copying it from a docker container with ret\n")
+	fmt.Printf("     " + theme.ColorGray + "specify an image tag like \"ubuntu:24.04\" to get a specific version" + theme.ColorReset + "\n")
+	fmt.Printf("     " + theme.ColorGray + "without args this command will use the tag \"ubuntu:latest\"" + theme.ColorReset + "\n")
+	fmt.Printf("     " + theme.ColorGray + "the file will be copied to the cwd and added with ret" + theme.ColorReset + "\n")
+	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/libc.go" + theme.ColorReset + "\n")
+}
+
 func libcSpinner(stop chan bool) {
 	emojis := []string{
 		"🖱️", "⌨️", "🔧", "⚙️", "📂", "📁", "💾", "📟", "🛠️",
@@ -46,24 +55,7 @@ func libcSpinner(stop chan bool) {
 	}
 }
 
-func LibcHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "libc" + theme.ColorGray + " [tag]" + theme.ColorReset + "\n")
-	fmt.Printf("  🗽 get a version of libc by copying it from a docker container with ret\n")
-	fmt.Printf("     " + theme.ColorGray + "specify an image tag like \"ubuntu:24.04\" to get a specific version" + theme.ColorReset + "\n")
-	fmt.Printf("     " + theme.ColorGray + "without args this command will use the tag \"ubuntu:latest\"" + theme.ColorReset + "\n")
-	fmt.Printf("     " + theme.ColorGray + "the file will be copied to the cwd and added with ret" + theme.ColorReset + "\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/libc.go" + theme.ColorReset + "\n")
-}
-
 func Libc(args []string) {
-	if len(args) > 0 {
-		switch args[0] {
-		case "help":
-			LibcHelp()
-			return
-		}
-	}
-
 	c := exec.Command("docker", "-v")
 	err := c.Run()
 	if err != nil {

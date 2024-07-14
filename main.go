@@ -39,6 +39,23 @@ func main() {
 
 	command := flag.Arg(0)
 
+	if command == "help" {
+		if flag.NArg() < 2 {
+			flag.Usage()
+			return
+		}
+
+		found, cmd := commands.CommandsTrie.Search(flag.Arg(1))
+
+		if !found {
+			flag.Usage()
+			return
+		}
+
+		cmd.Help()
+		return
+	}
+
 	found, cmd := commands.CommandsTrie.Search(command)
 
 	if !found {

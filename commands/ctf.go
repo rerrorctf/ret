@@ -27,6 +27,12 @@ func init() {
 		}})
 }
 
+func CtfHelp() {
+	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "ctf" + theme.ColorGray + " [flag]" + theme.ColorReset + "\n")
+	fmt.Printf("  🚩 capture the flag with ret\n")
+	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/ctf.go" + theme.ColorReset + "\n")
+}
+
 func displayCurrentFlag() {
 	flag, err := util.GetCurrentFlag()
 	if err != nil {
@@ -55,20 +61,8 @@ func scoreNewFlag(newFlag string) {
 	fmt.Printf("🚩 "+theme.ColorPurple+"%s"+theme.ColorReset+"\n", flag.Flag)
 }
 
-func CtfHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "ctf" + theme.ColorGray + " [flag]" + theme.ColorReset + "\n")
-	fmt.Printf("  🚩 capture the flag with ret\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/ctf.go" + theme.ColorReset + "\n")
-}
-
 func Ctf(args []string) {
-	if len(args) > 0 {
-		switch args[0] {
-		case "help":
-			CtfHelp()
-			return
-		}
-	} else {
+	if len(args) == 0 {
 		displayCurrentFlag()
 		return
 	}

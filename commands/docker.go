@@ -29,6 +29,12 @@ func init() {
 		}})
 }
 
+func DockerHelp() {
+	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "docker" + theme.ColorGray + " [ip] [port]" + theme.ColorReset + "\n")
+	fmt.Printf("  🐋 create a dockerfile from a template with ret\n")
+	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/docker.go" + theme.ColorReset + "\n")
+}
+
 func makeDockerFile(port int) {
 	binaries := util.GuessBinary()
 
@@ -52,21 +58,7 @@ func makeDockerFile(port int) {
 	fmt.Printf("🐋 "+theme.ColorGray+"ready to run:"+theme.ColorReset+" $ sudo docker build -t task . && sudo docker run -p %d:%d task\n", port, port)
 }
 
-func DockerHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "docker" + theme.ColorGray + " [ip] [port]" + theme.ColorReset + "\n")
-	fmt.Printf("  🐋 create a dockerfile from a template with ret\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/docker.go" + theme.ColorReset + "\n")
-}
-
 func Docker(args []string) {
-	if len(args) > 0 {
-		switch args[0] {
-		case "help":
-			DockerHelp()
-			return
-		}
-	}
-
 	var ip string
 	var port int
 	util.GetRemoteParams(args, &ip, &port)

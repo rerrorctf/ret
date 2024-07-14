@@ -29,13 +29,7 @@ func FormatHelp() {
 }
 
 func Format(args []string) {
-	if len(args) > 0 {
-		switch args[0] {
-		case "help":
-			FormatHelp()
-			return
-		}
-	} else {
+	if len(args) == 0 {
 		fmt.Printf(theme.ColorGray+"current flag format: "+theme.ColorReset+"%v"+theme.ColorReset+"\n", config.FlagFormat)
 		return
 	}

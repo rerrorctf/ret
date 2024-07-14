@@ -29,14 +29,6 @@ func WriteupHelp() {
 }
 
 func Writeup(args []string) {
-	if len(args) > 0 {
-		switch args[0] {
-		case "help":
-			WriteupHelp()
-			return
-		}
-	}
-
 	filePath := "writeup.md"
 
 	_, err := os.Stat(filePath)

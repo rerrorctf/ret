@@ -36,6 +36,13 @@ func init() {
 		}})
 }
 
+func ChatHelp() {
+	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "chat" + theme.ColorGray + " message" + theme.ColorReset + "\n")
+	fmt.Printf("  📢 chat with ret\n")
+	fmt.Printf("     " + theme.ColorGray + "use - to read from stdin" + theme.ColorReset + "\n")
+	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/chat.go" + theme.ColorReset + "\n")
+}
+
 func removeColors(message string) string {
 	message = strings.ReplaceAll(message, theme.ColorReset, "")
 	message = strings.ReplaceAll(message, theme.ColorRed, "")
@@ -105,21 +112,8 @@ func sendEmbed(message string) {
 	sendMessage(body)
 }
 
-func ChatHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "chat" + theme.ColorGray + " message" + theme.ColorReset + "\n")
-	fmt.Printf("  📢 chat with ret\n")
-	fmt.Printf("     " + theme.ColorGray + "use - to read from stdin" + theme.ColorReset + "\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/chat.go" + theme.ColorReset + "\n")
-}
-
 func Chat(args []string) {
-	if len(args) > 0 {
-		switch args[0] {
-		case "help":
-			ChatHelp()
-			return
-		}
-	} else {
+	if len(args) == 0 {
 		ChatHelp()
 		return
 	}

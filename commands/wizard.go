@@ -32,6 +32,12 @@ func init() {
 		}})
 }
 
+func WizardHelp() {
+	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "wizard" + theme.ColorGray + " [ip] [port]" + theme.ColorReset + "\n")
+	fmt.Printf("  🧙 do " + theme.ColorPurple + "m" + theme.ColorBlue + "a" + theme.ColorGreen + "g" + theme.ColorYellow + "i" + theme.ColorRed + "c" + theme.ColorReset + " with ret\n")
+	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/wizard.go" + theme.ColorReset + "\n")
+}
+
 func runWizardCommand(command string) {
 	if len(command) == 0 {
 		return
@@ -111,21 +117,7 @@ func findInterestingFiles() []string {
 	return interestingFiles
 }
 
-func WizardHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "wizard" + theme.ColorGray + " [ip] [port]" + theme.ColorReset + "\n")
-	fmt.Printf("  🧙 do " + theme.ColorPurple + "m" + theme.ColorBlue + "a" + theme.ColorGreen + "g" + theme.ColorYellow + "i" + theme.ColorRed + "c" + theme.ColorReset + " with ret\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/wizard.go" + theme.ColorReset + "\n")
-}
-
 func Wizard(args []string) {
-	if len(args) > 0 {
-		switch args[0] {
-		case "help":
-			WizardHelp()
-			return
-		}
-	}
-
 	runWizardCommand(config.WizardPreCommand)
 
 	// create interesting files list

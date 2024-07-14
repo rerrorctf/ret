@@ -25,14 +25,6 @@ func SageHelp() {
 }
 
 func Sage(args []string) {
-	if len(args) > 0 {
-		switch args[0] {
-		case "help":
-			SageHelp()
-			return
-		}
-	}
-
 	pull := exec.Command("sudo", "docker", "pull", "sagemath/sagemath")
 
 	pull.Stdin = os.Stdin

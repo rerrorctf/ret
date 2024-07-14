@@ -46,14 +46,6 @@ func SyscallHelp() {
 }
 
 func Syscall(args []string) {
-	if len(args) > 0 {
-		switch args[0] {
-		case "help":
-			SyscallHelp()
-			return
-		}
-	}
-
 	arch := "x64"
 	pattern := "."
 
