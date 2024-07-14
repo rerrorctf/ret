@@ -7,6 +7,7 @@ type Argument struct {
 	Name     string
 	Optional bool
 	List     bool
+	Default  string
 }
 
 type Command struct {
