@@ -30,7 +30,6 @@ func init() {
 }
 
 func DockerHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "docker" + theme.ColorGray + " [ip] [port]" + theme.ColorReset + "\n")
 	fmt.Printf("  🐋 create a dockerfile from a template with ret\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/docker.go" + theme.ColorReset + "\n")
 }

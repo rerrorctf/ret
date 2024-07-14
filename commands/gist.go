@@ -30,7 +30,6 @@ func init() {
 }
 
 func GistHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "gist" + theme.ColorGray + " file1 [file2 file3...]" + theme.ColorReset + "\n")
 	fmt.Printf("  🐙 make private gists with ret\n")
 	fmt.Printf("     " + theme.ColorGray + "specify the path of one or more files to upload" + theme.ColorReset + "\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/gist.go" + theme.ColorReset + "\n")

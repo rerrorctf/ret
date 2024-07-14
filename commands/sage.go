@@ -19,7 +19,6 @@ func init() {
 }
 
 func SageHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "sage" + theme.ColorReset + "\n")
 	fmt.Printf("  🌿 open sage with ret\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/sage.go" + theme.ColorReset + "\n")
 }

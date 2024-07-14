@@ -36,7 +36,6 @@ func init() {
 }
 
 func GptHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "gpt" + theme.ColorGray + " question" + theme.ColorReset + "\n")
 	fmt.Printf("  🧠 ask ChatGPT with ret\n")
 	fmt.Printf("     " + theme.ColorGray + "use - to read from stdin" + theme.ColorReset + "\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/gpt.go" + theme.ColorReset + "\n")

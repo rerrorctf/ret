@@ -23,7 +23,6 @@ func init() {
 }
 
 func WriteupHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "writeup" + theme.ColorReset + "\n")
 	fmt.Printf("  📝 create a template for a task in a file called writeup.md with ret\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/writeup.go" + theme.ColorReset + "\n")
 }

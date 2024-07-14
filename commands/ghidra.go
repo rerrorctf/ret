@@ -28,7 +28,6 @@ func init() {
 }
 
 func GhidraHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "ghidra" + theme.ColorGray + " [file1 file2...]" + theme.ColorReset + "\n")
 	fmt.Printf("  🦖 ingests all added files then opens ghidra with ret\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/ghidra.go" + theme.ColorReset + "\n")
 }

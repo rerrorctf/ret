@@ -27,7 +27,6 @@ func init() {
 }
 
 func VpsHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "vps" + theme.ColorGray + " [create/list/destroy]" + theme.ColorReset + "\n")
 	fmt.Printf("  ☁️  create and manage google cloud compute instances with ret\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/vps.go" + theme.ColorReset + "\n")
 }

@@ -28,7 +28,6 @@ func init() {
 }
 
 func CtfHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "ctf" + theme.ColorGray + " [flag]" + theme.ColorReset + "\n")
 	fmt.Printf("  🚩 capture the flag with ret\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/ctf.go" + theme.ColorReset + "\n")
 }

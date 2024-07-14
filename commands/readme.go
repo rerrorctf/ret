@@ -16,7 +16,6 @@ func init() {
 }
 
 func ReadmeHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "readme" + theme.ColorReset + "\n")
 	fmt.Printf("  🖨️  make the readme with ret\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/readme.go" + theme.ColorReset + "\n")
 }

@@ -52,6 +52,27 @@ func main() {
 			return
 		}
 
+		fmt.Printf(theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"%s "+theme.ColorReset, cmd.Name)
+
+		for _, arg := range cmd.Arguments {
+
+			if arg.List {
+				if arg.Optional {
+					fmt.Printf(theme.ColorGray+"[%s1 %s2 %s3...] ", arg.Name, arg.Name, arg.Name)
+				} else {
+					fmt.Printf(theme.ColorReset+"%s1 "+theme.ColorGray+"[%s2 %s3...] ", arg.Name, arg.Name, arg.Name)
+				}
+			} else {
+				if arg.Optional {
+					fmt.Printf(theme.ColorGray+"[%s] ", arg.Name)
+				} else {
+					fmt.Printf(theme.ColorReset+"%s ", arg.Name)
+				}
+			}
+		}
+
+		fmt.Printf("\n" + theme.ColorReset)
+
 		cmd.Help()
 		return
 	}

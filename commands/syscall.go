@@ -29,7 +29,6 @@ func init() {
 }
 
 func SyscallHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "syscall" + theme.ColorReset + " [(x86/32)/(x64/64)]" + theme.ColorReset + " [regex-pattern]\n")
 	fmt.Printf("  📞 check syscalls by regex with ret\n")
 
 	fmt.Printf(theme.ColorBlue + "\n  uses" + theme.ColorGray + ": \n")

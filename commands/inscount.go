@@ -21,7 +21,6 @@ func init() {
 }
 
 func InscountHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "inscount" + theme.ColorReset + "\n")
 	fmt.Printf("  🔬 create a pin script to count instructions from a template with ret\n")
 	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/inscount.go" + theme.ColorReset + "\n")
 }

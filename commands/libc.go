@@ -26,7 +26,6 @@ func init() {
 }
 
 func LibcHelp() {
-	fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorBlue + "libc" + theme.ColorGray + " [tag]" + theme.ColorReset + "\n")
 	fmt.Printf("  🗽 get a version of libc by copying it from a docker container with ret\n")
 	fmt.Printf("     " + theme.ColorGray + "specify an image tag like \"ubuntu:24.04\" to get a specific version" + theme.ColorReset + "\n")
 	fmt.Printf("     " + theme.ColorGray + "without args this command will use the tag \"ubuntu:latest\"" + theme.ColorReset + "\n")
