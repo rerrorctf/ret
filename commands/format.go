@@ -24,7 +24,6 @@ func init() {
 
 func FormatHelp() {
 	fmt.Printf("  🔍 set the current flag format regex with ret\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/format.go" + theme.ColorReset + "\n")
 }
 
 func Format(args []string) {

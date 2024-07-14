@@ -33,7 +33,6 @@ func init() {
 
 func PwnHelp() {
 	fmt.Printf("  🐚 create a pwntools script template with ret\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/pwn.go" + theme.ColorReset + "\n")
 }
 
 func makePwnScript(ip string, port int) {

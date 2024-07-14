@@ -39,7 +39,6 @@ func init() {
 func NotesHelp() {
 	fmt.Printf("  ✏️  take notes with ret\n")
 	fmt.Printf("     " + theme.ColorGray + "use - to read from stdin" + theme.ColorReset + "\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/notes.go" + theme.ColorReset + "\n")
 }
 
 func displayNotes() {

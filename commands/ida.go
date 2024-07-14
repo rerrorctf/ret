@@ -30,7 +30,6 @@ func init() {
 
 func IdaHelp() {
 	fmt.Printf("  💃 opens all added files then opens ida with ret\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/ida.go" + theme.ColorReset + "\n")
 }
 
 func idaSpinner() {

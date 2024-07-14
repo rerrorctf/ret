@@ -34,7 +34,6 @@ func init() {
 
 func WizardHelp() {
 	fmt.Printf("  🧙 do " + theme.ColorPurple + "m" + theme.ColorBlue + "a" + theme.ColorGreen + "g" + theme.ColorYellow + "i" + theme.ColorRed + "c" + theme.ColorReset + " with ret\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/wizard.go" + theme.ColorReset + "\n")
 }
 
 func runWizardCommand(command string) {

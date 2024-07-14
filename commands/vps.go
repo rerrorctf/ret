@@ -28,7 +28,6 @@ func init() {
 
 func VpsHelp() {
 	fmt.Printf("  ☁️  create and manage google cloud compute instances with ret\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/vps.go" + theme.ColorReset + "\n")
 }
 
 func createVps() string {

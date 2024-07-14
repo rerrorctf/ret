@@ -7,7 +7,6 @@ import (
 	"os"
 	"ret/config"
 	"ret/data"
-	"ret/theme"
 	"ret/util"
 )
 
@@ -29,7 +28,6 @@ func init() {
 
 func CryptoHelp() {
 	fmt.Printf("  🚀 search for crypto constants using yara rules with ret\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/crypto.go" + theme.ColorReset + "\n")
 }
 
 func Crypto(args []string) {

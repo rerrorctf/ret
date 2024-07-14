@@ -24,7 +24,6 @@ func init() {
 
 func DecompressHelp() {
 	fmt.Printf("  🤏 decompress one or more files with ret\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/decompress.go" + theme.ColorReset + "\n")
 }
 
 func Decompress(args []string) {

@@ -20,7 +20,6 @@ func init() {
 
 func AngrHelp() {
 	fmt.Printf("  😠 open angr with ret\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/angr.go" + theme.ColorReset + "\n")
 }
 
 func Angr(args []string) {

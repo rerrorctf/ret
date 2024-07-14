@@ -39,7 +39,6 @@ func init() {
 func ChatHelp() {
 	fmt.Printf("  📢 chat with ret\n")
 	fmt.Printf("     " + theme.ColorGray + "use - to read from stdin" + theme.ColorReset + "\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/chat.go" + theme.ColorReset + "\n")
 }
 
 func removeColors(message string) string {

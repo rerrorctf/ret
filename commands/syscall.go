@@ -40,8 +40,6 @@ func SyscallHelp() {
 	fmt.Printf(theme.ColorPurple + "    syscall x64 write" + theme.ColorReset + "\n")
 	fmt.Printf(theme.ColorPurple + "    syscall 32 read" + theme.ColorReset + "\n")
 	fmt.Printf(theme.ColorPurple + "    syscall x86 10[0-9]" + theme.ColorReset + "\n\n")
-
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/syscall.go" + theme.ColorReset + "\n")
 }
 
 func Syscall(args []string) {

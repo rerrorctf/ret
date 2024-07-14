@@ -40,7 +40,6 @@ func init() {
 func ChefHelp() {
 	fmt.Printf("  🔪 open cyberchef with ret\n")
 	fmt.Printf("     " + theme.ColorGray + "use file - to read from stdin" + theme.ColorReset + "\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/chef.go" + theme.ColorReset + "\n")
 }
 
 func Chef(args []string) {

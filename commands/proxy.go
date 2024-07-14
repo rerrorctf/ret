@@ -30,7 +30,6 @@ func init() {
 
 func ProxyHelp() {
 	fmt.Printf("  📡 manage proxies with ret\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/proxy.go" + theme.ColorReset + "\n")
 }
 
 func proxyList() {

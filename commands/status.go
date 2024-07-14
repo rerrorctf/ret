@@ -23,7 +23,6 @@ func init() {
 
 func StatusHelp() {
 	fmt.Printf("  👀 displays the status for the current task with ret\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/status.go" + theme.ColorReset + "\n")
 }
 
 func Status(args []string) {

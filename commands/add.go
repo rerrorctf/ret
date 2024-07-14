@@ -35,7 +35,6 @@ func init() {
 
 func AddHelp() {
 	fmt.Printf("  📥 add one or more files to the current task with ret\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/add.go" + theme.ColorReset + "\n")
 }
 
 func grep2Win(path string, flags string) {

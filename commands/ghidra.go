@@ -29,7 +29,6 @@ func init() {
 
 func GhidraHelp() {
 	fmt.Printf("  🦖 ingests all added files then opens ghidra with ret\n")
-	fmt.Printf("  🔗 " + theme.ColorGray + "https://github.com/rerrorctf/ret/blob/main/commands/ghidra.go" + theme.ColorReset + "\n")
 }
 
 func ghidraSpinner() {

@@ -74,6 +74,8 @@ func main() {
 		fmt.Printf("\n" + theme.ColorReset)
 
 		cmd.Help()
+
+		fmt.Printf("  🔗 "+theme.ColorGray+"%s"+theme.ColorReset+"\n", cmd.Url)
 		return
 	}
 
