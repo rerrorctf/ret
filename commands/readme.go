@@ -3,6 +3,8 @@ package commands
 import (
 	"fmt"
 	"os"
+	"reflect"
+	"ret/config"
 	"ret/theme"
 )
 
@@ -24,6 +26,34 @@ func Readme(args []string) {
 	fmt.Fprintf(os.Stdout, "# ret\n\n")
 
 	fmt.Fprintf(os.Stdout, "<img src=\"https://github.com/rerrorctf/ret/assets/93072266/5a998dbb-5730-4b10-9636-45e35e9fe77e\" alt=\"rounding error ctf team logo\" width=\"400\"/>\n\n")
+
+	fmt.Fprintf(os.Stdout, "This tool helps you solve ctf tasks by automating workflow and basic analysis and providing useful utilities.\n\n")
+
+	fmt.Fprintf(os.Stdout, "## Installation\n\n")
+
+	fmt.Fprintf(os.Stdout, "You can get the latest binary from https://github.com/rerrorctf/ret/releases.\n\n")
+
+	fmt.Fprintf(os.Stdout, "Here installation just means putting `ret` somewhere on your path. I like to make a symlink it to in `/usr/local/bin`.\n\n")
+
+	fmt.Fprintf(os.Stdout, "```\n$ sudo ln -s ./ret /usr/local/bin/ret\n```\n\n")
+
+	fmt.Fprintf(os.Stdout, "Other options are available and you may do whatever works best for you.\n\n")
+
+	fmt.Fprintf(os.Stdout, "### Compiling (Optional)\n\n")
+
+	fmt.Fprintf(os.Stdout, "First install `go` https://go.dev/dl/ by following the install instructions.\n\n")
+
+	fmt.Fprintf(os.Stdout, "You can use `go` in system repos but they tend to be fairly old and out of date.\n\n")
+
+	fmt.Fprintf(os.Stdout, "Now, the project root directory, you can simply do:\n\n")
+
+	fmt.Fprintf(os.Stdout, "```\n$ go build\n```\n\n")
+
+	fmt.Fprintf(os.Stdout, "This will produce the `ret` binary. This single file is all you need to use `ret`.\n\n")
+
+	fmt.Fprintf(os.Stdout, "There is also a `build.sh` that I use to create the binaries that get uploaded to github.\n\n")
+
+	fmt.Fprintf(os.Stdout, "```\n$ ./build.sh\n```\n\n")
 
 	fmt.Fprintf(os.Stdout, "## Commands\n\n")
 
@@ -69,4 +99,19 @@ func Readme(args []string) {
 
 		fmt.Fprintf(os.Stdout, "🔗 %s\n\n", command.Url)
 	}
+
+	fmt.Fprintf(os.Stdout, "## ~/.config/ret\n\n")
+
+	fmt.Fprintf(os.Stdout, "`ret` will parse `~/.config/ret`:\n\n")
+
+	fmt.Fprintf(os.Stdout, "```json\n{\n")
+
+	t := reflect.TypeOf(config.Config{})
+
+	for i := 0; i < t.NumField(); i++ {
+		field := t.Field(i)
+		fmt.Fprintf(os.Stdout, "  \"%s\": \"%s\",\n", field.Tag.Get("json"), "")
+	}
+
+	fmt.Fprintf(os.Stdout, "}\n```\n")
 }
