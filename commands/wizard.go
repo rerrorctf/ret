@@ -35,7 +35,20 @@ func init() {
 }
 
 func WizardHelp() string {
-	return fmt.Sprintf("do " + theme.ColorPurple + "m" + theme.ColorBlue + "a" + theme.ColorGreen + "g" + theme.ColorYellow + "i" + theme.ColorRed + "c" + theme.ColorReset + " with ret\n")
+	return "do " + theme.ColorPurple + "m" + theme.ColorBlue + "a" + theme.ColorGreen + "g" + theme.ColorYellow + "i" + theme.ColorRed + "c" + theme.ColorReset + " with ret.\n\n" +
+		"wizard is here to help! they simply run a few common commands suitable for a typical workflow.\n\n" +
+		"the workflow is quite well suited for typical rev and pwn tasks and may be useful for tasks in other categories too.\n\n" +
+		"sometimes " + theme.ColorRed + "the wizard makes mistakes" + theme.ColorReset + "! be sure to check its work by carefully reviewing the detailed output.\n\n" +
+		"steps the wizard performs:\n" +
+		theme.ColorGray + "1) " + theme.ColorBlue + "executes the " + theme.ColorYellow + "\"wizardprecommand\"" + theme.ColorBlue + " string with " + theme.ColorCyan + "\"bash -c\"" + theme.ColorBlue + " from " + theme.ColorPurple + "~/.config/ret" + theme.ColorBlue + ".\n" +
+		theme.ColorGray + "2) " + theme.ColorBlue + "searches for interesting files within the current directory. this is typically the task handout .zip file.\n" +
+		theme.ColorGray + "3) " + theme.ColorBlue + "ensures that the hidden " + theme.ColorPurple + ".ret" + theme.ColorBlue + " directory skeleton exists.\n" +
+		theme.ColorGray + "4) " + theme.ColorBlue + "decompresses, using the " + theme.ColorGreen + "decompress" + theme.ColorBlue + " command, any interesting files that it can.\n" +
+		theme.ColorGray + "5) " + theme.ColorBlue + "adds any interesting files to file using the " + theme.ColorGreen + "add" + theme.ColorBlue + " command. this includes those found by decompression and ignores the compressed archives themselves files.\n" +
+		theme.ColorGray + "6) " + theme.ColorBlue + "shows the added files using the " + theme.ColorGreen + "status" + theme.ColorBlue + " command.\n" +
+		theme.ColorGray + "7) " + theme.ColorBlue + "if the wizard thinks there is an elf file it will invoke " + theme.ColorGreen + "pwn" + theme.ColorBlue + " for you.\n" +
+		theme.ColorGray + "8) " + theme.ColorBlue + "if you provided an ip or an ip and a port wizard will pass these to " + theme.ColorGreen + "pwn" + theme.ColorBlue + " command.\n" +
+		theme.ColorGray + "9) " + theme.ColorBlue + "executes the " + theme.ColorYellow + "\"wizardpostcommand\"" + theme.ColorBlue + " string with " + theme.ColorCyan + "\"bash -c\"" + theme.ColorBlue + " from " + theme.ColorPurple + "~/.config/ret" + theme.ColorBlue + ".\n" + theme.ColorReset
 }
 
 func runWizardCommand(command string) {
