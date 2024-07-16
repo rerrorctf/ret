@@ -78,9 +78,7 @@ func main() {
 
 		fmt.Printf("\n" + theme.ColorReset)
 
-		fmt.Printf("%s %s\n", cmd.Emoji, cmd.Help())
-
-		fmt.Printf("🔗 "+theme.ColorGray+"%s"+theme.ColorReset+"\n", cmd.Url)
+		fmt.Printf("%s %s", cmd.Emoji, cmd.Help())
 		return
 	}
 
