@@ -38,8 +38,15 @@ func init() {
 }
 
 func ChefHelp() string {
-	return fmt.Sprintf("open cyberchef with ret\n") +
-		fmt.Sprintf(theme.ColorGray+"use file - to read from stdin"+theme.ColorReset+"\n")
+	return "open cyberchef with ret\n\n" +
+		"use file - to read from stdin\n\n" +
+		"for example:\n" +
+		"```bash\n" +
+		theme.ColorGray + "$ " + theme.ColorBlue + "echo \"hello, world!\" | base64 | ret chef -\n" + theme.ColorReset +
+		theme.ColorGray + "$ " + theme.ColorBlue + "ret chef aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQ==\n" + theme.ColorReset +
+		"```\n\n" +
+		fmt.Sprintf("generates a cyberchef url by appending your input, raw base64 encoded, to "+theme.ColorPurple+"%s"+theme.ColorReset+"\n\n", CHEF_URL) +
+		"uses " + theme.ColorGreen + "`open`" + theme.ColorReset + " to open the resulting url in your default browser\n"
 }
 
 func Chef(args []string) {
