@@ -20,7 +20,7 @@ func init() {
 		Help:      WriteupHelp,
 		Url:       "https://github.com/rerrorctf/ret/blob/main/commands/wizard.go",
 		Arguments: nil,
-		SeeAlso:   []string{"notes", "pwn", "ctf", "format"}})
+		SeeAlso:   []string{"notes", "pwn", "capture", "format"}})
 }
 
 func WriteupHelp() string {
@@ -29,7 +29,7 @@ func WriteupHelp() string {
 		"if a file called `writeup.md` already exists the command will abort\n\n" +
 		"1. imports all notes taken with the " + theme.ColorGreen + "`notes`" + theme.ColorReset + " command into the description area\n" +
 		"2. creates a space for a python script and then imports the script created by " + theme.ColorGreen + "`pwn`" + theme.ColorReset + " if one exists\n" +
-		"3. imports the flag captured with the " + theme.ColorGreen + "`ctf`" + theme.ColorReset + " command if one exists or the regex specfied with " + theme.ColorGreen + "`format`" + theme.ColorReset + " if one does not\n" +
+		"3. imports the flag captured with the " + theme.ColorGreen + "`capture`" + theme.ColorReset + " command if one exists or the regex specfied with " + theme.ColorGreen + "`format`" + theme.ColorReset + " if one does not\n" +
 		"4. uses the " + theme.ColorYellow + "`\"username\"`" + theme.ColorReset + " from " + theme.ColorCyan + "`~/.config/ret`" + theme.ColorReset + " to attribute to this writeup to you\n" +
 		"5. inserts a date stamp for today's date using yyyy/mm/dd format\n"
 }

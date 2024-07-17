@@ -13,22 +13,26 @@ import (
 
 func init() {
 	Commands = append(Commands, Command{
-		Name:  "ctf",
-		Emoji: "🚩",
-		Func:  Ctf,
-		Help:  CtfHelp,
-		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/ctf.go",
+		Name:  "capture",
+		Emoji: "🏁",
+		Func:  Capture,
+		Help:  CaptureHelp,
+		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/capture.go",
 		Arguments: []Argument{
 			{
 				Name:     "flag",
 				Optional: true,
 				List:     false,
 			},
-		}})
+		},
+		SeeAlso: []string{"format", "writeup"}})
 }
 
-func CtfHelp() string {
-	return fmt.Sprintf("capture the flag with ret\n")
+func CaptureHelp() string {
+	return "capture the flag with ret\n\n" +
+		"supply no arguments to see the currently captured flag\n\n" +
+		"note that captured flags are stored in hidden directory " + theme.ColorCyan + "`.ret`" + theme.ColorReset + " and therefore scoped to the cwd\n\n" +
+		"flags are stored in the " + theme.ColorCyan + "`.ret/flag.json`" + theme.ColorReset + " file\n"
 }
 
 func displayCurrentFlag() {
@@ -38,7 +42,7 @@ func displayCurrentFlag() {
 		return
 	}
 
-	fmt.Printf("🚩 "+theme.ColorPurple+"%s"+theme.ColorReset+"\n", flag)
+	fmt.Printf("🏁 "+theme.ColorPurple+"%s"+theme.ColorReset+"\n", flag)
 }
 
 func scoreNewFlag(newFlag string) {
@@ -56,10 +60,10 @@ func scoreNewFlag(newFlag string) {
 		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
-	fmt.Printf("🚩 "+theme.ColorPurple+"%s"+theme.ColorReset+"\n", flag.Flag)
+	fmt.Printf("🏁 "+theme.ColorPurple+"%s"+theme.ColorReset+"\n", flag.Flag)
 }
 
-func Ctf(args []string) {
+func Capture(args []string) {
 	if len(args) == 0 {
 		displayCurrentFlag()
 		return

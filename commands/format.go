@@ -19,11 +19,14 @@ func init() {
 				Optional: true,
 				List:     false,
 			},
-		}})
+		},
+		SeeAlso: []string{"add", "capture", "writeup"}})
 }
 
 func FormatHelp() string {
-	return fmt.Sprintf("set the current flag format regex with ret\n")
+	return "set the current flag format regex with ret\n\n" +
+		"the flag format is stored in " + theme.ColorCyan + "`~/.config/ret`" + theme.ColorReset + " using the " + theme.ColorYellow + "`\"flagformat\"`" + theme.ColorReset + " field\n\n" +
+		"the flag format regex will be used to search for flags when adding files with the " + theme.ColorGreen + "`add`" + theme.ColorReset + " command\n"
 }
 
 func Format(args []string) {

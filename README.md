@@ -172,6 +172,24 @@ see https://docs.angr.io/en/latest/getting-started/installing.html#installing-wi
 
 ---
 
+### 🏁 <u>ca</u>pture
+
+```
+$ ret capture [flag] 
+```
+
+capture the flag with ret
+
+supply no arguments to see the currently captured flag
+
+note that captured flags are stored in hidden directory `.ret` and therefore scoped to the cwd
+
+flags are stored in the `.ret/flag.json` file
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/capture.go
+
+---
+
 ### 📢 <u>cha</u>t
 
 ```
@@ -216,6 +234,10 @@ generates a cyberchef url by appending your input, raw base64 encoded, to https:
 
 uses `open` to open the resulting url in your default browser
 
+you can set `"chefurl"` in `~/.config/ret` to use another instance of cyberchef
+
+if you provide a custom url it should be the equivalent of https://gchq.github.io/CyberChef/
+
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/chef.go
 
 ---
@@ -229,18 +251,6 @@ $ ret crypto [file1 file2 file3...]
 search for crypto constants using yara rules with ret
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/crypto.go
-
----
-
-### 🚩 <u>ct</u>f
-
-```
-$ ret ctf [flag] 
-```
-
-capture the flag with ret
-
-🔗 https://github.com/rerrorctf/ret/blob/main/commands/ctf.go
 
 ---
 
@@ -275,6 +285,10 @@ $ ret format [regex]
 ```
 
 set the current flag format regex with ret
+
+the flag format is stored in `~/.config/ret` using the `"flagformat"` field
+
+the flag format regex will be used to search for flags when adding files with the `add` command
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/format.go
 
@@ -508,7 +522,7 @@ if a file called `writeup.md` already exists the command will abort
 
 1. imports all notes taken with the `notes` command into the description area
 2. creates a space for a python script and then imports the script created by `pwn` if one exists
-3. imports the flag captured with the `ctf` command if one exists or the regex specfied with `format` if one does not
+3. imports the flag captured with the `capture` command if one exists or the regex specfied with `format` if one does not
 4. uses the `"username"` from `~/.config/ret` to attribute to this writeup to you
 5. inserts a date stamp for today's date using yyyy/mm/dd format
 
@@ -540,5 +554,6 @@ if a file called `writeup.md` already exists the command will abort
   "googlecloudproject": "",
   "googlecloudregion": "",
   "googlecloudsshkey": "",
+  "chefurl": "",
 }
 ```
