@@ -3,7 +3,6 @@ package commands
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"io"
 	"log"
 	"math/rand"
@@ -37,8 +36,13 @@ func init() {
 }
 
 func ChatHelp() string {
-	return fmt.Sprintf("chat with ret\n") +
-		fmt.Sprintf(theme.ColorGray+"use - to read from stdin"+theme.ColorReset+"\n")
+	return "chat via a discord webhook with ret\n\n" +
+		"use - to read from stdin\n\n" +
+		"requires that " + theme.ColorYellow + "`\"chatwebhookurl\"`" + theme.ColorReset + " from " + theme.ColorCyan + "`~/.config/ret`" + theme.ColorReset + " is a valid webhook\n\n" +
+		"requires that " + theme.ColorYellow + "`\"username\"`" + theme.ColorReset + " from " + theme.ColorCyan + "`~/.config/ret`" + theme.ColorReset + " is set to valid string\n\n" +
+		"when data is read from stdin, due to the use of the - argument, it will be sent as an embed with an accurate timestamp and a random color\n\n" +
+		"color codes, such as the ones used by this tool, are stripped by this code prior to sending\n\n" +
+		"for more information please see " + theme.ColorPurple + "https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks\n" + theme.ColorReset
 }
 
 func sendMessage(message map[string]interface{}) {
