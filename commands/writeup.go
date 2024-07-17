@@ -19,7 +19,8 @@ func init() {
 		Func:      Writeup,
 		Help:      WriteupHelp,
 		Url:       "https://github.com/rerrorctf/ret/blob/main/commands/wizard.go",
-		Arguments: nil})
+		Arguments: nil,
+		SeeAlso:   []string{"notes", "pwn", "ctf", "format"}})
 }
 
 func WriteupHelp() string {
