@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"strings"
 
 	"ret/commands"
 	"ret/config"
@@ -78,7 +79,12 @@ func main() {
 
 		fmt.Printf("\n" + theme.ColorReset)
 
-		fmt.Printf("%s %s", cmd.Emoji, cmd.Help())
+		help := cmd.Help()
+		help = strings.ReplaceAll(help, "```\n", "")
+		help = strings.ReplaceAll(help, "```bash\n", "")
+		help = strings.ReplaceAll(help, "```python\n", "")
+		help = strings.ReplaceAll(help, "`", "")
+		fmt.Printf("%s %s", cmd.Emoji, help)
 		return
 	}
 
