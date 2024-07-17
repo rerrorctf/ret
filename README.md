@@ -254,6 +254,22 @@ search for crypto constants using yara rules with ret
 
 ---
 
+### 🚩 <u>ct</u>ftime
+
+```
+$ ret ctftime [url] 
+```
+
+set the current ctftime url with ret
+
+the ctftime url is stored in `~/.config/ret` using the `"ctftimeurl"` field
+
+the ctftime url will be used to aid in the generation of writeups with the `writeup` command
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/ctftime.go
+
+---
+
 ### 🤏 <u>de</u>compress
 
 ```
@@ -520,11 +536,12 @@ the writeup will saved in a file called `writeup.md`
 
 if a file called `writeup.md` already exists the command will abort
 
-1. imports all notes taken with the `notes` command into the description area
-2. creates a space for a python script and then imports the script created by `pwn` if one exists
-3. imports the flag captured with the `capture` command if one exists or the regex specfied with `format` if one does not
-4. uses the `"username"` from `~/.config/ret` to attribute to this writeup to you
-5. inserts a date stamp for today's date using yyyy/mm/dd format
+1. uses the `"ctftimeurl"` to insert a url at the top of the writeup
+2. imports all notes taken with the `notes` command into the description area
+3. creates a space for a python script and then imports the script created by `pwn` if one exists
+4. imports the flag captured with the `capture` command if one exists or the regex specfied with `format` if one does not
+5. uses the `"username"` from `~/.config/ret` to attribute to this writeup to you
+6. inserts a date stamp for today's date using yyyy/mm/dd format
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/wizard.go
 
@@ -555,5 +572,6 @@ if a file called `writeup.md` already exists the command will abort
   "googlecloudregion": "",
   "googlecloudsshkey": "",
   "chefurl": "",
+  "ctftimeurl": "",
 }
 ```
