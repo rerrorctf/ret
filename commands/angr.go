@@ -19,7 +19,14 @@ func init() {
 }
 
 func AngrHelp() string {
-	return fmt.Sprintf("open angr with ret\n")
+	return "runs the angr docker with ret\n\n" +
+		"mounts the current working directory as a volume\n\n" +
+		"effectively runs:\n" +
+		"```bash\n" +
+		theme.ColorGray + "$ " + theme.ColorBlue + "sudo docker pull angr/angr\n" +
+		theme.ColorGray + "$ " + theme.ColorBlue + "sudo docker run -it -v $PWD:/home/angr/x angr/angr\n" + theme.ColorReset +
+		"```\n\n" +
+		"see https://docs.angr.io/en/latest/getting-started/installing.html#installing-with-docker for more information\n" + theme.ColorReset
 }
 
 func Angr(args []string) {
