@@ -44,7 +44,7 @@ func ChefHelp() string {
 		"```\n\n" +
 		"generates a cyberchef url by appending your input, raw base64 encoded, to " + theme.ColorPurple + "https://gchq.github.io/CyberChef/#input=" + theme.ColorReset + "\n\n" +
 		"uses " + theme.ColorGreen + "`open`" + theme.ColorReset + " to open the resulting url in your default browser\n\n" +
-		"you can set " + theme.ColorYellow + "`\"chefurl\"`" + theme.ColorReset + " in " + theme.ColorCyan + "`~/.config/ret`" + theme.ColorReset + " to use another instance of cyber chef\n\n" +
+		"you can set " + theme.ColorYellow + "`\"chefurl\"`" + theme.ColorReset + " in " + theme.ColorCyan + "`~/.config/ret`" + theme.ColorReset + " to use another instance of cyberchef\n\n" +
 		"if you provide a custom url it should be the equivalent of " + theme.ColorPurple + "https://gchq.github.io/CyberChef/" + theme.ColorReset + "\n"
 }
 
