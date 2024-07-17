@@ -65,6 +65,8 @@ func Readme(args []string) {
 
 	fmt.Fprintf(os.Stdout, "```\n$ ret help command\n```\n\n")
 
+	fmt.Fprintf(os.Stdout, "---\n\n")
+
 	for _, command := range Commands {
 		shortestValidPrefix, restOfCommand := CommandsTrie.ShortestPrefix(command.Name)
 		fmt.Fprintf(os.Stdout, "### %s <u>%s</u>%s\n\n", command.Emoji, shortestValidPrefix, restOfCommand)
@@ -98,6 +100,8 @@ func Readme(args []string) {
 		fmt.Fprintf(os.Stdout, "%s\n", theme.RemoveColors(command.Help()))
 
 		fmt.Fprintf(os.Stdout, "🔗 %s\n\n", command.Url)
+
+		fmt.Fprintf(os.Stdout, "---\n\n")
 	}
 
 	fmt.Fprintf(os.Stdout, "## ~/.config/ret\n\n")
