@@ -16,6 +16,48 @@ $ sudo ln -s ./ret /usr/local/bin/ret
 
 Other options are available and you may do whatever works best for you.
 
+### Installing Dependencies (Optional)
+
+some commands make opportunistic use of other tools and some won't work without them
+
+consider installing the following to get access to the full functionality of ret
+
+#### strings
+
+a basic system util that may not be installed by default that is used by ret to search for flags
+
+#### grep
+
+a basic system util that may not be installed by default that is used by ret to search for flags
+
+#### yara
+
+yara is used by the crypto and add commands to search for cryptographic constants
+
+#### gcloud cli
+
+the google cloud cli is used by the `vps` command to create and manage compute resources
+
+you can install it from here https://cloud.google.com/sdk/docs/install#deb
+
+#### docker
+
+used by the `docker`, `libc`, `sage` and `angr` commands
+
+you can install it from here https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
+
+#### pin
+
+used by the output of the `inscount` command
+
+you can install it from here https://www.intel.com/content/www/us/en/developer/articles/tool/pin-a-binary-instrumentation-tool-downloads.html
+
+#### pwntools
+
+used by the output of the `pwn` command
+
+you can install it from here https://docs.pwntools.com/en/stable/install.html
+
 ### Compiling (Optional)
 
 First install `go` https://go.dev/dl/ by following the install instructions.
@@ -50,439 +92,453 @@ You can get help for a command by prefixing `help` to the command:
 $ ret help command
 ```
 
-### abi 🤝
+---
+
+### 🤝 <u>ab</u>i
 
 ```
-ret abi [architecture] [os]
+$ ret abi [architecture=x64] [os=linux] 
 ```
 
-Prints reference details about the abi for the given platform.
+view abi details with ret
 
-- **architecture**: Specify `x86/32` or `x64/64`.
-- **os**: Specify `linux` or `windows`.
+output includes calling conventions, register volatility and more
 
-For more detailed information on calling conventions, refer to the [Agner Fog's Calling Conventions PDF](https://www.agner.org/optimize/calling_conventions.pdf).
+for architecture specify one of `x86`, `32`, `x64`, `64` ~ the default is `x64`
 
-https://github.com/rerrorctf/ret/blob/main/commands/abi.go
+for os specify one of `linux`, `windows` ~ the default is `linux`
 
-### add 📥
-
-```
-ret add file1 [file2 file3...]
-```
-
-This command will:
-1. Analyze each file to determine its type.
-2. Generate a SHA-256 hash for each file.
-3. Added files are stored in in the hidden directory `.ret/files` inside a subfolder that is named using the SHA2-256 hex digest of the file content.
-4. Save metadata about the file in a JSON file.
-5. Searches for patterns within the file content.
-
-https://github.com/rerrorctf/ret/blob/main/commands/add.go
-
-### angr 😠
-
-```
-ret angr
+for example:
+```bash
+$ ret abi x64 linux
+$ ret abi 32 windows
 ```
 
-Just runs:
+for more detailed information on calling conventions refer to https://www.agner.org/optimize/calling_conventions.pdf
 
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/abi.go
+
+---
+
+### 📥 <u>ad</u>d
+
+```
+$ ret add file1 [file2 file3...] 
+```
+
+add one or more files to the current task with ret
+
+performs the following steps:
+1. analyze each file to determine if it is an elf or not by examing the file's magic bytes
+2. generate a sha-2-256 hash for each file
+3. added files are copied into the hidden directory `.ret/files` inside a subfolder that is named using the sha-2-256 hex digest of the file content
+4. save metadata about the files, specifically their length, location and file type (i.e. elf or not), in the files json file in the hidden `.ret` directory
+5. uses strings, with widths of 8, 16 and 32 bits per character, in combination with grep to search for flags according to the flag format
+6. uses yara to search for constants associated with cryptography. this is equivilent to running the `crypto` command on the files
+
+added files are subject to processing by other commands that operate on the set of added files
+
+adding a file does not prevent changes from occuring to the source file nor does it detect them for you, like a version control system would
+
+you can track several version of a file by adding each of them remembering that they are addressed according to the hash of their content
+
+you can restore a specific version of a file by copying it from the subdirectory in which a copy of it was made when the file was added
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/add.go
+
+---
+
+### 😠 <u>an</u>gr
+
+```
+$ ret angr 
+```
+
+runs the angr docker with ret
+
+mounts the current working directory as a volume
+
+note that this command requires docker
+
+effectively runs:
 ```bash
 $ sudo docker pull angr/angr
 $ sudo docker run -it -v $PWD:/home/angr/x angr/angr
 ```
 
-See https://docs.angr.io/en/latest/getting-started/installing.html#installing-with-docker for more information.
+see https://docs.angr.io/en/latest/getting-started/installing.html#installing-with-docker for more information
 
-https://github.com/rerrorctf/ret/blob/main/commands/angr.go
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/angr.go
 
+---
 
-### chat 📢
-
-```
-ret chat message
-```
-
-Sends a message to discord via a webhook in `~/.config/ret` called `chatwebhookurl`.
-
-https://github.com/rerrorctf/ret/blob/main/commands/chat.go
-
-### chef 🔪
+### 📢 <u>cha</u>t
 
 ```
-ret chef [-] [text]
+$ ret chat [-] [message1 message2 message3...] 
 ```
 
-The `chef` command allows you to open CyberChef with a specified input directly from the command line.
+chat via a discord webhook with ret
 
-CyberChef is a web-based tool for performing various encoding, decoding, and data transformation operations.
+use - to read from stdin
 
-See https://gchq.github.io/CyberChef for more information.
+requires that `"chatwebhookurl"` from `~/.config/ret` is a valid webhook
 
-Use - to read from stdin.
+requires that `"username"` from `~/.config/ret` is set to valid string
 
-https://github.com/rerrorctf/ret/blob/main/commands/chef.go
+when data is read from stdin, due to the use of the - argument, it will be sent as an embed with an accurate timestamp and a random color
 
-### crypto 🚀
+color codes, such as the ones used by this tool, are stripped by this code prior to sending
 
-```
-ret crypto
-```
+for more information please see https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks
 
-https://github.com/rerrorctf/ret/blob/main/commands/crypto.go
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/chat.go
 
-### ctf 🚩
+---
 
-```
-ret ctf [flag]
-```
-
-Records the provided flag as the solution for the current task.
-
-If no flag is provided will report the currently recorded flag if any exists.
-
-Note that if you set the flag for the current task the `writeup` command will automatically include it for you.
-
-https://github.com/rerrorctf/ret/blob/main/commands/ctf.go
-
-### decompress 🤏
+### 🔪 <u>che</u>f
 
 ```
-ret decompress file1 [file2 file3...]
+$ ret chef [-] [text1 text2 text3...] 
 ```
 
-Decompresses files by first checking if they have a suitable extension and then a suitable magic.
+open cyberchef with ret
 
-Supports .zip, .gzip, .xz, .tar and .7z.
+use file - to read from stdin
 
-Note that we check the extension to avoid decompressing things like .apk files.
-
-https://github.com/rerrorctf/ret/blob/main/commands/decompress.go
-
-### docker 🐋
-
-```
-ret docker [ip] [port]
-```
-
-Creates a Dockerfile from a template.
-
-This is potentially useful for pwning locally.
-
-https://github.com/rerrorctf/ret/blob/main/commands/docker.go
-
-### format 🔍
-
-```
-ret format [regex]
-```
-
-Prints the current flag format regex or updates it if an argument is supplied.
-
-This creates or rewrites the contents `~/.config/ret`.
-
-Note that if don't set the flag for the current task the `writeup` command will automatically include the format regex for you as a placeholder.
-
-https://github.com/rerrorctf/ret/blob/main/commands/format.go
-
-### ghidra 🦖
-
-```
-ret ghidra [file1 file2...]
-```
-
-The `Ghidra` command in this package is designed to ingest files and open them with ghidra, a software reverse engineering tool.
-
-- Ensures the ghidra project directory exists.
-- Optionally add one or more files.
-- Analyzes all added files and opens the ghidra project.
-
-Make sure ghidra is installed (or symlinked) at `/opt/ghidra` or use the config file to adjust the default ghidra installation location.
-
-https://github.com/rerrorctf/ret/blob/main/commands/ghidra.go
-
-### gist 🐙
-
-```
-ret gist file1 [file2 file3...]
-```
-
-Create a private gist from one or more files.
-
-Requires `~/.config/ret` to have a valid `gisttoken`.
-
-See your tokens here https://github.com/settings/tokens?type=beta.
-
-Read about creating gists programatically here https://docs.github.com/en/rest/gists/gists?apiVersion=2022-11-28#create-a-gist.
-
-https://github.com/rerrorctf/ret/blob/main/commands/gist.go
-
-### gpt 🧠
-
-```
-ret gpt question
-```
-
-Pose a question to ChatGPT with ret's ctf specific prompt.
-
-Optionally you can read from stdin by specifying `-` as the first param.
-
-```
-$ ret gpt how do i pwn?
-$ cat go.py | ret gpt - how do i make this pwn better?
-```
-
-https://github.com/rerrorctf/ret/blob/main/commands/gpt.go
-
-### ida 💃
-
-```
-ret ida [file1 file2...]
-```
-
-Optionally adds one or more new files.
-
-Imports all added files.
-
-Opens ida.
-
-Make sure ida is installed (or symlinked) at `/opt/ida` or use the config file to adjust the default ida installation location.
-
-https://github.com/rerrorctf/ret/blob/main/commands/ida.go
-
-### inscount 🔬
-
-```
-ret inscount
-```
-
-Creates a python and a golang script for counting instructions with pin.
-
-https://github.com/rerrorctf/ret/blob/main/commands/inscount.go
-
-### libc 🗽
-
-```
-ret libc [tag]
-```
-
-Creates and runs a Docker container based on the given tag.
-
-By default will use ubuntu:latest as the tag if none is provided.
-
-A Dockerfile and a script will be created and then run in a temp directory.
-
-The script will build, run, stop and remove the container.
-
-When the container is running `libc.so.6` will be copied from the container.
-
-After the container is destroyed the file is added with ret.
-
-https://github.com/rerrorctf/ret/blob/main/commands/libc.go
-
-### notes ✏️
-
-```
-ret notes [message]
-```
-
-https://github.com/rerrorctf/ret/blob/main/commands/notes.go
-
-### proxy 📡
-
-```
-ret proxy [list/create]
-```
-
-This command manages SSH proxies.
-
-1. **Listing Proxies**:
-   - Command: `ret proxy list`
-   - Description: Lists all currently active SSH proxies that are using local port forwarding (`ssh -L`). It parses the output of `ps aux` to find relevant SSH processes and displays their details, including the local port, remote IP, remote port, and process ID.
-
-2. **Creating Proxies**:
-   - Command: `ret proxy create local-port remote-ip remote-port [ssh-ip]`
-   - Description: Creates a new SSH proxy with local port forwarding. It requires the local port, remote IP, and remote port as arguments. Optionally, an SSH IP can be specified. The command uses the current user's credentials to establish the SSH connection.
-
-https://github.com/rerrorctf/ret/blob/main/commands/proxy.go
-
-### pwn 🐚
-
-```
-ret pwn [ip] [port]
-```
-
-Creates a pwntools script from a template.
-
-If `~/.config/ret` contains a value for `pwnscripttemplate` the contents of this file will be used as the template instead.
-
-If a custom template is in use `pwn` will take the contents of the file at this path and do the following substitutions:
-  - :%s/\%BINARY\%/task
-    - where task is the result of util.GuessBinary()
-  - :%s/\%IP\%/127.0.0.1
-    - where 127.0.0.1 is the supplied ip address
-  - :%s/\%PORT\%/9001
-    - where 9001 is the supplied port
-
-For example:
-
-```python
-#!/usr/bin/env python3
-
-from pwn import *
-
-#context.log_level = "debug"
-elf = ELF("./%BINARY%", checksec=False)
-context.binary = elf
-
-#p = elf.process()
-#p = elf.debug(gdbscript="")
-p = remote("%IP%", %PORT%)
-
-p.interactive()
-```
-
-Might be transformed into:
-
-```python
-#!/usr/bin/env python3
-
-from pwn import *
-
-#context.log_level = "debug"
-elf = ELF("./task", checksec=False)
-context.binary = elf
-
-#p = elf.process()
-#p = elf.debug(gdbscript="")
-p = remote("127.0.0.1", 9001)
-
-p.interactive()
-```
-
-Note the placement of the `"` characters.
-
-https://github.com/rerrorctf/ret/blob/main/commands/pwn.go
-
-### sage 🌿
-
-```
-ret sage
-```
-
-Just runs:
-
+for example:
 ```bash
-$ sudo docker pull sagemath/sagemath
-$ sudo docker run -it sagemath/sagemath:latest
+$ echo "hello, world!" | base64 | ret chef -
+$ ret chef aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQ==
 ```
 
-See https://hub.docker.com/r/sagemath/sagemath for more information.
+generates a cyberchef url by appending your input, raw base64 encoded, to https://gchq.github.io/CyberChef/#input=
 
-https://github.com/rerrorctf/ret/blob/main/commands/sage.go
+uses `open` to open the resulting url in your default browser
 
-### status 👀
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/chef.go
 
-```
-ret status
-```
+---
 
-Prints information about the task including any added files.
-
-https://github.com/rerrorctf/ret/blob/main/commands/status.go
-
-### syscall 📞
+### 🚀 <u>cr</u>ypto
 
 ```
-ret syscall [(x86/32)/(x64/64)] [regex-pattern]
+$ ret crypto [file1 file2 file3...] 
 ```
 
-Greps syscall headers for x86 and x64 linux.
+search for crypto constants using yara rules with ret
 
-For x86 linux we use:
-`/usr/include/x86_64-linux-gnu/asm/unistd_32.h`
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/crypto.go
 
-For x64 linux we use:
-`/usr/include/x86_64-linux-gnu/asm/unistd_64.h`
+---
 
-For example:
-
-`syscall x64 " 0"`
-
-`syscall x64 write`
-
-`syscall 32 read`
-
-`syscall x86 10[0-9]`
-
-https://github.com/rerrorctf/ret/blob/main/commands/syscall.go
-
-### vps ☁️
+### 🚩 <u>ct</u>f
 
 ```
-ret vps [create/list/destroy]
+$ ret ctf [flag] 
 ```
 
-Simply create and manage google cloud compute instances.
+capture the flag with ret
 
-Requires the google cloud cli be installed. See https://cloud.google.com/sdk/docs/install for more information.
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/ctf.go
 
-https://github.com/rerrorctf/ret/blob/main/commands/vps.go
+---
 
-### wizard 🧙
-
-```
-ret wizard [ip] [port]
-```
-
-Wizard is here to help! They simply run a few common commands for a typical workflow. The workflow is quite well suited for typical rev and pwn tasks. Sometimes the wizard makes mistakes!
-
-1) Executes the `wizardprecommand` from ~/.config/ret.
-2) Searches for interesting files within the current directory.
-3) Ensures that the hidden .ret directory skeleton exists.
-4) Unzips any .zip files that it can.
-5) Adds any interesting files. This includes those found by unzipping and ignores .zip files.
-6) Shows `status`.
-7) If the wizard thinks there is an elf file it will invoke `pwn` for you.
-8) If you provided an ip or an ip and a port wizard will pass these to `pwn` for you.
-9) Executes the `wizardpostcommand` from ~/.config/ret.
-
-https://github.com/rerrorctf/ret/blob/main/commands/wizard.go
-
-### writeup 📝
+### 🤏 <u>de</u>compress
 
 ```
-ret writeup
+$ ret decompress file1 [file2 file3...] 
 ```
 
-Create a writeup template for a task in a file called `writeup.md`.
+decompress one or more files with ret
 
-https://github.com/rerrorctf/ret/blob/main/commands/writeup.go
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/decompress.go
+
+---
+
+### 🐋 <u>do</u>cker
+
+```
+$ ret docker [ip] [port] 
+```
+
+create a dockerfile from a template with ret
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/docker.go
+
+---
+
+### 🔍 <u>f</u>ormat
+
+```
+$ ret format [regex] 
+```
+
+set the current flag format regex with ret
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/format.go
+
+---
+
+### 🦖 <u>gh</u>idra
+
+```
+$ ret ghidra [file1 file2 file3...] 
+```
+
+ingests all added files then opens ghidra with ret
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/ghidra.go
+
+---
+
+### 🐙 <u>gi</u>st
+
+```
+$ ret gist file1 [file2 file3...] 
+```
+
+make private gists with ret
+specify the path of one or more files to upload
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/gist.go
+
+---
+
+### 🧠 <u>gp</u>t
+
+```
+$ ret gpt [-] [question1 question2 question3...] 
+```
+
+ask ChatGPT with ret
+use - to read from stdin
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/gpt.go
+
+---
+
+### 💃 <u>id</u>a
+
+```
+$ ret ida file1 [file2 file3...] 
+```
+
+opens all added files then opens ida with ret
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/ida.go
+
+---
+
+### 🔬 <u>in</u>scount
+
+```
+$ ret inscount 
+```
+
+create a pin script to count instructions from a template with ret
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/inscount.go
+
+---
+
+### 🗽 <u>l</u>ibc
+
+```
+$ ret libc [tag] 
+```
+
+get a version of libc by copying it from a docker container with ret
+specify an image tag like "ubuntu:24.04" to get a specific version
+without args this command will use the tag "ubuntu:latest"
+the file will be copied to the cwd and added with ret
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/libc.go
+
+---
+
+### ✏️  <u>n</u>otes
+
+```
+$ ret notes [-] [note1 note2 note3...] 
+```
+
+take notes with ret
+use - to read from stdin
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/notes.go
+
+---
+
+### 📡 <u>pr</u>oxy
+
+```
+$ ret proxy [list/create] 
+```
+
+manage proxies with ret
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/proxy.go
+
+---
+
+### 🐚 <u>pw</u>n
+
+```
+$ ret pwn [ip=127.0.0.1] [port=9001] 
+```
+
+create a pwntools script template with ret
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/pwn.go
+
+---
+
+### 🖨️  <u>r</u>eadme
+
+```
+$ ret readme 
+```
+
+make the readme with ret
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/readme.go
+
+---
+
+### 🌿 <u>sa</u>ge
+
+```
+$ ret sage 
+```
+
+open sage with ret
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/sage.go
+
+---
+
+### 👀 <u>st</u>atus
+
+```
+$ ret status 
+```
+
+displays the status for the current task with ret
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/status.go
+
+---
+
+### 📞 <u>sy</u>scall
+
+```
+$ ret syscall [(x86/32)/(x64/64)] [regex] 
+```
+
+check syscalls by regex with ret
+
+  uses: 
+    x86: /usr/include/x86_64-linux-gnu/asm/unistd_32.h
+    x64: /usr/include/x86_64-linux-gnu/asm/unistd_64.h
+
+  examples: 
+    syscall x64 " 0"
+    syscall x64 write
+    syscall 32 read
+    syscall x86 10[0-9]
+
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/status.go
+
+---
+
+### ☁️  <u>v</u>ps
+
+```
+$ ret vps [create/list/destroy] 
+```
+
+create and manage google cloud compute instances with ret
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/vps.go
+
+---
+
+### 🧙 <u>wi</u>zard
+
+```
+$ ret wizard [ip=127.0.0.1] [port=9001] 
+```
+
+do magic with ret
+
+wizard is here to help! they simply run a few common commands suitable for a typical workflow
+
+the workflow is quite well suited for typical rev and pwn tasks and may be useful for tasks in other categories too
+
+sometimes the wizard makes mistakes! be sure to check its work by carefully reviewing the detailed output
+
+steps the wizard performs:
+1) executes the `"wizardprecommand"` string with `"bash -c"` from `~/.config/ret`
+2) searches for interesting files within the current directory. this is typically the task handout .zip file
+3) ensures that the hidden `.ret` directory skeleton exists
+4) decompresses, using the `decompress` command, any interesting files that it can
+5) adds any interesting files to file using the `add` command. this includes those found by decompression and ignores the compressed archives themselves files
+6) shows the added files using the `status` command
+7) if the wizard thinks there is an elf file it will invoke `pwn` for you
+8) if you provided an `ip` or an `ip` and a `port` wizard will pass these to `pwn` command
+9) executes the `"wizardpostcommand"` string with `"bash -c"` from `~/.config/ret`
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/wizard.go
+
+---
+
+### 📝 <u>wr</u>iteup
+
+```
+$ ret writeup 
+```
+
+create a markdown writeup using a template with ret
+
+the writeup will saved in a file called `writeup.md`
+
+if a file called `writeup.md` already exists the command will abort
+
+1. imports all notes taken with the `notes` command into the description area
+2. creates a space for a python script and then imports the script created by `pwn` if one exists
+3. imports the flag captured with the `ctf` command if one exists or the regex specfied with `format` if one does not
+4. uses the `"username"` from `~/.config/ret` to attribute to this writeup to you
+5. inserts a date stamp for today's date using yyyy/mm/dd format
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/wizard.go
+
+---
 
 ## ~/.config/ret
 
-`ret` will parse `~/.config/ret`.
+`ret` will parse `~/.config/ret`:
 
 ```json
 {
-  "ghidrainstallpath": "/opt/ghidra",
-  "ghidraproject": "project",
-  "idainstallpath": "/opt/ida",
-  "pwnscriptname": "go.py",
+  "ghidrainstallpath": "",
+  "ghidraproject": "",
+  "idainstallpath": "",
+  "pwnscriptname": "",
   "pwnscripttemplate": "",
-  "inscountgoscriptname": "inscount.go",
-  "inscountpythonscriptname": "inscount.py",
-  "flagformat": "flag{.+}",
+  "inscountgoscriptname": "",
+  "inscountpythonscriptname": "",
+  "flagformat": "",
   "wizardprecommand": "",
   "wizardpostcommand": "",
-  "username": "smiley",
+  "username": "",
   "chatwebhookurl": "",
   "gisttoken": "",
   "openaikey": "",
-  "openaimodel": "gpt-4o",
+  "openaimodel": "",
   "googlecloudproject": "",
-  "googlecloudregion": "europe-west3-c",
-  "googlecloudsshkey": ""
+  "googlecloudregion": "",
+  "googlecloudsshkey": "",
 }
 ```
