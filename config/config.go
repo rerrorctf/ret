@@ -39,6 +39,7 @@ var (
 	GoogleCloudProject       = "default"
 	GoogleCloudRegion        = "europe-west3-c"
 	GoogleCloudSSHKey        = ""
+	ChefUrl                  = "https://gchq.github.io/CyberChef/"
 )
 
 type Config struct {
@@ -60,6 +61,7 @@ type Config struct {
 	GoogleCloudProject       string `json:"googlecloudproject"`
 	GoogleCloudRegion        string `json:"googlecloudregion"`
 	GoogleCloudSSHKey        string `json:"googlecloudsshkey"`
+	ChefUrl                  string `json:"chefurl"`
 }
 
 func ParseUserConfig() {
@@ -154,6 +156,10 @@ func ParseUserConfig() {
 	if len(userConfig.GoogleCloudSSHKey) > 0 {
 		GoogleCloudSSHKey = userConfig.GoogleCloudSSHKey
 	}
+
+	if len(userConfig.ChefUrl) > 0 {
+		ChefUrl = userConfig.ChefUrl
+	}
 }
 
 func GetConfigPath() (string, error) {
@@ -192,6 +198,7 @@ func WriteUserConfig() {
 	userConfig.GoogleCloudProject = GoogleCloudProject
 	userConfig.GoogleCloudRegion = GoogleCloudRegion
 	userConfig.GoogleCloudSSHKey = GoogleCloudSSHKey
+	userConfig.ChefUrl = ChefUrl
 
 	jsonData, err := json.MarshalIndent(userConfig, "", "  ")
 	if err != nil {
