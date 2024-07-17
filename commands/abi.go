@@ -32,11 +32,15 @@ func init() {
 
 func AbiHelp() string {
 	return "view abi details with ret\n\n" +
-		"output includes calling conventions and register volatility\n\n" +
-		"architecture: specify one of x86/32 or x64/64 ~ the default is x64\n" +
-		"os: specify one of linux or windows ~ the default is linux\n\n" +
-		"for example: $ ret abi x64 linux\n\n" +
-		"for more detailed information on calling conventions refer to https://www.agner.org/optimize/calling_conventions.pdf\n"
+		"output includes calling conventions, register volatility and more\n\n" +
+		"for architecture specify one of `x86`, `32`, `x64`, `64` " + theme.ColorGray + "~ the default is `x64`\n\n" + theme.ColorReset +
+		"for os specify one of `linux`, `windows` " + theme.ColorGray + "~ the default is `linux`\n\n" + theme.ColorReset +
+		"for example:\n" +
+		"```bash\n" +
+		theme.ColorGray + "$ " + theme.ColorBlue + "ret abi x64 linux\n" + theme.ColorReset +
+		theme.ColorGray + "$ " + theme.ColorBlue + "ret abi 32 windows\n" + theme.ColorReset +
+		"```\n\n" +
+		"for more detailed information on calling conventions refer to " + theme.ColorPurple + "https://www.agner.org/optimize/calling_conventions.pdf\n" + theme.ColorReset
 }
 
 func showLinuxAbix86() {
