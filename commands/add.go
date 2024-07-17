@@ -30,7 +30,8 @@ func init() {
 				Optional: false,
 				List:     true,
 			},
-		}})
+		},
+		SeeAlso: []string{"status", "crypto"}})
 }
 
 func AddHelp() string {

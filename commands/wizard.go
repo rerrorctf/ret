@@ -31,7 +31,8 @@ func init() {
 				List:     false,
 				Default:  "9001",
 			},
-		}})
+		},
+		SeeAlso: []string{"decompress", "add", "status", "pwn"}})
 }
 
 func WizardHelp() string {
