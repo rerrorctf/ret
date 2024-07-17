@@ -85,6 +85,19 @@ func main() {
 		help = strings.ReplaceAll(help, "```python\n", "")
 		help = strings.ReplaceAll(help, "`", "")
 		fmt.Printf("%s %s", cmd.Emoji, help)
+
+		if len(cmd.SeeAlso) > 0 {
+			fmt.Printf("\n" + theme.ColorGray + "see also:" + theme.ColorReset + "\n")
+			for _, seeThis := range cmd.SeeAlso {
+				found, cmd := commands.CommandsTrie.Search(seeThis)
+				if !found {
+					continue
+				}
+				fmt.Printf("%s %s ", cmd.Emoji, cmd.Name)
+			}
+
+			fmt.Printf("\n")
+		}
 		return
 	}
 

@@ -17,6 +17,7 @@ type Command struct {
 	Help      CommandHelpFunc
 	Url       string
 	Arguments []Argument
+	SeeAlso   []string
 }
 
 type CommandTrieNode struct {
