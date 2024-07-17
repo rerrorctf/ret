@@ -21,6 +21,7 @@ func init() {
 func AngrHelp() string {
 	return "runs the angr docker with ret\n\n" +
 		"mounts the current working directory as a volume\n\n" +
+		"note that this command requires docker\n\n" +
 		"effectively runs:\n" +
 		"```bash\n" +
 		theme.ColorGray + "$ " + theme.ColorBlue + "sudo docker pull angr/angr\n" +
