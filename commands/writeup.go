@@ -23,7 +23,14 @@ func init() {
 }
 
 func WriteupHelp() string {
-	return fmt.Sprintf("create a template for a task in a file called writeup.md with ret\n")
+	return "create a markdown writeup using a template with ret\n\n" +
+		"the writeup will saved in a file called `writeup.md`\n\n" +
+		"if a file called `writeup.md` already exists the command will abort\n\n" +
+		"1. imports all notes taken with the " + theme.ColorGreen + "`notes`" + theme.ColorReset + " command into the description area\n" +
+		"2. creates a space for a python script and then imports the script created by " + theme.ColorGreen + "`pwn`" + theme.ColorReset + " if one exists\n" +
+		"3. imports the flag captured with the " + theme.ColorGreen + "`ctf`" + theme.ColorReset + " command if one exists or the regex specfied with " + theme.ColorGreen + "`format`" + theme.ColorReset + " if one does not\n" +
+		"4. uses the " + theme.ColorYellow + "`\"username\"`" + theme.ColorReset + " from " + theme.ColorCyan + "`~/.config/ret`" + theme.ColorReset + " to attribute to this writeup to you\n" +
+		"5. inserts a date stamp for today's date using yyyy/mm/dd format\n"
 }
 
 func Writeup(args []string) {
