@@ -22,33 +22,7 @@ some commands make opportunistic use of other tools and some won't work without 
 
 consider installing the following to get access to the full functionality of ret
 
-#### yara
-
-yara is used by the crypto and add commands to search for cryptographic constants
-
-#### gcloud cli
-
-the google cloud cli is used by the `vps` command to create and manage compute resources
-
-you can install it from here https://cloud.google.com/sdk/docs/install#deb
-
-#### docker
-
-used by the `docker`, `libc`, `sage` and `angr` commands
-
-you can install it from here https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
-
-#### pin
-
-used by the output of the `inscount` command
-
-you can install it from here https://www.intel.com/content/www/us/en/developer/articles/tool/pin-a-binary-instrumentation-tool-downloads.html
-
-#### pwntools
-
-used by the output of the `pwn` command
-
-you can install it from here https://docs.pwntools.com/en/stable/install.html
+you can use the `check` command to see what's installed
 
 ### Compiling (Optional)
 
@@ -206,7 +180,29 @@ for more information please see https://support.discord.com/hc/en-us/articles/22
 
 ---
 
-### 🔪 <u>che</u>f
+### ✅ <u>chec</u>k
+
+```
+$ ret check 
+```
+
+check if ret's optional dependencies are installed
+
+checks for the following:
+1) docker
+2) pwntools
+3) ida
+4) ghidra
+5) ping
+6) yara
+7) gcloud
+8) 7z
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/check.go
+
+---
+
+### 🔪 <u>chef</u>
 
 ```
 $ ret chef [-] [text1 text2 text3...] 

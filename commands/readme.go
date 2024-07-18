@@ -45,33 +45,7 @@ func Readme(args []string) {
 
 	fmt.Fprintf(os.Stdout, "consider installing the following to get access to the full functionality of ret\n\n")
 
-	fmt.Fprintf(os.Stdout, "#### yara\n\n")
-
-	fmt.Fprintf(os.Stdout, "yara is used by the crypto and add commands to search for cryptographic constants\n\n")
-
-	fmt.Fprintf(os.Stdout, "#### gcloud cli\n\n")
-
-	fmt.Fprintf(os.Stdout, "the google cloud cli is used by the `vps` command to create and manage compute resources\n\n")
-
-	fmt.Fprintf(os.Stdout, "you can install it from here https://cloud.google.com/sdk/docs/install#deb\n\n")
-
-	fmt.Fprintf(os.Stdout, "#### docker\n\n")
-
-	fmt.Fprintf(os.Stdout, "used by the `docker`, `libc`, `sage` and `angr` commands\n\n")
-
-	fmt.Fprintf(os.Stdout, "you can install it from here https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository\n\n")
-
-	fmt.Fprintf(os.Stdout, "#### pin\n\n")
-
-	fmt.Fprintf(os.Stdout, "used by the output of the `inscount` command\n\n")
-
-	fmt.Fprintf(os.Stdout, "you can install it from here https://www.intel.com/content/www/us/en/developer/articles/tool/pin-a-binary-instrumentation-tool-downloads.html\n\n")
-
-	fmt.Fprintf(os.Stdout, "#### pwntools\n\n")
-
-	fmt.Fprintf(os.Stdout, "used by the output of the `pwn` command\n\n")
-
-	fmt.Fprintf(os.Stdout, "you can install it from here https://docs.pwntools.com/en/stable/install.html\n\n")
+	fmt.Fprintf(os.Stdout, "you can use the `check` command to see what's installed\n\n")
 
 	fmt.Fprintf(os.Stdout, "### Compiling (Optional)\n\n")
 
