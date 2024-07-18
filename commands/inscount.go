@@ -44,7 +44,7 @@ func makeInscountScript(binary string) {
 		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
-	fmt.Printf("🔬 "+theme.ColorGray+"ready to count instructions with python:"+theme.ColorReset+" $ ./%s\n", config.InscountPythonScriptName)
+	fmt.Printf("🔬 "+theme.ColorGray+"ready to count instructions:"+theme.ColorReset+" $ ./%s\n", config.InscountPythonScriptName)
 }
 
 func Inscount(args []string) {

@@ -25,7 +25,6 @@ var (
 	IdaInstallPath           = "/opt/ida"
 	PwnScriptName            = "go.py"
 	PwnScriptTemplate        = ""
-	InscountGoScriptName     = "inscount.go"
 	InscountPythonScriptName = "inscount.py"
 	FlagFileName             = FolderName + "/flag.json"
 	FlagFormat               = "flag{.+}"
@@ -49,7 +48,6 @@ type Config struct {
 	IdaInstallPath           string `json:"idainstallpath"`
 	PwnScriptName            string `json:"pwnscriptname"`
 	PwnScriptTemplate        string `json:"pwnscripttemplate"`
-	InscountGoScriptName     string `json:"inscountgoscriptname"`
 	InscountPythonScriptName string `json:"inscountpythonscriptname"`
 	FlagFormat               string `json:"flagformat"`
 	WizardPreCommand         string `json:"wizardprecommand"`
@@ -105,10 +103,6 @@ func ParseUserConfig() {
 
 	if len(userConfig.PwnScriptTemplate) > 0 {
 		PwnScriptTemplate = userConfig.PwnScriptTemplate
-	}
-
-	if len(userConfig.InscountGoScriptName) > 0 {
-		InscountGoScriptName = userConfig.InscountGoScriptName
 	}
 
 	if len(userConfig.InscountPythonScriptName) > 0 {
@@ -191,7 +185,6 @@ func WriteUserConfig() {
 	userConfig.IdaInstallPath = IdaInstallPath
 	userConfig.PwnScriptName = PwnScriptName
 	userConfig.PwnScriptTemplate = PwnScriptTemplate
-	userConfig.InscountGoScriptName = InscountGoScriptName
 	userConfig.InscountPythonScriptName = InscountPythonScriptName
 	userConfig.FlagFormat = FlagFormat
 	userConfig.WizardPreCommand = WizardPreCommand
