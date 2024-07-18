@@ -414,6 +414,21 @@ $ ret pwn [ip=127.0.0.1] [port=9001]
 
 create a pwntools script template with ret
 
+the file this command creates is named using `"pwnscriptname"` from `~/.config/ret` and is `"go.py"` by default
+
+this command attempts to guess the name of the main task binary using the list of added files and their types
+
+you can specify the path of a custom template with `"pwnscripttemplate"`
+
+this command will do the follow substitutions in custom templates:
+1) `/%BINARY%/binary`
+2) `/%IP%/ip`
+3) `/%PORT%/port`
+
+for example:
+1) `"remote("%IP%", %PORT%)"` would become `"remote("127.0.0.1", 9001)"`
+2) `"process("./%BINARY%")"` would become `"process("./task")"`
+
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/pwn.go
 
 ---
