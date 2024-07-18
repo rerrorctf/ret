@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"embed"
 	"fmt"
 	"log"
 	"os"
@@ -9,6 +10,9 @@ import (
 	"ret/util"
 	"strings"
 )
+
+//go:embed inscount.py
+var embedFS embed.FS
 
 func init() {
 	Commands = append(Commands, Command{
@@ -24,144 +28,11 @@ func InscountHelp() string {
 	return fmt.Sprintf("create a pin script to count instructions from a template with ret\n")
 }
 
-func makeInscountGoScript(binary string) {
-	script := fmt.Sprintf(
-		`package main
+func makeInscountScript(binary string) {
+	scriptFile, _ := embedFS.ReadFile("inscount.py")
 
-import (
-	"bufio"
-	"bytes"
-	"fmt"
-	"os/exec"
-	"strconv"
-	"strings"
-)
-
-const (
-	PIN             = "/opt/pin/pin"
-	INSCOUNT2_MT_SO = "/opt/pin/source/tools/SimpleExamples/obj-intel64/inscount2_mt.so"
-	BINARY          = "./%s"
-)
-
-func main() {
-	flag := ""
-
-	cmdArgs := []string{
-		"-t", INSCOUNT2_MT_SO,
-		"--", BINARY,
-	}
-
-	var printableBytes []byte
-	for i := 32; i <= 126; i++ {
-		printableBytes = append(printableBytes, byte(i))
-	}
-
-	highestCount := 0
-	var bestByte byte
-
-	type Result struct {
-		count    int
-		bestByte byte
-	}
-
-	results := make(chan Result)
-
-	for {
-		for _, i := range printableBytes {
-			go func(i byte) {
-				cmd := exec.Command(PIN, cmdArgs...)
-
-				var cmdStdin bytes.Buffer
-				var cmdStdout bytes.Buffer
-				var cmdStderr bytes.Buffer
-
-				cmdStdin.WriteString(flag)
-				cmdStdin.WriteByte(i)
-
-				cmd.Stdin = &cmdStdin
-				cmd.Stdout = &cmdStdout
-				cmd.Stderr = &cmdStderr
-
-				err := cmd.Run()
-
-				if err != nil {
-					fmt.Printf("%%s\n", cmdStdout.String())
-					fmt.Printf("%%s\n", cmdStderr.String())
-				}
-
-				totalCount := 0
-				scanner := bufio.NewScanner(&cmdStdout)
-				for scanner.Scan() {
-					line := scanner.Text()
-					if strings.HasPrefix(line, "Count[") {
-						parts := strings.Split(line, " = ")
-						count, err := strconv.Atoi(parts[1])
-						if err == nil {
-							totalCount += count
-						}
-					}
-				}
-
-				results <- Result{totalCount, i}
-			}(i)
-		}
-
-		for range printableBytes {
-			result := <-results
-			if result.count > highestCount {
-				highestCount = result.count
-				bestByte = result.bestByte
-			}
-		}
-
-		flag = fmt.Sprintf("%%s%%c", flag, bestByte)
-		fmt.Printf("%%s\n", flag)
-	}
-}
-`, binary)
-
-	err := os.WriteFile(config.InscountGoScriptName, []byte(script), 0644)
-	if err != nil {
-		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
-	}
-
-	fmt.Printf("🔬 "+theme.ColorGray+"ready to count instructions with golang:"+theme.ColorReset+" $ go run ./%s\n", config.InscountGoScriptName)
-}
-
-func makeInscountPythonScript(binary string) {
-	script := fmt.Sprintf(
-		`#!/usr/bin/env python3
-
-import string
-from pwn import *
-
-PIN             = "/opt/pin/pin"
-INSCOUNT2_MT_SO = "/opt/pin/source/tools/SimpleExamples/obj-intel64/inscount2_mt.so"
-BINARY          = "./%s"
-
-flag = b""
-
-while True:
-	highest_count = 0
-	best_byte = b"\x00"
-	for c in string.printable:
-		b = c.encode()
-		with process(argv=[PIN, "-t", INSCOUNT2_MT_SO, "--", BINARY], level="CRITICAL") as p:
-			p.sendline(flag + b)
-
-			lines = p.recvall().split(b"\n")
-
-			count = 0
-			for line in lines:
-				if b"Count[" in line:
-					count += int(line.split(b" = ")[1])
-
-			if count > highest_count:
-				highest_count = count
-				best_byte = b
-	flag += best_byte
-	log.success(flag.decode())
-`, binary)
+	script := string(scriptFile)
+	script = strings.ReplaceAll(script, "%s", binary)
 
 	err := os.WriteFile(config.InscountPythonScriptName, []byte(script), 0644)
 	if err != nil {
@@ -194,17 +65,10 @@ func Inscount(args []string) {
 		}
 	}
 
-	_, err := os.Stat(config.InscountGoScriptName)
-	if !os.IsNotExist(err) {
-		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": \"%s\" already exists!\n", config.InscountGoScriptName)
-	}
-
-	makeInscountGoScript(binary)
-
-	_, err = os.Stat(config.InscountPythonScriptName)
+	_, err := os.Stat(config.InscountPythonScriptName)
 	if !os.IsNotExist(err) {
 		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": \"%s\" already exists!\n", config.InscountPythonScriptName)
 	}
 
-	makeInscountPythonScript(binary)
+	makeInscountScript(binary)
 }
