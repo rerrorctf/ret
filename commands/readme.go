@@ -45,14 +45,6 @@ func Readme(args []string) {
 
 	fmt.Fprintf(os.Stdout, "consider installing the following to get access to the full functionality of ret\n\n")
 
-	fmt.Fprintf(os.Stdout, "#### strings\n\n")
-
-	fmt.Fprintf(os.Stdout, "a basic system util that may not be installed by default that is used by ret to search for flags\n\n")
-
-	fmt.Fprintf(os.Stdout, "#### grep\n\n")
-
-	fmt.Fprintf(os.Stdout, "a basic system util that may not be installed by default that is used by ret to search for flags\n\n")
-
 	fmt.Fprintf(os.Stdout, "#### yara\n\n")
 
 	fmt.Fprintf(os.Stdout, "yara is used by the crypto and add commands to search for cryptographic constants\n\n")

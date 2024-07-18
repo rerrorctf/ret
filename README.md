@@ -22,14 +22,6 @@ some commands make opportunistic use of other tools and some won't work without 
 
 consider installing the following to get access to the full functionality of ret
 
-#### strings
-
-a basic system util that may not be installed by default that is used by ret to search for flags
-
-#### grep
-
-a basic system util that may not be installed by default that is used by ret to search for flags
-
 #### yara
 
 yara is used by the crypto and add commands to search for cryptographic constants
