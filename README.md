@@ -356,6 +356,12 @@ $ ret inscount
 
 create a pin script to count instructions from a template with ret
 
+uses `"inscountpythonscriptname"` from `~/.config/ret` to name the file
+
+this command assumes it can find a pin installation at /opt/pin
+
+you can find pin install instructions here https://www.intel.com/content/www/us/en/developer/articles/tool/pin-a-binary-instrumentation-tool-downloads.html
+
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/inscount.go
 
 ---
@@ -546,7 +552,6 @@ if a file called `writeup.md` already exists the command will abort
   "idainstallpath": "",
   "pwnscriptname": "",
   "pwnscripttemplate": "",
-  "inscountgoscriptname": "",
   "inscountpythonscriptname": "",
   "flagformat": "",
   "wizardprecommand": "",

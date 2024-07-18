@@ -25,7 +25,10 @@ func init() {
 }
 
 func InscountHelp() string {
-	return fmt.Sprintf("create a pin script to count instructions from a template with ret\n")
+	return "create a pin script to count instructions from a template with ret\n\n" +
+		"uses " + theme.ColorYellow + "`\"inscountpythonscriptname\"`" + theme.ColorReset + " from " + theme.ColorCyan + "`~/.config/ret`" + theme.ColorReset + " to name the file\n\n" +
+		"this command assumes it can find a pin installation at /opt/pin\n\n" +
+		"you can find pin install instructions here " + theme.ColorPurple + "https://www.intel.com/content/www/us/en/developer/articles/tool/pin-a-binary-instrumentation-tool-downloads.html\n" + theme.ColorReset
 }
 
 func makeInscountScript(binary string) {
