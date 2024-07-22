@@ -8,6 +8,7 @@ type Argument struct {
 	Optional bool
 	List     bool
 	Default  string
+	Override bool
 }
 
 type Command struct {
@@ -73,8 +74,11 @@ func (t *CommandTrie) ShortestPrefix(word string) (string, string) {
 }
 
 var (
-	Commands     []Command
-	CommandsTrie *CommandTrie
+	Commands        []Command
+	CommandsTrie    *CommandTrie
+	CommandsChoice1 bool
+	CommandsChoice2 bool
+	CommandsChoice3 bool
 )
 
 func PrepareCommands() {

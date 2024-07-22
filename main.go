@@ -29,6 +29,10 @@ func main() {
 		fmt.Printf(theme.ColorGray+"https://github.com/rerrorctf/ret ~ %s\n"+theme.ColorReset, COMMIT)
 	}
 
+	flag.BoolVar(&commands.CommandsChoice1, "1", false, "command override 1")
+	flag.BoolVar(&commands.CommandsChoice2, "2", false, "command override 2")
+	flag.BoolVar(&commands.CommandsChoice3, "3", false, "command override 3")
+
 	flag.Parse()
 
 	if flag.NArg() < 1 {
@@ -53,9 +57,21 @@ func main() {
 			return
 		}
 
-		fmt.Printf(theme.ColorGreen+"usage"+theme.ColorReset+": ret "+theme.ColorBlue+"%s "+theme.ColorReset, cmd.Name)
+		fmt.Printf(theme.ColorGreen + "usage" + theme.ColorReset + ": ret " + theme.ColorReset)
 
 		for _, arg := range cmd.Arguments {
+			if arg.Override {
+				fmt.Printf(theme.ColorGray+"%s ", arg.Name)
+			}
+		}
+
+		fmt.Printf(theme.ColorBlue+"%s "+theme.ColorReset, cmd.Name)
+
+		for _, arg := range cmd.Arguments {
+			if arg.Override {
+				continue
+			}
+
 			name := arg.Name
 			if arg.Default != "" {
 				name = fmt.Sprintf("%s=%s", name, arg.Default)
