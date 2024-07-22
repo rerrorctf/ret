@@ -32,6 +32,8 @@ var (
 	WizardPostCommand        = ""
 	Username                 = ""
 	ChatWebhookUrl           = ""
+	ChatWebhookUrl2          = ""
+	ChatWebhookUrl3          = ""
 	GistToken                = ""
 	OpenAIKey                = ""
 	OpenAIModel              = "gpt-4o"
@@ -54,6 +56,8 @@ type Config struct {
 	WizardPostCommand        string `json:"wizardpostcommand"`
 	Username                 string `json:"username"`
 	ChatWebhookUrl           string `json:"chatwebhookurl"`
+	ChatWebhookUrl2          string `json:"chatwebhookurl2"`
+	ChatWebhookUrl3          string `json:"chatwebhookurl3"`
 	GistToken                string `json:"gisttoken"`
 	OpenAIKey                string `json:"openaikey"`
 	OpenAIModel              string `json:"openaimodel"`
@@ -129,6 +133,14 @@ func ParseUserConfig() {
 		ChatWebhookUrl = userConfig.ChatWebhookUrl
 	}
 
+	if len(userConfig.ChatWebhookUrl2) > 0 {
+		ChatWebhookUrl2 = userConfig.ChatWebhookUrl2
+	}
+
+	if len(userConfig.ChatWebhookUrl3) > 0 {
+		ChatWebhookUrl3 = userConfig.ChatWebhookUrl3
+	}
+
 	if len(userConfig.GistToken) > 0 {
 		GistToken = userConfig.GistToken
 	}
@@ -191,6 +203,8 @@ func WriteUserConfig() {
 	userConfig.WizardPostCommand = WizardPostCommand
 	userConfig.Username = Username
 	userConfig.ChatWebhookUrl = ChatWebhookUrl
+	userConfig.ChatWebhookUrl2 = ChatWebhookUrl2
+	userConfig.ChatWebhookUrl3 = ChatWebhookUrl3
 	userConfig.GistToken = GistToken
 	userConfig.OpenAIKey = OpenAIKey
 	userConfig.OpenAIModel = OpenAIModel

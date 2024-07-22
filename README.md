@@ -159,14 +159,20 @@ flags are stored in the `.ret/flag.json` file
 ### 📢 <u>cha</u>t
 
 ```
-$ ret chat [-] [message1 message2 message3...] 
+$ ret chat [--1] [--2] [--3] [-] [message1 message2 message3...] 
 ```
 
 chat via a discord webhook with ret
 
 use - to read from stdin
 
-requires that `"chatwebhookurl"` from `~/.config/ret` is a valid webhook
+requires a valid webhook this is typically `"chatwebhookurl"` from `~/.config/ret` is a valid webhook
+
+however the command supports up to 3 webhooks using `$ ret --1 chat`, `$ ret --2 chat` and `$ ret --3 chat`
+
+if no numerical override is specified the `"chatwebhookurl"` webhook is used by default
+
+webhooks 2 and 3 are set with `"chatwebhookurl2"` and `"chatwebhookurl3"` respectively
 
 requires that `"username"` from `~/.config/ret` is set to valid string
 
@@ -573,6 +579,8 @@ if a file called `writeup.md` already exists the command will abort
   "wizardpostcommand": "",
   "username": "",
   "chatwebhookurl": "",
+  "chatwebhookurl2": "",
+  "chatwebhookurl3": "",
   "gisttoken": "",
   "openaikey": "",
   "openaimodel": "",
