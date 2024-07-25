@@ -1,14 +1,9 @@
 package commands
 
 import (
-	"encoding/json"
 	"fmt"
-	"log"
-	"os"
 	"os/exec"
 	"ret/config"
-	"ret/data"
-	"ret/theme"
 	"time"
 )
 
@@ -55,26 +50,9 @@ func Ida(args []string) {
 
 	go idaSpinner()
 
-	idaArgs := make([]string, 0)
+	launchIda := exec.Command(config.IdaInstallPath + "/ida64")
 
-	jsonData, err := os.ReadFile(config.RetFilesNames)
-	if err == nil {
-		var files data.Files
-
-		err = json.Unmarshal(jsonData, &files)
-		if err != nil {
-			log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
-		}
-
-		for _, file := range files.Files {
-			idaArgs = append(idaArgs, file.Filepath)
-		}
-
-	}
-
-	launchIda := exec.Command(config.IdaInstallPath+"/ida64", idaArgs...)
-
-	err = launchIda.Start()
+	err := launchIda.Start()
 	if err != nil {
 		fmt.Println("warning:\n", err)
 	}
