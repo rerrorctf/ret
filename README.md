@@ -203,6 +203,7 @@ checks for the following:
 6) yara
 7) gcloud
 8) 7z
+9) pin
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/check.go
 
