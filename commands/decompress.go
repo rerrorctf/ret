@@ -24,7 +24,17 @@ func init() {
 }
 
 func DecompressHelp() string {
-	return fmt.Sprintf("decompress one or more files with ret\n")
+	return "decompress one or more files with ret\n\n" +
+		"will first check if the file has a valid extension\n" +
+		"valid extensions are " +
+		theme.ColorPurple + "`.gzip`" + theme.ColorReset + ", " +
+		theme.ColorPurple + "`.gz`" + theme.ColorReset + ", " +
+		theme.ColorPurple + "`.zip`" + theme.ColorReset + ", " +
+		theme.ColorPurple + "`.xz`" + theme.ColorReset + ", " +
+		theme.ColorPurple + "`.7z` " + theme.ColorReset + "and " + theme.ColorPurple + "`.tar`" + theme.ColorReset + "\n\n" +
+		"if the file has a valid extension decompress will then check if the file has a valid magic\n\n" +
+		"if the file has a valid extension and magic it will be decompressed with 7z as if the following was executed:\n" +
+		theme.ColorGray + "$ " + theme.ColorBlue + "7z e filename -y\n" + theme.ColorReset
 }
 
 func Decompress(args []string) {
