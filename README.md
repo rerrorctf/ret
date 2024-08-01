@@ -280,7 +280,7 @@ if the file has a valid extension decompress will then check if the file has a v
 
 if the file has a valid extension and magic it will be decompressed with 7z as if the following was executed:
 
-$ 7z e filename -y
+`$ 7z e filename -y`
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/decompress.go
 
