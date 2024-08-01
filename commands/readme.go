@@ -43,9 +43,9 @@ func Readme(args []string) {
 
 	fmt.Fprintf(os.Stdout, "some commands make opportunistic use of other tools and some won't work without them\n\n")
 
-	fmt.Fprintf(os.Stdout, "consider installing the following to get access to the full functionality of ret\n\n")
+	fmt.Fprintf(os.Stdout, "you can use the `check` command to see what's currently installed\n\n")
 
-	fmt.Fprintf(os.Stdout, "you can use the `check` command to see what's installed\n\n")
+	fmt.Fprintf(os.Stdout, "consider installing the missing dependencies mentioned by the `check` command to get access to the full functionality of ret\n\n")
 
 	fmt.Fprintf(os.Stdout, "### Compiling (Optional)\n\n")
 
