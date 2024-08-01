@@ -13,7 +13,7 @@ func init() {
 		Func:    Check,
 		Help:    CheckHelp,
 		Url:     "https://github.com/rerrorctf/ret/blob/main/commands/check.go",
-		SeeAlso: []string{"crypto", "angr", "sage", "docker", "libc", "vps"},
+		SeeAlso: []string{"crypto", "angr", "sage", "docker", "libc", "vps", "inscount"},
 	})
 }
 
@@ -27,7 +27,8 @@ func CheckHelp() string {
 		theme.ColorGray + "5) " + theme.ColorReset + "ping\n" +
 		theme.ColorGray + "6) " + theme.ColorReset + "yara\n" +
 		theme.ColorGray + "7) " + theme.ColorReset + "gcloud\n" +
-		theme.ColorGray + "8) " + theme.ColorReset + "7z\n"
+		theme.ColorGray + "8) " + theme.ColorReset + "7z\n" +
+		theme.ColorGray + "9) " + theme.ColorReset + "pin\n"
 }
 
 func testCommand(command string, args ...string) bool {
@@ -73,4 +74,8 @@ func Check(args []string) {
 	}
 
 	testCommand("7z", "--help")
+
+	if !testCommand("stat", "/opt/pin/pin") {
+		suggestLink("https://www.intel.com/content/www/us/en/developer/articles/tool/pin-a-binary-instrumentation-tool-downloads.html")
+	}
 }
