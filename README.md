@@ -20,9 +20,9 @@ Other options are available and you may do whatever works best for you.
 
 some commands make opportunistic use of other tools and some won't work without them
 
-consider installing the following to get access to the full functionality of ret
+you can use the `check` command to see what's currently installed
 
-you can use the `check` command to see what's installed
+consider installing the missing dependencies mentioned by the `check` command to get access to the full functionality of ret
 
 ### Compiling (Optional)
 
