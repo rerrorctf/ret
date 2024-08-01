@@ -159,7 +159,7 @@ flags are stored in the `.ret/flag.json` file
 ### 📢 <u>cha</u>t
 
 ```
-$ ret chat [--1] [--2] [--3] [-] [message1 message2 message3...] 
+$ ret --1 --2 --3 chat [-] [message1 message2 message3...] 
 ```
 
 chat via a discord webhook with ret
