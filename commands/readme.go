@@ -79,9 +79,21 @@ func Readme(args []string) {
 		shortestValidPrefix, restOfCommand := CommandsTrie.ShortestPrefix(command.Name)
 		fmt.Fprintf(os.Stdout, "### %s <u>%s</u>%s\n\n", command.Emoji, shortestValidPrefix, restOfCommand)
 
-		fmt.Fprintf(os.Stdout, "```\n$ ret %s ", command.Name)
+		fmt.Fprintf(os.Stdout, "```\n$ ret ")
 
 		for _, arg := range command.Arguments {
+			if arg.Override {
+				fmt.Printf("%s ", arg.Name)
+			}
+		}
+
+		fmt.Fprintf(os.Stdout, "%s ", command.Name)
+
+		for _, arg := range command.Arguments {
+			if arg.Override {
+				continue
+			}
+
 			name := arg.Name
 			if arg.Default != "" {
 				name = fmt.Sprintf("%s=%s", name, arg.Default)
