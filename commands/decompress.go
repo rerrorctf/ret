@@ -33,7 +33,7 @@ func DecompressHelp() string {
 		theme.ColorPurple + "`.xz`" + theme.ColorReset + ", " +
 		theme.ColorPurple + "`.7z` " + theme.ColorReset + "and " + theme.ColorPurple + "`.tar`" + theme.ColorReset + "\n\n" +
 		"if the file has a valid extension decompress will then check if the file has a valid magic\n\n" +
-		"if the file has a valid extension and magic it will be decompressed with 7z as if the following was executed:\n" +
+		"if the file has a valid extension and magic it will be decompressed with 7z as if the following was executed:\n\n" +
 		theme.ColorGray + "$ " + theme.ColorBlue + "7z e filename -y\n" + theme.ColorReset
 }
 
