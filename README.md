@@ -199,7 +199,7 @@ checks for the following:
 2) pwntools
 3) ida
 4) ghidra
-5) ping
+5) pin
 6) yara
 7) gcloud
 8) 7z
