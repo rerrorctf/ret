@@ -24,7 +24,7 @@ func CheckHelp() string {
 		theme.ColorGray + "2) " + theme.ColorReset + "pwntools\n" +
 		theme.ColorGray + "3) " + theme.ColorReset + "ida\n" +
 		theme.ColorGray + "4) " + theme.ColorReset + "ghidra\n" +
-		theme.ColorGray + "5) " + theme.ColorReset + "ping\n" +
+		theme.ColorGray + "5) " + theme.ColorReset + "pin\n" +
 		theme.ColorGray + "6) " + theme.ColorReset + "yara\n" +
 		theme.ColorGray + "7) " + theme.ColorReset + "gcloud\n" +
 		theme.ColorGray + "8) " + theme.ColorReset + "7z\n" +
