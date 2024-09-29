@@ -473,6 +473,19 @@ open sage with ret
 
 ---
 
+### 🌐 <u>sh</u>are
+
+```
+$ ret share 
+```
+
+share task progress with ret
+
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/share.go
+
+---
+
 ### 👀 <u>st</u>atus
 
 ```
