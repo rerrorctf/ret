@@ -79,8 +79,7 @@ func Writeup(args []string) {
 
 	template := fmt.Sprintf(
 		"%s\n\n"+
-			"# TASK-NAME (CATEGORY)\n\n"+
-			"DESCRIPTION-GOES-HERE\n\n"+
+			"# NAME (CATEGORY)\n\n"+
 			"%s"+
 			"## Solution\n\n"+
 			"```python\n"+
