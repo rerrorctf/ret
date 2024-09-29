@@ -33,7 +33,7 @@ func GistHelp() string {
 
 func Gist(args []string) {
 	if len(args) == 0 {
-		log.Fatalf("💥 " + theme.ColorRed + "error" + theme.ColorReset + ": exepcted 1 or more arguments\n")
+		log.Fatalf("💥 " + theme.ColorRed + "error" + theme.ColorReset + ": expected 1 or more arguments\n")
 	}
 
 	if len(config.GistToken) == 0 {
