@@ -13,7 +13,6 @@ func init() {
 		Emoji: "💃",
 		Func:  Ida,
 		Help:  IdaHelp,
-		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/ida.go",
 		Arguments: []Argument{
 			{
 				Name:     "file",

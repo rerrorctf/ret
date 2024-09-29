@@ -14,7 +14,6 @@ func init() {
 		Emoji: "🐋",
 		Func:  Docker,
 		Help:  DockerHelp,
-		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/docker.go",
 		Arguments: []Argument{
 			{
 				Name:     "ip",

@@ -16,7 +16,6 @@ func init() {
 		Emoji: "☁️ ",
 		Func:  Vps,
 		Help:  VpsHelp,
-		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/vps.go",
 		Arguments: []Argument{
 			{
 				Name:     "create/list/destroy",

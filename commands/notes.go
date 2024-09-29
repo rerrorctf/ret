@@ -21,7 +21,6 @@ func init() {
 		Emoji: "✏️ ",
 		Func:  Notes,
 		Help:  NotesHelp,
-		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/notes.go",
 		Arguments: []Argument{
 			{
 				Name:     "-",

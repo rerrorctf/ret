@@ -13,7 +13,6 @@ func init() {
 		Emoji: "🤏",
 		Func:  Decompress,
 		Help:  DecompressHelp,
-		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/decompress.go",
 		Arguments: []Argument{
 			{
 				Name:     "file",

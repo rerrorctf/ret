@@ -517,7 +517,7 @@ check syscalls by regex with ret
     syscall x86 10[0-9]
 
 
-🔗 https://github.com/rerrorctf/ret/blob/main/commands/status.go
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/syscall.go
 
 ---
 
@@ -581,7 +581,7 @@ if a file called `writeup.md` already exists the command will abort
 5. uses the `"username"` from `~/.config/ret` to attribute to this writeup to you
 6. inserts a date stamp for today's date using yyyy/mm/dd format
 
-🔗 https://github.com/rerrorctf/ret/blob/main/commands/wizard.go
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/writeup.go
 
 ---
 

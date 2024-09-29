@@ -12,7 +12,6 @@ func init() {
 		Emoji: "🤝",
 		Func:  Abi,
 		Help:  AbiHelp,
-		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/abi.go",
 		Arguments: []Argument{
 			{
 				Name:     "architecture",

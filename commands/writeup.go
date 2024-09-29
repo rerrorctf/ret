@@ -18,7 +18,6 @@ func init() {
 		Emoji:     "📝",
 		Func:      Writeup,
 		Help:      WriteupHelp,
-		Url:       "https://github.com/rerrorctf/ret/blob/main/commands/wizard.go",
 		Arguments: nil,
 		SeeAlso:   []string{"notes", "pwn", "capture", "format", "ctftime"}})
 }

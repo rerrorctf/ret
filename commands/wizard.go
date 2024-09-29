@@ -17,7 +17,6 @@ func init() {
 		Emoji: "🧙",
 		Func:  Wizard,
 		Help:  WizardHelp,
-		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/wizard.go",
 		Arguments: []Argument{
 			{
 				Name:     "ip",

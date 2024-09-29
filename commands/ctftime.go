@@ -12,7 +12,6 @@ func init() {
 		Emoji: "🚩",
 		Func:  CtfTime,
 		Help:  CtfTimeHelp,
-		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/ctftime.go",
 		Arguments: []Argument{
 			{
 				Name:     "url",

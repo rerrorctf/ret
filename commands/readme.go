@@ -14,7 +14,6 @@ func init() {
 		Emoji: "🖨️ ",
 		Func:  Readme,
 		Help:  ReadmeHelp,
-		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/readme.go",
 	})
 }
 
@@ -119,7 +118,7 @@ func Readme(args []string) {
 
 		fmt.Fprintf(os.Stdout, "%s\n", theme.RemoveColors(command.Help()))
 
-		fmt.Fprintf(os.Stdout, "🔗 %s\n\n", command.Url)
+		fmt.Fprintf(os.Stdout, "🔗 https://github.com/rerrorctf/ret/blob/main/commands/%s.go\n\n", command.Name)
 
 		fmt.Fprintf(os.Stdout, "---\n\n")
 	}

@@ -13,7 +13,6 @@ func init() {
 		Emoji: "📞",
 		Func:  Syscall,
 		Help:  SyscallHelp,
-		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/status.go",
 		Arguments: []Argument{
 			{
 				Name:     "(x86/32)/(x64/64)",

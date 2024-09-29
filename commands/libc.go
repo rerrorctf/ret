@@ -15,7 +15,6 @@ func init() {
 		Emoji: "🗽",
 		Func:  Libc,
 		Help:  LibcHelp,
-		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/libc.go",
 		Arguments: []Argument{
 			{
 				Name:     "tag",
