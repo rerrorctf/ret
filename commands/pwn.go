@@ -16,7 +16,6 @@ func init() {
 		Emoji: "🐚",
 		Func:  Pwn,
 		Help:  PwnHelp,
-		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/pwn.go",
 		Arguments: []Argument{
 			{
 				Name:     "ip",

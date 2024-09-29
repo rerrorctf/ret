@@ -14,7 +14,6 @@ func init() {
 		Emoji: "🖨️ ",
 		Func:  Readme,
 		Help:  ReadmeHelp,
-		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/readme.go",
 	})
 }
 

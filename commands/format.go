@@ -12,7 +12,6 @@ func init() {
 		Emoji: "🔍",
 		Func:  Format,
 		Help:  FormatHelp,
-		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/format.go",
 		Arguments: []Argument{
 			{
 				Name:     "regex",

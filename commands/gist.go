@@ -16,7 +16,6 @@ func init() {
 		Emoji: "🐙",
 		Func:  Gist,
 		Help:  GistHelp,
-		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/gist.go",
 		Arguments: []Argument{
 			{
 				Name:     "file",

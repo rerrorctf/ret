@@ -18,7 +18,6 @@ func init() {
 		Emoji: "📡",
 		Func:  Proxy,
 		Help:  ProxyHelp,
-		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/proxy.go",
 		Arguments: []Argument{
 			{
 				Name:     "list/create",

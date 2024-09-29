@@ -17,7 +17,6 @@ func init() {
 		Emoji: "🦖",
 		Func:  Ghidra,
 		Help:  GhidraHelp,
-		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/ghidra.go",
 		Arguments: []Argument{
 			{
 				Name:     "file",

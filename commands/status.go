@@ -17,7 +17,6 @@ func init() {
 		Emoji:     "👀",
 		Func:      Status,
 		Help:      StatusHelp,
-		Url:       "https://github.com/rerrorctf/ret/blob/main/commands/status.go",
 		Arguments: nil})
 }
 

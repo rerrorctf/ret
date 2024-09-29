@@ -17,7 +17,6 @@ func init() {
 		Emoji: "🏁",
 		Func:  Capture,
 		Help:  CaptureHelp,
-		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/capture.go",
 		Arguments: []Argument{
 			{
 				Name:     "flag",

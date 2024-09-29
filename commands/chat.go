@@ -20,7 +20,6 @@ func init() {
 		Emoji: "📢",
 		Func:  Chat,
 		Help:  ChatHelp,
-		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/chat.go",
 		Arguments: []Argument{
 			{
 				Name:     "--1",

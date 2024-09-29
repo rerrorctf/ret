@@ -14,7 +14,6 @@ func init() {
 		Emoji:     "🌿",
 		Func:      Sage,
 		Help:      SageHelp,
-		Url:       "https://github.com/rerrorctf/ret/blob/main/commands/sage.go",
 		Arguments: nil})
 }
 

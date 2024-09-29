@@ -16,7 +16,6 @@ type Command struct {
 	Emoji     string
 	Func      CommandFunc
 	Help      CommandHelpFunc
-	Url       string
 	Arguments []Argument
 	SeeAlso   []string
 }

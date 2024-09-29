@@ -19,7 +19,6 @@ func init() {
 		Emoji: "🧠",
 		Func:  Gpt,
 		Help:  GptHelp,
-		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/gpt.go",
 		Arguments: []Argument{
 			{
 				Name:     "-",

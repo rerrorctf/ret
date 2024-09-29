@@ -14,7 +14,6 @@ func init() {
 		Emoji:     "😠",
 		Func:      Angr,
 		Help:      AngrHelp,
-		Url:       "https://github.com/rerrorctf/ret/blob/main/commands/angr.go",
 		Arguments: nil})
 }
 

@@ -20,7 +20,6 @@ func init() {
 		Emoji:     "🔬",
 		Func:      Inscount,
 		Help:      InscountHelp,
-		Url:       "https://github.com/rerrorctf/ret/blob/main/commands/inscount.go",
 		Arguments: nil})
 }
 

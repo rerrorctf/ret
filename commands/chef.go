@@ -19,7 +19,6 @@ func init() {
 		Emoji: "🔪",
 		Func:  Chef,
 		Help:  ChefHelp,
-		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/chef.go",
 		Arguments: []Argument{
 			{
 				Name:     "-",

@@ -16,7 +16,6 @@ func init() {
 		Emoji: "🚀",
 		Func:  Crypto,
 		Help:  CryptoHelp,
-		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/crypto.go",
 		Arguments: []Argument{
 			{
 				Name:     "file",

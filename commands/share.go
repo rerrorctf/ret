@@ -15,7 +15,6 @@ func init() {
 		Emoji:     "🌐",
 		Func:      Share,
 		Help:      ShareHelp,
-		Url:       "https://github.com/rerrorctf/ret/blob/main/commands/share.go",
 		Arguments: nil,
 		SeeAlso:   []string{"notes", "capture", "chat", "gist", "pwn"}})
 }

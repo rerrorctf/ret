@@ -23,7 +23,6 @@ func init() {
 		Emoji: "📥",
 		Func:  Add,
 		Help:  AddHelp,
-		Url:   "https://github.com/rerrorctf/ret/blob/main/commands/add.go",
 		Arguments: []Argument{
 			{
 				Name:     "file",

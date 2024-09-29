@@ -12,7 +12,6 @@ func init() {
 		Emoji:   "✅",
 		Func:    Check,
 		Help:    CheckHelp,
-		Url:     "https://github.com/rerrorctf/ret/blob/main/commands/check.go",
 		SeeAlso: []string{"crypto", "angr", "sage", "docker", "libc", "vps", "inscount"},
 	})
 }
