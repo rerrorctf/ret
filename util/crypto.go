@@ -3,6 +3,7 @@ package util
 import (
 	"bytes"
 	"embed"
+	"fmt"
 	"log"
 	"os"
 	"os/exec"
@@ -29,5 +30,10 @@ func CryptoWithYara(file string, buffer *bytes.Buffer) {
 	cmd := exec.Command("yara", "--no-warnings", "-s", tmpfile.Name(), file)
 	cmd.Stdout = buffer
 	cmd.Stderr = os.Stderr
-	cmd.Run()
+
+	err := cmd.Run()
+
+	if err != nil {
+		fmt.Printf("%v\n", err)
+	}
 }
