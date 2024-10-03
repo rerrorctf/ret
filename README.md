@@ -339,19 +339,6 @@ specify the path of one or more files to upload
 
 ---
 
-### 🧠 <u>gp</u>t
-
-```
-$ ret gpt [-] [question1 question2 question3...] 
-```
-
-ask ChatGPT with ret
-use - to read from stdin
-
-🔗 https://github.com/rerrorctf/ret/blob/main/commands/gpt.go
-
----
-
 ### 💃 <u>id</u>a
 
 ```
