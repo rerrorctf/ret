@@ -56,8 +56,8 @@ func Share(args []string) {
 
 	gistUrl := ""
 	if len(files) > 0 {
-		gistUrl = util.Gist(files)
+		gistUrl = "**" + util.Gist(files) + "**"
 	}
 
-	Chat([]string{fmt.Sprintf("🏁 %s\n**%s**", flag, gistUrl)})
+	Chat([]string{fmt.Sprintf("🏁 `%s`\n%s", flag, gistUrl)})
 }
