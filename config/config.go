@@ -35,8 +35,6 @@ var (
 	ChatWebhookUrl2          = ""
 	ChatWebhookUrl3          = ""
 	GistToken                = ""
-	OpenAIKey                = ""
-	OpenAIModel              = "gpt-4o"
 	GoogleCloudProject       = "default"
 	GoogleCloudRegion        = "europe-west3-c"
 	GoogleCloudSSHKey        = ""
@@ -59,8 +57,6 @@ type Config struct {
 	ChatWebhookUrl2          string `json:"chatwebhookurl2"`
 	ChatWebhookUrl3          string `json:"chatwebhookurl3"`
 	GistToken                string `json:"gisttoken"`
-	OpenAIKey                string `json:"openaikey"`
-	OpenAIModel              string `json:"openaimodel"`
 	GoogleCloudProject       string `json:"googlecloudproject"`
 	GoogleCloudRegion        string `json:"googlecloudregion"`
 	GoogleCloudSSHKey        string `json:"googlecloudsshkey"`
@@ -145,14 +141,6 @@ func ParseUserConfig() {
 		GistToken = userConfig.GistToken
 	}
 
-	if len(userConfig.OpenAIKey) > 0 {
-		OpenAIKey = userConfig.OpenAIKey
-	}
-
-	if len(userConfig.OpenAIModel) > 0 {
-		OpenAIModel = userConfig.OpenAIModel
-	}
-
 	if len(userConfig.GoogleCloudProject) > 0 {
 		GoogleCloudProject = userConfig.GoogleCloudProject
 	}
@@ -206,8 +194,6 @@ func WriteUserConfig() {
 	userConfig.ChatWebhookUrl2 = ChatWebhookUrl2
 	userConfig.ChatWebhookUrl3 = ChatWebhookUrl3
 	userConfig.GistToken = GistToken
-	userConfig.OpenAIKey = OpenAIKey
-	userConfig.OpenAIModel = OpenAIModel
 	userConfig.GoogleCloudProject = GoogleCloudProject
 	userConfig.GoogleCloudRegion = GoogleCloudRegion
 	userConfig.GoogleCloudSSHKey = GoogleCloudSSHKey
