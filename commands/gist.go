@@ -1,6 +1,8 @@
 package commands
 
 import (
+	"crypto/sha256"
+	"encoding/hex"
 	"fmt"
 	"log"
 	"os"
@@ -43,12 +45,17 @@ func Gist(args []string) {
 
 	for _, file := range args {
 		buffer, err := os.ReadFile(file)
+
+		sha256Hash := sha256.New()
+		sha256Hash.Write(buffer)
+		sha256HashString := hex.EncodeToString(sha256Hash.Sum(nil))
+
 		if err != nil {
 			log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 		}
 
 		splits := strings.Split(file, "/")
-		filename := splits[len(splits)-1]
+		filename := sha256HashString[:8] + "_" + splits[len(splits)-1]
 
 		files[filename] = map[string]interface{}{
 			"content": string(buffer),
