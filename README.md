@@ -8,7 +8,7 @@ This tool helps you solve ctf tasks by automating workflow and basic analysis an
 
 You can get the latest binary from https://github.com/rerrorctf/ret/releases.
 
-Here installation just means putting `ret` somewhere on your path. I like to make a symlink it to in `/usr/local/bin`.
+Here installation just means putting `ret` somewhere on your path. I like to make a symlink to it in `/usr/local/bin`.
 
 ```
 $ sudo ln -s ./ret /usr/local/bin/ret

@@ -32,7 +32,7 @@ func Readme(args []string) {
 
 	fmt.Fprintf(os.Stdout, "You can get the latest binary from https://github.com/rerrorctf/ret/releases.\n\n")
 
-	fmt.Fprintf(os.Stdout, "Here installation just means putting `ret` somewhere on your path. I like to make a symlink it to in `/usr/local/bin`.\n\n")
+	fmt.Fprintf(os.Stdout, "Here installation just means putting `ret` somewhere on your path. I like to make a symlink to it in `/usr/local/bin`.\n\n")
 
 	fmt.Fprintf(os.Stdout, "```\n$ sudo ln -s ./ret /usr/local/bin/ret\n```\n\n")
 
