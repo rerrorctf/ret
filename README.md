@@ -592,8 +592,6 @@ if a file called `writeup.md` already exists the command will abort
   "chatwebhookurl2": "",
   "chatwebhookurl3": "",
   "gisttoken": "",
-  "openaikey": "",
-  "openaimodel": "",
   "googlecloudproject": "",
   "googlecloudregion": "",
   "googlecloudsshkey": "",
