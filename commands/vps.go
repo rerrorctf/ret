@@ -13,7 +13,7 @@ import (
 func init() {
 	Commands = append(Commands, Command{
 		Name:  "vps",
-		Emoji: "☁️ ",
+		Emoji: "🍦",
 		Func:  Vps,
 		Help:  VpsHelp,
 		Arguments: []Argument{
