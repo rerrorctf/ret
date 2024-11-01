@@ -133,7 +133,11 @@ func Readme(args []string) {
 
 	for i := 0; i < t.NumField(); i++ {
 		field := t.Field(i)
-		fmt.Fprintf(os.Stdout, "  \"%s\": \"%s\",\n", field.Tag.Get("json"), "")
+		fmt.Fprintf(os.Stdout, "  \"%s\": \"%s\"", field.Tag.Get("json"), "")
+		if (i + 1) != t.NumField() {
+			fmt.Fprintf(os.Stdout, ",")
+		}
+		fmt.Fprintf(os.Stdout, "\n")
 	}
 
 	fmt.Fprintf(os.Stdout, "}\n```\n")
