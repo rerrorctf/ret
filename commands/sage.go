@@ -1,7 +1,6 @@
 package commands
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"os/exec"
@@ -18,7 +17,7 @@ func init() {
 }
 
 func SageHelp() string {
-	return fmt.Sprintf("open sage with ret\n")
+	return "open sage with ret\n"
 }
 
 func Sage(args []string) {

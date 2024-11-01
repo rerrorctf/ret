@@ -26,7 +26,7 @@ func init() {
 }
 
 func CryptoHelp() string {
-	return fmt.Sprintf("search for crypto constants using yara rules with ret\n")
+	return "search for crypto constants using yara rules with ret\n"
 }
 
 func Crypto(args []string) {

@@ -28,7 +28,7 @@ func init() {
 }
 
 func ProxyHelp() string {
-	return fmt.Sprintf("manage proxies with ret\n")
+	return "manage proxies with ret\n"
 }
 
 func proxyList() {

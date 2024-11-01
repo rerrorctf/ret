@@ -28,8 +28,8 @@ func init() {
 }
 
 func GistHelp() string {
-	return fmt.Sprintf("make private gists with ret\n") +
-		fmt.Sprintf(theme.ColorGray+"specify the path of one or more files to upload"+theme.ColorReset+"\n")
+	return "make private gists with ret\n" +
+		theme.ColorGray + "specify the path of one or more files to upload" + theme.ColorReset + "\n"
 }
 
 func Gist(args []string) {
