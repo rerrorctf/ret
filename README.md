@@ -596,6 +596,6 @@ if a file called `writeup.md` already exists the command will abort
   "googlecloudregion": "",
   "googlecloudsshkey": "",
   "chefurl": "",
-  "ctftimeurl": "",
+  "ctftimeurl": ""
 }
 ```
