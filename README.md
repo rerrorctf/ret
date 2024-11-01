@@ -384,7 +384,7 @@ the file will be copied to the cwd and added with ret
 
 ---
 
-### ✏️  <u>n</u>otes
+### 📝 <u>n</u>otes
 
 ```
 $ ret notes [-] [note1 note2 note3...] 
@@ -436,7 +436,7 @@ for example:
 
 ---
 
-### 🖨️  <u>r</u>eadme
+### 📃 <u>r</u>eadme
 
 ```
 $ ret readme 
@@ -508,7 +508,7 @@ check syscalls by regex with ret
 
 ---
 
-### ☁️  <u>v</u>ps
+### 🍦 <u>v</u>ps
 
 ```
 $ ret vps [create/list/destroy] 
