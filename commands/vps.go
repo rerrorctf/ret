@@ -26,7 +26,7 @@ func init() {
 }
 
 func VpsHelp() string {
-	return fmt.Sprintf("create and manage google cloud compute instances with ret\n")
+	return "create and manage google cloud compute instances with ret\n"
 }
 
 func createVps() string {

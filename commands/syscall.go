@@ -1,7 +1,6 @@
 package commands
 
 import (
-	"fmt"
 	"log"
 	"ret/theme"
 	"ret/util"
@@ -28,17 +27,15 @@ func init() {
 }
 
 func SyscallHelp() string {
-	return fmt.Sprintf("check syscalls by regex with ret\n") +
-
-		fmt.Sprintf(theme.ColorBlue+"\n  uses"+theme.ColorGray+": \n") +
-		fmt.Sprintf(theme.ColorGreen+"    x86"+theme.ColorGray+": /usr/include/x86_64-linux-gnu/asm/unistd_32.h"+theme.ColorReset+"\n") +
-		fmt.Sprintf(theme.ColorGreen+"    x64"+theme.ColorGray+": /usr/include/x86_64-linux-gnu/asm/unistd_64.h"+theme.ColorReset+"\n") +
-
-		fmt.Sprintf(theme.ColorBlue+"\n  examples"+theme.ColorGray+": \n") +
-		fmt.Sprintf(theme.ColorPurple+"    syscall x64 \" 0\""+theme.ColorReset+"\n") +
-		fmt.Sprintf(theme.ColorPurple+"    syscall x64 write"+theme.ColorReset+"\n") +
-		fmt.Sprintf(theme.ColorPurple+"    syscall 32 read"+theme.ColorReset+"\n") +
-		fmt.Sprintf(theme.ColorPurple+"    syscall x86 10[0-9]"+theme.ColorReset+"\n\n")
+	return "check syscalls by regex with ret\n" +
+		theme.ColorBlue + "\n  uses" + theme.ColorGray + ": \n" +
+		theme.ColorGreen + "    x86" + theme.ColorGray + ": /usr/include/x86_64-linux-gnu/asm/unistd_32.h" + theme.ColorReset + "\n" +
+		theme.ColorGreen + "    x64" + theme.ColorGray + ": /usr/include/x86_64-linux-gnu/asm/unistd_64.h" + theme.ColorReset + "\n" +
+		theme.ColorBlue + "\n  examples" + theme.ColorGray + ": \n" +
+		theme.ColorPurple + "    syscall x64 \" 0\"" + theme.ColorReset + "\n" +
+		theme.ColorPurple + "    syscall x64 write" + theme.ColorReset + "\n" +
+		theme.ColorPurple + "    syscall 32 read" + theme.ColorReset + "\n" +
+		theme.ColorPurple + "    syscall x86 10[0-9]" + theme.ColorReset + "\n\n"
 }
 
 func Syscall(args []string) {

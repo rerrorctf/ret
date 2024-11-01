@@ -23,7 +23,7 @@ func init() {
 }
 
 func IdaHelp() string {
-	return fmt.Sprintf("opens all added files then opens ida with ret\n")
+	return "opens all added files then opens ida with ret\n"
 }
 
 func idaSpinner() {

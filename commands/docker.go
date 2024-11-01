@@ -29,7 +29,7 @@ func init() {
 }
 
 func DockerHelp() string {
-	return fmt.Sprintf("create a dockerfile from a template with ret\n")
+	return "create a dockerfile from a template with ret\n"
 }
 
 func makeDockerFile(port int) {

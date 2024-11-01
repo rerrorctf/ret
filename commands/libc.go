@@ -25,10 +25,10 @@ func init() {
 }
 
 func LibcHelp() string {
-	return fmt.Sprintf("get a version of libc by copying it from a docker container with ret\n") +
-		fmt.Sprintf(theme.ColorGray+"specify an image tag like \"ubuntu:24.04\" to get a specific version"+theme.ColorReset+"\n") +
-		fmt.Sprintf(theme.ColorGray+"without args this command will use the tag \"ubuntu:latest\""+theme.ColorReset+"\n") +
-		fmt.Sprintf(theme.ColorGray+"the file will be copied to the cwd and added with ret"+theme.ColorReset+"\n")
+	return "get a version of libc by copying it from a docker container with ret\n" +
+		theme.ColorGray + "specify an image tag like \"ubuntu:24.04\" to get a specific version" + theme.ColorReset + "\n" +
+		theme.ColorGray + "without args this command will use the tag \"ubuntu:latest\"" + theme.ColorReset + "\n" +
+		theme.ColorGray + "the file will be copied to the cwd and added with ret" + theme.ColorReset + "\n"
 }
 
 func libcSpinner(stop chan bool) {
