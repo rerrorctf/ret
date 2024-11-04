@@ -8,7 +8,6 @@ import (
 	"ret/config"
 	"ret/theme"
 	"ret/util"
-	"strings"
 )
 
 func init() {
@@ -191,21 +190,8 @@ func Wizard(args []string) {
 	fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me show the status!" + theme.ColorReset + "\n")
 	Status([]string{})
 
-	// if there are one or more elf binaries then pwn
-	for _, file := range filesToAdd {
-		if strings.Contains(file, ".so") {
-			continue
-		}
-
-		result := util.RunFileCommandOnFile(file)
-
-		if strings.Contains(result, "ELF") {
-			fmt.Printf("🧙💬 " + theme.ColorGreen + "I see that there is at least one ELF." + theme.ColorReset + "\n")
-			fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me make a pwn template for you!" + theme.ColorReset + "\n")
-			Pwn(args)
-			break
-		}
-	}
+	fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me make a pwn template for you!" + theme.ColorReset + "\n")
+	Pwn(args)
 
 	runWizardCommand(config.WizardPostCommand)
 }
