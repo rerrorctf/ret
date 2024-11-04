@@ -92,8 +92,8 @@ func makePwnScript(ip string, port int) {
 			"#!/usr/bin/env python3\n\n"+
 				"from pwn import *\n\n"+
 				"#context.log_level = \"debug\"\n"+
-				"elf = ELF(\"./%s\", checksec=False)\n"+
-				"context.binary = elf\n\n"+
+				"#elf = ELF(\"./%s\", checksec=True)\n"+
+				"#context.binary = elf\n\n"+
 				"#p = elf.process()\n"+
 				"#p = elf.debug(gdbscript=\"\")\n"+
 				"p = remote(\"%s\", %d)\n\n"+
