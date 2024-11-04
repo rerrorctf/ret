@@ -8,7 +8,6 @@ import (
 	"ret/config"
 	"ret/theme"
 	"ret/util"
-	"strings"
 )
 
 func init() {
@@ -46,7 +45,7 @@ func WizardHelp() string {
 		theme.ColorGray + "4) " + theme.ColorReset + "decompresses, using the " + theme.ColorGreen + "`decompress`" + theme.ColorReset + " command, any interesting files that it can\n" +
 		theme.ColorGray + "5) " + theme.ColorReset + "adds any interesting files using the " + theme.ColorGreen + "`add`" + theme.ColorReset + " command. this includes those found by decompression and ignores the compressed archives themselves files\n" +
 		theme.ColorGray + "6) " + theme.ColorReset + "shows the added files using the " + theme.ColorGreen + "`status`" + theme.ColorReset + " command\n" +
-		theme.ColorGray + "7) " + theme.ColorReset + "if the wizard thinks there is an elf file it will invoke " + theme.ColorGreen + "`pwn`" + theme.ColorReset + " for you\n" +
+		theme.ColorGray + "7) " + theme.ColorReset + "invokes " + theme.ColorGreen + "`pwn`" + theme.ColorReset + " for you\n" +
 		theme.ColorGray + "8) " + theme.ColorReset + "if you provided an `ip` or an `ip` and a `port` wizard will pass these to " + theme.ColorGreen + "`pwn`" + theme.ColorReset + " command\n" +
 		theme.ColorGray + "9) " + theme.ColorReset + "executes the " + theme.ColorYellow + "`\"wizardpostcommand\"`" + theme.ColorReset + " string with " + theme.ColorGreen + "`\"bash -c\"`" + theme.ColorReset + " from " + theme.ColorCyan + "`~/.config/ret`" + theme.ColorReset + "\n" + theme.ColorReset
 }
@@ -191,21 +190,8 @@ func Wizard(args []string) {
 	fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me show the status!" + theme.ColorReset + "\n")
 	Status([]string{})
 
-	// if there are one or more elf binaries then pwn
-	for _, file := range filesToAdd {
-		if strings.Contains(file, ".so") {
-			continue
-		}
-
-		result := util.RunFileCommandOnFile(file)
-
-		if strings.Contains(result, "ELF") {
-			fmt.Printf("🧙💬 " + theme.ColorGreen + "I see that there is at least one ELF." + theme.ColorReset + "\n")
-			fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me make a pwn template for you!" + theme.ColorReset + "\n")
-			Pwn(args)
-			break
-		}
-	}
+	fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me make a pwn template for you!" + theme.ColorReset + "\n")
+	Pwn(args)
 
 	runWizardCommand(config.WizardPostCommand)
 }

@@ -517,7 +517,7 @@ steps the wizard performs:
 4) decompresses, using the `decompress` command, any interesting files that it can
 5) adds any interesting files using the `add` command. this includes those found by decompression and ignores the compressed archives themselves files
 6) shows the added files using the `status` command
-7) if the wizard thinks there is an elf file it will invoke `pwn` for you
+7) invokes `pwn` for you
 8) if you provided an `ip` or an `ip` and a `port` wizard will pass these to `pwn` command
 9) executes the `"wizardpostcommand"` string with `"bash -c"` from `~/.config/ret`
 
