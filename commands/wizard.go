@@ -45,7 +45,7 @@ func WizardHelp() string {
 		theme.ColorGray + "4) " + theme.ColorReset + "decompresses, using the " + theme.ColorGreen + "`decompress`" + theme.ColorReset + " command, any interesting files that it can\n" +
 		theme.ColorGray + "5) " + theme.ColorReset + "adds any interesting files using the " + theme.ColorGreen + "`add`" + theme.ColorReset + " command. this includes those found by decompression and ignores the compressed archives themselves files\n" +
 		theme.ColorGray + "6) " + theme.ColorReset + "shows the added files using the " + theme.ColorGreen + "`status`" + theme.ColorReset + " command\n" +
-		theme.ColorGray + "7) " + theme.ColorReset + "if the wizard thinks there is an elf file it will invoke " + theme.ColorGreen + "`pwn`" + theme.ColorReset + " for you\n" +
+		theme.ColorGray + "7) " + theme.ColorReset + "invokes " + theme.ColorGreen + "`pwn`" + theme.ColorReset + " for you\n" +
 		theme.ColorGray + "8) " + theme.ColorReset + "if you provided an `ip` or an `ip` and a `port` wizard will pass these to " + theme.ColorGreen + "`pwn`" + theme.ColorReset + " command\n" +
 		theme.ColorGray + "9) " + theme.ColorReset + "executes the " + theme.ColorYellow + "`\"wizardpostcommand\"`" + theme.ColorReset + " string with " + theme.ColorGreen + "`\"bash -c\"`" + theme.ColorReset + " from " + theme.ColorCyan + "`~/.config/ret`" + theme.ColorReset + "\n" + theme.ColorReset
 }
