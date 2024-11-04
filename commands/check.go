@@ -12,7 +12,7 @@ func init() {
 		Emoji:   "✅",
 		Func:    Check,
 		Help:    CheckHelp,
-		SeeAlso: []string{"crypto", "angr", "sage", "docker", "libc", "vps", "inscount"},
+		SeeAlso: []string{"crypto", "angr", "sage", "docker", "libc", "inscount"},
 	})
 }
 
@@ -67,10 +67,6 @@ func Check(args []string) {
 	}
 
 	testCommand("yara", "--help")
-
-	if !testCommand("gcloud", "--version") {
-		suggestLink("https://cloud.google.com/sdk/docs/install#deb")
-	}
 
 	testCommand("7z", "--help")
 
