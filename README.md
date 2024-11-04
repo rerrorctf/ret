@@ -397,19 +397,7 @@ use - to read from stdin
 
 ---
 
-### 📡 <u>pr</u>oxy
-
-```
-$ ret proxy [list/create] 
-```
-
-manage proxies with ret
-
-🔗 https://github.com/rerrorctf/ret/blob/main/commands/proxy.go
-
----
-
-### 🐚 <u>pw</u>n
+### 🐚 <u>p</u>wn
 
 ```
 $ ret pwn [ip=127.0.0.1] [port=9001] 
@@ -505,18 +493,6 @@ check syscalls by regex with ret
 
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/syscall.go
-
----
-
-### 🍦 <u>v</u>ps
-
-```
-$ ret vps [create/list/destroy] 
-```
-
-create and manage google cloud compute instances with ret
-
-🔗 https://github.com/rerrorctf/ret/blob/main/commands/vps.go
 
 ---
 
