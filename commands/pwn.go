@@ -60,7 +60,7 @@ func makePwnScript(ip string, port int) {
 	binaries := util.GuessBinary()
 
 	if len(binaries) > 1 {
-		fmt.Printf("⚠️ multiple candidate binaries found\n")
+		fmt.Printf("😰multiple candidate binaries found\n")
 		for _, binary := range binaries {
 			fmt.Printf("%s\n", binary)
 		}
@@ -70,7 +70,7 @@ func makePwnScript(ip string, port int) {
 
 	if strings.Compare(binary, config.DefaultBinaryName) != 0 {
 		if !util.BinaryIsExecutable(binary) {
-			fmt.Printf("⚠️ "+theme.ColorGray+" \""+theme.ColorReset+"%v"+theme.ColorGray+"\""+theme.ColorRed+" is not executable"+theme.ColorReset+"\n", binary)
+			fmt.Printf("😰"+theme.ColorGray+" \""+theme.ColorReset+"%v"+theme.ColorGray+"\""+theme.ColorRed+" is not executable"+theme.ColorReset+"\n", binary)
 		}
 	}
 

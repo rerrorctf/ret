@@ -37,7 +37,7 @@ func CaptureHelp() string {
 func displayCurrentFlag() {
 	flag, err := util.GetCurrentFlag()
 	if err != nil {
-		fmt.Printf("⚠️ "+theme.ColorYellow+" warning"+theme.ColorReset+": flag file \"%s\" doesn't exist\n", config.FlagFileName)
+		fmt.Printf("😰"+theme.ColorYellow+" warning"+theme.ColorReset+": flag file \"%s\" doesn't exist\n", config.FlagFileName)
 		return
 	}
 
