@@ -47,7 +47,7 @@ func Decompress(args []string) {
 		if decompressed {
 			fmt.Printf("🤏 "+theme.ColorGreen+"decompressed"+theme.ColorReset+":\"%s\"\n", file)
 		} else {
-			fmt.Printf("⚠️  "+theme.ColorYellow+"unable to decompress"+theme.ColorReset+":\"%s\"\n", file)
+			fmt.Printf("😰 "+theme.ColorYellow+"unable to decompress"+theme.ColorReset+":\"%s\"\n", file)
 		}
 	}
 }
