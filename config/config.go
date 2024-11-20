@@ -20,48 +20,46 @@ const (
 )
 
 var (
-	GhidraInstallPath        = "/opt/ghidra"
-	GhidraProject            = "ghidra"
-	IdaInstallPath           = "/opt/ida"
-	PwnScriptName            = "go.py"
-	PwnScriptTemplate        = ""
-	InscountPythonScriptName = "inscount.py"
-	FlagFileName             = FolderName + "/flag.json"
-	FlagFormat               = "flag{.+}"
-	WizardPreCommand         = ""
-	WizardPostCommand        = ""
-	Username                 = ""
-	ChatWebhookUrl           = ""
-	ChatWebhookUrl2          = ""
-	ChatWebhookUrl3          = ""
-	GistToken                = ""
-	GoogleCloudProject       = "default"
-	GoogleCloudRegion        = "europe-west3-c"
-	GoogleCloudSSHKey        = ""
-	ChefUrl                  = "https://gchq.github.io/CyberChef/"
-	CtfTimeUrl               = ""
+	GhidraInstallPath  = "/opt/ghidra"
+	GhidraProject      = "ghidra"
+	IdaInstallPath     = "/opt/ida"
+	PwnScriptName      = "go.py"
+	PwnScriptTemplate  = ""
+	FlagFileName       = FolderName + "/flag.json"
+	FlagFormat         = "flag{.+}"
+	WizardPreCommand   = ""
+	WizardPostCommand  = ""
+	Username           = ""
+	ChatWebhookUrl     = ""
+	ChatWebhookUrl2    = ""
+	ChatWebhookUrl3    = ""
+	GistToken          = ""
+	GoogleCloudProject = "default"
+	GoogleCloudRegion  = "europe-west3-c"
+	GoogleCloudSSHKey  = ""
+	ChefUrl            = "https://gchq.github.io/CyberChef/"
+	CtfTimeUrl         = ""
 )
 
 type Config struct {
-	GhidraInstallPath        string `json:"ghidrainstallpath"`
-	GhidraProject            string `json:"ghidraproject"`
-	IdaInstallPath           string `json:"idainstallpath"`
-	PwnScriptName            string `json:"pwnscriptname"`
-	PwnScriptTemplate        string `json:"pwnscripttemplate"`
-	InscountPythonScriptName string `json:"inscountpythonscriptname"`
-	FlagFormat               string `json:"flagformat"`
-	WizardPreCommand         string `json:"wizardprecommand"`
-	WizardPostCommand        string `json:"wizardpostcommand"`
-	Username                 string `json:"username"`
-	ChatWebhookUrl           string `json:"chatwebhookurl"`
-	ChatWebhookUrl2          string `json:"chatwebhookurl2"`
-	ChatWebhookUrl3          string `json:"chatwebhookurl3"`
-	GistToken                string `json:"gisttoken"`
-	GoogleCloudProject       string `json:"googlecloudproject"`
-	GoogleCloudRegion        string `json:"googlecloudregion"`
-	GoogleCloudSSHKey        string `json:"googlecloudsshkey"`
-	ChefUrl                  string `json:"chefurl"`
-	CtfTimeUrl               string `json:"ctftimeurl"`
+	GhidraInstallPath  string `json:"ghidrainstallpath"`
+	GhidraProject      string `json:"ghidraproject"`
+	IdaInstallPath     string `json:"idainstallpath"`
+	PwnScriptName      string `json:"pwnscriptname"`
+	PwnScriptTemplate  string `json:"pwnscripttemplate"`
+	FlagFormat         string `json:"flagformat"`
+	WizardPreCommand   string `json:"wizardprecommand"`
+	WizardPostCommand  string `json:"wizardpostcommand"`
+	Username           string `json:"username"`
+	ChatWebhookUrl     string `json:"chatwebhookurl"`
+	ChatWebhookUrl2    string `json:"chatwebhookurl2"`
+	ChatWebhookUrl3    string `json:"chatwebhookurl3"`
+	GistToken          string `json:"gisttoken"`
+	GoogleCloudProject string `json:"googlecloudproject"`
+	GoogleCloudRegion  string `json:"googlecloudregion"`
+	GoogleCloudSSHKey  string `json:"googlecloudsshkey"`
+	ChefUrl            string `json:"chefurl"`
+	CtfTimeUrl         string `json:"ctftimeurl"`
 }
 
 func ParseUserConfig() {
@@ -103,10 +101,6 @@ func ParseUserConfig() {
 
 	if len(userConfig.PwnScriptTemplate) > 0 {
 		PwnScriptTemplate = userConfig.PwnScriptTemplate
-	}
-
-	if len(userConfig.InscountPythonScriptName) > 0 {
-		InscountPythonScriptName = userConfig.InscountPythonScriptName
 	}
 
 	if len(userConfig.FlagFormat) > 0 {
@@ -185,7 +179,6 @@ func WriteUserConfig() {
 	userConfig.IdaInstallPath = IdaInstallPath
 	userConfig.PwnScriptName = PwnScriptName
 	userConfig.PwnScriptTemplate = PwnScriptTemplate
-	userConfig.InscountPythonScriptName = InscountPythonScriptName
 	userConfig.FlagFormat = FlagFormat
 	userConfig.WizardPreCommand = WizardPreCommand
 	userConfig.WizardPostCommand = WizardPostCommand
