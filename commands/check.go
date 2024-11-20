@@ -12,7 +12,7 @@ func init() {
 		Emoji:   "✅",
 		Func:    Check,
 		Help:    CheckHelp,
-		SeeAlso: []string{"crypto", "angr", "sage", "docker", "libc"},
+		SeeAlso: []string{"angr", "sage", "docker", "libc"},
 	})
 }
 
@@ -23,9 +23,8 @@ func CheckHelp() string {
 		theme.ColorGray + "2) " + theme.ColorReset + "pwntools\n" +
 		theme.ColorGray + "3) " + theme.ColorReset + "ida\n" +
 		theme.ColorGray + "4) " + theme.ColorReset + "ghidra\n" +
-		theme.ColorGray + "5) " + theme.ColorReset + "yara\n" +
-		theme.ColorGray + "6) " + theme.ColorReset + "gcloud\n" +
-		theme.ColorGray + "7) " + theme.ColorReset + "7z\n"
+		theme.ColorGray + "5) " + theme.ColorReset + "gcloud\n" +
+		theme.ColorGray + "6) " + theme.ColorReset + "7z\n"
 }
 
 func testCommand(command string, args ...string) bool {
@@ -59,8 +58,6 @@ func Check(args []string) {
 	if !testCommand("stat", "/opt/ida/ida64") {
 		suggestLink("https://hex-rays.com/ida-free/")
 	}
-
-	testCommand("yara", "--help")
 
 	testCommand("7z", "--help")
 }

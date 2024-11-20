@@ -100,8 +100,6 @@ performs the following steps:
 3. added files are copied into the hidden directory `.ret/files` inside a subfolder that is named using the sha-2-256 hex digest of the file content
 4. save metadata about the files, specifically their length, location and file type (i.e. elf or not), in the files json file in the hidden `.ret` directory
 5. uses strings, with widths of 8, 16 and 32 bits per character, in combination with grep to search for flags according to the flag format
-6. uses yara to search for constants associated with cryptography. this is equivilent to running the `crypto` command on the files
-
 added files are subject to processing by other commands that operate on the set of added files
 
 adding a file does not prevent changes from occuring to the source file nor does it detect them for you, like a version control system would
@@ -199,9 +197,8 @@ checks for the following:
 2) pwntools
 3) ida
 4) ghidra
-5) yara
-6) gcloud
-7) 7z
+5) gcloud
+6) 7z
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/check.go
 
@@ -232,18 +229,6 @@ you can set `"chefurl"` in `~/.config/ret` to use another instance of cyberchef
 if you provide a custom url it should be the equivalent of https://gchq.github.io/CyberChef/
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/chef.go
-
----
-
-### 🚀 <u>cr</u>ypto
-
-```
-$ ret crypto [file1 file2 file3...] 
-```
-
-search for crypto constants using yara rules with ret
-
-🔗 https://github.com/rerrorctf/ret/blob/main/commands/crypto.go
 
 ---
 
