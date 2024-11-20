@@ -197,10 +197,8 @@ checks for the following:
 2) pwntools
 3) ida
 4) ghidra
-5) pin
-6) gcloud
-7) 7z
-8) pin
+5) gcloud
+6) 7z
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/check.go
 
@@ -324,7 +322,7 @@ specify the path of one or more files to upload
 
 ---
 
-### 💃 <u>id</u>a
+### 💃 <u>i</u>da
 
 ```
 $ ret ida file1 [file2 file3...] 
@@ -333,24 +331,6 @@ $ ret ida file1 [file2 file3...]
 opens all added files then opens ida with ret
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/ida.go
-
----
-
-### 🔬 <u>in</u>scount
-
-```
-$ ret inscount 
-```
-
-create a pin script to count instructions from a template with ret
-
-uses `"inscountpythonscriptname"` from `~/.config/ret` to name the file
-
-this command assumes it can find a pin installation at /opt/pin
-
-you can find pin install instructions here https://www.intel.com/content/www/us/en/developer/articles/tool/pin-a-binary-instrumentation-tool-downloads.html
-
-🔗 https://github.com/rerrorctf/ret/blob/main/commands/inscount.go
 
 ---
 
@@ -544,7 +524,6 @@ if a file called `writeup.md` already exists the command will abort
   "idainstallpath": "",
   "pwnscriptname": "",
   "pwnscripttemplate": "",
-  "inscountpythonscriptname": "",
   "flagformat": "",
   "wizardprecommand": "",
   "wizardpostcommand": "",
