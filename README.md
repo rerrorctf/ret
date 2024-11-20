@@ -99,7 +99,7 @@ performs the following steps:
 2. generate a sha-2-256 hash for each file
 3. added files are copied into the hidden directory `.ret/files` inside a subfolder that is named using the sha-2-256 hex digest of the file content
 4. save metadata about the files, specifically their length, location and file type (i.e. elf or not), in the files json file in the hidden `.ret` directory
-5. uses strings, with widths of 8, 16 and 32 bits per character, in combination with grep to search for flags according to the flag format
+5. uses strings, with widths of 8, 16 and 32 bits per character, in combination with grep to search for flags
 added files are subject to processing by other commands that operate on the set of added files
 
 adding a file does not prevent changes from occuring to the source file nor does it detect them for you, like a version control system would
@@ -278,22 +278,6 @@ $ ret docker [ip] [port]
 create a dockerfile from a template with ret
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/docker.go
-
----
-
-### 🔍 <u>f</u>ormat
-
-```
-$ ret format [regex] 
-```
-
-set the current flag format regex with ret
-
-the flag format is stored in `~/.config/ret` using the `"flagformat"` field
-
-the flag format regex will be used to search for flags when adding files with the `add` command
-
-🔗 https://github.com/rerrorctf/ret/blob/main/commands/format.go
 
 ---
 
@@ -504,8 +488,8 @@ if a file called `writeup.md` already exists the command will abort
 
 1. uses the `"ctftimeurl"` to insert a url at the top of the writeup
 2. imports all notes taken with the `notes` command into the description area
-3. creates a space for a python script and then imports the script created by `pwn` if one exists
-4. imports the flag captured with the `capture` command if one exists or the regex specfied with `format` if one does not
+3. creates a space for a python script and then imports the script created by `pwn` if it exists
+4. imports the flag captured with the `capture` command if it exists
 5. uses the `"username"` from `~/.config/ret` to attribute to this writeup to you
 6. inserts a date stamp for today's date using yyyy/mm/dd format
 
@@ -524,7 +508,6 @@ if a file called `writeup.md` already exists the command will abort
   "idainstallpath": "",
   "pwnscriptname": "",
   "pwnscripttemplate": "",
-  "flagformat": "",
   "wizardprecommand": "",
   "wizardpostcommand": "",
   "username": "",

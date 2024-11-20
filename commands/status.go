@@ -61,7 +61,5 @@ func Status(args []string) {
 	flag, err := util.GetCurrentFlag()
 	if err == nil {
 		fmt.Printf("🏁 "+theme.ColorPurple+"%s"+theme.ColorPurple+"\n", flag)
-	} else if config.FlagFormat != "" {
-		fmt.Printf("🔍 "+theme.ColorPurple+"%s"+theme.ColorPurple+"\n", config.FlagFormat)
 	}
 }

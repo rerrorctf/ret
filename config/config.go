@@ -26,7 +26,7 @@ var (
 	PwnScriptName      = "go.py"
 	PwnScriptTemplate  = ""
 	FlagFileName       = FolderName + "/flag.json"
-	FlagFormat         = "flag{.+}"
+	FlagFormat         = "{.+}"
 	WizardPreCommand   = ""
 	WizardPostCommand  = ""
 	Username           = ""
@@ -47,7 +47,6 @@ type Config struct {
 	IdaInstallPath     string `json:"idainstallpath"`
 	PwnScriptName      string `json:"pwnscriptname"`
 	PwnScriptTemplate  string `json:"pwnscripttemplate"`
-	FlagFormat         string `json:"flagformat"`
 	WizardPreCommand   string `json:"wizardprecommand"`
 	WizardPostCommand  string `json:"wizardpostcommand"`
 	Username           string `json:"username"`
@@ -101,10 +100,6 @@ func ParseUserConfig() {
 
 	if len(userConfig.PwnScriptTemplate) > 0 {
 		PwnScriptTemplate = userConfig.PwnScriptTemplate
-	}
-
-	if len(userConfig.FlagFormat) > 0 {
-		FlagFormat = userConfig.FlagFormat
 	}
 
 	if len(userConfig.WizardPreCommand) > 0 {
@@ -179,7 +174,6 @@ func WriteUserConfig() {
 	userConfig.IdaInstallPath = IdaInstallPath
 	userConfig.PwnScriptName = PwnScriptName
 	userConfig.PwnScriptTemplate = PwnScriptTemplate
-	userConfig.FlagFormat = FlagFormat
 	userConfig.WizardPreCommand = WizardPreCommand
 	userConfig.WizardPostCommand = WizardPostCommand
 	userConfig.Username = Username
