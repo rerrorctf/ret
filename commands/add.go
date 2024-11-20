@@ -30,7 +30,7 @@ func init() {
 				List:     true,
 			},
 		},
-		SeeAlso: []string{"status", "crypto"}})
+		SeeAlso: []string{"status"}})
 }
 
 func AddHelp() string {
@@ -41,7 +41,6 @@ func AddHelp() string {
 		"3. added files are copied into the hidden directory " + theme.ColorCyan + "`.ret/files`" + theme.ColorReset + " inside a subfolder that is named using the sha-2-256 hex digest of the file content\n" +
 		"4. save metadata about the files, specifically their length, location and file type (i.e. elf or not), in the files json file in the hidden " + theme.ColorCyan + "`.ret`" + theme.ColorReset + " directory\n" +
 		"5. uses strings, with widths of 8, 16 and 32 bits per character, in combination with grep to search for flags according to the flag format\n" +
-		"6. uses yara to search for constants associated with cryptography. this is equivilent to running the `crypto` command on the files\n\n" +
 		"added files are subject to processing by other commands that operate on the set of added files\n\n" +
 		"adding a file does not prevent changes from occuring to the source file nor does it detect them for you, like a version control system would\n\n" +
 		"you can track several version of a file by adding each of them remembering that they are addressed according to the hash of their content\n\n" +
@@ -171,19 +170,6 @@ func addFile(srcPath string) {
 	grep2Win(dstPath, "")
 	grep2Win(dstPath, "-el")
 	grep2Win(dstPath, "-eL")
-
-	var buffer bytes.Buffer
-	util.CryptoWithYara(dstPath, &buffer)
-
-	scanner := bufio.NewScanner(&buffer)
-	for i := 0; i < 4; i++ {
-		if scanner.Scan() {
-			fmt.Printf(theme.ColorPurple+"🚀 %s"+theme.ColorReset+"\n", scanner.Text())
-		}
-	}
-	if scanner.Scan() {
-		fmt.Printf(theme.ColorGray + "🚀 one or more lines hidden" + theme.ColorReset + "\n")
-	}
 }
 
 func Add(args []string) {

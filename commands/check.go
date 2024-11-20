@@ -12,7 +12,7 @@ func init() {
 		Emoji:   "✅",
 		Func:    Check,
 		Help:    CheckHelp,
-		SeeAlso: []string{"crypto", "angr", "sage", "docker", "libc", "inscount"},
+		SeeAlso: []string{"angr", "sage", "docker", "libc", "inscount"},
 	})
 }
 
@@ -24,10 +24,9 @@ func CheckHelp() string {
 		theme.ColorGray + "3) " + theme.ColorReset + "ida\n" +
 		theme.ColorGray + "4) " + theme.ColorReset + "ghidra\n" +
 		theme.ColorGray + "5) " + theme.ColorReset + "pin\n" +
-		theme.ColorGray + "6) " + theme.ColorReset + "yara\n" +
-		theme.ColorGray + "7) " + theme.ColorReset + "gcloud\n" +
-		theme.ColorGray + "8) " + theme.ColorReset + "7z\n" +
-		theme.ColorGray + "9) " + theme.ColorReset + "pin\n"
+		theme.ColorGray + "6) " + theme.ColorReset + "gcloud\n" +
+		theme.ColorGray + "7) " + theme.ColorReset + "7z\n" +
+		theme.ColorGray + "8) " + theme.ColorReset + "pin\n"
 }
 
 func testCommand(command string, args ...string) bool {
@@ -65,8 +64,6 @@ func Check(args []string) {
 	if !testCommand("pin", "-help") {
 		suggestLink("https://www.intel.com/content/www/us/en/developer/articles/tool/pin-a-binary-instrumentation-tool-downloads.html")
 	}
-
-	testCommand("yara", "--help")
 
 	testCommand("7z", "--help")
 
