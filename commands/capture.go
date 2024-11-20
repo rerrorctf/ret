@@ -24,7 +24,7 @@ func init() {
 				List:     false,
 			},
 		},
-		SeeAlso: []string{"format", "writeup"}})
+		SeeAlso: []string{"writeup"}})
 }
 
 func CaptureHelp() string {

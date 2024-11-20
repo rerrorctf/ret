@@ -19,7 +19,7 @@ func init() {
 		Func:      Writeup,
 		Help:      WriteupHelp,
 		Arguments: nil,
-		SeeAlso:   []string{"notes", "pwn", "capture", "format", "ctftime"}})
+		SeeAlso:   []string{"notes", "pwn", "capture", "ctftime"}})
 }
 
 func WriteupHelp() string {
@@ -28,8 +28,8 @@ func WriteupHelp() string {
 		"if a file called `writeup.md` already exists the command will abort\n\n" +
 		"1. uses the " + theme.ColorYellow + "`\"ctftimeurl\"`" + theme.ColorReset + " to insert a url at the top of the writeup\n" +
 		"2. imports all notes taken with the " + theme.ColorGreen + "`notes`" + theme.ColorReset + " command into the description area\n" +
-		"3. creates a space for a python script and then imports the script created by " + theme.ColorGreen + "`pwn`" + theme.ColorReset + " if one exists\n" +
-		"4. imports the flag captured with the " + theme.ColorGreen + "`capture`" + theme.ColorReset + " command if one exists or the regex specfied with " + theme.ColorGreen + "`format`" + theme.ColorReset + " if one does not\n" +
+		"3. creates a space for a python script and then imports the script created by " + theme.ColorGreen + "`pwn`" + theme.ColorReset + " if it exists\n" +
+		"4. imports the flag captured with the " + theme.ColorGreen + "`capture`" + theme.ColorReset + " command if it exists\n" +
 		"5. uses the " + theme.ColorYellow + "`\"username\"`" + theme.ColorReset + " from " + theme.ColorCyan + "`~/.config/ret`" + theme.ColorReset + " to attribute to this writeup to you\n" +
 		"6. inserts a date stamp for today's date using yyyy/mm/dd format\n"
 }
