@@ -30,7 +30,7 @@ func init() {
 				Default:  "9001",
 			},
 		},
-		SeeAlso: []string{"decompress", "add", "status", "pwn"}})
+		SeeAlso: []string{"add", "status", "pwn"}})
 }
 
 func WizardHelp() string {
@@ -42,12 +42,11 @@ func WizardHelp() string {
 		theme.ColorGray + "1) " + theme.ColorReset + "executes the " + theme.ColorYellow + "`\"wizardprecommand\"`" + theme.ColorReset + " string with " + theme.ColorGreen + "`\"bash -c\"`" + theme.ColorReset + " from " + theme.ColorCyan + "`~/.config/ret`" + theme.ColorReset + "\n" +
 		theme.ColorGray + "2) " + theme.ColorReset + "searches for interesting files within the current directory. this is typically the task handout .zip file\n" +
 		theme.ColorGray + "3) " + theme.ColorReset + "ensures that the hidden " + theme.ColorCyan + "`.ret`" + theme.ColorReset + " directory skeleton exists\n" +
-		theme.ColorGray + "4) " + theme.ColorReset + "decompresses, using the " + theme.ColorGreen + "`decompress`" + theme.ColorReset + " command, any interesting files that it can\n" +
-		theme.ColorGray + "5) " + theme.ColorReset + "adds any interesting files using the " + theme.ColorGreen + "`add`" + theme.ColorReset + " command. this includes those found by decompression and ignores the compressed archives themselves files\n" +
-		theme.ColorGray + "6) " + theme.ColorReset + "shows the added files using the " + theme.ColorGreen + "`status`" + theme.ColorReset + " command\n" +
-		theme.ColorGray + "7) " + theme.ColorReset + "invokes " + theme.ColorGreen + "`pwn`" + theme.ColorReset + " for you\n" +
-		theme.ColorGray + "8) " + theme.ColorReset + "if you provided an `ip` or an `ip` and a `port` wizard will pass these to " + theme.ColorGreen + "`pwn`" + theme.ColorReset + " command\n" +
-		theme.ColorGray + "9) " + theme.ColorReset + "executes the " + theme.ColorYellow + "`\"wizardpostcommand\"`" + theme.ColorReset + " string with " + theme.ColorGreen + "`\"bash -c\"`" + theme.ColorReset + " from " + theme.ColorCyan + "`~/.config/ret`" + theme.ColorReset + "\n" + theme.ColorReset
+		theme.ColorGray + "4) " + theme.ColorReset + "adds any interesting files using the " + theme.ColorGreen + "`add`" + theme.ColorReset + " command\n" +
+		theme.ColorGray + "5) " + theme.ColorReset + "shows the added files using the " + theme.ColorGreen + "`status`" + theme.ColorReset + " command\n" +
+		theme.ColorGray + "6) " + theme.ColorReset + "invokes " + theme.ColorGreen + "`pwn`" + theme.ColorReset + " for you\n" +
+		theme.ColorGray + "7) " + theme.ColorReset + "if you provided an `ip` or an `ip` and a `port` wizard will pass these to " + theme.ColorGreen + "`pwn`" + theme.ColorReset + " command\n" +
+		theme.ColorGray + "8) " + theme.ColorReset + "executes the " + theme.ColorYellow + "`\"wizardpostcommand\"`" + theme.ColorReset + " string with " + theme.ColorGreen + "`\"bash -c\"`" + theme.ColorReset + " from " + theme.ColorCyan + "`~/.config/ret`" + theme.ColorReset + "\n" + theme.ColorReset
 }
 
 func runWizardCommand(command string) {
@@ -143,22 +142,6 @@ func Wizard(args []string) {
 		util.EnsureSkeleton()
 	}
 
-	unzippedAny := false
-
-	// unzip
-	fmt.Printf("🧙🪄 " + theme.ColorGreen + "Let me try to decompress those interesting files for you!" + theme.ColorReset + "\n")
-	for _, file := range interestingFiles {
-		decompessed := util.DecompressFile(file)
-		if decompessed {
-			fmt.Printf("🧙💬 "+theme.ColorGreen+"I decompressed "+theme.ColorCyan+"\"%s\""+theme.ColorGreen+" for you."+theme.ColorReset+"\n", file)
-			unzippedAny = true
-		}
-	}
-
-	if unzippedAny {
-		interestingFiles = findInterestingFiles()
-	}
-
 	// add files
 	if len(interestingFiles) > 0 {
 		if len(interestingFiles) > 1 {
@@ -171,11 +154,6 @@ func Wizard(args []string) {
 	filesToAdd := []string{}
 
 	for _, file := range interestingFiles {
-		if _, decompressable := util.IsDecompressable(file); decompressable {
-			fmt.Printf("🧙🪄 "+theme.ColorGreen+"Skipping "+theme.ColorCyan+"\"%s\""+theme.ColorGreen+" as it was decompressed."+theme.ColorReset+"\n", file)
-			continue
-		}
-
 		filesToAdd = append(filesToAdd, file)
 	}
 
