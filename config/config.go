@@ -27,8 +27,6 @@ var (
 	PwnScriptTemplate  = ""
 	FlagFileName       = FolderName + "/flag.json"
 	FlagFormat         = "{.+}"
-	WizardPreCommand   = ""
-	WizardPostCommand  = ""
 	Username           = ""
 	ChatWebhookUrl     = ""
 	ChatWebhookUrl2    = ""
@@ -47,8 +45,6 @@ type Config struct {
 	IdaInstallPath     string `json:"idainstallpath"`
 	PwnScriptName      string `json:"pwnscriptname"`
 	PwnScriptTemplate  string `json:"pwnscripttemplate"`
-	WizardPreCommand   string `json:"wizardprecommand"`
-	WizardPostCommand  string `json:"wizardpostcommand"`
 	Username           string `json:"username"`
 	ChatWebhookUrl     string `json:"chatwebhookurl"`
 	ChatWebhookUrl2    string `json:"chatwebhookurl2"`
@@ -100,14 +96,6 @@ func ParseUserConfig() {
 
 	if len(userConfig.PwnScriptTemplate) > 0 {
 		PwnScriptTemplate = userConfig.PwnScriptTemplate
-	}
-
-	if len(userConfig.WizardPreCommand) > 0 {
-		WizardPreCommand = userConfig.WizardPreCommand
-	}
-
-	if len(userConfig.WizardPostCommand) > 0 {
-		WizardPostCommand = userConfig.WizardPostCommand
 	}
 
 	if len(userConfig.Username) > 0 {
@@ -174,8 +162,6 @@ func WriteUserConfig() {
 	userConfig.IdaInstallPath = IdaInstallPath
 	userConfig.PwnScriptName = PwnScriptName
 	userConfig.PwnScriptTemplate = PwnScriptTemplate
-	userConfig.WizardPreCommand = WizardPreCommand
-	userConfig.WizardPostCommand = WizardPostCommand
 	userConfig.Username = Username
 	userConfig.ChatWebhookUrl = ChatWebhookUrl
 	userConfig.ChatWebhookUrl2 = ChatWebhookUrl2

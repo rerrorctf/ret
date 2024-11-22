@@ -445,36 +445,7 @@ check syscalls by regex with ret
 
 ---
 
-### 🧙 <u>wi</u>zard
-
-```
-$ ret wizard [ip=127.0.0.1] [port=9001] 
-```
-
-do magic with ret
-
-wizard is here to help! they simply run a few common commands suitable for a typical workflow
-
-the workflow is quite well suited for typical rev and pwn tasks and may be useful for tasks in other categories too
-
-sometimes the wizard makes mistakes! be sure to check its work by carefully reviewing the detailed output
-
-steps the wizard performs:
-1) executes the `"wizardprecommand"` string with `"bash -c"` from `~/.config/ret`
-2) searches for interesting files within the current directory. this is typically the task handout .zip file
-3) ensures that the hidden `.ret` directory skeleton exists
-4) decompresses, using the `decompress` command, any interesting files that it can
-5) adds any interesting files using the `add` command. this includes those found by decompression and ignores the compressed archives themselves files
-6) shows the added files using the `status` command
-7) invokes `pwn` for you
-8) if you provided an `ip` or an `ip` and a `port` wizard will pass these to `pwn` command
-9) executes the `"wizardpostcommand"` string with `"bash -c"` from `~/.config/ret`
-
-🔗 https://github.com/rerrorctf/ret/blob/main/commands/wizard.go
-
----
-
-### 📝 <u>wr</u>iteup
+### 📝 <u>w</u>riteup
 
 ```
 $ ret writeup 
@@ -508,8 +479,6 @@ if a file called `writeup.md` already exists the command will abort
   "idainstallpath": "",
   "pwnscriptname": "",
   "pwnscripttemplate": "",
-  "wizardprecommand": "",
-  "wizardpostcommand": "",
   "username": "",
   "chatwebhookurl": "",
   "chatwebhookurl2": "",
