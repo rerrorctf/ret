@@ -198,7 +198,6 @@ checks for the following:
 3) ida
 4) ghidra
 5) gcloud
-6) 7z
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/check.go
 
@@ -248,28 +247,7 @@ the ctftime url will be used to aid in the generation of writeups with the `writ
 
 ---
 
-### 🤏 <u>de</u>compress
-
-```
-$ ret decompress file1 [file2 file3...] 
-```
-
-decompress one or more files with ret
-
-will first check if the file has a valid extension
-valid extensions are `.gzip`, `.gz`, `.zip`, `.xz`, `.7z` and `.tar`
-
-if the file has a valid extension decompress will then check if the file has a valid magic
-
-if the file has a valid extension and magic it will be decompressed with 7z as if the following was executed:
-
-`$ 7z e filename -y`
-
-🔗 https://github.com/rerrorctf/ret/blob/main/commands/decompress.go
-
----
-
-### 🐋 <u>do</u>cker
+### 🐋 <u>d</u>ocker
 
 ```
 $ ret docker [ip] [port] 
