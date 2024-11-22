@@ -231,6 +231,29 @@ if you provide a custom url it should be the equivalent of https://gchq.github.i
 
 ---
 
+### 🚀 <u>cr</u>ypto
+
+```
+$ ret crypto [ip=127.0.0.1] [port=9001] 
+```
+
+create a sage script from a template with ret
+
+the file this command creates is named using `"cryptoscriptname"` from `~/.config/ret` and is `"go.sage"` by default
+
+you can specify the path of a custom template with `"cryptoscripttemplate"`
+
+this command will do the follow substitutions in custom templates:
+1) `/%IP%/ip`
+2) `/%PORT%/port`
+
+for example:
+`"remote("%IP%", %PORT%)"` would become `"remote("127.0.0.1", 9001)"`
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/crypto.go
+
+---
+
 ### 🚩 <u>ct</u>ftime
 
 ```
@@ -457,6 +480,8 @@ if a file called `writeup.md` already exists the command will abort
   "idainstallpath": "",
   "pwnscriptname": "",
   "pwnscripttemplate": "",
+  "cryptoscriptname": "",
+  "cryptoscripttemplate": "",
   "username": "",
   "chatwebhookurl": "",
   "chatwebhookurl2": "",

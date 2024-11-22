@@ -20,41 +20,47 @@ const (
 )
 
 var (
-	GhidraInstallPath  = "/opt/ghidra"
-	GhidraProject      = "ghidra"
-	IdaInstallPath     = "/opt/ida"
-	PwnScriptName      = "go.py"
-	PwnScriptTemplate  = ""
-	FlagFileName       = FolderName + "/flag.json"
-	FlagFormat         = "{.+}"
-	Username           = ""
-	ChatWebhookUrl     = ""
-	ChatWebhookUrl2    = ""
-	ChatWebhookUrl3    = ""
-	GistToken          = ""
-	GoogleCloudProject = "default"
-	GoogleCloudRegion  = "europe-west3-c"
-	GoogleCloudSSHKey  = ""
-	ChefUrl            = "https://gchq.github.io/CyberChef/"
-	CtfTimeUrl         = ""
+	GhidraInstallPath    = "/opt/ghidra"
+	GhidraProject        = "ghidra"
+	IdaInstallPath       = "/opt/ida"
+	PwnScriptName        = "go.py"
+	PwnScriptTemplate    = ""
+	CryptoScriptName     = "go.sage"
+	CryptoScriptTemplate = ""
+	FlagFileName         = FolderName + "/flag.json"
+	FlagFormat           = "{.+}"
+	WizardPreCommand     = ""
+	WizardPostCommand    = ""
+	Username             = ""
+	ChatWebhookUrl       = ""
+	ChatWebhookUrl2      = ""
+	ChatWebhookUrl3      = ""
+	GistToken            = ""
+	GoogleCloudProject   = "default"
+	GoogleCloudRegion    = "europe-west3-c"
+	GoogleCloudSSHKey    = ""
+	ChefUrl              = "https://gchq.github.io/CyberChef/"
+	CtfTimeUrl           = ""
 )
 
 type Config struct {
-	GhidraInstallPath  string `json:"ghidrainstallpath"`
-	GhidraProject      string `json:"ghidraproject"`
-	IdaInstallPath     string `json:"idainstallpath"`
-	PwnScriptName      string `json:"pwnscriptname"`
-	PwnScriptTemplate  string `json:"pwnscripttemplate"`
-	Username           string `json:"username"`
-	ChatWebhookUrl     string `json:"chatwebhookurl"`
-	ChatWebhookUrl2    string `json:"chatwebhookurl2"`
-	ChatWebhookUrl3    string `json:"chatwebhookurl3"`
-	GistToken          string `json:"gisttoken"`
-	GoogleCloudProject string `json:"googlecloudproject"`
-	GoogleCloudRegion  string `json:"googlecloudregion"`
-	GoogleCloudSSHKey  string `json:"googlecloudsshkey"`
-	ChefUrl            string `json:"chefurl"`
-	CtfTimeUrl         string `json:"ctftimeurl"`
+	GhidraInstallPath    string `json:"ghidrainstallpath"`
+	GhidraProject        string `json:"ghidraproject"`
+	IdaInstallPath       string `json:"idainstallpath"`
+	PwnScriptName        string `json:"pwnscriptname"`
+	PwnScriptTemplate    string `json:"pwnscripttemplate"`
+	CryptoScriptName     string `json:"cryptoscriptname"`
+	CryptoScriptTemplate string `json:"cryptoscripttemplate"`
+	Username             string `json:"username"`
+	ChatWebhookUrl       string `json:"chatwebhookurl"`
+	ChatWebhookUrl2      string `json:"chatwebhookurl2"`
+	ChatWebhookUrl3      string `json:"chatwebhookurl3"`
+	GistToken            string `json:"gisttoken"`
+	GoogleCloudProject   string `json:"googlecloudproject"`
+	GoogleCloudRegion    string `json:"googlecloudregion"`
+	GoogleCloudSSHKey    string `json:"googlecloudsshkey"`
+	ChefUrl              string `json:"chefurl"`
+	CtfTimeUrl           string `json:"ctftimeurl"`
 }
 
 func ParseUserConfig() {
@@ -96,6 +102,14 @@ func ParseUserConfig() {
 
 	if len(userConfig.PwnScriptTemplate) > 0 {
 		PwnScriptTemplate = userConfig.PwnScriptTemplate
+	}
+
+	if len(userConfig.CryptoScriptName) > 0 {
+		CryptoScriptName = userConfig.CryptoScriptName
+	}
+
+	if len(userConfig.CryptoScriptTemplate) > 0 {
+		CryptoScriptTemplate = userConfig.CryptoScriptTemplate
 	}
 
 	if len(userConfig.Username) > 0 {
@@ -162,6 +176,8 @@ func WriteUserConfig() {
 	userConfig.IdaInstallPath = IdaInstallPath
 	userConfig.PwnScriptName = PwnScriptName
 	userConfig.PwnScriptTemplate = PwnScriptTemplate
+	userConfig.CryptoScriptName = CryptoScriptName
+	userConfig.CryptoScriptTemplate = CryptoScriptTemplate
 	userConfig.Username = Username
 	userConfig.ChatWebhookUrl = ChatWebhookUrl
 	userConfig.ChatWebhookUrl2 = ChatWebhookUrl2
