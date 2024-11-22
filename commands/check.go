@@ -23,8 +23,7 @@ func CheckHelp() string {
 		theme.ColorGray + "2) " + theme.ColorReset + "pwntools\n" +
 		theme.ColorGray + "3) " + theme.ColorReset + "ida\n" +
 		theme.ColorGray + "4) " + theme.ColorReset + "ghidra\n" +
-		theme.ColorGray + "5) " + theme.ColorReset + "gcloud\n" +
-		theme.ColorGray + "6) " + theme.ColorReset + "7z\n"
+		theme.ColorGray + "5) " + theme.ColorReset + "gcloud\n"
 }
 
 func testCommand(command string, args ...string) bool {
@@ -58,6 +57,4 @@ func Check(args []string) {
 	if !testCommand("stat", "/opt/ida/ida64") {
 		suggestLink("https://hex-rays.com/ida-free/")
 	}
-
-	testCommand("7z", "--help")
 }

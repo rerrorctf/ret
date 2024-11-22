@@ -51,8 +51,6 @@ type Config struct {
 	PwnScriptTemplate    string `json:"pwnscripttemplate"`
 	CryptoScriptName     string `json:"cryptoscriptname"`
 	CryptoScriptTemplate string `json:"cryptoscripttemplate"`
-	WizardPreCommand     string `json:"wizardprecommand"`
-	WizardPostCommand    string `json:"wizardpostcommand"`
 	Username             string `json:"username"`
 	ChatWebhookUrl       string `json:"chatwebhookurl"`
 	ChatWebhookUrl2      string `json:"chatwebhookurl2"`
@@ -112,14 +110,6 @@ func ParseUserConfig() {
 
 	if len(userConfig.CryptoScriptTemplate) > 0 {
 		CryptoScriptTemplate = userConfig.CryptoScriptTemplate
-	}
-
-	if len(userConfig.WizardPreCommand) > 0 {
-		WizardPreCommand = userConfig.WizardPreCommand
-	}
-
-	if len(userConfig.WizardPostCommand) > 0 {
-		WizardPostCommand = userConfig.WizardPostCommand
 	}
 
 	if len(userConfig.Username) > 0 {
@@ -188,8 +178,6 @@ func WriteUserConfig() {
 	userConfig.PwnScriptTemplate = PwnScriptTemplate
 	userConfig.CryptoScriptName = CryptoScriptName
 	userConfig.CryptoScriptTemplate = CryptoScriptTemplate
-	userConfig.WizardPreCommand = WizardPreCommand
-	userConfig.WizardPostCommand = WizardPostCommand
 	userConfig.Username = Username
 	userConfig.ChatWebhookUrl = ChatWebhookUrl
 	userConfig.ChatWebhookUrl2 = ChatWebhookUrl2
