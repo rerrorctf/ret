@@ -20,10 +20,6 @@ Other options are available and you may do whatever works best for you.
 
 some commands make opportunistic use of other tools and some won't work without them
 
-you can use the `check` command to see what's currently installed
-
-consider installing the missing dependencies mentioned by the `check` command to get access to the full functionality of ret
-
 ### Compiling (Optional)
 
 First install `go` https://go.dev/dl/ by following the install instructions.
@@ -183,26 +179,7 @@ for more information please see https://support.discord.com/hc/en-us/articles/22
 
 ---
 
-### ✅ <u>chec</u>k
-
-```
-$ ret check 
-```
-
-check if ret's optional dependencies are installed
-
-checks for the following:
-1) docker
-2) pwntools
-3) ida
-4) ghidra
-5) gcloud
-
-🔗 https://github.com/rerrorctf/ret/blob/main/commands/check.go
-
----
-
-### 🔪 <u>chef</u>
+### 🔪 <u>che</u>f
 
 ```
 $ ret chef [-] [text1 text2 text3...] 
