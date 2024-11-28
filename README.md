@@ -72,15 +72,14 @@ output includes calling conventions, register volatility and more
 
 for architecture specify one of `x86`, `32`, `x64`, `64`, `arm64`, `aapcs64` ~ the default is `x64`
 
-for os specify one of `linux`, `windows` ~ the default is `linux`
+for os specify one of `linux`, `windows`, `mac` ~ the default is `linux`
 
 for example:
 ```bash
 $ ret abi x64 linux
 $ ret abi 32 windows
+$ ret abi am64 mac
 ```
-
-for more detailed information on calling conventions refer to https://www.agner.org/optimize/calling_conventions.pdf
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/abi.go
 
