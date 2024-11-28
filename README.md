@@ -70,7 +70,7 @@ view abi details with ret
 
 output includes calling conventions, register volatility and more
 
-for architecture specify one of `x86`, `32`, `x64`, `64` ~ the default is `x64`
+for architecture specify one of `x86`, `32`, `x64`, `64`, `arm64`, `aapcs64` ~ the default is `x64`
 
 for os specify one of `linux`, `windows` ~ the default is `linux`
 

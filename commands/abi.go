@@ -32,7 +32,7 @@ func init() {
 func AbiHelp() string {
 	return "view abi details with ret\n\n" +
 		"output includes calling conventions, register volatility and more\n\n" +
-		"for architecture specify one of `x86`, `32`, `x64`, `64` " + theme.ColorGray + "~ the default is `x64`\n\n" + theme.ColorReset +
+		"for architecture specify one of `x86`, `32`, `x64`, `64`, `arm64`, `aapcs64` " + theme.ColorGray + "~ the default is `x64`\n\n" + theme.ColorReset +
 		"for os specify one of `linux`, `windows` " + theme.ColorGray + "~ the default is `linux`\n\n" + theme.ColorReset +
 		"for example:\n" +
 		"```bash\n" +
@@ -88,6 +88,40 @@ func showLinuxAbix64() {
 	fmt.Println(theme.ColorPurple + "  [rsp-128] to [rsp-8]" + theme.ColorReset)
 
 	fmt.Println(theme.ColorGray + "  128-byte area below the stack pointer see -mno-red-zone" + theme.ColorReset)
+}
+
+func showLinuxAbiAAPCS64() {
+	fmt.Println(theme.ColorPurple + "linux 🐧 " + theme.ColorPurple + "AAPCS64" + theme.ColorReset)
+
+	fmt.Println(theme.ColorPurple + "  X31 Stack Pointer " + theme.ColorReset + "(" + theme.ColorPurple + "SP" + theme.ColorReset + ") - " + theme.ColorPurple +
+		"X30 Link Register " + theme.ColorReset + "(" + theme.ColorPurple + "LR" + theme.ColorReset + ") - " + theme.ColorPurple +
+		"X29 Frame Pointer " + theme.ColorReset + "(" + theme.ColorPurple + "FP" + theme.ColorReset + ")")
+
+	fmt.Println(theme.ColorYellow + "\nscratch" + theme.ColorReset + "/" + theme.ColorYellow + "caller-save" + theme.ColorReset + "/" + theme.ColorYellow + "volatile" + theme.ColorReset + ":")
+
+	fmt.Println(theme.ColorYellow + "  X9 X10 X11 X12 X13 X14 X15" + theme.ColorReset)
+
+	fmt.Println(theme.ColorGreen + "\ncallee-save" + theme.ColorReset + "/" + theme.ColorGreen + "non-volatile" + theme.ColorReset + ":")
+
+	fmt.Println(theme.ColorGreen + "  X19 X20 X21 X22 X23 X24 X25 X26 X27 X28" + theme.ColorReset)
+
+	fmt.Println(theme.ColorBlue + "\nintraprocedure" + theme.ColorReset + "/" + theme.ColorBlue + "platform" + theme.ColorReset + ":")
+
+	fmt.Println(theme.ColorBlue + "  X16 " + theme.ColorReset + "(" + theme.ColorBlue + "IP0" + theme.ColorReset + ") - " + theme.ColorBlue +
+		"X17 " + theme.ColorReset + "(" + theme.ColorBlue + "IP1" + theme.ColorReset + ") - " + theme.ColorBlue +
+		"X18 Platform Register " + theme.ColorReset + "(" + theme.ColorBlue + "PR" + theme.ColorReset + ")")
+
+	fmt.Println(theme.ColorCyan + "\ncall" + theme.ColorReset + ":")
+
+	fmt.Println(theme.ColorCyan + "  X0 X1 X2 X3 X4 X5 X6 X7 STACK => X0 X1 X2 X3 X4 X5 X6 X7" + theme.ColorReset)
+
+	fmt.Println(theme.ColorGray + "  X8 can be used to pass the address location of an indirect result" + theme.ColorReset)
+
+	fmt.Println(theme.ColorGray + "  arguments on the stack should be sign or zero extended and aligned to 8 bytes" + theme.ColorReset)
+
+	fmt.Println(theme.ColorRed + "\nsyscall" + theme.ColorReset + ":" + theme.ColorReset)
+
+	fmt.Println(theme.ColorRed + "  X8 X0 X1 X2 X3 X4 X5 => X0" + theme.ColorReset)
 }
 
 func showWindowsAbix86() {
@@ -153,6 +187,10 @@ func Abi(args []string) {
 			showLinuxAbix64()
 		} else {
 			showWindowsAbix64()
+		}
+	case "arm64", "aapcs64":
+		if opsys == "linux" {
+			showLinuxAbiAAPCS64()
 		}
 	default:
 		{
