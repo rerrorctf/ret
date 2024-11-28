@@ -194,7 +194,7 @@ func Abi(args []string) {
 		}
 	default:
 		{
-			log.Fatalf("💥 " + theme.ColorRed + "error" + theme.ColorReset + ": unsupported architecture. use 'x86/32' or 'x64/64'\n" + theme.ColorReset)
+			log.Fatalf("💥 " + theme.ColorRed + "error" + theme.ColorReset + ": unsupported architecture. use 'x86/32', 'x64/64', 'aapcs64/arm64'\n" + theme.ColorReset)
 		}
 	}
 
