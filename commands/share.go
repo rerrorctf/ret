@@ -37,6 +37,13 @@ func Share(args []string) {
 		}
 	}
 
+	buffer, err = os.ReadFile(config.CryptoScriptName)
+	if err == nil {
+		files[config.CryptoScriptName] = map[string]interface{}{
+			"content": string(buffer),
+		}
+	}
+
 	buffer, err = os.ReadFile(config.NotesFileName)
 	if err == nil {
 		// does not like .ret/notes.json
