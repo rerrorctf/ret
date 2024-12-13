@@ -65,12 +65,34 @@ func printSeeks() {
 func printMem() {
 	printColoredDefTitle("PROT_READ", "sys/mman.h")
 	printColoredDef("/usr/include/asm-generic/mman-common.h", "PROT_READ", "1")
+	printColoredDef("/usr/include/x86_64-linux-gnu/bits/mman-linux.h", "PROT_READ", "1")
 
 	printColoredDefTitle("PROT_WRITE", "sys/mman.h")
 	printColoredDef("/usr/include/asm-generic/mman-common.h", "PROT_WRITE", "2")
+	printColoredDef("/usr/include/x86_64-linux-gnu/bits/mman-linux.h", "PROT_WRITE", "2")
 
 	printColoredDefTitle("PROT_EXEC", "sys/mman.h")
 	printColoredDef("/usr/include/asm-generic/mman-common.h", "PROT_EXEC", "4")
+	printColoredDef("/usr/include/x86_64-linux-gnu/bits/mman-linux.h", "PROT_EXEC", "4")
+
+	printColoredDefTitle("MAP_SHARED", "sys/mman.h")
+	printColoredDef("/usr/include/linux/mman.h", "MAP_SHARED", "1")
+	printColoredDef("/usr/include/x86_64-linux-gnu/bits/mman-linux.h", "MAP_SHARED", "1")
+
+	printColoredDefTitle("MAP_PRIVATE", "sys/mman.h")
+	printColoredDef("/usr/include/linux/mman.h", "MAP_PRIVATE", "2")
+	printColoredDef("/usr/include/x86_64-linux-gnu/bits/mman-linux.h", "MAP_PRIVATE", "2")
+
+	printColoredDefTitle("MAP_SHARED_VALIDATE", "sys/mman.h")
+	printColoredDef("/usr/include/linux/mman.h", "MAP_SHARED_VALIDATE", "3")
+	printColoredDef("/usr/include/x86_64-linux-gnu/bits/mman-linux.h", "MAP_SHARED_VALIDATE", "3")
+
+	printColoredDefTitle("MAP_FIXED", "sys/mman.h")
+	printColoredDef("/usr/include/asm-generic/mman-common.h", "MAP_FIXED", "16")
+	printColoredDef("/usr/include/x86_64-linux-gnu/bits/mman-linux.h", "MAP_FIXED", "16")
+
+	printColoredDefTitle("MAP_ANONYMOUS", "sys/mman.h")
+	printColoredDef("/usr/include/asm-generic/mman-common.h", "MAP_ANONYMOUS", "32")
 }
 
 func Defs(args []string) {
@@ -80,6 +102,7 @@ func Defs(args []string) {
 	// SEEK_SET / SEEK_CUR / SEEK_END
 	printSeeks()
 
-	// PROT_READ / PROT_WRITE / PROT_EXEC
+	// PROT_READ / PROT_WRITE / PROT_EXEC /
+	// MAP_SHARED / MAP_PRIVATE / MAP_SHARED_VALIDATE / MAP_FIXED / MAP_ANONYMOUS
 	printMem()
 }
