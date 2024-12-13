@@ -42,8 +42,6 @@ func printStdFileNos() {
 
 	printColoredDefTitle("STDERR_FILENO", "unistd.h")
 	printColoredDef("", "STDERR_FILENO", "2")
-
-	fmt.Println()
 }
 
 func printSeeks() {
@@ -58,8 +56,6 @@ func printSeeks() {
 	printColoredDefTitle("SEEK_END", "stdio.h")
 	printColoredDef("/usr/include/linux/fs.h", "SEEK_END", "2")
 	printColoredDef("/usr/include/stdio.h", "SEEK_END", "2")
-
-	fmt.Println()
 }
 
 func printMem() {
@@ -95,6 +91,37 @@ func printMem() {
 	printColoredDef("/usr/include/asm-generic/mman-common.h", "MAP_ANONYMOUS", "32")
 }
 
+func printOpen() {
+	printColoredDefTitle("O_RDONLY", "fcntl.h")
+	printColoredDef("/usr/include/asm-generic/fcntl.h", "O_RDONLY", "0")
+	printColoredDef("/usr/include/x86_64-linux-gnu/bits/fcntl-linux.h", "O_RDONLY", "0")
+
+	printColoredDefTitle("O_WRONLY", "fcntl.h")
+	printColoredDef("/usr/include/asm-generic/fcntl.h", "O_WRONLY", "1")
+	printColoredDef("/usr/include/x86_64-linux-gnu/bits/fcntl-linux.h", "O_WRONLY", "1")
+
+	printColoredDefTitle("O_RDWR", "fcntl.h")
+	printColoredDef("/usr/include/asm-generic/fcntl.h", "O_RDWR", "2")
+	printColoredDef("/usr/include/x86_64-linux-gnu/bits/fcntl-linux.h", "O_RDWR", "2")
+
+	//
+
+	printColoredDefTitle("O_CREAT", "fcntl.h")
+	printColoredDef("/usr/include/asm-generic/fcntl.h", "O_CREAT", "0x40")
+
+	printColoredDefTitle("O_EXCL", "fcntl.h")
+	printColoredDef("/usr/include/asm-generic/fcntl.h", "O_EXCL", "0x80")
+
+	printColoredDefTitle("O_TRUNC", "fcntl.h")
+	printColoredDef("/usr/include/asm-generic/fcntl.h", "O_TRUNC", "0x200")
+
+	printColoredDefTitle("O_APPEND", "fcntl.h")
+	printColoredDef("/usr/include/asm-generic/fcntl.h", "O_APPEND", "0x400")
+
+	printColoredDefTitle("O_NONBLOCK", "fcntl.h")
+	printColoredDef("/usr/include/asm-generic/fcntl.h", "O_NONBLOCK", "0x800")
+}
+
 func Defs(args []string) {
 	// STDIN_FILENO / STDOUT_FILENO / STDERR_FILENO
 	printStdFileNos()
@@ -105,4 +132,7 @@ func Defs(args []string) {
 	// PROT_READ / PROT_WRITE / PROT_EXEC /
 	// MAP_SHARED / MAP_PRIVATE / MAP_SHARED_VALIDATE / MAP_FIXED / MAP_ANONYMOUS
 	printMem()
+
+	// O_RDONLY / O_WRONLY / O_RDWR / O_NONBLOCK / O_APPEND / O_CREAT / O_TRUNC / O_EXCL
+	printOpen()
 }
