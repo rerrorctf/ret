@@ -15,7 +15,7 @@ func init() {
 }
 
 func DefsHelp() string {
-	return ""
+	return "print some common constants with ret\n"
 }
 
 func printColoredDefTitle(def string, include string) {
