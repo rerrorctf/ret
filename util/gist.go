@@ -47,6 +47,11 @@ func Gist(files map[string]interface{}) string {
 		log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 	}
 
+	html_url := result["html_url"]
+	if html_url == nil {
+		log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", result)
+	}
+
 	url := result["html_url"].(string)
 
 	resp.Body.Close()
