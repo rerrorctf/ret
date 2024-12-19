@@ -36,9 +36,6 @@ var (
 	ChatWebhookUrl2      = ""
 	ChatWebhookUrl3      = ""
 	GistToken            = ""
-	GoogleCloudProject   = "default"
-	GoogleCloudRegion    = "europe-west3-c"
-	GoogleCloudSSHKey    = ""
 	ChefUrl              = "https://gchq.github.io/CyberChef/"
 	CtfTimeUrl           = ""
 )
@@ -56,9 +53,6 @@ type Config struct {
 	ChatWebhookUrl2      string `json:"chatwebhookurl2"`
 	ChatWebhookUrl3      string `json:"chatwebhookurl3"`
 	GistToken            string `json:"gisttoken"`
-	GoogleCloudProject   string `json:"googlecloudproject"`
-	GoogleCloudRegion    string `json:"googlecloudregion"`
-	GoogleCloudSSHKey    string `json:"googlecloudsshkey"`
 	ChefUrl              string `json:"chefurl"`
 	CtfTimeUrl           string `json:"ctftimeurl"`
 }
@@ -132,18 +126,6 @@ func ParseUserConfig() {
 		GistToken = userConfig.GistToken
 	}
 
-	if len(userConfig.GoogleCloudProject) > 0 {
-		GoogleCloudProject = userConfig.GoogleCloudProject
-	}
-
-	if len(userConfig.GoogleCloudRegion) > 0 {
-		GoogleCloudRegion = userConfig.GoogleCloudRegion
-	}
-
-	if len(userConfig.GoogleCloudSSHKey) > 0 {
-		GoogleCloudSSHKey = userConfig.GoogleCloudSSHKey
-	}
-
 	if len(userConfig.ChefUrl) > 0 {
 		ChefUrl = userConfig.ChefUrl
 	}
@@ -183,9 +165,6 @@ func WriteUserConfig() {
 	userConfig.ChatWebhookUrl2 = ChatWebhookUrl2
 	userConfig.ChatWebhookUrl3 = ChatWebhookUrl3
 	userConfig.GistToken = GistToken
-	userConfig.GoogleCloudProject = GoogleCloudProject
-	userConfig.GoogleCloudRegion = GoogleCloudRegion
-	userConfig.GoogleCloudSSHKey = GoogleCloudSSHKey
 	userConfig.ChefUrl = ChefUrl
 	userConfig.CtfTimeUrl = CtfTimeUrl
 
