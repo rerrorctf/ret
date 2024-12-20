@@ -110,7 +110,7 @@ func CtfTime(args []string) {
 	} else if finished {
 		fmt.Printf(theme.ColorGray+"time since finish: "+theme.ColorReset+"%v\n", finishTime.Sub(now))
 	} else {
-		fmt.Printf(theme.ColorGray+"time to start: "+theme.ColorReset+"%v\n", now.Sub(startTime))
+		fmt.Printf(theme.ColorGray+"time to start: "+theme.ColorReset+"%v\n", startTime.Sub(now))
 		fmt.Printf(theme.ColorGray+"time to finish: "+theme.ColorReset+"%v\n", finishTime.Sub(now))
 	}
 }
