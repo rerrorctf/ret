@@ -38,7 +38,7 @@ func CtfTime(args []string) {
 	if len(args) > 0 {
 		fmt.Printf(theme.ColorGray+"old ctftime url: "+theme.ColorRed+"%v"+theme.ColorReset+"\n", config.CtfTimeUrl)
 
-		config.CtfTimeUrl = args[0]
+		config.CtfTimeUrl = strings.Trim(args[0], "/")
 
 		config.WriteUserConfig()
 
