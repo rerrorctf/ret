@@ -49,6 +49,10 @@ func CtfTime(args []string) {
 		return
 	}
 
+	if len(config.CtfTimeUrl) == 0 {
+		return
+	}
+
 	fmt.Printf(theme.ColorGray+"url: "+theme.ColorReset+"%v"+theme.ColorReset+"\n", config.CtfTimeUrl)
 
 	if !strings.Contains(config.CtfTimeUrl, "ctftime.org") {
