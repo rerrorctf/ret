@@ -31,7 +31,10 @@ func init() {
 func CtfTimeHelp() string {
 	return "set the current ctftime url with ret\n\n" +
 		"the ctftime url is stored in " + theme.ColorCyan + "`~/.config/ret`" + theme.ColorReset + " using the " + theme.ColorYellow + "`\"ctftimeurl\"`" + theme.ColorReset + " field\n\n" +
-		"the ctftime url will be used to aid in the generation of writeups with the " + theme.ColorGreen + "`writeup`" + theme.ColorReset + " command\n"
+		"the command will use the ctftime.org api to fetch details about the currently set ctftime url and then display them\n\n" +
+		"the ctf's title, start time and finish time will be displayed along with an indication of the time to the start or finish depending on the context\n\n" +
+		"for more details please see https://ctftime.org/api/\n\n" +
+		"the ctftime url will be used to aid in the generation of writeups with the " + theme.ColorGreen + "`writeup`" + theme.ColorReset + " command\n\n"
 }
 
 func CtfTime(args []string) {

@@ -240,7 +240,14 @@ set the current ctftime url with ret
 
 the ctftime url is stored in `~/.config/ret` using the `"ctftimeurl"` field
 
+the command will use the ctftime.org api to fetch details about the currently set ctftime url and then display them
+
+the ctf's title, start time and finish time will be displayed along with an indication of the time to the start or finish depending on the context
+
+for more details please see https://ctftime.org/api/
+
 the ctftime url will be used to aid in the generation of writeups with the `writeup` command
+
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/ctftime.go
 
