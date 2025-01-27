@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"ret/config"
 	"ret/theme"
+	"ret/util"
 	"time"
 )
 
@@ -64,6 +65,8 @@ func Ghidra(args []string) {
 	}
 
 	go ghidraSpinner()
+
+	util.EnsureSkeleton()
 
 	analyzeFile := exec.Command(
 		config.GhidraInstallPath+"/support/analyzeHeadless",
