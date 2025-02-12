@@ -25,7 +25,7 @@ func init() {
 				List:     false,
 			},
 		},
-		SeeAlso: []string{"ctfrm", "writeup"}})
+		SeeAlso: []string{"writeup"}})
 }
 
 func CtfTimeHelp() string {
