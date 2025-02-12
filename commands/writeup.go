@@ -24,8 +24,9 @@ func init() {
 
 func WriteupHelp() string {
 	return "create a markdown writeup using a template with ret\n\n" +
-		"the writeup will saved in a file called `writeup.md`\n\n" +
-		"if a file called `writeup.md` already exists the command will abort\n\n" +
+		"the writeup will be saved in a file called `writeup.md`\n\n" +
+		"if a file called `writeup.md` already exists the command will abort\n" +
+		"there is a small window for a time-of-check/time-of-use race here - you have been warned!\n\n" +
 		"1. uses the " + theme.ColorYellow + "`\"ctftimeurl\"`" + theme.ColorReset + " to insert a url at the top of the writeup\n" +
 		"2. imports all notes taken with the " + theme.ColorGreen + "`notes`" + theme.ColorReset + " command into the description area\n" +
 		"3. creates a space for a python script and then imports the script created by " + theme.ColorGreen + "`pwn`" + theme.ColorReset + " if it exists\n" +
