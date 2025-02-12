@@ -236,17 +236,17 @@ for example:
 $ ret ctftime [url] 
 ```
 
-set the current ctftime url with ret
+adds a ctftime url with ret
 
-the ctftime url is stored in `~/.config/ret` using the `"ctftimeurl"` field
+the ctftime urls are stored in `~/.config/ret` using the `"ctftimeurls"` field
 
-the command will use the ctftime.org api to fetch details about the currently set ctftime url and then display them
+the command will use the ctftime.org api to fetch details about all the currently set ctftime urls and then display them
 
 the ctf's title, start time and finish time will be displayed along with an indication of the time to the start or finish depending on the context
 
 for more details please see https://ctftime.org/api/
 
-the ctftime url will be used to aid in the generation of writeups with the `writeup` command
+the ctftime urls will be used to aid in the generation of writeups with the `writeup` command
 
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/ctftime.go
@@ -454,7 +454,7 @@ the writeup will be saved in a file called `writeup.md`
 if a file called `writeup.md` already exists the command will abort
 there is a small window for a time-of-check/time-of-use race here - you have been warned!
 
-1. uses the `"ctftimeurl"` to insert a url at the top of the writeup
+1. uses the first url from `"ctftimeurls"` to insert a url at the top of the writeup
 2. imports all notes taken with the `notes` command into the description area
 3. creates a space for a python script and then imports the script created by `pwn` if it exists
 4. imports the flag captured with the `capture` command if it exists
@@ -484,6 +484,6 @@ there is a small window for a time-of-check/time-of-use race here - you have bee
   "chatwebhookurl3": "",
   "gisttoken": "",
   "chefurl": "",
-  "ctftimeurl": ""
+  "ctftimeurls": ""
 }
 ```
