@@ -27,7 +27,7 @@ func WriteupHelp() string {
 		"the writeup will be saved in a file called `writeup.md`\n\n" +
 		"if a file called `writeup.md` already exists the command will abort\n" +
 		"there is a small window for a time-of-check/time-of-use race here - you have been warned!\n\n" +
-		"1. uses the " + theme.ColorYellow + "`\"ctftimeurl\"`" + theme.ColorReset + " to insert a url at the top of the writeup\n" +
+		"1. uses the first url from " + theme.ColorYellow + "`\"ctftimeurls\"`" + theme.ColorReset + " to insert a url at the top of the writeup\n" +
 		"2. imports all notes taken with the " + theme.ColorGreen + "`notes`" + theme.ColorReset + " command into the description area\n" +
 		"3. creates a space for a python script and then imports the script created by " + theme.ColorGreen + "`pwn`" + theme.ColorReset + " if it exists\n" +
 		"4. imports the flag captured with the " + theme.ColorGreen + "`capture`" + theme.ColorReset + " command if it exists\n" +
@@ -44,7 +44,12 @@ func Writeup(args []string) {
 		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": \"%s\" already exists!\n", filePath)
 	}
 
-	url := config.CtfTimeUrl
+	url := ""
+	if len(config.CtfTimeUrls) > 0 {
+		// we should do better than this
+		url = config.CtfTimeUrls[0]
+	}
+
 	if url == "" {
 		url = "https://ctftime.link.goes.here"
 	}

@@ -37,24 +37,24 @@ var (
 	ChatWebhookUrl3      = ""
 	GistToken            = ""
 	ChefUrl              = "https://gchq.github.io/CyberChef/"
-	CtfTimeUrl           = ""
+	CtfTimeUrls          = []string{}
 )
 
 type Config struct {
-	GhidraInstallPath    string `json:"ghidrainstallpath"`
-	GhidraProject        string `json:"ghidraproject"`
-	IdaInstallPath       string `json:"idainstallpath"`
-	PwnScriptName        string `json:"pwnscriptname"`
-	PwnScriptTemplate    string `json:"pwnscripttemplate"`
-	CryptoScriptName     string `json:"cryptoscriptname"`
-	CryptoScriptTemplate string `json:"cryptoscripttemplate"`
-	Username             string `json:"username"`
-	ChatWebhookUrl       string `json:"chatwebhookurl"`
-	ChatWebhookUrl2      string `json:"chatwebhookurl2"`
-	ChatWebhookUrl3      string `json:"chatwebhookurl3"`
-	GistToken            string `json:"gisttoken"`
-	ChefUrl              string `json:"chefurl"`
-	CtfTimeUrl           string `json:"ctftimeurl"`
+	GhidraInstallPath    string   `json:"ghidrainstallpath"`
+	GhidraProject        string   `json:"ghidraproject"`
+	IdaInstallPath       string   `json:"idainstallpath"`
+	PwnScriptName        string   `json:"pwnscriptname"`
+	PwnScriptTemplate    string   `json:"pwnscripttemplate"`
+	CryptoScriptName     string   `json:"cryptoscriptname"`
+	CryptoScriptTemplate string   `json:"cryptoscripttemplate"`
+	Username             string   `json:"username"`
+	ChatWebhookUrl       string   `json:"chatwebhookurl"`
+	ChatWebhookUrl2      string   `json:"chatwebhookurl2"`
+	ChatWebhookUrl3      string   `json:"chatwebhookurl3"`
+	GistToken            string   `json:"gisttoken"`
+	ChefUrl              string   `json:"chefurl"`
+	CtfTimeUrls          []string `json:"ctftimeurls"`
 }
 
 func ParseUserConfig() {
@@ -130,8 +130,9 @@ func ParseUserConfig() {
 		ChefUrl = userConfig.ChefUrl
 	}
 
-	if len(userConfig.CtfTimeUrl) > 0 {
-		CtfTimeUrl = userConfig.CtfTimeUrl
+	if len(userConfig.CtfTimeUrls) > 0 {
+		CtfTimeUrls = make([]string, len(userConfig.CtfTimeUrls))
+		copy(CtfTimeUrls, userConfig.CtfTimeUrls)
 	}
 }
 
@@ -166,7 +167,8 @@ func WriteUserConfig() {
 	userConfig.ChatWebhookUrl3 = ChatWebhookUrl3
 	userConfig.GistToken = GistToken
 	userConfig.ChefUrl = ChefUrl
-	userConfig.CtfTimeUrl = CtfTimeUrl
+	userConfig.CtfTimeUrls = make([]string, len(CtfTimeUrls))
+	copy(userConfig.CtfTimeUrls, CtfTimeUrls)
 
 	jsonData, err := json.MarshalIndent(userConfig, "", "  ")
 	if err != nil {

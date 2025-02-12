@@ -29,37 +29,16 @@ func init() {
 }
 
 func CtfTimeHelp() string {
-	return "set the current ctftime url with ret\n\n" +
-		"the ctftime url is stored in " + theme.ColorCyan + "`~/.config/ret`" + theme.ColorReset + " using the " + theme.ColorYellow + "`\"ctftimeurl\"`" + theme.ColorReset + " field\n\n" +
-		"the command will use the ctftime.org api to fetch details about the currently set ctftime url and then display them\n\n" +
+	return "adds a ctftime url with ret\n\n" +
+		"the ctftime urls are stored in " + theme.ColorCyan + "`~/.config/ret`" + theme.ColorReset + " using the " + theme.ColorYellow + "`\"ctftimeurls\"`" + theme.ColorReset + " field\n\n" +
+		"the command will use the ctftime.org api to fetch details about all the currently set ctftime urls and then display them\n\n" +
 		"the ctf's title, start time and finish time will be displayed along with an indication of the time to the start or finish depending on the context\n\n" +
 		"for more details please see https://ctftime.org/api/\n\n" +
-		"the ctftime url will be used to aid in the generation of writeups with the " + theme.ColorGreen + "`writeup`" + theme.ColorReset + " command\n\n"
+		"the ctftime urls will be used to aid in the generation of writeups with the " + theme.ColorGreen + "`writeup`" + theme.ColorReset + " command\n\n"
 }
 
-func CtfTime(args []string) {
-	if len(args) > 0 {
-		fmt.Printf(theme.ColorGray+"old ctftime url: "+theme.ColorRed+"%v"+theme.ColorReset+"\n", config.CtfTimeUrl)
-
-		config.CtfTimeUrl = strings.Trim(args[0], "/")
-
-		config.WriteUserConfig()
-
-		fmt.Printf(theme.ColorGray+"new ctftime url: "+theme.ColorGreen+"%v"+theme.ColorReset+"\n", config.CtfTimeUrl)
-		return
-	}
-
-	if len(config.CtfTimeUrl) == 0 {
-		return
-	}
-
-	fmt.Printf(theme.ColorGray+"url: "+theme.ColorReset+"%v"+theme.ColorReset+"\n", config.CtfTimeUrl)
-
-	if !strings.Contains(config.CtfTimeUrl, "ctftime.org") {
-		return
-	}
-
-	splits := strings.Split(config.CtfTimeUrl, "/")
+func showStats(ctfTimeUrl string) {
+	splits := strings.Split(ctfTimeUrl, "/")
 	eventId := splits[len(splits)-1]
 
 	url := fmt.Sprintf("https://ctftime.org/api/v1/events/%s/", eventId)
@@ -119,5 +98,36 @@ func CtfTime(args []string) {
 	} else {
 		fmt.Printf(theme.ColorGray+"time to start: "+theme.ColorReset+"%v\n", startTime.Sub(now))
 		fmt.Printf(theme.ColorGray+"time to finish: "+theme.ColorReset+"%v\n", finishTime.Sub(now))
+	}
+}
+
+func CtfTime(args []string) {
+	if len(args) > 0 {
+		newCtfTimeUrl := strings.Trim(args[0], "/")
+
+		for _, ctfTimeUrl := range config.CtfTimeUrls {
+			if newCtfTimeUrl == ctfTimeUrl {
+				log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": a ctf with the url %v has already been registered\n", newCtfTimeUrl)
+				return
+			}
+		}
+
+		config.CtfTimeUrls = append(config.CtfTimeUrls, newCtfTimeUrl)
+
+		config.WriteUserConfig()
+
+		fmt.Printf(theme.ColorGray+"new ctftime url: "+theme.ColorGreen+"%v"+theme.ColorReset+"\n", newCtfTimeUrl)
+		return
+	}
+
+	for idx, ctfTimeUrl := range config.CtfTimeUrls {
+		fmt.Printf(theme.ColorGray+"url: "+theme.ColorReset+"%v"+theme.ColorReset+"\n", ctfTimeUrl)
+
+		if strings.Contains(ctfTimeUrl, "ctftime.org") {
+			showStats(ctfTimeUrl)
+			if idx+1 < len(config.CtfTimeUrls) {
+				fmt.Printf("\n")
+			}
+		}
 	}
 }
