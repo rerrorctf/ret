@@ -60,12 +60,12 @@ func (t *CommandTrie) Search(word string) (bool, *Command) {
 func (t *CommandTrie) ShortestPrefix(word string) (string, string) {
 	prefixLen := 1
 	node := t.root
-	for _, char := range word {
+	for idx, char := range word {
 		if _, ok := node.children[char]; !ok {
 			return "", ""
 		}
 		if len(node.children[char].children) > 1 {
-			prefixLen += 1
+			prefixLen = idx + 2
 		}
 		node = node.children[char]
 	}
