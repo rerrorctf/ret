@@ -36,13 +36,13 @@ func init() {
 func AddHelp() string {
 	return "add one or more files to the current task with ret\n\n" +
 		"performs the following steps:\n" +
-		"1. analyze each file to determine if it is an elf or not by examing the file's magic bytes\n" +
+		"1. analyze each file to determine if it is an elf or not by examining the file's magic bytes\n" +
 		"2. generate a sha-2-256 hash for each file\n" +
 		"3. added files are copied into the hidden directory " + theme.ColorCyan + "`.ret/files`" + theme.ColorReset + " inside a subfolder that is named using the sha-2-256 hex digest of the file content\n" +
 		"4. save metadata about the files, specifically their length, location and file type (i.e. elf or not), in the files json file in the hidden " + theme.ColorCyan + "`.ret`" + theme.ColorReset + " directory\n" +
 		"5. uses strings, with widths of 8, 16 and 32 bits per character, in combination with grep to search for flags\n" +
 		"added files are subject to processing by other commands that operate on the set of added files\n\n" +
-		"adding a file does not prevent changes from occuring to the source file nor does it detect them for you, like a version control system would\n\n" +
+		"adding a file does not prevent changes from occurring to the source file nor does it detect them for you, like a version control system would\n\n" +
 		"you can track several version of a file by adding each of them remembering that they are addressed according to the hash of their content\n\n" +
 		"you can restore a specific version of a file by copying it from the subdirectory in which a copy of it was made when the file was added\n"
 }

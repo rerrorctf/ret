@@ -90,14 +90,14 @@ $ ret add file1 [file2 file3...]
 add one or more files to the current task with ret
 
 performs the following steps:
-1. analyze each file to determine if it is an elf or not by examing the file's magic bytes
+1. analyze each file to determine if it is an elf or not by examining the file's magic bytes
 2. generate a sha-2-256 hash for each file
 3. added files are copied into the hidden directory `.ret/files` inside a subfolder that is named using the sha-2-256 hex digest of the file content
 4. save metadata about the files, specifically their length, location and file type (i.e. elf or not), in the files json file in the hidden `.ret` directory
 5. uses strings, with widths of 8, 16 and 32 bits per character, in combination with grep to search for flags
 added files are subject to processing by other commands that operate on the set of added files
 
-adding a file does not prevent changes from occuring to the source file nor does it detect them for you, like a version control system would
+adding a file does not prevent changes from occurring to the source file nor does it detect them for you, like a version control system would
 
 you can track several version of a file by adding each of them remembering that they are addressed according to the hash of their content
 
@@ -449,9 +449,10 @@ $ ret writeup
 
 create a markdown writeup using a template with ret
 
-the writeup will saved in a file called `writeup.md`
+the writeup will be saved in a file called `writeup.md`
 
 if a file called `writeup.md` already exists the command will abort
+there is a small window for a time-of-check/time-of-use race here - you have been warned!
 
 1. uses the `"ctftimeurl"` to insert a url at the top of the writeup
 2. imports all notes taken with the `notes` command into the description area
