@@ -454,7 +454,7 @@ the writeup will be saved in a file called `writeup.md`
 if a file called `writeup.md` already exists the command will abort
 there is a small window for a time-of-check/time-of-use race here - you have been warned!
 
-1. uses the first url from `"ctftimeurls"` to insert a url at the top of the writeup
+1. uses the first url from `"ctftimeurls"` to insert a url at the top of the writeup. inserts the rest as comments if there are more than one
 2. imports all notes taken with the `notes` command into the description area
 3. creates a space for a python script and then imports the script created by `pwn` if it exists
 4. imports the flag captured with the `capture` command if it exists
