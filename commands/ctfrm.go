@@ -36,7 +36,7 @@ func Ctfrm(args []string) {
 			if ctfTimeUrlToRemove == ctfTimeUrl {
 				config.CtfTimeUrls = append(config.CtfTimeUrls[:idx], config.CtfTimeUrls[idx+1:]...)
 				config.WriteUserConfig()
-				fmt.Printf(theme.ColorGray+"revmoed ctftime url: "+theme.ColorRed+"%v"+theme.ColorRed+"\n", ctfTimeUrlToRemove)
+				fmt.Printf(theme.ColorGray+"removed ctftime url: "+theme.ColorRed+"%v"+theme.ColorRed+"\n", ctfTimeUrlToRemove)
 				return
 			}
 		}
