@@ -74,7 +74,7 @@ for example:
 ```bash
 $ ret abi x64 linux
 $ ret abi 32 windows
-$ ret abi am64 mac
+$ ret abi arm64 mac
 ```
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/abi.go
@@ -230,7 +230,23 @@ for example:
 
 ---
 
-### 🚩 <u>ct</u>ftime
+### 🚮 <u>ctfr</u>m
+
+```
+$ ret ctfrm [url] 
+```
+
+remove a ctf with ret
+
+the ctftime url will be removed from the list, if it exists in the list, that is stored in `~/.config/ret` in the `"ctftimeurls"`
+
+you can also manually remove ctftime urls from this list by directly editing `~/.config/ret`
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/ctfrm.go
+
+---
+
+### 🚩 <u>ctft</u>ime
 
 ```
 $ ret ctftime [url] 

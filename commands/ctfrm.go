@@ -25,7 +25,9 @@ func init() {
 }
 
 func CtfrmHelp() string {
-	return "remove a ctf with ret\n\n"
+	return "remove a ctf with ret\n\n" +
+		"the ctftime url will be removed from the list, if it exists in the list, that is stored in " + theme.ColorCyan + "`~/.config/ret`" + theme.ColorReset + " in the " + theme.ColorYellow + "`\"ctftimeurls\"`" + theme.ColorReset + "\n\n" +
+		"you can also manually remove ctftime urls from this list by directly editing " + theme.ColorCyan + "`~/.config/ret`" + theme.ColorReset + "\n"
 }
 
 func Ctfrm(args []string) {

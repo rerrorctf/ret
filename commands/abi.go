@@ -38,7 +38,7 @@ func AbiHelp() string {
 		"```bash\n" +
 		theme.ColorGray + "$ " + theme.ColorBlue + "ret abi x64 linux\n" + theme.ColorReset +
 		theme.ColorGray + "$ " + theme.ColorBlue + "ret abi 32 windows\n" + theme.ColorReset +
-		theme.ColorGray + "$ " + theme.ColorBlue + "ret abi am64 mac\n" + theme.ColorReset +
+		theme.ColorGray + "$ " + theme.ColorBlue + "ret abi arm64 mac\n" + theme.ColorReset +
 		"```\n"
 }
 
