@@ -20,17 +20,17 @@ func DefsHelp() string {
 
 func printColoredDefTitle(def string, include string) {
 	if len(include) > 0 {
-		fmt.Printf(theme.ColorGreen + def + theme.ColorGray + " #include <" + include + ">\n" + theme.ColorReset)
+		fmt.Println(theme.ColorGreen + def + theme.ColorGray + " #include <" + include + ">" + theme.ColorReset)
 	} else {
-		fmt.Printf(theme.ColorGreen + def + "\n" + theme.ColorReset)
+		fmt.Println(theme.ColorGreen + def + theme.ColorReset)
 	}
 }
 
 func printColoredDef(path string, def string, val string) {
 	if len(path) > 0 {
-		fmt.Printf(theme.ColorGray + "  " + path + " ~ " + theme.ColorReset)
+		fmt.Printf("%s  %s ~ %s", theme.ColorGray, path, theme.ColorReset)
 	}
-	fmt.Printf(theme.ColorPurple + "#define " + theme.ColorBlue + def + " " + theme.ColorReset + val + "\n")
+	fmt.Println(theme.ColorPurple + "#define " + theme.ColorBlue + def + " " + theme.ColorReset + val)
 }
 
 func printStdFileNos() {
