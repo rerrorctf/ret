@@ -500,6 +500,6 @@ there is a small window for a time-of-check/time-of-use race here - you have bee
   "chatwebhookurl3": "",
   "gisttoken": "",
   "chefurl": "",
-  "ctftimeurls": ""
+  "ctftimeurls": []
 }
 ```
