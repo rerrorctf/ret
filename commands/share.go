@@ -2,10 +2,8 @@ package commands
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"ret/config"
-	"ret/theme"
 	"ret/util"
 )
 
@@ -24,46 +22,45 @@ func ShareHelp() string {
 }
 
 func Share(args []string) {
-	if len(config.GistToken) == 0 {
-		log.Fatalf("💥 " + theme.ColorRed + "error" + theme.ColorReset + ": no gist token in ~/.config/ret\n")
-	}
-
-	files := map[string]interface{}{}
-
-	buffer, err := os.ReadFile(config.PwnScriptName)
-	if err == nil {
-		files[config.PwnScriptName] = map[string]interface{}{
-			"content": string(buffer),
-		}
-	}
-
-	buffer, err = os.ReadFile(config.CryptoScriptName)
-	if err == nil {
-		files[config.CryptoScriptName] = map[string]interface{}{
-			"content": string(buffer),
-		}
-	}
-
-	buffer, err = os.ReadFile(config.NotesFileName)
-	if err == nil {
-		// does not like .ret/notes.json
-		files["notes.json"] = map[string]interface{}{
-			"content": string(buffer),
-		}
-	}
-
 	flag, err := util.GetCurrentFlag()
 	if err != nil {
 		flag = config.FlagFormat
-	} else {
-		files["flag.txt"] = map[string]interface{}{
-			"content": string(flag),
-		}
 	}
 
 	gistUrl := ""
-	if len(files) > 0 {
-		gistUrl = "**" + util.Gist(files) + "**"
+
+	if len(config.GistToken) > 0 {
+		files := map[string]interface{}{}
+
+		buffer, err := os.ReadFile(config.PwnScriptName)
+		if err == nil {
+			files[config.PwnScriptName] = map[string]interface{}{
+				"content": string(buffer),
+			}
+		}
+
+		buffer, err = os.ReadFile(config.CryptoScriptName)
+		if err == nil {
+			files[config.CryptoScriptName] = map[string]interface{}{
+				"content": string(buffer),
+			}
+		}
+
+		buffer, err = os.ReadFile(config.NotesFileName)
+		if err == nil {
+			// does not like .ret/notes.json
+			files["notes.json"] = map[string]interface{}{
+				"content": string(buffer),
+			}
+		}
+
+		files["flag.txt"] = map[string]interface{}{
+			"content": string(flag),
+		}
+
+		if len(files) > 0 {
+			gistUrl = "**" + util.Gist(files) + "**"
+		}
 	}
 
 	Chat([]string{fmt.Sprintf("🏁 `%s`\n%s", flag, gistUrl)})
