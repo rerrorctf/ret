@@ -14,7 +14,7 @@ func init() {
 		Func:      Share,
 		Help:      ShareHelp,
 		Arguments: nil,
-		SeeAlso:   []string{"notes", "capture", "chat", "gist", "pwn"}})
+		SeeAlso:   []string{"notes", "capture", "chat", "gist", "pwn", "crypto"}})
 }
 
 func ShareHelp() string {
