@@ -417,6 +417,16 @@ $ ret share
 
 share task progress with ret
 
+if you have captured a flag with the `capture` command this will be sent using the `chat` command
+
+if you have a valid `"gisttoken"` this command will also make a gist and include the url in the chat message
+
+the gist will attempt to include the following files:
+
+1. the pwn script, which uses `"pwnscriptname"`, and is typically generated with the `pwn` command
+2. the crypto script, which uses `"cryptoscriptname"`, and is typically generated with the `crypto` command
+3. the notes, which are saved in the .ret/notes.json file, and are typically populated with the `notes` command
+4. the flag, which is saved in the .ret/flag.json file, and is typically set with the `capture` command
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/share.go
 

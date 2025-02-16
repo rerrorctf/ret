@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"ret/config"
+	"ret/theme"
 	"ret/util"
 )
 
@@ -18,7 +19,14 @@ func init() {
 }
 
 func ShareHelp() string {
-	return "share task progress with ret\n\n"
+	return "share task progress with ret\n\n" +
+		"if you have captured a flag with the " + theme.ColorGreen + "`capture`" + theme.ColorReset + " command this will be sent using the " + theme.ColorGreen + "`chat`" + theme.ColorReset + " command\n\n" +
+		"if you have a valid " + theme.ColorYellow + "`\"gisttoken\"`" + theme.ColorReset + " this command will also make a gist and include the url in the chat message\n\n" +
+		"the gist will attempt to include the following files:\n\n" +
+		"1. the pwn script, which uses " + theme.ColorYellow + "`\"pwnscriptname\"`" + theme.ColorReset + ", and is typically generated with the " + theme.ColorGreen + "`pwn`" + theme.ColorReset + " command\n" +
+		"2. the crypto script, which uses " + theme.ColorYellow + "`\"cryptoscriptname\"`" + theme.ColorReset + ", and is typically generated with the " + theme.ColorGreen + "`crypto`" + theme.ColorReset + " command\n" +
+		"3. the notes, which are saved in the " + theme.ColorCyan + ".ret/notes.json" + theme.ColorReset + " file, and are typically populated with the " + theme.ColorGreen + "`notes`" + theme.ColorReset + " command\n" +
+		"4. the flag, which is saved in the " + theme.ColorCyan + ".ret/flag.json" + theme.ColorReset + " file, and is typically set with the " + theme.ColorGreen + "`capture`" + theme.ColorReset + " command\n"
 }
 
 func Share(args []string) {
