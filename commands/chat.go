@@ -55,7 +55,7 @@ func init() {
 func ChatHelp() string {
 	return "chat via a discord webhook with ret\n\n" +
 		"use - to read from stdin\n\n" +
-		"requires a valid webhook this is typically " + theme.ColorYellow + "`\"chatwebhookurl\"`" + theme.ColorReset + " from " + theme.ColorCyan + "`~/.config/ret`" + theme.ColorReset + " is a valid webhook\n\n" +
+		"requires a valid webhook this is typically " + theme.ColorYellow + "`\"chatwebhookurl\"`" + theme.ColorReset + " from " + theme.ColorCyan + "`~/.config/ret`" + theme.ColorReset + "\n\n" +
 		"however the command supports up to 3 webhooks using " + theme.ColorGray + "`$ ret --1 chat`" + theme.ColorReset + ", " + theme.ColorGray + "`$ ret --2 chat` " + theme.ColorReset + "and " + theme.ColorGray + "`$ ret --3 chat`" + theme.ColorReset + "\n\n" +
 		"if no numerical override is specified the " + theme.ColorYellow + "`\"chatwebhookurl\"`" + theme.ColorReset + " webhook is used by default\n\n" +
 		"webhooks 2 and 3 are set with " + theme.ColorYellow + "`\"chatwebhookurl2\"`" + theme.ColorReset + " and " + theme.ColorYellow + "`\"chatwebhookurl3\"`" + theme.ColorReset + " respectively\n\n" +

@@ -159,7 +159,7 @@ chat via a discord webhook with ret
 
 use - to read from stdin
 
-requires a valid webhook this is typically `"chatwebhookurl"` from `~/.config/ret` is a valid webhook
+requires a valid webhook this is typically `"chatwebhookurl"` from `~/.config/ret`
 
 however the command supports up to 3 webhooks using `$ ret --1 chat`, `$ ret --2 chat` and `$ ret --3 chat`
 
