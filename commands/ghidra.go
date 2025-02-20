@@ -1,8 +1,6 @@
 package commands
 
 import (
-	"bufio"
-	"bytes"
 	"fmt"
 	"log"
 	"os"
@@ -11,7 +9,6 @@ import (
 	"ret/config"
 	"ret/theme"
 	"ret/util"
-	"strings"
 	"time"
 )
 
@@ -51,29 +48,11 @@ func ghidraSpinner() {
 }
 
 func ghidraAlreadyRunning() bool {
-	pidofCmd := exec.Command("pidof", "java")
-	pidofCmd.Stdin = nil
-	var pidofOutput bytes.Buffer
-	pidofCmd.Stdout = &pidofOutput
-	if err := pidofCmd.Run(); err != nil {
+	if _, err := os.Stat(config.FolderName + "/" + config.GhidraProject + "/ghidra.lock"); os.IsNotExist(err) {
 		return false
 	}
 
-	scanner := bufio.NewScanner(&pidofOutput)
-	for scanner.Scan() {
-		javaPid := scanner.Text()
-
-		cmdline, err := os.ReadFile("/proc/" + javaPid + "/cmdline")
-		if err != nil {
-			continue
-		}
-
-		if strings.Contains(string(cmdline), "ghidra") {
-			return true
-		}
-	}
-
-	return false
+	return true
 }
 
 func Ghidra(args []string) {
@@ -94,7 +73,7 @@ func Ghidra(args []string) {
 	}
 
 	if config.CheckIfGhidraRunning && ghidraAlreadyRunning() {
-		fmt.Println("😰" + theme.ColorYellow + " warning" + theme.ColorReset + ": ghidra already seems to be running")
+		fmt.Printf("😰"+theme.ColorYellow+" warning"+theme.ColorReset+": %s exists!\n", config.FolderName+"/"+config.GhidraProject+"/ghidra.lock")
 		return
 	}
 
