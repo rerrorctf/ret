@@ -12,6 +12,12 @@ import (
 	"time"
 )
 
+type CTFTimeInfo struct {
+	Title  string
+	Start  time.Time
+	Finish time.Time
+}
+
 func init() {
 	Commands = append(Commands, Command{
 		Name:  "ctftime",
@@ -37,7 +43,20 @@ func CtfTimeHelp() string {
 		"the ctftime urls will be used to aid in the generation of writeups with the " + theme.ColorGreen + "`writeup`" + theme.ColorReset + " command\n\n"
 }
 
-func showStats(ctfTimeUrl string) {
+func ctftimeSpinner() {
+	emojis := []string{
+		"🕛", "⏳", "🕧", "🕐", "⏰", "🕞", "⏲️", "🚩",
+	}
+
+	for {
+		for _, e := range emojis {
+			fmt.Printf("\r%s", e)
+			time.Sleep(200 * time.Millisecond)
+		}
+	}
+}
+
+func fetchInfo(ctfTimeUrl string, info *CTFTimeInfo) {
 	splits := strings.Split(ctfTimeUrl, "/")
 	eventId := splits[len(splits)-1]
 
@@ -68,36 +87,41 @@ func showStats(ctfTimeUrl string) {
 		log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 	}
 
-	title := result["title"]
-	fmt.Printf(theme.ColorGray+"title: "+theme.ColorBlue+"%s"+theme.ColorReset+"\n", title)
-
-	now := time.Now()
+	info.Title = fmt.Sprintf("%s", result["title"])
 
 	start := fmt.Sprintf("%s", result["start"])
-	startTime, err := time.Parse(time.RFC3339, start)
+	info.Start, err = time.Parse(time.RFC3339, start)
+
 	if err != nil {
 		log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 	}
 
 	finish := fmt.Sprintf("%s", result["finish"])
-	finishTime, err := time.Parse(time.RFC3339, finish)
+	info.Finish, err = time.Parse(time.RFC3339, finish)
+
 	if err != nil {
 		log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 	}
+}
 
-	fmt.Printf(theme.ColorGray+"start: "+theme.ColorGreen+"%v "+theme.ColorGray+"finish: "+theme.ColorRed+"%v"+theme.ColorReset+"\n", startTime, finishTime)
+func showInfo(info *CTFTimeInfo) {
+	fmt.Printf(theme.ColorGray+"title: "+theme.ColorBlue+"%s"+theme.ColorReset+"\n", info.Title)
 
-	started := startTime.Before(now)
-	finished := finishTime.Before(now)
+	now := time.Now()
+
+	fmt.Printf(theme.ColorGray+"start: "+theme.ColorGreen+"%v "+theme.ColorGray+"finish: "+theme.ColorRed+"%v"+theme.ColorReset+"\n", info.Start, info.Finish)
+
+	started := info.Start.Before(now)
+	finished := info.Finish.Before(now)
 	ongoing := started && !finished
 
 	if ongoing {
-		fmt.Printf(theme.ColorGray+"time remaining: "+theme.ColorReset+"%v\n", finishTime.Sub(now))
+		fmt.Printf(theme.ColorGray+"time remaining: "+theme.ColorReset+"%v\n", info.Finish.Sub(now))
 	} else if finished {
-		fmt.Printf(theme.ColorGray+"time since finish: "+theme.ColorReset+"%v\n", finishTime.Sub(now))
+		fmt.Printf(theme.ColorGray+"time since finish: "+theme.ColorReset+"%v\n", info.Finish.Sub(now))
 	} else {
-		fmt.Printf(theme.ColorGray+"time to start: "+theme.ColorReset+"%v\n", startTime.Sub(now))
-		fmt.Printf(theme.ColorGray+"time to finish: "+theme.ColorReset+"%v\n", finishTime.Sub(now))
+		fmt.Printf(theme.ColorGray+"time to start: "+theme.ColorReset+"%v\n", info.Start.Sub(now))
+		fmt.Printf(theme.ColorGray+"time to finish: "+theme.ColorReset+"%v\n", info.Finish.Sub(now))
 	}
 }
 
@@ -120,11 +144,23 @@ func CtfTime(args []string) {
 		return
 	}
 
+	go ctftimeSpinner()
+
+	infos := make([]CTFTimeInfo, len(config.CtfTimeUrls))
+
+	for idx, ctfTimeUrl := range config.CtfTimeUrls {
+		if strings.Contains(ctfTimeUrl, "ctftime.org") {
+			fetchInfo(ctfTimeUrl, &infos[idx])
+		}
+	}
+
+	fmt.Printf("\r")
+
 	for idx, ctfTimeUrl := range config.CtfTimeUrls {
 		fmt.Printf(theme.ColorGray+"url: "+theme.ColorReset+"%v"+theme.ColorReset+"\n", ctfTimeUrl)
 
 		if strings.Contains(ctfTimeUrl, "ctftime.org") {
-			showStats(ctfTimeUrl)
+			showInfo(&infos[idx])
 			if idx+1 < len(config.CtfTimeUrls) {
 				fmt.Printf("\n")
 			}
