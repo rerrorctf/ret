@@ -47,6 +47,14 @@ func ghidraSpinner() {
 	}
 }
 
+func ghidraAlreadyRunning() bool {
+	if _, err := os.Stat(config.FolderName + "/" + config.GhidraProject + "/ghidra.lock"); os.IsNotExist(err) {
+		return false
+	}
+
+	return true
+}
+
 func Ghidra(args []string) {
 	if _, err := os.Stat(config.FolderName + "/" + config.GhidraProject); os.IsNotExist(err) {
 		err := os.MkdirAll(config.FolderName+"/"+config.GhidraProject, 0755)
@@ -62,6 +70,11 @@ func Ghidra(args []string) {
 
 	if len(args) > 0 {
 		Add(args)
+	}
+
+	if config.CheckIfGhidraRunning && ghidraAlreadyRunning() {
+		fmt.Printf("😰"+theme.ColorYellow+" warning"+theme.ColorReset+": %s exists!\n", config.FolderName+"/"+config.GhidraProject+"/ghidra.lock")
+		return
 	}
 
 	go ghidraSpinner()
