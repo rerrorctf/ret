@@ -50,8 +50,6 @@ func ResultChecker(strategy *Strategy, m *big.Int) {
 }
 
 func Rsa() {
-	//fmt.Printf("%v %v %v %v %v %v\n", P, Q, E, D, N, C)
-
 	var strategyWG sync.WaitGroup
 
 	for _, strategy := range Strategies {
