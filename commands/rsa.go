@@ -69,6 +69,8 @@ func parseArgs(args []string) {
 			parseBigInts(&rsa.Q, arg[2:])
 		} else if strings.HasPrefix(arg, "e=") {
 			parseBigInts(&rsa.E, arg[2:])
+		} else if strings.HasPrefix(arg, "d=") {
+			parseBigInts(&rsa.D, arg[2:])
 		} else if strings.HasPrefix(arg, "n=") {
 			parseBigInts(&rsa.N, arg[2:])
 		} else if strings.HasPrefix(arg, "c=") {
