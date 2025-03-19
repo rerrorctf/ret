@@ -24,13 +24,13 @@ var (
 	Strategies []Strategy
 )
 
-func ResultChecker(strategy *Strategy, m *big.Int) {
+func ResultChecker(strategy *Strategy, m *big.Int) []byte {
 	if strategy == nil {
-		return
+		return nil
 	}
 
 	if m == nil {
-		return
+		return nil
 	}
 
 	mBytes := m.Bytes()
@@ -43,10 +43,11 @@ func ResultChecker(strategy *Strategy, m *big.Int) {
 	}
 
 	if ascii != true {
-		return
+		return nil
 	}
 
 	fmt.Printf("[%s]\n%s\n", strategy.Name, mBytes)
+	return mBytes
 }
 
 func Rsa() {
