@@ -3,6 +3,7 @@ package rsa
 import (
 	"fmt"
 	"math/big"
+	"ret/theme"
 	"sync"
 )
 
@@ -46,7 +47,7 @@ func ResultChecker(strategy *Strategy, m *big.Int) []byte {
 		return nil
 	}
 
-	fmt.Printf("[%s]\n%s\n", strategy.Name, mBytes)
+	fmt.Printf("["+theme.ColorGreen+"%s"+theme.ColorReset+"]\n🏁 "+theme.ColorPurple+"%s"+theme.ColorReset+"\n", strategy.Name, mBytes)
 	return mBytes
 }
 
