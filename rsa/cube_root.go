@@ -6,6 +6,12 @@ import (
 	"sync"
 )
 
+var (
+	n0 = big.NewInt(0)
+	n2 = big.NewInt(2)
+	n3 = big.NewInt(3)
+)
+
 func init() {
 	Strategies = append(Strategies, Strategy{
 		Name: "cube_root",
@@ -50,62 +56,55 @@ func scriptCubeRootCoefficient(n *big.Int, c *big.Int, k int, mBytes []byte) {
 		n, c, k, mBytes)
 }
 
-func computeCubeRoot(c *big.Int) (*big.Int, bool) {
-	lo := big.NewInt(1)
-	hi := new(big.Int).Set(c)
-	var mid, tmp big.Int
+func computeCubeRoot(y *big.Int) (*big.Int, bool) {
+	// based on https://github.com/chfast/mini-gmp/blob/95c194c8b1a475939d9fa29ff6b9a30b71dcbf48/mini-gmp/mini-gmp.c#L3216
 
-	for lo.Cmp(hi) < 0 {
-		mid.Add(lo, hi)
-		mid.Rsh(&mid, 1)
+	u := big.NewInt(0)
+	t := big.NewInt(0)
+	v := big.NewInt(0)
+	tmp := big.NewInt(0)
 
-		tmp.Mul(&mid, &mid)
-		tmp.Mul(&tmp, &mid)
+	t.SetBit(t, y.BitLen()/3+1, 1)
 
-		switch tmp.Cmp(c) {
-		case -1:
-			lo.Add(&mid, big.NewInt(1))
-		case 0, 1:
-			hi.Set(&mid)
+	for {
+		tmp.Set(u)
+		u.Set(t)
+		t.Set(tmp)
+
+		t.Exp(u, n2, nil)
+		t.Div(y, t)
+		v.Mul(u, n2)
+		t.Add(t, v)
+		t.Div(t, n3)
+
+		if t.Cmp(u) >= 0 {
+			break
 		}
 	}
 
-	exact := false
-	x := new(big.Int).Exp(lo, big.NewInt(3), nil)
+	t.Exp(u, n3, nil)
+	v.Sub(y, t)
 
-	if c.Cmp(x) == 0 {
-		exact = true
-	}
+	exact := v.Cmp(n0) == 0
 
-	return lo, exact
+	return u, exact
 }
 
 func StrategyCubeRoot(strategy *Strategy) {
 	var wg sync.WaitGroup
 
 	for _, c := range C {
-		wg.Add(1)
+		m, exact := computeCubeRoot(c)
 
-		go func() {
-			defer wg.Done()
-
-			m, exact := computeCubeRoot(c)
-
-			if !exact {
-				return
-			}
-
+		if exact {
 			mBytes := ResultChecker(strategy, m)
 
-			if mBytes == nil {
-				return
+			if mBytes != nil {
+				scriptCubeRootExact(c, mBytes)
+				continue
 			}
+		}
 
-			scriptCubeRootExact(c, mBytes)
-		}()
-	}
-
-	for _, c := range C {
 		for _, n := range N {
 			wg.Add(1)
 
