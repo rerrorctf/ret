@@ -2,6 +2,7 @@ package commands
 
 import (
 	"fmt"
+	"log"
 	"math/big"
 	"ret/rsa"
 	"ret/theme"
@@ -60,6 +61,10 @@ func parseBigInts(XS *[]*big.Int, arg string) {
 }
 
 func parseArgs(args []string) {
+	if len(args) == 0 {
+		log.Fatalln("💥 " + theme.ColorRed + "error" + theme.ColorReset + ": expected 1 or more args")
+	}
+
 	for _, arg := range args {
 		arg = strings.ReplaceAll(arg, "-", "")
 
