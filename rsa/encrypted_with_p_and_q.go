@@ -23,7 +23,7 @@ func scriptEncryptedWithPAndQ(p *big.Int, q *big.Int, c *big.Int, mBytes []byte)
 			"d = pow(p, -1, phi)\n"+
 			"m = pow(c, d, q)\n\n"+
 			"flag = m.to_bytes(length=(m.bit_length() + 7) // 8, byteorder=\"big\")\n"+
-			"print(flag.decode()) # %s\n```\n",
+			"print(flag.decode()) # %s\n```\n\n",
 		p, q, c, mBytes)
 }
 

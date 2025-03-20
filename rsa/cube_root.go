@@ -36,7 +36,7 @@ func scriptCubeRootExact(c *big.Int, mBytes []byte) {
 			"c = %s\n\n"+
 			"m = cube_root(c)\n"+
 			"flag = m.to_bytes(length=(m.bit_length() + 7) // 8, byteorder=\"big\")\n"+
-			"print(flag.decode()) # %s\n```\n",
+			"print(flag.decode()) # %s\n```\n\n",
 		c, mBytes)
 }
 
@@ -52,7 +52,7 @@ func scriptCubeRootCoefficient(n *big.Int, c *big.Int, k int, mBytes []byte) {
 			"    k += 1\n"+
 			"m = gmpy2.iroot(c + k * n, 3)[0] # k = %v\n\n"+
 			"flag = m.to_bytes(length=(m.bit_length() + 7) // 8, byteorder=\"big\")\n"+
-			"print(flag.decode()) # %s\n```\n",
+			"print(flag.decode()) # %s\n```\n\n",
 		n, c, k, mBytes)
 }
 

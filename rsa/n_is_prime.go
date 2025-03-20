@@ -23,7 +23,7 @@ func scriptNIsPrime(n *big.Int, e *big.Int, c *big.Int, mBytes []byte) {
 			"d = pow(e, -1, phi)\n"+
 			"m = pow(c, d, n)\n\n"+
 			"flag = m.to_bytes(length=(m.bit_length() + 7) // 8, byteorder=\"big\")\n"+
-			"print(flag.decode()) # %s\n```\n",
+			"print(flag.decode()) # %s\n```\n\n",
 		n, e, c, mBytes)
 }
 

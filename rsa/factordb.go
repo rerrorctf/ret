@@ -32,7 +32,7 @@ func scriptFactorDB(url string, p *big.Int, q *big.Int, n *big.Int, e *big.Int, 
 			"d = pow(e, -1, phi)\n"+
 			"m = pow(c, d, n)\n\n"+
 			"flag = m.to_bytes(length=(m.bit_length() + 7) // 8, byteorder=\"big\")\n"+
-			"print(flag.decode()) # %s\n```\n",
+			"print(flag.decode()) # %s\n```\n\n",
 		n, e, c, url, p, q, mBytes)
 }
 
@@ -64,7 +64,7 @@ func scriptFactorDBManyFactors(url string, factors []*big.Int, n *big.Int, e *bi
 			"d = pow(e, -1, phi)\n"+
 			"m = pow(c, d, n)\n\n"+
 			"flag = m.to_bytes(length=(m.bit_length() + 7) // 8, byteorder=\"big\")\n"+
-			"print(flag.decode()) # %s\n```\n",
+			"print(flag.decode()) # %s\n```\n\n",
 		mBytes)
 
 	fmt.Print(script)
