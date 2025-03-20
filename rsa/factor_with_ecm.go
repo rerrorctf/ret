@@ -17,13 +17,14 @@ func init() {
 	})
 }
 
-func scriptFactorECM(p *big.Int, q *big.Int, n *big.Int, e *big.Int, c *big.Int, mBytes []byte) {
+func scriptFactorECM(cmd string, p *big.Int, q *big.Int, n *big.Int, e *big.Int, c *big.Int, mBytes []byte) {
 	fmt.Printf(
 		"\n```python\n"+
 			"#!/usr/bin/env python3\n\n"+
 			"n = %s\n"+
 			"e = %s\n"+
 			"c = %s\n\n"+
+			"# factored with gmp-ecm ~ \"%s\"\n"+
 			"p = %s\n"+
 			"q = %s\n"+
 			"assert((p * q) == n)\n\n"+
@@ -31,19 +32,20 @@ func scriptFactorECM(p *big.Int, q *big.Int, n *big.Int, e *big.Int, c *big.Int,
 			"d = pow(e, -1, phi)\n"+
 			"m = pow(c, d, n)\n\n"+
 			"flag = m.to_bytes(length=(m.bit_length() + 7) // 8, byteorder=\"big\")\n"+
-			"print(flag.decode()) # %s\n```\n",
-		n, e, c, p, q, mBytes)
+			"print(flag.decode()) # %s\n```\n\n",
+		n, e, c, cmd, p, q, mBytes)
 }
 
-func scriptFactorECMManyFactors(factors []*big.Int, n *big.Int, e *big.Int, c *big.Int, mBytes []byte) {
+func scriptFactorECMManyFactors(cmd string, factors []*big.Int, n *big.Int, e *big.Int, c *big.Int, mBytes []byte) {
 	script := fmt.Sprintf(
 		"\n```python\n"+
 			"#!/usr/bin/env python3\n\n"+
 			"n = %s\n"+
 			"e = %s\n"+
 			"c = %s\n\n"+
+			"# factored with gmp-ecm ~ \"%s\"\n"+
 			"factors = [\n",
-		n, e, c)
+		n, e, c, cmd)
 
 	for _, factor := range factors {
 		script += fmt.Sprintf("    %s,\n", factor)
@@ -62,7 +64,7 @@ func scriptFactorECMManyFactors(factors []*big.Int, n *big.Int, e *big.Int, c *b
 			"d = pow(e, -1, phi)\n"+
 			"m = pow(c, d, n)\n\n"+
 			"flag = m.to_bytes(length=(m.bit_length() + 7) // 8, byteorder=\"big\")\n"+
-			"print(flag.decode()) # %s\n```\n",
+			"print(flag.decode()) # %s\n```\n\n",
 		mBytes)
 
 	fmt.Print(script)
@@ -132,7 +134,7 @@ func factorWithECM(strategy *Strategy, n *big.Int) {
 					continue
 				}
 
-				scriptFactorECM(p, q, n, e, c, mBytes)
+				scriptFactorECM(cmd.String(), p, q, n, e, c, mBytes)
 			}
 		}
 	} else {
@@ -153,7 +155,7 @@ func factorWithECM(strategy *Strategy, n *big.Int) {
 					continue
 				}
 
-				scriptFactorECMManyFactors(factors, n, e, c, mBytes)
+				scriptFactorECMManyFactors(cmd.String(), factors, n, e, c, mBytes)
 			}
 		}
 	}
@@ -161,10 +163,12 @@ func factorWithECM(strategy *Strategy, n *big.Int) {
 
 func StrategyFactorWithECM(strategy *Strategy) {
 	// check that ecm is installed
-	cmd := exec.Command("/usr/bin/ecmm", "--help")
+	cmd := exec.Command("/usr/bin/ecm", "--help")
 
 	err := cmd.Run()
 	if err != nil {
+		fmt.Printf("😰"+theme.ColorGray+" \""+theme.ColorReset+"%v"+theme.ColorGray+"\""+theme.ColorYellow+
+			" failed"+theme.ColorReset+"! consider installing "+theme.ColorCyan+"gmp-ecm"+theme.ColorReset+"\n", cmd.String())
 		return
 	}
 
@@ -174,10 +178,18 @@ func StrategyFactorWithECM(strategy *Strategy) {
 }
 
 // examples:
+//
+// many small primes
 // n = 580642391898843192929563856870897799650883152718761762932292482252152591279871421569162037190419036435041797739880389529593674485555792234900969402019055601781662044515999210032698275981631376651117318677368742867687180140048715627160641771118040372573575479330830092989800730105573700557717146251860588802509310534792310748898504394966263819959963273509119791037525504422606634640173277598774814099540555569257179715908642917355365791447508751401889724095964924513196281345665480688029639999472649549163147599540142367575413885729653166517595719991872223011969856259344396899748662101941230745601719730556631637
 // e = 65537
 // c = 9015202564552492364962954854291908723653545972440223723318311631007329746475
-
+//
+// 2x small primes
 // n = 1807415580361109435231633835400969
 // e = 65537
 // c = 1503532357945764445345675481376484
+//
+// 3x small primes
+// n = 190209468605777663603644732778418652613552593605359
+// e = 65537
+// c = 90571159227971972121059021184318089901439721540089
