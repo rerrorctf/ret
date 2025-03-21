@@ -8,6 +8,7 @@ import (
 	"os/exec"
 	"ret/theme"
 	"strings"
+	"sync"
 )
 
 func init() {
@@ -172,9 +173,18 @@ func StrategyFactorWithECM(strategy *Strategy) {
 		return
 	}
 
+	var wg sync.WaitGroup
+
 	for _, n := range N {
-		factorWithECM(strategy, n)
+		wg.Add(1)
+
+		go func() {
+			defer wg.Done()
+			factorWithECM(strategy, n)
+		}()
 	}
+
+	wg.Wait()
 }
 
 // examples:
