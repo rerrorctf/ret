@@ -407,18 +407,6 @@ $ ret rsa -n=147879229115615272273161474028448405953 -e=3 -c=1116012306926835049
 
 ---
 
-### 🌿 <u>sa</u>ge
-
-```
-$ ret sage 
-```
-
-open sage with ret
-
-🔗 https://github.com/rerrorctf/ret/blob/main/commands/sage.go
-
----
-
 ### 🌐 <u>sh</u>are
 
 ```
