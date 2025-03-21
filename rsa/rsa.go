@@ -5,6 +5,7 @@ import (
 	"math/big"
 	"ret/theme"
 	"sync"
+	"time"
 )
 
 type StrategyFunc func(*Strategy)
@@ -23,6 +24,8 @@ var (
 	C []*big.Int
 
 	Strategies []Strategy
+
+	StartTime time.Time
 )
 
 func ResultChecker(strategy *Strategy, m *big.Int) []byte {
@@ -47,11 +50,16 @@ func ResultChecker(strategy *Strategy, m *big.Int) []byte {
 		return nil
 	}
 
-	fmt.Printf("["+theme.ColorGreen+"%s"+theme.ColorReset+"]\n🏁 "+theme.ColorPurple+"%s"+theme.ColorReset+"\n", strategy.Name, mBytes)
+	now := time.Now()
+	diff := now.Sub(StartTime)
+
+	fmt.Printf("["+theme.ColorGreen+"%s"+theme.ColorReset+"] after %v\n🏁 "+theme.ColorPurple+"%s"+theme.ColorReset+"\n", strategy.Name, diff, mBytes)
 	return mBytes
 }
 
 func Rsa() {
+	StartTime = time.Now()
+
 	var strategyWG sync.WaitGroup
 
 	for _, strategy := range Strategies {
