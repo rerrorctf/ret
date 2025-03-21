@@ -107,30 +107,6 @@ you can restore a specific version of a file by copying it from the subdirectory
 
 ---
 
-### 😠 <u>an</u>gr
-
-```
-$ ret angr 
-```
-
-runs the angr docker with ret
-
-mounts the current working directory as a volume
-
-note that this command requires docker
-
-effectively runs:
-```bash
-$ sudo docker pull angr/angr
-$ sudo docker run -it -v $PWD:/home/angr/x angr/angr
-```
-
-see https://docs.angr.io/en/latest/getting-started/installing.html#installing-with-docker for more information
-
-🔗 https://github.com/rerrorctf/ret/blob/main/commands/angr.go
-
----
-
 ### 🏁 <u>ca</u>pture
 
 ```
