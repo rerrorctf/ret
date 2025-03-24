@@ -173,8 +173,6 @@ $ ret chef aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQ==
 
 generates a cyberchef url by appending your input, raw base64 encoded, to https://gchq.github.io/CyberChef/#input=
 
-uses `open` to open the resulting url in your default browser
-
 you can set `"chefurl"` in `~/.config/ret` to use another instance of cyberchef
 
 if you provide a custom url it should be the equivalent of https://gchq.github.io/CyberChef/
@@ -303,21 +301,6 @@ $ ret ida file1 [file2 file3...]
 opens all added files then opens ida with ret
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/ida.go
-
----
-
-### 🗽 <u>l</u>ibc
-
-```
-$ ret libc [tag] 
-```
-
-get a version of libc by copying it from a docker container with ret
-specify an image tag like "ubuntu:24.04" to get a specific version
-without args this command will use the tag "ubuntu:latest"
-the file will be copied to the cwd and added with ret
-
-🔗 https://github.com/rerrorctf/ret/blob/main/commands/libc.go
 
 ---
 
