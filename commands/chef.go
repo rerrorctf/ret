@@ -67,7 +67,7 @@ func Chef(args []string) {
 
 	encoded := base64.RawStdEncoding.EncodeToString([]byte(input))
 
-	finalUrl := config.ChefUrl + "/#input=" + encoded
+	finalUrl := config.ChefUrl + "#input=" + encoded
 
 	fmt.Printf("%s\n", finalUrl)
 }
