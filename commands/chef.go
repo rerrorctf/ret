@@ -7,7 +7,6 @@ import (
 	"io"
 	"log"
 	"os"
-	"os/exec"
 	"ret/config"
 	"ret/theme"
 	"strings"
@@ -42,7 +41,6 @@ func ChefHelp() string {
 		theme.ColorGray + "$ " + theme.ColorBlue + "ret chef aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQ==\n" + theme.ColorReset +
 		"```\n\n" +
 		"generates a cyberchef url by appending your input, raw base64 encoded, to " + theme.ColorPurple + "https://gchq.github.io/CyberChef/#input=" + theme.ColorReset + "\n\n" +
-		"uses " + theme.ColorGreen + "`open`" + theme.ColorReset + " to open the resulting url in your default browser\n\n" +
 		"you can set " + theme.ColorYellow + "`\"chefurl\"`" + theme.ColorReset + " in " + theme.ColorCyan + "`~/.config/ret`" + theme.ColorReset + " to use another instance of cyberchef\n\n" +
 		"if you provide a custom url it should be the equivalent of " + theme.ColorPurple + "https://gchq.github.io/CyberChef/" + theme.ColorReset + "\n"
 }
@@ -72,11 +70,4 @@ func Chef(args []string) {
 	finalUrl := config.ChefUrl + "/#input=" + encoded
 
 	fmt.Printf("%s\n", finalUrl)
-
-	open := exec.Command("open", finalUrl)
-
-	err := open.Run()
-	if err != nil {
-		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
-	}
 }
