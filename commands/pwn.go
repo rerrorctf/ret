@@ -60,7 +60,7 @@ func makePwnScript(ip string, port int) {
 	binaries := util.GuessBinary()
 
 	if len(binaries) > 1 {
-		fmt.Printf("😰multiple candidate binaries found\n")
+		fmt.Printf("😰 multiple candidate binaries found\n")
 		for _, binary := range binaries {
 			fmt.Printf("%s\n", binary)
 		}
