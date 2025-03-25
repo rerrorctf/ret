@@ -52,19 +52,19 @@ func init() {
 func RsaHelp() string {
 	return "solve simple rsa tasks with ret\n\n" +
 
-		"this command works by applying strategies to the given parameters that look for plaintext that consists of entirely ascii printable bytes\n" +
+		"this command works by applying strategies to the given parameters that look for plaintext that consists of entirely ascii printable bytes\n\n" +
 		"as a result it is well suited to finding flags for ctf tasks but not as a general purpose integer factorization tool\n\n" +
 
-		theme.ColorGray + "arguments:" + theme.ColorReset + "\n" +
-		"can be supplied as either base 10 or base 16 strings and the base will be inferred automatically\n" +
-		"e.g. " + theme.ColorPurple + "FEED01234" + theme.ColorReset + " will be treated as a base 16 string and " + theme.ColorPurple + "123456789" + theme.ColorReset + " will be treated as a base 10 string\n" +
-		"you can supply arguments the most common prefixes i.e. " + theme.ColorBlue + "x= -x= --x= " + theme.ColorReset + "where x is one of {p, q, e, d, n, c}\n" +
+		"arguments can be supplied as either base 10 or base 16 strings and the base will be inferred automatically\n\n" +
+		"for example " + theme.ColorPurple + "FEED01234" + theme.ColorReset + " will be treated as a base 16 string and " + theme.ColorPurple + "123456789" + theme.ColorReset + " will be treated as a base 10 string\n\n" +
+		"you can supply arguments the most common prefixes i.e. " + theme.ColorBlue + "x= -x= --x= " + theme.ColorReset + "where x is one of {p, q, e, d, n, c}\n\n" +
 		"multiple values can be supplied as a list or with multiple argument prefixes e.g. " + theme.ColorBlue + "-n=1,2,3 or -n=1 -n=2 -n=3" + theme.ColorReset + "\n\n" +
 
-		theme.ColorGray + "optional dependencies:" + theme.ColorReset + "\n" +
-		"this command opportunistically makes use of other tools to perform compute intensive factorization\n" +
+		"this command opportunistically makes use of the following tools to perform compute intensive factorization:\n\n" +
 		" - gmp-ecm\n" +
 		" - pari-gp\n\n" +
+
+		theme.ColorYellow + "note" + theme.ColorReset + ": this command is essentially a work in progress as strategies are added over time\n\n" +
 
 		"for example:\n" +
 		"```bash\n" +

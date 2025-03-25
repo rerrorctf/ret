@@ -365,18 +365,23 @@ $ ret rsa [--p] [--q] [--e] [--d] [--n] [--c]
 solve simple rsa tasks with ret
 
 this command works by applying strategies to the given parameters that look for plaintext that consists of entirely ascii printable bytes
+
 as a result it is well suited to finding flags for ctf tasks but not as a general purpose integer factorization tool
 
-arguments:
-can be supplied as either base 10 or base 16 strings and the base will be inferred automatically
-e.g. FEED01234 will be treated as a base 16 string and 123456789 will be treated as a base 10 string
+arguments can be supplied as either base 10 or base 16 strings and the base will be inferred automatically
+
+for example FEED01234 will be treated as a base 16 string and 123456789 will be treated as a base 10 string
+
 you can supply arguments the most common prefixes i.e. x= -x= --x= where x is one of {p, q, e, d, n, c}
+
 multiple values can be supplied as a list or with multiple argument prefixes e.g. -n=1,2,3 or -n=1 -n=2 -n=3
 
-optional dependencies:
-this command opportunistically makes use of other tools to perform compute intensive factorization
+this command opportunistically makes use of the following tools to perform compute intensive factorization:
+
  - gmp-ecm
  - pari-gp
+
+note: this command is essentially a work in progress as strategies are added over time
 
 for example:
 ```bash
