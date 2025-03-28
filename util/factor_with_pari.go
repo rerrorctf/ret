@@ -17,7 +17,7 @@ func CheckIfPariInstalled() bool {
 	err := cmd.Run()
 	if err != nil {
 		fmt.Printf("😰"+theme.ColorGray+" \""+theme.ColorReset+"%v"+theme.ColorGray+"\""+theme.ColorYellow+
-			" failed"+theme.ColorReset+"! consider installing "+theme.ColorCyan+"pari-gp"+theme.ColorReset+"\n", cmd.String())
+			" failed"+theme.ColorReset+"! consider installing "+theme.ColorCyan+"pari-gp"+theme.ColorReset+"\n\n", cmd.String())
 		return false
 	}
 
