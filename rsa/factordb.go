@@ -1,13 +1,11 @@
 package rsa
 
 import (
-	"encoding/json"
 	"fmt"
-	"io"
 	"log"
 	"math/big"
-	"net/http"
 	"ret/theme"
+	"ret/util"
 )
 
 func init() {
@@ -71,74 +69,10 @@ func scriptFactorDBManyFactors(url string, factors []*big.Int, n *big.Int, e *bi
 }
 
 func factorDB(strategy *Strategy, n *big.Int) {
-	url := fmt.Sprintf("https://factordb.com/api/?query=%s", n)
+	factors, url, err := util.FactorDB(n)
 
-	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		log.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		return
-	}
-
-	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0")
-
-	client := &http.Client{}
-	resp, err := client.Do(req)
-	if err != nil {
-		log.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		return
-	}
-
-	defer resp.Body.Close()
-
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		log.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		return
-	}
-
-	type FactorDBResult struct {
-		Status string `json:"status"`
-	}
-
-	var result FactorDBResult
-	if err := json.Unmarshal(body, &result); err != nil {
-		log.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		return
-	}
-
-	if result.Status != "FF" {
-		return
-	}
-
-	type FactorDBFFResult struct {
-		Status  string          `json:"status"`
-		Factors [][]interface{} `json:"factors"`
-	}
-
-	var ffResult FactorDBFFResult
-	if err := json.Unmarshal(body, &ffResult); err != nil {
-		log.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		return
-	}
-
-	if len(ffResult.Factors) < 2 {
-		return
-	}
-
-	if len(ffResult.Factors[0]) < 1 {
-		return
-	}
-
-	factors := make([]*big.Int, 0)
-
-	for _, factor := range ffResult.Factors {
-		fs, _ := factor[0].(string)
-		f, _ := new(big.Int).SetString(fs, 10)
-		c, _ := factor[1].(float64)
-
-		for range int64(c) {
-			factors = append(factors, f)
-		}
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	if len(factors) == 2 {
