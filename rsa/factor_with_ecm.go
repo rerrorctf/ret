@@ -1,13 +1,11 @@
 package rsa
 
 import (
-	"bufio"
 	"fmt"
 	"log"
 	"math/big"
-	"os/exec"
 	"ret/theme"
-	"strings"
+	"ret/util"
 	"sync"
 )
 
@@ -71,52 +69,11 @@ func scriptFactorECMManyFactors(cmd string, factors []*big.Int, n *big.Int, e *b
 	fmt.Print(script)
 }
 func factorWithECM(strategy *Strategy, n *big.Int) {
-	cmd := exec.Command("/usr/bin/ecm", "-c", "1000000000", "-one", "2000")
+	factors, cmdStr, err := util.FactorWithECM(n)
 
-	stdin, err := cmd.StdinPipe()
 	if err != nil {
 		log.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 		return
-	}
-
-	stdout, err := cmd.StdoutPipe()
-	if err != nil {
-		log.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-		return
-	}
-
-	factors := make([]*big.Int, 0)
-
-	cofactor := new(big.Int).Set(n)
-
-	stdin.Write([]byte(fmt.Sprintf("%s\n", cofactor)))
-
-	cmd.Start()
-
-	scanner := bufio.NewScanner(stdout)
-
-	for scanner.Scan() {
-		line := scanner.Text()
-
-		splits := strings.Split(line, " ")
-
-		if strings.Contains(line, "Found prime factor of ") {
-			factor, _ := new(big.Int).SetString(splits[len(splits)-1], 10)
-			factors = append(factors, factor)
-			continue
-		}
-
-		if strings.Contains(line, "Composite cofactor") {
-			cofactor.SetString(splits[2], 10)
-			stdin.Write([]byte(fmt.Sprintf("%s\n", cofactor)))
-			continue
-		}
-
-		if strings.Contains(line, "Prime cofactor") {
-			factor, _ := new(big.Int).SetString(splits[2], 10)
-			factors = append(factors, factor)
-			break
-		}
 	}
 
 	if len(factors) == 2 {
@@ -135,7 +92,7 @@ func factorWithECM(strategy *Strategy, n *big.Int) {
 					continue
 				}
 
-				scriptFactorECM(cmd.String(), p, q, n, e, c, mBytes)
+				scriptFactorECM(cmdStr, p, q, n, e, c, mBytes)
 			}
 		}
 	} else {
@@ -156,20 +113,15 @@ func factorWithECM(strategy *Strategy, n *big.Int) {
 					continue
 				}
 
-				scriptFactorECMManyFactors(cmd.String(), factors, n, e, c, mBytes)
+				scriptFactorECMManyFactors(cmdStr, factors, n, e, c, mBytes)
 			}
 		}
 	}
 }
 
 func StrategyFactorWithECM(strategy *Strategy) {
-	// check that ecm is installed
-	cmd := exec.Command("/usr/bin/ecm", "--help")
-
-	err := cmd.Run()
-	if err != nil {
-		fmt.Printf("😰"+theme.ColorGray+" \""+theme.ColorReset+"%v"+theme.ColorGray+"\""+theme.ColorYellow+
-			" failed"+theme.ColorReset+"! consider installing "+theme.ColorCyan+"gmp-ecm"+theme.ColorReset+"\n", cmd.String())
+	installed := util.CheckIfECMInstalled()
+	if installed != true {
 		return
 	}
 

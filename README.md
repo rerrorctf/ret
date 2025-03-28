@@ -282,6 +282,11 @@ you can supply arguments the most common prefixes i.e. n= -n= --n=
 
 multiple values can be supplied as a list or with multiple argument prefixes e.g. -n=1,2,3 or -n=1 -n=2 -n=3
 
+this command opportunistically makes use of the following tools to perform factorization:
+
+ - gmp-ecm
+ - pari-gp
+
 for example:
 ```bash
 $ ret factor -n=1807415580361109435231633835400969
