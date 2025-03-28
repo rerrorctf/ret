@@ -5,8 +5,22 @@ import (
 	"fmt"
 	"math/big"
 	"os/exec"
+	"ret/theme"
 	"strings"
 )
+
+func CheckIfECMInstalled() bool {
+	cmd := exec.Command("/usr/bin/ecm", "--help")
+
+	err := cmd.Run()
+	if err != nil {
+		fmt.Printf("😰"+theme.ColorGray+" \""+theme.ColorReset+"%v"+theme.ColorGray+"\""+theme.ColorYellow+
+			" failed"+theme.ColorReset+"! consider installing "+theme.ColorCyan+"gmp-ecm"+theme.ColorReset+"\n", cmd.String())
+		return false
+	}
+
+	return true
+}
 
 func FactorWithECM(n *big.Int) ([]*big.Int, string, error) {
 	cmd := exec.Command("/usr/bin/ecm", "-c", "1000000000", "-one", "2000")

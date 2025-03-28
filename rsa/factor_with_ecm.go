@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"math/big"
-	"os/exec"
 	"ret/theme"
 	"ret/util"
 	"sync"
@@ -121,13 +120,8 @@ func factorWithECM(strategy *Strategy, n *big.Int) {
 }
 
 func StrategyFactorWithECM(strategy *Strategy) {
-	// check that ecm is installed
-	cmd := exec.Command("/usr/bin/ecm", "--help")
-
-	err := cmd.Run()
-	if err != nil {
-		fmt.Printf("😰"+theme.ColorGray+" \""+theme.ColorReset+"%v"+theme.ColorGray+"\""+theme.ColorYellow+
-			" failed"+theme.ColorReset+"! consider installing "+theme.ColorCyan+"gmp-ecm"+theme.ColorReset+"\n", cmd.String())
+	installed := util.CheckIfECMInstalled()
+	if installed != true {
 		return
 	}
 

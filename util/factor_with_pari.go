@@ -6,9 +6,23 @@ import (
 	"math/big"
 	"os"
 	"os/exec"
+	"ret/theme"
 	"strconv"
 	"strings"
 )
+
+func CheckIfPariInstalled() bool {
+	cmd := exec.Command("/usr/bin/gp", "-v")
+
+	err := cmd.Run()
+	if err != nil {
+		fmt.Printf("😰"+theme.ColorGray+" \""+theme.ColorReset+"%v"+theme.ColorGray+"\""+theme.ColorYellow+
+			" failed"+theme.ColorReset+"! consider installing "+theme.ColorCyan+"pari-gp"+theme.ColorReset+"\n", cmd.String())
+		return false
+	}
+
+	return true
+}
 
 func FactorWithPari(n *big.Int) ([]*big.Int, string, error) {
 

@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"math/big"
-	"os/exec"
 	"ret/theme"
 	"ret/util"
 	"sync"
@@ -121,13 +120,8 @@ func factorWithPari(strategy *Strategy, n *big.Int) {
 }
 
 func StrategyFactorWithPari(strategy *Strategy) {
-	// check that pari-gp is installed
-	cmd := exec.Command("/usr/bin/gp", "-v")
-
-	err := cmd.Run()
-	if err != nil {
-		fmt.Printf("😰"+theme.ColorGray+" \""+theme.ColorReset+"%v"+theme.ColorGray+"\""+theme.ColorYellow+
-			" failed"+theme.ColorReset+"! consider installing "+theme.ColorCyan+"pari-gp"+theme.ColorReset+"\n", cmd.String())
+	installed := util.CheckIfPariInstalled()
+	if installed != true {
 		return
 	}
 
