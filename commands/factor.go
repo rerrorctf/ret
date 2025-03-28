@@ -38,6 +38,10 @@ func FactorHelp() string {
 		"you can supply arguments the most common prefixes i.e. " + theme.ColorBlue + "n= -n= --n= " + theme.ColorReset + "\n\n" +
 		"multiple values can be supplied as a list or with multiple argument prefixes e.g. " + theme.ColorBlue + "-n=1,2,3 or -n=1 -n=2 -n=3" + theme.ColorReset + "\n\n" +
 
+		"this command opportunistically makes use of the following tools to perform factorization:\n\n" +
+		" - gmp-ecm\n" +
+		" - pari-gp\n\n" +
+
 		"for example:\n" +
 		"```bash\n" +
 		theme.ColorGray + "$ " + theme.ColorBlue + "ret factor -n=1807415580361109435231633835400969\n" + theme.ColorReset +
