@@ -8,6 +8,7 @@ import (
 	"ret/util"
 	"strings"
 	"sync"
+	"time"
 )
 
 var (
@@ -63,15 +64,18 @@ func parseFactorArgs(args []string) {
 }
 
 func Factor(args []string) {
+	startTime := time.Now()
+
 	parseFactorArgs(args)
 
 	var wg sync.WaitGroup
 
 	for _, n := range N {
-		wg.Add(1)
+		wg.Add(2)
 
 		go func() {
 			defer wg.Done()
+
 			factors, url, err := util.FactorDB(n)
 			if err != nil {
 				log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
@@ -85,7 +89,34 @@ func Factor(args []string) {
 				return
 			}
 
-			fmt.Printf("%v\n%v\n", factors, url)
+			diff := time.Now().Sub(startTime)
+
+			fmt.Printf(theme.ColorGreen+"[factordb]"+theme.ColorReset+" 🪓 in "+
+				theme.ColorYellow+"%v"+theme.ColorGray+" %v"+theme.ColorReset+"\n"+"%v\n\n",
+				diff, url, factors)
+		}()
+
+		go func() {
+			defer wg.Done()
+
+			factors, cmdStr, err := util.FactorWithECM(n)
+			if err != nil {
+				log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
+			}
+
+			if factors == nil {
+				return
+			}
+
+			if len(factors) == 0 {
+				return
+			}
+
+			diff := time.Now().Sub(startTime)
+
+			fmt.Printf(theme.ColorGreen+"[ecm]"+theme.ColorReset+" 🪓 in "+
+				theme.ColorYellow+"%v"+theme.ColorGray+" %v"+theme.ColorReset+"\n"+"%v\n\n",
+				diff, cmdStr, factors)
 		}()
 	}
 
