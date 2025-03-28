@@ -97,58 +97,65 @@ func Factor(args []string) {
 		}()
 	}
 
-	for _, n := range N {
-		wg.Add(1)
+	if util.CheckIfECMInstalled() {
 
-		go func() {
-			defer wg.Done()
+		for _, n := range N {
+			wg.Add(1)
 
-			factors, cmdStr, err := util.FactorWithECM(n)
-			if err != nil {
-				log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-			}
+			go func() {
+				defer wg.Done()
 
-			if factors == nil {
-				return
-			}
+				factors, cmdStr, err := util.FactorWithECM(n)
+				if err != nil {
+					log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
+				}
 
-			if len(factors) == 0 {
-				return
-			}
+				if factors == nil {
+					return
+				}
 
-			diff := time.Now().Sub(startTime)
+				if len(factors) == 0 {
+					return
+				}
 
-			fmt.Printf(theme.ColorGreen+"🪓 [ecm]"+theme.ColorReset+" in "+
-				theme.ColorYellow+"%v"+theme.ColorGray+" %v"+theme.ColorReset+"\n"+"%v\n\n",
-				diff, cmdStr, factors)
-		}()
+				diff := time.Now().Sub(startTime)
+
+				fmt.Printf(theme.ColorGreen+"🪓 [ecm]"+theme.ColorReset+" in "+
+					theme.ColorYellow+"%v"+theme.ColorGray+" %v"+theme.ColorReset+"\n"+"%v\n\n",
+					diff, cmdStr, factors)
+			}()
+		}
 	}
 
-	for _, n := range N {
-		wg.Add(1)
+	if util.CheckIfPariInstalled() {
 
-		go func() {
-			defer wg.Done()
+		for _, n := range N {
+			wg.Add(1)
 
-			factors, cmdStr, err := util.FactorWithPari(n)
-			if err != nil {
-				log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-			}
+			go func() {
+				defer wg.Done()
 
-			if factors == nil {
-				return
-			}
+				factors, cmdStr, err := util.FactorWithPari(n)
+				if err != nil {
+					log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
+				}
 
-			if len(factors) == 0 {
-				return
-			}
+				if factors == nil {
+					return
+				}
 
-			diff := time.Now().Sub(startTime)
+				if len(factors) == 0 {
+					return
+				}
 
-			fmt.Printf(theme.ColorGreen+"🪓 [gp-pari]"+theme.ColorReset+" in "+
-				theme.ColorYellow+"%v"+theme.ColorGray+" %v"+theme.ColorReset+"\n"+"%v\n\n",
-				diff, cmdStr, factors)
-		}()
+				diff := time.Now().Sub(startTime)
+
+				fmt.Printf(theme.ColorGreen+"🪓 [gp-pari]"+theme.ColorReset+" in "+
+					theme.ColorYellow+"%v"+theme.ColorGray+" %v"+theme.ColorReset+"\n"+"%v\n\n",
+					diff, cmdStr, factors)
+			}()
+		}
+
 	}
 
 	wg.Wait()
