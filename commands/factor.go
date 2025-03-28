@@ -71,7 +71,7 @@ func Factor(args []string) {
 	var wg sync.WaitGroup
 
 	for _, n := range N {
-		wg.Add(2)
+		wg.Add(1)
 
 		go func() {
 			defer wg.Done()
@@ -91,10 +91,14 @@ func Factor(args []string) {
 
 			diff := time.Now().Sub(startTime)
 
-			fmt.Printf(theme.ColorGreen+"[factordb]"+theme.ColorReset+" 🪓 in "+
+			fmt.Printf(theme.ColorGreen+"🪓 [factordb]"+theme.ColorReset+" in "+
 				theme.ColorYellow+"%v"+theme.ColorGray+" %v"+theme.ColorReset+"\n"+"%v\n\n",
 				diff, url, factors)
 		}()
+	}
+
+	for _, n := range N {
+		wg.Add(1)
 
 		go func() {
 			defer wg.Done()
@@ -114,7 +118,34 @@ func Factor(args []string) {
 
 			diff := time.Now().Sub(startTime)
 
-			fmt.Printf(theme.ColorGreen+"[ecm]"+theme.ColorReset+" 🪓 in "+
+			fmt.Printf(theme.ColorGreen+"🪓 [ecm]"+theme.ColorReset+" in "+
+				theme.ColorYellow+"%v"+theme.ColorGray+" %v"+theme.ColorReset+"\n"+"%v\n\n",
+				diff, cmdStr, factors)
+		}()
+	}
+
+	for _, n := range N {
+		wg.Add(1)
+
+		go func() {
+			defer wg.Done()
+
+			factors, cmdStr, err := util.FactorWithPari(n)
+			if err != nil {
+				log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
+			}
+
+			if factors == nil {
+				return
+			}
+
+			if len(factors) == 0 {
+				return
+			}
+
+			diff := time.Now().Sub(startTime)
+
+			fmt.Printf(theme.ColorGreen+"🪓 [gp-pari]"+theme.ColorReset+" in "+
 				theme.ColorYellow+"%v"+theme.ColorGray+" %v"+theme.ColorReset+"\n"+"%v\n\n",
 				diff, cmdStr, factors)
 		}()
