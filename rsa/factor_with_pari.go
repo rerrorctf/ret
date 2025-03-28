@@ -1,15 +1,12 @@
 package rsa
 
 import (
-	"bufio"
 	"fmt"
 	"log"
 	"math/big"
-	"os"
 	"os/exec"
 	"ret/theme"
-	"strconv"
-	"strings"
+	"ret/util"
 	"sync"
 )
 
@@ -73,47 +70,11 @@ func scriptFactorPariManyFactors(cmd string, factors []*big.Int, n *big.Int, e *
 	fmt.Print(script)
 }
 func factorWithPari(strategy *Strategy, n *big.Int) {
-	file, err := os.CreateTemp("", "ret_rsa_factorme")
+	factors, cmdStr, err := util.FactorWithPari(n)
 
-	fmt.Fprintf(file, "print(factorint(%s))\n", n)
-
-	file.Close()
-
-	cmd := exec.Command("/usr/bin/gp", "--stacksize", "1073741824", "--fast", "--quiet", file.Name())
-
-	stdout, err := cmd.StdoutPipe()
 	if err != nil {
 		log.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 		return
-	}
-
-	factors := make([]*big.Int, 0)
-
-	cmd.Start()
-
-	scanner := bufio.NewScanner(stdout)
-
-	if !scanner.Scan() {
-		return
-	}
-
-	line := scanner.Text()
-	splits := strings.Split(line[1:len(line)-1], ";")
-
-	for _, split := range splits {
-		nums := strings.Split(split, ",")
-
-		count, err := strconv.Atoi(strings.TrimSpace(nums[1]))
-		if err != nil {
-			log.Printf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-			return
-		}
-
-		factor, _ := new(big.Int).SetString(strings.TrimSpace(nums[0]), 10)
-
-		for range count {
-			factors = append(factors, factor)
-		}
 	}
 
 	if len(factors) == 2 {
@@ -132,7 +93,7 @@ func factorWithPari(strategy *Strategy, n *big.Int) {
 					continue
 				}
 
-				scriptFactorPari(cmd.String(), p, q, n, e, c, mBytes)
+				scriptFactorPari(cmdStr, p, q, n, e, c, mBytes)
 			}
 		}
 	} else {
@@ -153,7 +114,7 @@ func factorWithPari(strategy *Strategy, n *big.Int) {
 					continue
 				}
 
-				scriptFactorPariManyFactors(cmd.String(), factors, n, e, c, mBytes)
+				scriptFactorPariManyFactors(cmdStr, factors, n, e, c, mBytes)
 			}
 		}
 	}
