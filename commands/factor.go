@@ -27,15 +27,16 @@ func init() {
 				Optional: true,
 				List:     false,
 			},
-		}})
+		},
+		SeeAlso: []string{"rsa", "crypto"}})
 }
 
 func FactorHelp() string {
-	return "factor with ret\n" +
+	return "factor integers with ret\n\n" +
 
-		"arguments can be supplied as either base 10 or base 16 strings and the base will be inferred automatically\n\n" +
+		"values can be supplied as either base 10 or base 16 strings and the base will be inferred automatically\n\n" +
 		"for example " + theme.ColorPurple + "FEED01234" + theme.ColorReset + " will be treated as a base 16 string and " + theme.ColorPurple + "123456789" + theme.ColorReset + " will be treated as a base 10 string\n\n" +
-		"you can supply arguments the most common prefixes i.e. " + theme.ColorBlue + "n= -n= --n= " + theme.ColorReset + "\n\n" +
+		"you can supply values the most common prefixes i.e. " + theme.ColorBlue + "n= -n= --n= " + theme.ColorReset + "\n\n" +
 		"multiple values can be supplied as a list or with multiple argument prefixes e.g. " + theme.ColorBlue + "-n=1,2,3 or -n=1 -n=2 -n=3" + theme.ColorReset + "\n\n" +
 
 		"this command opportunistically makes use of the following tools to perform factorization:\n\n" +
@@ -47,7 +48,7 @@ func FactorHelp() string {
 		theme.ColorGray + "$ " + theme.ColorBlue + "ret factor -n=1807415580361109435231633835400969\n" + theme.ColorReset +
 		theme.ColorGray + "$ " + theme.ColorBlue + "ret factor -n=0x591ccab6e6a72f019cf942f99f09\n" + theme.ColorReset +
 		theme.ColorGray + "$ " + theme.ColorBlue + "ret factor -n=147879229115615272273161474028448405953\n" + theme.ColorReset +
-		"```\n\n"
+		"```\n"
 }
 
 func parseFactorArgs(args []string) {
