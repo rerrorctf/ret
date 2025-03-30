@@ -46,7 +46,8 @@ func init() {
 				Optional: true,
 				List:     false,
 			},
-		}})
+		},
+		SeeAlso: []string{"factor", "crypto"}})
 }
 
 func RsaHelp() string {
@@ -71,7 +72,7 @@ func RsaHelp() string {
 		theme.ColorGray + "$ " + theme.ColorBlue + "ret rsa -n=1807415580361109435231633835400969 -e=65537 -c=1503532357945764445345675481376484\n" + theme.ColorReset +
 		theme.ColorGray + "$ " + theme.ColorBlue + "ret rsa -n=0x591ccab6e6a72f019cf942f99f09 -e=0x10001 -c=0x4a213f10d6c08b78ff5c0562e6e4\n" + theme.ColorReset +
 		theme.ColorGray + "$ " + theme.ColorBlue + "ret rsa -n=147879229115615272273161474028448405953 -e=3 -c=11160123069268350498833916853402276143\n" + theme.ColorReset +
-		"```\n\n"
+		"```\n"
 }
 
 func parseRsaArgs(args []string) {

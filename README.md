@@ -273,12 +273,13 @@ create a dockerfile from a template with ret
 $ ret factor [--n] 
 ```
 
-factor with ret
-arguments can be supplied as either base 10 or base 16 strings and the base will be inferred automatically
+factor integers with ret
+
+values can be supplied as either base 10 or base 16 strings and the base will be inferred automatically
 
 for example FEED01234 will be treated as a base 16 string and 123456789 will be treated as a base 10 string
 
-you can supply arguments the most common prefixes i.e. n= -n= --n= 
+you can supply values the most common prefixes i.e. n= -n= --n= 
 
 multiple values can be supplied as a list or with multiple argument prefixes e.g. -n=1,2,3 or -n=1 -n=2 -n=3
 
@@ -293,7 +294,6 @@ $ ret factor -n=1807415580361109435231633835400969
 $ ret factor -n=0x591ccab6e6a72f019cf942f99f09
 $ ret factor -n=147879229115615272273161474028448405953
 ```
-
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/factor.go
 
@@ -421,7 +421,6 @@ $ ret rsa -n=1807415580361109435231633835400969 -e=65537 -c=15035323579457644453
 $ ret rsa -n=0x591ccab6e6a72f019cf942f99f09 -e=0x10001 -c=0x4a213f10d6c08b78ff5c0562e6e4
 $ ret rsa -n=147879229115615272273161474028448405953 -e=3 -c=11160123069268350498833916853402276143
 ```
-
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/rsa.go
 
