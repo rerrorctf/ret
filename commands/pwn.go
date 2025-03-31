@@ -93,7 +93,8 @@ func makePwnScript(ip string, port int) {
 				"from pwn import *\n\n"+
 				"#context.log_level = \"debug\"\n"+
 				"#elf = ELF(\"./%s\", checksec=True)\n"+
-				"#context.binary = elf\n\n"+
+				"#context.binary = elf\n"+
+				"#context.terminal = [\"tmux\", \"splitw\", \"-h\"]\n\n"+
 				"#p = elf.process()\n"+
 				"#p = elf.debug(gdbscript=\"\")\n"+
 				"p = remote(\"%s\", %d)\n\n"+
