@@ -75,6 +75,8 @@ func factorDB(strategy *Strategy, n *big.Int) {
 		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
+	fmt.Printf("["+theme.ColorGreen+"%s"+theme.ColorReset+"] "+theme.ColorPurple+"%v"+theme.ColorReset+"\n", strategy.Name, factors)
+
 	if len(factors) == 2 {
 		// special case for N = p * q where p and q and two distinct primes
 		p := factors[0]

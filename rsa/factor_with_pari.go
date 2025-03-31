@@ -76,6 +76,8 @@ func factorWithPari(strategy *Strategy, n *big.Int) {
 		return
 	}
 
+	fmt.Printf("["+theme.ColorGreen+"%s"+theme.ColorReset+"] "+theme.ColorPurple+"%v"+theme.ColorReset+"\n", strategy.Name, factors)
+
 	if len(factors) == 2 {
 		// special case for N = p * q where p and q and two distinct primes
 		p := factors[0]

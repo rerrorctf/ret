@@ -53,7 +53,7 @@ func ResultChecker(strategy *Strategy, m *big.Int) []byte {
 	now := time.Now()
 	diff := now.Sub(StartTime)
 
-	fmt.Printf("["+theme.ColorGreen+"%s"+theme.ColorReset+"] after %v\n🏁 "+theme.ColorPurple+"%s"+theme.ColorReset+"\n", strategy.Name, diff, mBytes)
+	fmt.Printf("["+theme.ColorGreen+"%s"+theme.ColorReset+"] after %v 🏁 "+theme.ColorPurple+"%s"+theme.ColorReset+"\n", strategy.Name, diff, mBytes)
 	return mBytes
 }
 
