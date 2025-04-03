@@ -305,7 +305,19 @@ $ ret factor -n=147879229115615272273161474028448405953
 $ ret ghidra [file1 file2 file3...] 
 ```
 
-ingests all added files then opens ghidra with ret
+adds files specified as arguments to this command, creates a ghidra project within the hidden .ret subdirectory, analyzes all added files then opens ghidra with ret
+
+requires that https://ghidra-sre.org/ is installed
+
+this command uses two configurable references to a typical ghidra installation both of which come from `~/.config/ret`
+
+1) `"ghidrarun"` who's default value is ghidra
+bash should be able to use this name to find ghidraRun on your path
+this is typically located at /opt/ghidra/ghidraRun
+
+2) `"ghidraanalyzeheadless"` who's default value is ghidra-analyzeHeadless
+bash should be able to use this name to find analyzeHeadless on your path
+this is typically located at /opt/ghidra/support/analyzeHeadless
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/ghidra.go
 
@@ -514,7 +526,8 @@ there is a small window for a time-of-check/time-of-use race here - you have bee
 
 ```json
 {
-  "ghidrainstallpath": "",
+  "ghidrarun": "",
+  "ghidraanalyzeheadless": "",
   "ghidraproject": "",
   "idainstallpath": "",
   "pwnscriptname": "",

@@ -24,11 +24,20 @@ func init() {
 				Optional: true,
 				List:     true,
 			},
-		}})
+		},
+		SeeAlso: []string{"add", "status", "ida", "pwn"}})
 }
 
 func GhidraHelp() string {
-	return "ingests all added files then opens ghidra with ret\n"
+	return "adds files specified as arguments to this command, creates a ghidra project within the hidden .ret subdirectory, analyzes all added files then opens ghidra with ret\n\n" +
+		"requires that " + theme.ColorPurple + "https://ghidra-sre.org/" + theme.ColorReset + " is installed\n\n" +
+		"this command uses two configurable references to a typical ghidra installation both of which come from " + theme.ColorCyan + "`~/.config/ret`" + theme.ColorReset + "\n\n" +
+		"1) " + theme.ColorYellow + "`\"ghidrarun\"`" + theme.ColorReset + " who's default value is " + theme.ColorGreen + "ghidra" + theme.ColorReset + "\n" +
+		"bash should be able to use this name to find " + theme.ColorYellow + "ghidraRun" + theme.ColorReset + " on your path\n" +
+		"this is typically located at " + theme.ColorBlue + "/opt/ghidra/ghidraRun" + theme.ColorReset + "\n\n" +
+		"2) " + theme.ColorYellow + "`\"ghidraanalyzeheadless\"`" + theme.ColorReset + " who's default value is " + theme.ColorGreen + "ghidra-analyzeHeadless" + theme.ColorReset + "\n" +
+		"bash should be able to use this name to find " + theme.ColorYellow + "analyzeHeadless" + theme.ColorReset + " on your path\n" +
+		"this is typically located at " + theme.ColorBlue + "/opt/ghidra/support/analyzeHeadless" + theme.ColorReset + "\n"
 }
 
 func ghidraSpinner() {
@@ -82,7 +91,7 @@ func Ghidra(args []string) {
 	util.EnsureSkeleton()
 
 	analyzeFile := exec.Command(
-		config.GhidraInstallPath+"/support/analyzeHeadless",
+		config.GhidraAnalyzeHeadless,
 		config.FolderName+"/"+config.GhidraProject,
 		config.GhidraProject, "-recursive",
 		"-import", config.FilesFolderName)
@@ -93,8 +102,7 @@ func Ghidra(args []string) {
 		fmt.Println("warning:\n", err)
 	}
 
-	openGhidra := exec.Command(
-		config.GhidraInstallPath+"/ghidraRun", absoluteProjectPath)
+	openGhidra := exec.Command(config.GhidraRun, absoluteProjectPath)
 
 	openGhidraOutput, err := openGhidra.CombinedOutput()
 	if err != nil {
