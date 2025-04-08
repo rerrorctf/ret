@@ -47,7 +47,7 @@ func init() {
 				List:     false,
 			},
 		},
-		SeeAlso: []string{"factor", "crypto"}})
+		SeeAlso: []string{"factor"}})
 }
 
 func RsaHelp() string {

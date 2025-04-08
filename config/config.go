@@ -27,8 +27,6 @@ var (
 	IdaInstallPath        = "/opt/ida"
 	PwnScriptName         = "go.py"
 	PwnScriptTemplate     = ""
-	CryptoScriptName      = "go.sage"
-	CryptoScriptTemplate  = ""
 	FlagFileName          = FolderName + "/flag.json"
 	FlagFormat            = "{.+}"
 	WizardPreCommand      = ""
@@ -49,8 +47,6 @@ type Config struct {
 	IdaInstallPath        string   `json:"idainstallpath"`
 	PwnScriptName         string   `json:"pwnscriptname"`
 	PwnScriptTemplate     string   `json:"pwnscripttemplate"`
-	CryptoScriptName      string   `json:"cryptoscriptname"`
-	CryptoScriptTemplate  string   `json:"cryptoscripttemplate"`
 	Username              string   `json:"username"`
 	ChatWebhookUrl        string   `json:"chatwebhookurl"`
 	ChatWebhookUrl2       string   `json:"chatwebhookurl2"`
@@ -103,14 +99,6 @@ func ParseUserConfig() {
 
 	if len(userConfig.PwnScriptTemplate) > 0 {
 		PwnScriptTemplate = userConfig.PwnScriptTemplate
-	}
-
-	if len(userConfig.CryptoScriptName) > 0 {
-		CryptoScriptName = userConfig.CryptoScriptName
-	}
-
-	if len(userConfig.CryptoScriptTemplate) > 0 {
-		CryptoScriptTemplate = userConfig.CryptoScriptTemplate
 	}
 
 	if len(userConfig.Username) > 0 {
@@ -167,8 +155,6 @@ func WriteUserConfig() {
 	userConfig.IdaInstallPath = IdaInstallPath
 	userConfig.PwnScriptName = PwnScriptName
 	userConfig.PwnScriptTemplate = PwnScriptTemplate
-	userConfig.CryptoScriptName = CryptoScriptName
-	userConfig.CryptoScriptTemplate = CryptoScriptTemplate
 	userConfig.Username = Username
 	userConfig.ChatWebhookUrl = ChatWebhookUrl
 	userConfig.ChatWebhookUrl2 = ChatWebhookUrl2
