@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+
+from pwn import *
+
+#context.log_level = "debug"
+#elf = ELF("./%BINARY%")
+#libc = elf.libc
+#context.binary = elf
+#context.terminal = ["ghostty", "-e"]
+
+#p = elf.process()
+#p = elf.debug(gdbscript="")
+p = remote("%IP%", %PORT%)
+
+p.interactive()
