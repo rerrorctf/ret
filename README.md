@@ -181,29 +181,6 @@ if you provide a custom url it should be the equivalent of https://gchq.github.i
 
 ---
 
-### 🚀 <u>cr</u>ypto
-
-```
-$ ret crypto [ip=127.0.0.1] [port=9001] 
-```
-
-create a sage script from a template with ret
-
-the file this command creates is named using `"cryptoscriptname"` from `~/.config/ret` and is `"go.sage"` by default
-
-you can specify the path of a custom template with `"cryptoscripttemplate"`
-
-this command will do the follow substitutions in custom templates:
-1) `/%IP%/ip`
-2) `/%PORT%/port`
-
-for example:
-`"remote("%IP%", %PORT%)"` would become `"remote("127.0.0.1", 9001)"`
-
-🔗 https://github.com/rerrorctf/ret/blob/main/commands/crypto.go
-
----
-
 ### 🚮 <u>ctfr</u>m
 
 ```
@@ -453,9 +430,8 @@ if you have a valid `"gisttoken"` this command will also make a gist and include
 the gist will attempt to include the following files:
 
 1. the pwn script, which uses `"pwnscriptname"`, and is typically generated with the `pwn` command
-2. the crypto script, which uses `"cryptoscriptname"`, and is typically generated with the `crypto` command
-3. the notes, which are saved in the .ret/notes.json file, and are typically populated with the `notes` command
-4. the flag, which is saved in the .ret/flag.json file, and is typically set with the `capture` command
+2. the notes, which are saved in the .ret/notes.json file, and are typically populated with the `notes` command
+3. the flag, which is saved in the .ret/flag.json file, and is typically set with the `capture` command
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/share.go
 
@@ -532,8 +508,6 @@ there is a small window for a time-of-check/time-of-use race here - you have bee
   "idainstallpath": "",
   "pwnscriptname": "",
   "pwnscripttemplate": "",
-  "cryptoscriptname": "",
-  "cryptoscripttemplate": "",
   "username": "",
   "chatwebhookurl": "",
   "chatwebhookurl2": "",

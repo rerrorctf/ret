@@ -28,7 +28,7 @@ func init() {
 				List:     false,
 			},
 		},
-		SeeAlso: []string{"rsa", "crypto"}})
+		SeeAlso: []string{"rsa"}})
 }
 
 func FactorHelp() string {
