@@ -204,19 +204,7 @@ the ctftime urls will be used to aid in the generation of writeups with the `wri
 
 ---
 
-### 🙉 <u>de</u>fs
-
-```
-$ ret defs 
-```
-
-print some common constants with ret
-
-🔗 https://github.com/rerrorctf/ret/blob/main/commands/defs.go
-
----
-
-### 🐋 <u>do</u>cker
+### 🐋 <u>d</u>ocker
 
 ```
 $ ret docker [ip] [port] 
