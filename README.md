@@ -449,29 +449,6 @@ displays the status for the current task with ret
 
 ---
 
-### 📞 <u>sy</u>scall
-
-```
-$ ret syscall [(x86/32)/(x64/64)] [regex] 
-```
-
-check syscalls by regex with ret
-
-  uses: 
-    x86: /usr/include/x86_64-linux-gnu/asm/unistd_32.h
-    x64: /usr/include/x86_64-linux-gnu/asm/unistd_64.h
-
-  examples: 
-    syscall x64 " 0"
-    syscall x64 write
-    syscall 32 read
-    syscall x86 10[0-9]
-
-
-🔗 https://github.com/rerrorctf/ret/blob/main/commands/syscall.go
-
----
-
 ### 📝 <u>w</u>riteup
 
 ```
