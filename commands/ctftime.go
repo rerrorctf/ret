@@ -144,6 +144,10 @@ func CtfTime(args []string) {
 		return
 	}
 
+	if len(config.CtfTimeUrls) == 0 {
+		return
+	}
+
 	go ctftimeSpinner()
 
 	infos := make([]CTFTimeInfo, len(config.CtfTimeUrls))
