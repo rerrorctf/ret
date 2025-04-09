@@ -38,7 +38,7 @@ func makeDockerFile(port int) {
 	binary := binaries[0]
 
 	dockerfile := fmt.Sprintf(
-		"FROM ubuntu:24.04\n\n"+
+		"FROM ubuntu:latest\n\n"+
 			"RUN apt update && apt upgrade -y && apt install -y socat\n\n"+
 			"COPY %s .\n\n"+
 			"RUN echo \"flag{example}\" > flag.txt\n\n"+
