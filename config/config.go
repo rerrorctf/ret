@@ -2,7 +2,6 @@ package config
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"os"
 	"os/user"
@@ -57,13 +56,7 @@ type Config struct {
 }
 
 func ParseUserConfig() {
-	currentUser, err := user.Current()
-	if err != nil {
-		fmt.Println("Error:", err)
-		return
-	}
-
-	configPath := filepath.Join(currentUser.HomeDir, UserConfig)
+	configPath := filepath.Join(os.Getenv("HOME"), UserConfig)
 
 	jsonData, err := os.ReadFile(configPath)
 	if err != nil {
