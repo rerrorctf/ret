@@ -38,7 +38,7 @@ func makeDockerFile(port int) {
 	binary := binaries[0]
 
 	dockerfile := fmt.Sprintf(
-		"FROM ubuntu:24.04\n\n"+
+		"FROM ubuntu:latest\n\n"+
 			"RUN apt update && apt upgrade -y && apt install -y socat\n\n"+
 			"COPY %s .\n\n"+
 			"RUN echo \"flag{example}\" > flag.txt\n\n"+
@@ -52,7 +52,7 @@ func makeDockerFile(port int) {
 		log.Fatalln("error writing to file:", err)
 	}
 
-	fmt.Printf("🐋 "+theme.ColorGray+"ready to run:"+theme.ColorReset+" $ sudo docker build -t task . && sudo docker run -p %d:%d task\n", port, port)
+	fmt.Printf("🐋 "+theme.ColorGray+"ready to run:"+theme.ColorReset+" $ sudo docker build -t task . && sudo docker run --rm -it -p%d:%d task\n", port, port)
 }
 
 func Docker(args []string) {
@@ -63,7 +63,7 @@ func Docker(args []string) {
 	_, err := os.Stat("./Dockerfile")
 	if !os.IsNotExist(err) {
 		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": \"Dockerfile\" already exists!\n"+
-			"🐋 "+theme.ColorGray+"ready to run:"+theme.ColorReset+" $ sudo docker build -t task . && sudo docker run -p %d:%d task\n", port, port)
+			"🐋 "+theme.ColorGray+"ready to run:"+theme.ColorReset+" $ sudo docker build -t task . && sudo docker run --rm -it -p%d:%d task\n", port, port)
 	}
 
 	makeDockerFile(port)
