@@ -181,23 +181,7 @@ if you provide a custom url it should be the equivalent of https://gchq.github.i
 
 ---
 
-### 🚮 <u>ctfr</u>m
-
-```
-$ ret ctfrm [url] 
-```
-
-remove a ctf with ret
-
-the ctftime url will be removed from the list, if it exists in the list, that is stored in `~/.config/ret` in the `"ctftimeurls"`
-
-you can also manually remove ctftime urls from this list by directly editing `~/.config/ret`
-
-🔗 https://github.com/rerrorctf/ret/blob/main/commands/ctfrm.go
-
----
-
-### 🚩 <u>ctft</u>ime
+### 🚩 <u>ct</u>ftime
 
 ```
 $ ret ctftime [url] 
@@ -374,6 +358,22 @@ $ ret readme
 make the readme with ret
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/readme.go
+
+---
+
+### 🚮 <u>rm</u>ctf
+
+```
+$ ret rmctf [url] 
+```
+
+remove a ctf with ret
+
+the ctftime url will be removed from the list, if it exists in the list, that is stored in `~/.config/ret` in the `"ctftimeurls"`
+
+you can also manually remove ctftime urls from this list by directly editing `~/.config/ret`
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/rmctf.go
 
 ---
 
