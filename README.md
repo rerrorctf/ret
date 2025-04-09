@@ -1,32 +1,14 @@
 # ret
 
-<img src="https://github.com/rerrorctf/ret/assets/93072266/5a998dbb-5730-4b10-9636-45e35e9fe77e" alt="rounding error ctf team logo" width="400"/>
-
 This tool helps you solve ctf tasks by automating workflow and basic analysis and providing useful utilities.
+
+<img src="https://github.com/rerrorctf/ret/assets/93072266/5a998dbb-5730-4b10-9636-45e35e9fe77e" alt="rounding error ctf team logo" width="150"/>
 
 ## Installation
 
 You can get the latest binary from https://github.com/rerrorctf/ret/releases.
 
-Here installation just means putting `ret` somewhere on your path. I like to make a symlink to it in `/usr/local/bin`.
-
-```
-$ sudo ln -s ./ret /usr/local/bin/ret
-```
-
-Other options are available and you may do whatever works best for you.
-
-### Installing Dependencies (Optional)
-
-some commands make opportunistic use of other tools and some won't work without them
-
 ### Compiling (Optional)
-
-First install `go` https://go.dev/dl/ by following the install instructions.
-
-You can use `go` in system repos but they tend to be fairly old and out of date.
-
-Now, the project root directory, you can simply do:
 
 ```
 $ go build
