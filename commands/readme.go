@@ -23,31 +23,15 @@ func ReadmeHelp() string {
 func Readme(args []string) {
 	fmt.Printf("# ret\n\n")
 
-	fmt.Printf("<img src=\"https://github.com/rerrorctf/ret/assets/93072266/5a998dbb-5730-4b10-9636-45e35e9fe77e\" alt=\"rounding error ctf team logo\" width=\"400\"/>\n\n")
-
 	fmt.Printf("This tool helps you solve ctf tasks by automating workflow and basic analysis and providing useful utilities.\n\n")
+
+	fmt.Printf("<img src=\"https://github.com/rerrorctf/ret/assets/93072266/5a998dbb-5730-4b10-9636-45e35e9fe77e\" alt=\"rounding error ctf team logo\" width=\"150\"/>\n\n")
 
 	fmt.Printf("## Installation\n\n")
 
 	fmt.Printf("You can get the latest binary from https://github.com/rerrorctf/ret/releases.\n\n")
 
-	fmt.Printf("Here installation just means putting `ret` somewhere on your path. I like to make a symlink to it in `/usr/local/bin`.\n\n")
-
-	fmt.Printf("```\n$ sudo ln -s ./ret /usr/local/bin/ret\n```\n\n")
-
-	fmt.Printf("Other options are available and you may do whatever works best for you.\n\n")
-
-	fmt.Printf("### Installing Dependencies (Optional)\n\n")
-
-	fmt.Printf("some commands make opportunistic use of other tools and some won't work without them\n\n")
-
 	fmt.Printf("### Compiling (Optional)\n\n")
-
-	fmt.Printf("First install `go` https://go.dev/dl/ by following the install instructions.\n\n")
-
-	fmt.Printf("You can use `go` in system repos but they tend to be fairly old and out of date.\n\n")
-
-	fmt.Printf("Now, the project root directory, you can simply do:\n\n")
 
 	fmt.Printf("```\n$ go build\n```\n\n")
 
