@@ -41,7 +41,7 @@ func CtfTimeHelp() string {
 		"the command will use the ctftime.org api to fetch details about all the currently set ctftime urls and then display them\n\n" +
 		"the ctf's title, start time and finish time will be displayed along with an indication of the time to the start or finish depending on the context\n\n" +
 		"for more details please see https://ctftime.org/api/\n\n" +
-		"the ctftime urls will be used to aid in the generation of writeups with the " + theme.ColorGreen + "`writeup`" + theme.ColorReset + " command\n\n"
+		"the ctftime urls will be used to aid in the generation of writeups with the " + theme.ColorGreen + "`writeup`" + theme.ColorReset + " command\n"
 }
 
 func ctftimeSpinner() {
