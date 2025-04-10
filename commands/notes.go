@@ -32,7 +32,7 @@ func init() {
 				Optional: true,
 				List:     true,
 			},
-		}})
+		}, SeeAlso: []string{"writeup", "share"}})
 }
 
 func NotesHelp() string {
