@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"math"
 	"net/http"
 	"ret/config"
 	"ret/theme"
@@ -114,12 +115,33 @@ func showInfo(info *CTFTimeInfo) {
 	fmt.Printf(theme.ColorGray+"title:  "+theme.ColorBlue+"%s"+theme.ColorReset+" ", info.Title)
 
 	if ongoing {
-		fmt.Printf(theme.ColorGray+"time remaining: "+theme.ColorReset+"%v\n", info.Finish.Sub(now))
+		delta := info.Finish.Sub(now)
+		hours := int(math.Abs(delta.Hours()))
+		mins := int(math.Abs(delta.Minutes()))
+		seconds := int(math.Abs(delta.Seconds()))
+
+		if hours > 0 {
+			fmt.Printf(theme.ColorGray+"about "+theme.ColorGreen+"~%v"+theme.ColorGray+" hours remaining!\n", hours)
+		} else if mins > 0 {
+			fmt.Printf(theme.ColorGray+"about "+theme.ColorGreen+"~%v"+theme.ColorGray+" mins remaining!!\n", mins)
+		} else {
+			fmt.Printf(theme.ColorGray+"only about "+theme.ColorGreen+"~%v"+theme.ColorGray+" seconds remaining!!!\n", seconds)
+		}
 	} else if finished {
-		fmt.Printf(theme.ColorGray+"time since finish: "+theme.ColorReset+"%v\n", info.Finish.Sub(now))
+		delta := info.Finish.Sub(now)
+		hours := int(math.Abs(delta.Hours()))
+		mins := int(math.Abs(delta.Minutes()))
+		seconds := int(math.Abs(delta.Seconds()))
+
+		if hours > 0 {
+			fmt.Printf(theme.ColorGray+"finished "+theme.ColorRed+"~%v"+theme.ColorGray+" hours ago\n", hours)
+		} else if mins > 0 {
+			fmt.Printf(theme.ColorGray+"finished "+theme.ColorRed+"~%v"+theme.ColorGray+" mins ago\n", mins)
+		} else {
+			fmt.Printf(theme.ColorGray+"finished "+theme.ColorRed+"~%v"+theme.ColorGray+" seconds ago\n", seconds)
+		}
 	} else {
 		delta := info.Start.Sub(now)
-
 		hours := int(delta.Hours())
 		mins := int(delta.Minutes())
 		seconds := int(delta.Seconds())
