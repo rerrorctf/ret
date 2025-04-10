@@ -181,7 +181,6 @@ for more details please see https://ctftime.org/api/
 
 the ctftime urls will be used to aid in the generation of writeups with the `writeup` command
 
-
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/ctftime.go
 
 ---
@@ -279,7 +278,7 @@ opens all added files then opens ida with ret
 
 ---
 
-### 📝 <u>n</u>otes
+### ✏️ <u>n</u>otes
 
 ```
 $ ret notes [-] [note1 note2 note3...] 
