@@ -17,7 +17,8 @@ func init() {
 		Emoji:     "👀",
 		Func:      Status,
 		Help:      StatusHelp,
-		Arguments: nil})
+		Arguments: nil,
+		SeeAlso:   []string{"add", "capture"}})
 }
 
 func StatusHelp() string {

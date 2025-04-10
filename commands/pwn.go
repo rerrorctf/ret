@@ -30,7 +30,7 @@ func init() {
 				Default:  "9001",
 			},
 		},
-		SeeAlso: []string{"add"}})
+		SeeAlso: []string{"add", "ghidra", "ida"}})
 }
 
 func PwnHelp() string {

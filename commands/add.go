@@ -30,7 +30,7 @@ func init() {
 				List:     true,
 			},
 		},
-		SeeAlso: []string{"status"}})
+		SeeAlso: []string{"status", "ghidra", "ida", "pwn", "docker"}})
 }
 
 func AddHelp() string {

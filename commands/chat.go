@@ -49,7 +49,7 @@ func init() {
 				Optional: true,
 				List:     true,
 			},
-		}})
+		}, SeeAlso: []string{"share"}})
 }
 
 func ChatHelp() string {
