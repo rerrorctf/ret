@@ -18,7 +18,7 @@ import (
 func init() {
 	Commands = append(Commands, Command{
 		Name:  "notes",
-		Emoji: "📝",
+		Emoji: "✏️",
 		Func:  Notes,
 		Help:  NotesHelp,
 		Arguments: []Argument{
