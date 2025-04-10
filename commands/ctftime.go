@@ -105,24 +105,36 @@ func fetchInfo(ctfTimeUrl string, info *CTFTimeInfo) {
 }
 
 func showInfo(info *CTFTimeInfo) {
-	fmt.Printf(theme.ColorGray+"title: "+theme.ColorBlue+"%s"+theme.ColorReset+"\n", info.Title)
-
 	now := time.Now()
-
-	fmt.Printf(theme.ColorGray+"start: "+theme.ColorGreen+"%v "+theme.ColorGray+"finish: "+theme.ColorRed+"%v"+theme.ColorReset+"\n", info.Start, info.Finish)
 
 	started := info.Start.Before(now)
 	finished := info.Finish.Before(now)
 	ongoing := started && !finished
+
+	fmt.Printf(theme.ColorGray+"title:  "+theme.ColorBlue+"%s"+theme.ColorReset+" ", info.Title)
 
 	if ongoing {
 		fmt.Printf(theme.ColorGray+"time remaining: "+theme.ColorReset+"%v\n", info.Finish.Sub(now))
 	} else if finished {
 		fmt.Printf(theme.ColorGray+"time since finish: "+theme.ColorReset+"%v\n", info.Finish.Sub(now))
 	} else {
-		fmt.Printf(theme.ColorGray+"time to start: "+theme.ColorReset+"%v\n", info.Start.Sub(now))
-		fmt.Printf(theme.ColorGray+"time to finish: "+theme.ColorReset+"%v\n", info.Finish.Sub(now))
+		delta := info.Start.Sub(now)
+
+		hours := int(delta.Hours())
+		mins := int(delta.Minutes())
+		seconds := int(delta.Seconds())
+
+		if hours > 0 {
+			fmt.Printf(theme.ColorGray+"starts in "+theme.ColorPurple+"~%v"+theme.ColorGray+" hours\n", hours)
+		} else if mins > 0 {
+			fmt.Printf(theme.ColorGray+"starts in "+theme.ColorPurple+"~%v"+theme.ColorGray+" mins\n", mins)
+		} else {
+			fmt.Printf(theme.ColorGray+"starts in "+theme.ColorPurple+"~%v"+theme.ColorGray+" seconds\n", seconds)
+		}
 	}
+
+	fmt.Printf(theme.ColorGray+"start:  "+theme.ColorGreen+"%v"+theme.ColorReset+"\n", info.Start.Local())
+	fmt.Printf(theme.ColorGray+"finish: "+theme.ColorRed+"%v"+theme.ColorReset+"\n", info.Finish.Local())
 }
 
 func CtfTime(args []string) {
@@ -161,7 +173,7 @@ func CtfTime(args []string) {
 	fmt.Printf("\r")
 
 	for idx, ctfTimeUrl := range config.CtfTimeUrls {
-		fmt.Printf(theme.ColorGray+"url: "+theme.ColorReset+"%v"+theme.ColorReset+"\n", ctfTimeUrl)
+		fmt.Printf(theme.ColorGray+"url:    "+theme.ColorCyan+theme.StartUnderline+"%v"+theme.ColorReset+theme.StopUnderline+"\n", ctfTimeUrl)
 
 		if strings.Contains(ctfTimeUrl, "ctftime.org") {
 			showInfo(&infos[idx])
