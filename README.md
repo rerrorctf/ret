@@ -278,7 +278,25 @@ opens all added files then opens ida with ret
 
 ---
 
-### ✏️ <u>n</u>otes
+### 🏷️ <u>na</u>me
+
+```
+$ ret name [task-name] 
+```
+
+set or query a task's name with ret
+
+supply no arguments to see the current name
+
+note that task metadata is stored in hidden directory `.ret` and therefore scoped to the cwd
+
+task metadata is stored in the `.ret/task.json` file
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/name.go
+
+---
+
+### ✏️ <u>no</u>tes
 
 ```
 $ ret notes [-] [note1 note2 note3...] 
