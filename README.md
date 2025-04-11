@@ -89,7 +89,7 @@ you can restore a specific version of a file by copying it from the subdirectory
 
 ---
 
-### 🏁 <u>ca</u>pture
+### 🏁 <u>cap</u>ture
 
 ```
 $ ret capture [flag] 
@@ -104,6 +104,24 @@ note that captured flags are stored in hidden directory `.ret` and therefore sco
 flags are stored in the `.ret/flag.json` file
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/capture.go
+
+---
+
+### 😼 <u>cat</u>egory
+
+```
+$ ret category [task-category] 
+```
+
+set or query a task's category with ret
+
+supply no arguments to see the current category
+
+note that task metadata is stored in hidden directory `.ret` and therefore scoped to the cwd
+
+task metadata is stored in the `.ret/task.json` file
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/category.go
 
 ---
 
