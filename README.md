@@ -203,7 +203,25 @@ the ctftime urls will be used to aid in the generation of writeups with the `wri
 
 ---
 
-### 🐋 <u>d</u>ocker
+### 🌹 <u>de</u>scription
+
+```
+$ ret description [task-description] 
+```
+
+set or query a task's description with ret
+
+supply no arguments to see the current description
+
+note that task metadata is stored in hidden directory `.ret` and therefore scoped to the cwd
+
+task metadata is stored in the `.ret/task.json` file
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/description.go
+
+---
+
+### 🐋 <u>do</u>cker
 
 ```
 $ ret docker [ip] [port] 

@@ -58,3 +58,14 @@ func SetCurrentTaskCategory(category string) {
 	task.Category = category
 	SetCurrentTask(&task)
 }
+
+func GetCurrentTaskDescription() string {
+	task := GetCurrentTask()
+	return task.Description
+}
+
+func SetCurrentTaskDescription(description string) {
+	task := GetCurrentTask()
+	task.Description = description
+	SetCurrentTask(&task)
+}
