@@ -47,3 +47,14 @@ func SetCurrentTaskName(name string) {
 	task.Name = name
 	SetCurrentTask(&task)
 }
+
+func GetCurrentTaskCategory() string {
+	task := GetCurrentTask()
+	return task.Category
+}
+
+func SetCurrentTaskCategory(category string) {
+	task := GetCurrentTask()
+	task.Category = category
+	SetCurrentTask(&task)
+}
