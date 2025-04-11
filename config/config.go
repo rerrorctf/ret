@@ -17,6 +17,7 @@ const (
 	DefaultBinaryName    = "task"
 	NotesFileName        = FolderName + "/notes.json"
 	CheckIfGhidraRunning = true
+	TaskFileName         = FolderName + "/task.json"
 )
 
 var (
