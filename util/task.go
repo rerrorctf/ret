@@ -69,3 +69,14 @@ func SetCurrentTaskDescription(description string) {
 	task.Description = description
 	SetCurrentTask(&task)
 }
+
+func GetCurrentTaskFlag() string {
+	task := GetCurrentTask()
+	return task.Flag
+}
+
+func SetCurrentTaskFlag(flag string) {
+	task := GetCurrentTask()
+	task.Flag = flag
+	SetCurrentTask(&task)
+}

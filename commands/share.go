@@ -27,7 +27,7 @@ func ShareHelp() string {
 		"the gist will attempt to include the following files:\n\n" +
 		"1. the pwn script, which uses " + theme.ColorYellow + "`\"pwnscriptname\"`" + theme.ColorReset + ", and is typically generated with the " + theme.ColorGreen + "`pwn`" + theme.ColorReset + " command\n" +
 		"2. the notes, which are saved in the " + theme.ColorCyan + ".ret/notes.json" + theme.ColorReset + " file, and are typically populated with the " + theme.ColorGreen + "`notes`" + theme.ColorReset + " command\n" +
-		"3. the flag, which is saved in the " + theme.ColorCyan + ".ret/flag.json" + theme.ColorReset + " file, and is typically set with the " + theme.ColorGreen + "`capture`" + theme.ColorReset + " command\n"
+		"3. the flag, which is saved in the " + theme.ColorCyan + ".ret/task.json" + theme.ColorReset + " file, and is typically set with the " + theme.ColorGreen + "`capture`" + theme.ColorReset + " command\n"
 }
 
 func Share(args []string) {
@@ -39,8 +39,8 @@ func Share(args []string) {
 	splits := strings.Split(path, "/")
 	dir := splits[len(splits)-1]
 
-	flag, err := util.GetCurrentFlag()
-	if err != nil {
+	flag := util.GetCurrentTaskFlag()
+	if len(flag) == 0 {
 		flag = config.FlagFormat
 	}
 
