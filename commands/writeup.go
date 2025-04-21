@@ -57,8 +57,8 @@ func Writeup(args []string) {
 		urls = "https://ctftime.link.goes.here"
 	}
 
-	flag, err := util.GetCurrentFlag()
-	if err != nil {
+	flag := util.GetCurrentTaskFlag()
+	if len(flag) == 0 {
 		flag = config.FlagFormat
 	}
 

@@ -1,12 +1,8 @@
 package commands
 
 import (
-	"encoding/json"
 	"fmt"
-	"log"
-	"os"
 	"ret/config"
-	"ret/data"
 	"ret/theme"
 	"ret/util"
 )
@@ -28,47 +24,40 @@ func init() {
 }
 
 func CaptureHelp() string {
-	return "capture the flag with ret\n\n" +
-		"supply no arguments to see the currently captured flag\n\n" +
-		"note that captured flags are stored in hidden directory " + theme.ColorCyan + "`.ret`" + theme.ColorReset + " and therefore scoped to the cwd\n\n" +
-		"flags are stored in the " + theme.ColorCyan + "`.ret/flag.json`" + theme.ColorReset + " file\n"
+	return "set or query a task's flag with ret\n\n" +
+		"supply no arguments to see the current flag\n\n" +
+		"note that task metadata is stored in hidden directory " + theme.ColorCyan + "`.ret`" + theme.ColorReset + " and therefore scoped to the cwd\n\n" +
+		"task metadata is stored in the " + theme.ColorCyan + "`" + config.TaskFileName + "`" + theme.ColorReset + " file\n"
 }
 
-func displayCurrentFlag() {
-	flag, err := util.GetCurrentFlag()
-	if err != nil {
-		fmt.Printf("😰"+theme.ColorYellow+" warning"+theme.ColorReset+": flag file \"%s\" doesn't exist\n", config.FlagFileName)
+func displayCurrentTaskFlag() {
+	flag := util.GetCurrentTaskFlag()
+	if len(flag) == 0 {
 		return
 	}
 
 	fmt.Printf("🏁 "+theme.ColorPurple+"%s"+theme.ColorReset+"\n", flag)
 }
 
-func scoreNewFlag(newFlag string) {
-	var flag data.Flag
+func setCurrentTaskFlag(newFlag string) {
+	oldFlag := util.GetCurrentTaskFlag()
 
-	flag.Flag = newFlag
-
-	jsonData, err := json.MarshalIndent(flag, "", "  ")
-	if err != nil {
-		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
+	if len(oldFlag) > 0 {
+		fmt.Printf(theme.ColorGray+"🏁 changing flag from: "+theme.ColorRed+"%s"+theme.ColorGray+" to: "+theme.ColorGreen+"%s"+theme.ColorReset+"\n", oldFlag, newFlag)
+	} else {
+		fmt.Printf(theme.ColorGray+"🏁 setting flag to: "+theme.ColorGreen+"%s"+theme.ColorReset+"\n", newFlag)
 	}
 
-	err = os.WriteFile(config.FlagFileName, jsonData, 0644)
-	if err != nil {
-		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
-	}
-
-	fmt.Printf("🏁 "+theme.ColorPurple+"%s"+theme.ColorReset+"\n", flag.Flag)
+	util.SetCurrentTaskFlag(newFlag)
 }
 
 func Capture(args []string) {
 	if len(args) == 0 {
-		displayCurrentFlag()
+		displayCurrentTaskFlag()
 		return
 	}
 
 	util.EnsureSkeleton()
 
-	scoreNewFlag(args[0])
+	setCurrentTaskFlag(args[0])
 }

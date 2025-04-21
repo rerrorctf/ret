@@ -95,13 +95,13 @@ you can restore a specific version of a file by copying it from the subdirectory
 $ ret capture [flag] 
 ```
 
-capture the flag with ret
+set or query a task's flag with ret
 
-supply no arguments to see the currently captured flag
+supply no arguments to see the current flag
 
-note that captured flags are stored in hidden directory `.ret` and therefore scoped to the cwd
+note that task metadata is stored in hidden directory `.ret` and therefore scoped to the cwd
 
-flags are stored in the `.ret/flag.json` file
+task metadata is stored in the `.ret/task.json` file
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/capture.go
 
@@ -454,7 +454,7 @@ the gist will attempt to include the following files:
 
 1. the pwn script, which uses `"pwnscriptname"`, and is typically generated with the `pwn` command
 2. the notes, which are saved in the .ret/notes.json file, and are typically populated with the `notes` command
-3. the flag, which is saved in the .ret/flag.json file, and is typically set with the `capture` command
+3. the flag, which is saved in the .ret/task.json file, and is typically set with the `capture` command
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/share.go
 

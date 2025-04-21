@@ -59,8 +59,8 @@ func Status(args []string) {
 		}
 	}
 
-	flag, err := util.GetCurrentFlag()
-	if err == nil {
+	flag := util.GetCurrentTaskFlag()
+	if len(flag) > 0 {
 		fmt.Printf("🏁 "+theme.ColorPurple+"%s"+theme.ColorPurple+"\n", flag)
 	}
 }
