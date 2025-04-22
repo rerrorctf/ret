@@ -11,6 +11,8 @@ import (
 
 func GetCurrentTask() data.Task {
 	var task data.Task
+	task.Ip = "127.0.0.1"
+	task.Port = 9001
 
 	jsonData, err := os.ReadFile(config.TaskFileName)
 	if err != nil {
@@ -78,5 +80,27 @@ func GetCurrentTaskFlag() string {
 func SetCurrentTaskFlag(flag string) {
 	task := GetCurrentTask()
 	task.Flag = flag
+	SetCurrentTask(&task)
+}
+
+func GetCurrentTaskIp() string {
+	task := GetCurrentTask()
+	return task.Ip
+}
+
+func SetCurrentTaskIp(ip string) {
+	task := GetCurrentTask()
+	task.Ip = ip
+	SetCurrentTask(&task)
+}
+
+func GetCurrentTaskPort() int {
+	task := GetCurrentTask()
+	return task.Port
+}
+
+func SetCurrentTaskPort(port int) {
+	task := GetCurrentTask()
+	task.Port = port
 	SetCurrentTask(&task)
 }
