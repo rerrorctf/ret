@@ -372,7 +372,7 @@ for example:
 
 ---
 
-### 📃 <u>re</u>adme
+### 📃 <u>rea</u>dme
 
 ```
 $ ret readme 
@@ -381,6 +381,24 @@ $ ret readme
 make the readme with ret
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/readme.go
+
+---
+
+### 📡 <u>rem</u>ote
+
+```
+$ ret remote [ip=127.0.0.1] [port=9001] 
+```
+
+set or query a task's ip and port with ret
+
+supply no arguments to see the current ip and port
+
+note that task metadata is stored in hidden directory `.ret` and therefore scoped to the cwd
+
+task metadata is stored in the `.ret/task.json` file
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/remote.go
 
 ---
 
