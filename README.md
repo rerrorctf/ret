@@ -320,7 +320,7 @@ specify the path of one or more files to upload
 
 ---
 
-### 💃 <u>i</u>da
+### 💃 <u>id</u>a
 
 ```
 $ ret ida file1 [file2 file3...] 
@@ -329,6 +329,18 @@ $ ret ida file1 [file2 file3...]
 opens all added files then opens ida with ret
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/ida.go
+
+---
+
+### 🚀 <u>in</u>it
+
+```
+$ ret init 
+```
+
+init a task with ret
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/init.go
 
 ---
 
