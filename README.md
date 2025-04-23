@@ -203,7 +203,7 @@ the ctftime urls will be used to aid in the generation of writeups with the `wri
 
 ---
 
-### 🌹 <u>de</u>scription
+### 🗣️ <u>de</u>scription
 
 ```
 $ ret description [task-description] 
@@ -520,13 +520,6 @@ the writeup will be saved in a file called `writeup.md`
 
 if a file called `writeup.md` already exists the command will abort
 there is a small window for a time-of-check/time-of-use race here - you have been warned!
-
-1. uses the first url from `"ctftimeurls"` to insert a url at the top of the writeup. inserts the rest as comments if there are more than one
-2. imports all notes taken with the `notes` command into the description area
-3. creates a space for a python script and then imports the script created by `pwn` if it exists
-4. imports the flag captured with the `capture` command if it exists
-5. uses the `"username"` from `~/.config/ret` to attribute to this writeup to you
-6. inserts a date stamp for today's date using yyyy/mm/dd format
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/writeup.go
 

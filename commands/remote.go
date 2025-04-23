@@ -27,7 +27,7 @@ func init() {
 				Default:  "9001",
 			},
 		},
-		SeeAlso: nil})
+		SeeAlso: []string{"name", "event", "category", "description", "writeup"}})
 }
 
 func RemoteHelp() string {

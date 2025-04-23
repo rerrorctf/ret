@@ -20,7 +20,7 @@ func init() {
 				List:     false,
 			},
 		},
-		SeeAlso: nil})
+		SeeAlso: []string{"name", "category", "description", "remote", "writeup"}})
 }
 
 func EventHelp() string {
