@@ -10,7 +10,7 @@ import (
 func init() {
 	Commands = append(Commands, Command{
 		Name:  "description",
-		Emoji: "🌹", // a rose by any other name would smell as 1337
+		Emoji: "🗣️", // a rose by any other name would smell as 1337
 		Func:  Description,
 		Help:  DescriptionHelp,
 		Arguments: []Argument{
@@ -20,7 +20,7 @@ func init() {
 				List:     false,
 			},
 		},
-		SeeAlso: nil})
+		SeeAlso: []string{"name", "category", "event", "remote", "writeup"}})
 }
 
 func DescriptionHelp() string {
@@ -36,16 +36,16 @@ func displayCurrentTaskDescription() {
 		return
 	}
 
-	fmt.Printf("🌹 "+theme.ColorBlue+"%s"+theme.ColorReset+"\n", description)
+	fmt.Printf("🗣️ "+theme.ColorBlue+"%s"+theme.ColorReset+"\n", description)
 }
 
 func setCurrentTaskDescription(newDescription string) {
 	oldDescription := util.GetCurrentTaskDescription()
 
 	if len(oldDescription) > 0 {
-		fmt.Printf(theme.ColorGray+"🌹 changing description from: "+theme.ColorRed+"%s"+theme.ColorGray+" to: "+theme.ColorGreen+"%s"+theme.ColorReset+"\n", oldDescription, newDescription)
+		fmt.Printf(theme.ColorGray+"🗣️ changing description from: "+theme.ColorRed+"%s"+theme.ColorGray+" to: "+theme.ColorGreen+"%s"+theme.ColorReset+"\n", oldDescription, newDescription)
 	} else {
-		fmt.Printf(theme.ColorGray+"🌹 setting description to: "+theme.ColorGreen+"%s"+theme.ColorReset+"\n", newDescription)
+		fmt.Printf(theme.ColorGray+"🗣️ setting description to: "+theme.ColorGreen+"%s"+theme.ColorReset+"\n", newDescription)
 	}
 
 	util.SetCurrentTaskDescription(newDescription)
