@@ -104,3 +104,14 @@ func SetCurrentTaskPort(port int) {
 	task.Port = port
 	SetCurrentTask(&task)
 }
+
+func GetCurrentTaskEvent() string {
+	task := GetCurrentTask()
+	return task.Event
+}
+
+func SetCurrentTaskEvent(event string) {
+	task := GetCurrentTask()
+	task.Event = event
+	SetCurrentTask(&task)
+}

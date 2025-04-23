@@ -233,6 +233,24 @@ create a dockerfile from a template with ret
 
 ---
 
+### 🗓️ <u>e</u>vent
+
+```
+$ ret event [ctftime-url] 
+```
+
+set or query a task's event with ret
+
+supply no arguments to see the task's current event
+
+note that task metadata is stored in hidden directory `.ret` and therefore scoped to the cwd
+
+task metadata is stored in the `.ret/task.json` file
+
+🔗 https://github.com/rerrorctf/ret/blob/main/commands/event.go
+
+---
+
 ### 🪓 <u>f</u>actor
 
 ```
