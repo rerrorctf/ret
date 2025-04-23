@@ -30,7 +30,7 @@ func init() {
 				Default:  "9001",
 			},
 		},
-		SeeAlso: []string{"add", "ghidra", "ida"}})
+		SeeAlso: []string{"add", "remote", "init", "ghidra", "ida"}})
 }
 
 func PwnHelp() string {
@@ -121,9 +121,12 @@ func Pwn(args []string) {
 		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": \"%s\" already exists!\n", config.PwnScriptName)
 	}
 
-	var ip string
-	var port int
-	util.GetRemoteParams(args, &ip, &port)
+	ip := util.GetCurrentTaskIp()
+	port := util.GetCurrentTaskPort()
+
+	if (len(args) > 0) || (len(ip) == 0) {
+		util.GetRemoteParams(args, &ip, &port)
+	}
 
 	makePwnScript(ip, port)
 }
