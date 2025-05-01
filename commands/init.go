@@ -6,7 +6,6 @@ import (
 	"ret/config"
 	"ret/theme"
 	"ret/util"
-	"strconv"
 )
 
 func init() {
@@ -16,7 +15,7 @@ func init() {
 		Func:      Init,
 		Help:      InitHelp,
 		Arguments: nil,
-		SeeAlso:   []string{"event", "name", "category", "description", "remote", "writeup"}})
+		SeeAlso:   []string{"event", "name", "category", "writeup"}})
 }
 
 func InitHelp() string {
@@ -75,45 +74,10 @@ func handleCategory() {
 	Category(nil)
 }
 
-func handleDescription() {
-	fmt.Println("🚀 " + theme.ColorPurple + "what is this task's description?" + theme.ColorReset)
-
-	var description string
-	fmt.Scanf("%s", &description)
-
-	util.SetCurrentTaskDescription(description)
-
-	Description(nil)
-}
-
-func handleRemote() {
-	fmt.Println("🚀 " + theme.ColorPurple + "what is the ip address for this task's remote?" + theme.ColorReset)
-
-	var ip string
-	fmt.Scanf("%s", &ip)
-
-	util.SetCurrentTaskIp(ip)
-
-	fmt.Println("🚀 " + theme.ColorPurple + "what is the port for this task's remote?" + theme.ColorReset)
-
-	var port string
-	fmt.Scanf("%s", &port)
-
-	p, err := strconv.Atoi(port)
-
-	if err == nil {
-		util.SetCurrentTaskPort(p)
-	}
-
-	Remote(nil)
-}
-
 func Init(args []string) {
 	util.EnsureSkeleton()
 
 	handleEvent()
 	handleName()
 	handleCategory()
-	handleDescription()
-	handleRemote()
 }
