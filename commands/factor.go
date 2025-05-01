@@ -28,7 +28,7 @@ func init() {
 				List:     false,
 			},
 		},
-		SeeAlso: []string{"rsa"}})
+		SeeAlso: nil})
 }
 
 func FactorHelp() string {
@@ -38,10 +38,6 @@ func FactorHelp() string {
 		"for example " + theme.ColorPurple + "FEED01234" + theme.ColorReset + " will be treated as a base 16 string and " + theme.ColorPurple + "123456789" + theme.ColorReset + " will be treated as a base 10 string\n\n" +
 		"you can supply values the most common prefixes i.e. " + theme.ColorBlue + "n= -n= --n= " + theme.ColorReset + "\n\n" +
 		"multiple values can be supplied as a list or with multiple argument prefixes e.g. " + theme.ColorBlue + "-n=1,2,3 or -n=1 -n=2 -n=3" + theme.ColorReset + "\n\n" +
-
-		"this command opportunistically makes use of the following tools to perform factorization:\n\n" +
-		" - gmp-ecm\n" +
-		" - pari-gp\n\n" +
 
 		"for example:\n" +
 		"```bash\n" +
@@ -81,7 +77,7 @@ func Factor(args []string) {
 		go func() {
 			defer wg.Done()
 
-			factors, url, err := util.FactorDB(n)
+			status, factors, url, err := util.FactorDB(n)
 			if err != nil {
 				log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
 			}
@@ -97,70 +93,9 @@ func Factor(args []string) {
 			diff := time.Now().Sub(startTime)
 
 			fmt.Printf(theme.ColorGreen+"🪓 [factordb]"+theme.ColorReset+" in "+
-				theme.ColorYellow+"%v"+theme.ColorGray+" %v"+theme.ColorReset+"\n"+"%v\n\n",
-				diff, url, factors)
+				theme.ColorYellow+"%v"+theme.ColorGray+" %v"+theme.ColorReset+"\n"+"[%s] %v\n",
+				diff, url, status, factors)
 		}()
-	}
-
-	if util.CheckIfECMInstalled() {
-
-		for _, n := range N {
-			wg.Add(1)
-
-			go func() {
-				defer wg.Done()
-
-				factors, cmdStr, err := util.FactorWithECM(n)
-				if err != nil {
-					log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-				}
-
-				if factors == nil {
-					return
-				}
-
-				if len(factors) == 0 {
-					return
-				}
-
-				diff := time.Now().Sub(startTime)
-
-				fmt.Printf(theme.ColorGreen+"🪓 [ecm]"+theme.ColorReset+" in "+
-					theme.ColorYellow+"%v"+theme.ColorGray+" %v"+theme.ColorReset+"\n"+"%v\n\n",
-					diff, cmdStr, factors)
-			}()
-		}
-	}
-
-	if util.CheckIfPariInstalled() {
-
-		for _, n := range N {
-			wg.Add(1)
-
-			go func() {
-				defer wg.Done()
-
-				factors, cmdStr, err := util.FactorWithPari(n)
-				if err != nil {
-					log.Fatalf("💥 "+theme.ColorRed+" error"+theme.ColorReset+": %v\n", err)
-				}
-
-				if factors == nil {
-					return
-				}
-
-				if len(factors) == 0 {
-					return
-				}
-
-				diff := time.Now().Sub(startTime)
-
-				fmt.Printf(theme.ColorGreen+"🪓 [gp-pari]"+theme.ColorReset+" in "+
-					theme.ColorYellow+"%v"+theme.ColorGray+" %v"+theme.ColorReset+"\n"+"%v\n\n",
-					diff, cmdStr, factors)
-			}()
-		}
-
 	}
 
 	wg.Wait()
