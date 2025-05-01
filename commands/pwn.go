@@ -129,4 +129,7 @@ func Pwn(args []string) {
 	}
 
 	makePwnScript(ip, port)
+
+	util.SetCurrentTaskIp(ip)
+	util.SetCurrentTaskPort(port)
 }
