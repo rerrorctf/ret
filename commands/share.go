@@ -33,7 +33,7 @@ func ShareHelp() string {
 func Share(args []string) {
 	path, err := os.Getwd()
 	if err != nil {
-		log.Fatalln("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v", err)
+		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": %v\n", err)
 	}
 
 	splits := strings.Split(path, "/")
