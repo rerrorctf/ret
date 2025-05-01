@@ -267,11 +267,6 @@ you can supply values the most common prefixes i.e. n= -n= --n=
 
 multiple values can be supplied as a list or with multiple argument prefixes e.g. -n=1,2,3 or -n=1 -n=2 -n=3
 
-this command opportunistically makes use of the following tools to perform factorization:
-
- - gmp-ecm
- - pari-gp
-
 for example:
 ```bash
 $ ret factor -n=1807415580361109435231633835400969
@@ -445,44 +440,6 @@ the ctftime url will be removed from the list, if it exists in the list, that is
 you can also manually remove ctftime urls from this list by directly editing `~/.config/ret`
 
 🔗 https://github.com/rerrorctf/ret/blob/main/commands/rmctf.go
-
----
-
-### 🔐 <u>rs</u>a
-
-```
-$ ret rsa [--p] [--q] [--e] [--d] [--n] [--c] 
-```
-
-solve simple rsa tasks with ret
-
-this command works by applying strategies to the given parameters that look for plaintext that consists of entirely ascii printable bytes
-
-as a result it is well suited to finding flags for ctf tasks but not as a general purpose integer factorization tool
-
-arguments can be supplied as either base 10 or base 16 strings and the base will be inferred automatically
-
-for example FEED01234 will be treated as a base 16 string and 123456789 will be treated as a base 10 string
-
-you can supply arguments the most common prefixes i.e. x= -x= --x= where x is one of {p, q, e, d, n, c}
-
-multiple values can be supplied as a list or with multiple argument prefixes e.g. -n=1,2,3 or -n=1 -n=2 -n=3
-
-this command opportunistically makes use of the following tools to perform compute intensive factorization:
-
- - gmp-ecm
- - pari-gp
-
-note: this command is essentially a work in progress as strategies are added over time
-
-for example:
-```bash
-$ ret rsa -n=1807415580361109435231633835400969 -e=65537 -c=1503532357945764445345675481376484
-$ ret rsa -n=0x591ccab6e6a72f019cf942f99f09 -e=0x10001 -c=0x4a213f10d6c08b78ff5c0562e6e4
-$ ret rsa -n=147879229115615272273161474028448405953 -e=3 -c=11160123069268350498833916853402276143
-```
-
-🔗 https://github.com/rerrorctf/ret/blob/main/commands/rsa.go
 
 ---
 

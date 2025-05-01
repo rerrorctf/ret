@@ -8,12 +8,12 @@ import (
 	"net/http"
 )
 
-func FactorDB(n *big.Int) ([]*big.Int, string, error) {
+func FactorDB(n *big.Int) (string, []*big.Int, string, error) {
 	url := fmt.Sprintf("https://factordb.com/api/?query=%s", n)
 
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		return nil, "", err
+		return "", nil, "", err
 	}
 
 	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0")
@@ -21,14 +21,14 @@ func FactorDB(n *big.Int) ([]*big.Int, string, error) {
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		return nil, "", err
+		return "", nil, "", err
 	}
 
 	defer resp.Body.Close()
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return nil, "", err
+		return "", nil, "", err
 	}
 
 	type FactorDBResult struct {
@@ -37,11 +37,7 @@ func FactorDB(n *big.Int) ([]*big.Int, string, error) {
 
 	var result FactorDBResult
 	if err := json.Unmarshal(body, &result); err != nil {
-		return nil, "", err
-	}
-
-	if result.Status != "FF" {
-		return nil, "", nil
+		return "", nil, "", err
 	}
 
 	type FactorDBFFResult struct {
@@ -51,15 +47,15 @@ func FactorDB(n *big.Int) ([]*big.Int, string, error) {
 
 	var ffResult FactorDBFFResult
 	if err := json.Unmarshal(body, &ffResult); err != nil {
-		return nil, "", err
+		return "", nil, "", err
 	}
 
-	if len(ffResult.Factors) < 2 {
-		return nil, "", nil
+	if len(ffResult.Factors) < 1 {
+		return "", nil, "", nil
 	}
 
 	if len(ffResult.Factors[0]) < 1 {
-		return nil, "", nil
+		return "", nil, "", nil
 	}
 
 	factors := make([]*big.Int, 0)
@@ -74,5 +70,5 @@ func FactorDB(n *big.Int) ([]*big.Int, string, error) {
 		}
 	}
 
-	return factors, url, nil
+	return result.Status, factors, url, nil
 }
