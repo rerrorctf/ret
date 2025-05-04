@@ -121,6 +121,8 @@ func Pwn(args []string) {
 		log.Fatalf("💥 "+theme.ColorRed+"error"+theme.ColorReset+": \"%s\" already exists!\n", config.PwnScriptName)
 	}
 
+	util.EnsureSkeleton()
+
 	ip := util.GetCurrentTaskIp()
 	port := util.GetCurrentTaskPort()
 
