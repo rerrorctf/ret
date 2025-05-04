@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"os/exec"
 	"ret/config"
 	"ret/data"
 	"ret/theme"
@@ -18,7 +17,7 @@ func init() {
 		Func:      Status,
 		Help:      StatusHelp,
 		Arguments: nil,
-		SeeAlso:   []string{"add", "capture"}})
+		SeeAlso:   []string{"add", "init", "name", "category", "event", "capture"}})
 }
 
 func StatusHelp() string {
@@ -26,6 +25,26 @@ func StatusHelp() string {
 }
 
 func Status(args []string) {
+	name := util.GetCurrentTaskName()
+	if len(name) > 0 {
+		fmt.Printf("🏷️ "+theme.ColorCyan+"%s"+theme.ColorReset+"\n", name)
+	}
+
+	category := util.GetCurrentTaskCategory()
+	if len(category) > 0 {
+		fmt.Printf("😼 "+theme.ColorYellow+"%s"+theme.ColorReset+"\n", category)
+	}
+
+	event := util.GetCurrentTaskEvent()
+	if len(event) > 0 {
+		fmt.Printf("🗓️ "+theme.ColorGreen+"%s"+theme.ColorReset+"\n", event)
+	}
+
+	flag := util.GetCurrentTaskFlag()
+	if len(flag) > 0 {
+		fmt.Printf("🏁 "+theme.ColorPurple+"%s"+theme.ColorPurple+"\n", flag)
+	}
+
 	jsonData, err := os.ReadFile(config.RetFilesNames)
 	if err == nil {
 		var files data.Files
@@ -33,34 +52,10 @@ func Status(args []string) {
 		err = json.Unmarshal(jsonData, &files)
 		if err == nil {
 			for idx, file := range files.Files {
-
 				fmt.Printf(theme.ColorGray+"["+theme.ColorBlue+"%v"+theme.ColorGray+"]"+theme.ColorReset, idx)
 				fmt.Printf(theme.ColorGreen+" %s ", file.Filename)
 				fmt.Printf(theme.ColorReset+"%s\n", file.SHA256)
-
-				if file.FileType == data.FILE_TYPE_ELF {
-					checksec := exec.Command("pwn", "checksec", file.Filepath)
-
-					checksec.Stdout = os.Stdout
-					checksec.Stderr = os.Stderr
-					checksec.Stdin = os.Stdin
-
-					err := checksec.Run()
-					if err != nil {
-						fileOutput := util.RunFileCommandOnFile(file.Filepath)
-						fmt.Printf(theme.ColorGray+"    "+theme.ColorReset+"%s\n", fileOutput)
-						continue
-					}
-				} else {
-					fileOutput := util.RunFileCommandOnFile(file.Filepath)
-					fmt.Printf(theme.ColorGray+"    "+theme.ColorReset+"%s\n", fileOutput)
-				}
 			}
 		}
-	}
-
-	flag := util.GetCurrentTaskFlag()
-	if len(flag) > 0 {
-		fmt.Printf("🏁 "+theme.ColorPurple+"%s"+theme.ColorPurple+"\n", flag)
 	}
 }
